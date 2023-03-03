@@ -17,7 +17,7 @@ def file_select_gui(file_selection):
     window.title('Degree Plan and Audit Tool') # Window name
 
     button_file_browse = Button(window, text="Browse Files", command=file_selection)  # File Browse button
-    button_file_browse.grid(column=1, row=1)  # File Browse button position
+    button_file_browse.pack(side = 'top') # places button near the top of window
 
     window.mainloop()  # waits for user to finish selecting file
 
