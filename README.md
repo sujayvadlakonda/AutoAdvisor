@@ -10,4 +10,4 @@
 ### Usage Instructions
 - the browse files button is used to select which file (i.e. transcript) the tool is going to get information from and use
 - when selecting a file, if you can't find the file you need, try changing the file type to "All Files" in the bottom right drop down menu of the file explorer
-- once file is selected, the information will then be captured by the tool
+- once file is selected, the information will then be captured/scraped by the tool
