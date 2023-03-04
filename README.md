@@ -4,7 +4,7 @@
 1. Download *[Box Drive](https://www.box.com/resources/downloads)* for Windows
 - Instructions on how to install it *[here](https://support.box.com/hc/en-us/articles/360043697474-Installing-and-Updating-Box-Drive)*
 - Box does not support having both *Box Sync* and *Box Drive* installed on your computer, so uninstall *Box Sync* if you have that first
-2. Sign in to *Box Drive* with your UTD email (if box asks for a email), then your UTD Box login information (i.e. netid and password)
+2. Sign in to *Box Drive* with your UTD email (if *Box* asks for a email), then your UTD *Box* login information (i.e. netid and password)
 - Installation is successful if you see *Box* as an option in the side menu of your *File Explorer* desktop application
 
 ### Usage Instructions
@@ -15,24 +15,24 @@
 ### Installation Instructions for Developers
 - Maintain *requirements.txt* file with any new dependencies
 - To generate a new *requirments.txt* file, do the following:
-1. Install the *pipreqs* package via pips by going into *Command Prompt* and entering; 
-```
-pip install pipreqs
-```
-2. After installation, copy the path to the project folder, whose dependencies you want to generate a *requirements.txt* file for, and paste it in *Command prompt* after typing in `pipreqs` , as shown here: 
-```
-pipreqs TypeFolderPathHere
-```
-3. If a requirements.txt file is generated, you'll see a success message in Command Prompt
+  1. Install the *pipreqs* package via pips by going into *Command Prompt* and entering; 
+  ```
+  pip install pipreqs
+  ```
+  2. After installation, copy the path to the project folder, whose dependencies you want to generate a *requirements.txt* file for, and paste it in *Command prompt* after typing in `pipreqs` , as shown here: 
+  ```
+  pipreqs TypeFolderPathHere
+  ```
+  3. If a *requirements.txt* file is generated, you'll see a success message in Command Prompt
 
-- To install packages using the requirement.txt file instead of manually doing so: 
+- To install packages using the *requirement.txt* file instead of manually doing so: 
   1. If you're using a virtual environment, then have it open
-  2. Go to the directory where your requirements.txt file is located.
+  2. Go to the directory where your *requirements.txt* file is located.
   3. If you're in the mentioned directory, run the following command by entering it in *Command Prompt* and the press enter:
-```
-pip install -r requirements.txt
-```
-4. If you aren't in the mentioned directory, where your requirements.txt file is located, then enter into *Command Prompt*:
-```
-pip install -r TypePathTorequirements.txtFileHere
-```
+  ```
+  pip install -r requirements.txt
+  ```
+  4. If you aren't in the mentioned directory, where your *requirements.txt* file is located, then enter into *Command Prompt*:
+  ```
+  pip install -r TypePathTorequirements.txtFileHere
+  ```
