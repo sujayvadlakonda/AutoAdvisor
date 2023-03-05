@@ -23,6 +23,10 @@ class Transcript:
         raise Exception("Student Name Not Found!")
 
 
+    def close(self):
+        self.transcript.close()
+
+
     def _get_first_page_words(self):
         first_page = self._get_first_page()
         first_page_words = first_page.extract_words(x_tolerance=30, y_tolerance=3, keep_blank_chars=True, use_text_flow=False, horizontal_ltr=True, vertical_ttb=True, extra_attrs=[], split_at_punctuation=False)
