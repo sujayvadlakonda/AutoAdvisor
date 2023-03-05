@@ -1,6 +1,6 @@
 import unittest
 
-from read_transcript import Transcript
+from transcript import Transcript
 
 
 class TestTranscript(unittest.TestCase):
