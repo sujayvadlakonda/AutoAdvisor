@@ -23,6 +23,17 @@ class Transcript:
         raise Exception("Student Name Not Found!")
 
 
+    def get_student_id(self):
+        first_page_words = self._get_first_page_words()
+
+        for word in first_page_words:
+            text = word['text']
+            if text.startswith("Student ID:"):
+                return remove_label(text, label="Student ID:")
+
+        raise Exception("Student ID Not Found!")
+
+
     def close(self):
         self.transcript.close()
 

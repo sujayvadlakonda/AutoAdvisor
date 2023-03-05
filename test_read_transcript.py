@@ -34,5 +34,15 @@ class TestTranscript(unittest.TestCase):
         self.assertEqual(self.keeley_jones.get_student_name(), "Keeley Jones")
 
 
+    def test_student_id(self):
+        self.assertEqual(self.ted_lasso.get_student_id(), "2021504218")
+        self.assertEqual(self.mike_modano.get_student_id(), "2021543217")
+        self.assertEqual(self.taylor_swift.get_student_id(), "2021012398")
+        self.assertEqual(self.roy_kent.get_student_id(), "2021231140")
+        self.assertEqual(self.stevie_budd.get_student_id(), "2021261148")
+        self.assertEqual(self.krusty_krab.get_student_id(), "2021122928")
+        self.assertEqual(self.keeley_jones.get_student_id(), "2021244212")
+
+
 
 unittest.main()
