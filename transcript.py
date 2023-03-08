@@ -13,10 +13,11 @@ class Transcript:
 
 
     def get_student_name(self):
-        first_page_words = self._get_first_page_words()
+        first_page = self._get_first_page()
+        first_page_lines = first_page.get_lines()
 
-        for word in first_page_words:
-            text = word['text']
+        for line in first_page_lines:
+            text = line['text']
             if text.startswith("Name:"):
                 return remove_label(text, label="Name:")
 
@@ -24,10 +25,11 @@ class Transcript:
 
 
     def get_student_id(self):
-        first_page_words = self._get_first_page_words()
+        first_page = self._get_first_page()
+        first_page_lines = first_page.get_lines()
 
-        for word in first_page_words:
-            text = word['text']
+        for line in first_page_lines:
+            text = line['text']
             if text.startswith("Student ID:"):
                 return remove_label(text, label="Student ID:")
 
@@ -38,12 +40,19 @@ class Transcript:
         self.transcript.close()
 
 
-    def _get_first_page_words(self):
-        first_page = self._get_first_page()
-        first_page_words = first_page.extract_words(x_tolerance=30, keep_blank_chars=True)
-
-        return first_page_words
-
-
     def _get_first_page(self):
-        return self.transcript.pages[0]
+        return self._get_page(0)
+
+
+    def _get_page(self, page_number):
+        return TranscriptPage(self.transcript.pages[page_number])
+
+
+
+class TranscriptPage:
+    def __init__(self, page):
+        self.page = page
+
+
+    def get_lines(self):
+        return self.page.extract_words(x_tolerance=30, keep_blank_chars=True)
