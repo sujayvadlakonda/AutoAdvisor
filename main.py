@@ -35,6 +35,3 @@ if __name__ == '__main__':
     file_select_gui(file_selection) # calling file selection gui function
 
 
-# function to scrape data from file (sujay's job)
-
-
