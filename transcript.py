@@ -18,6 +18,7 @@ class Transcript:
             if line.startswith("Name:"):
                 return remove_label(line, label="Name:")
 
+
         raise Exception("Student Name Not Found!")
 
 
@@ -25,6 +26,7 @@ class Transcript:
         for line in self.lines:
             if line.startswith("Student ID:"):
                 return remove_label(line, label="Student ID:")
+
 
         raise Exception("Student ID Not Found!")
 
