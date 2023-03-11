@@ -9,41 +9,37 @@ def remove_label(text, label):
 
 class Transcript:
     def __init__(self, path_to_pdf):
-        self.transcript = pdfplumber.open(path_to_pdf)
+        self.pdf = pdfplumber.open(path_to_pdf)
+        self.lines = self._construct_lines()
 
 
     def get_student_name(self):
-        first_page_words = self._get_first_page_words()
+        for line in self.lines:
+            if line.startswith("Name:"):
+                return remove_label(line, label="Name:")
 
-        for word in first_page_words:
-            text = word['text']
-            if text.startswith("Name:"):
-                return remove_label(text, label="Name:")
 
         raise Exception("Student Name Not Found!")
 
 
     def get_student_id(self):
-        first_page_words = self._get_first_page_words()
+        for line in self.lines:
+            if line.startswith("Student ID:"):
+                return remove_label(line, label="Student ID:")
 
-        for word in first_page_words:
-            text = word['text']
-            if text.startswith("Student ID:"):
-                return remove_label(text, label="Student ID:")
 
         raise Exception("Student ID Not Found!")
 
 
     def close(self):
-        self.transcript.close()
+        self.pdf.close()
 
 
-    def _get_first_page_words(self):
-        first_page = self._get_first_page()
-        first_page_words = first_page.extract_words(x_tolerance=30, keep_blank_chars=True)
+    def _construct_lines(self):
+        lines = []
 
-        return first_page_words
+        for page in self.pdf.pages:
+            for line in page.extract_words(x_tolerance=30, keep_blank_chars=True):
+                lines.append(line['text'])
 
-
-    def _get_first_page(self):
-        return self.transcript.pages[0]
+        return lines
