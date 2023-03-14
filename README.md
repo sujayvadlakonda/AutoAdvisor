@@ -7,12 +7,12 @@
 2. Sign in to *Box Drive* with your UTD email (if *Box* asks for a email), then your UTD *Box* login information (i.e. netid and password)
 - Installation is successful if you see *Box* as an option in the side menu of your *File Explorer* desktop application
 
-### Usage Instructions
+### Usage Instructions For Window Computers
 - The *Browse Files* button is used to select which file (i.e. transcript) the tool is going to get information from and use
 - When selecting a file, if you can't find the file you need, try changing the file type to *All Files* in the bottom right drop down menu of the *File Explorer* window
 - Once file is selected, the information will then be captured/scraped by the tool
 
-### Installation Instructions for Developers
+### Installation Instructions for Developers (This is for if you're using a Windows Computer)
 - Maintain *requirements.txt* file with any new dependencies
 - To generate a new *requirments.txt* file, do the following:
   1. Install the *pipreqs* package via pips by going into *Command Prompt* and entering; 
