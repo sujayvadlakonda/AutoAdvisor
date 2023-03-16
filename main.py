@@ -11,14 +11,14 @@ def open_file(file_name):
     file_err_msg = "File not opened or could not be opened."
 
     # Opens file in read-only mode
-    try:
+    if file_name:
         with open(file_name, "r") as f:
             # Displays selected file name to user
             showinfo(
                 title="Selected File",
                 message="Selected file: "+get_filename(file_name)
             )
-    except:
+    else:
         mbox.showerror("Error", file_err_msg)  # failed opening file message box
 
 # Gets file name from file path
@@ -44,16 +44,15 @@ def file_selection():
 
 # file selection gui for the window and browse file button
 def file_select_gui(window):
+    style = ttk.Style(window)
+    style.configure("BW.TLabel", font=("Roboto", 15), foreground="black", background="white")
+    style.configure("GWSmall.TLabel", font=("Roboto", 12), foreground="Gray", background="white")
+    style.configure("BWSmall.TLabel", font=("Roboto", 12), foreground="Blue", background="white")
+
     # Upload File text label and design
-    lbl_upload = Label(
-        window,
-        text="Upload File",
-        font="Roboto 15",
-        width=100,
-        height=4,
-        fg="black",
-        bg="white"
-    )
+    lbl_upload = ttk.Label(text="Upload File", style="BW.TLabel")
+    lbl_upload.pack(pady=30)  # text padding
+    lbl_upload = ttk.Label(text="Select a file (e.g. transcript) to upload", style="GWSmall.TLabel")
     lbl_upload.pack(pady=10)  # text padding
 
     # Button to open Window's File Explorer and design
@@ -87,3 +86,27 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+# adding "file_name = file_selection()" in file_select_gui() causes file explorer to open before the button is clicked
+# adding "return file_name" in file_selection() causes file explorer to open before the button is clicked
+# don't put () after button commands or they'll activate before you press the button
+
+#  put (tkinter window gui) in a sep Window class in a sep file w/ mainloop function exposed
+#  BrowseFileButton class w/ file_selection function in a separate file
+#  pulled-out constants
+#  show file name, make buttons+upload file page pic/outline+homepg labels/button look nice
+#  add a prev + next button that goes to next window page
+#  add homepage with utd ecs+degree plan and audit tool label, and "+ Start" button, that goes to upload file page
+
+#   style = ttk.Style(self) and ttk.Label(self, text="", style="chosenname.TLabel")
+# Name of File label and design
+#     lbl_filename = Label(
+#         window,
+#         text="Chosen File",
+#         font="Roboto 12",
+#         width=50,
+#         height=4,
+#         fg="black",
+#         bg="white"
+#     )
+#  lbl_filename.configure(text="Chosen File: "+filename)
