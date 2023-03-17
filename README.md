@@ -38,7 +38,7 @@
   ```
 ## For mac user's testing the Upload File python code:
 - For file related stuff you can just swap the file_explorer variable in initialdir with the finder variable when it comes to the "Upload File" python files
-- Adding "file_name = file_selection()" in file_select_gui() just causes file explorer to open before the button is clicked
-- Adding "return file_name" in file_selection() just causes file explorer to open before the button is clicked
+- Adding "file_path = file_selection()" in file_select_gui() just causes file explorer to open before the button is clicked
+- Adding "return file_path" in file_selection() just causes file explorer to open before the button is clicked
 - don't put () after button commands or they'll activate before you press the button
 
