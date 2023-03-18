@@ -41,11 +41,12 @@ def file_selection():
 
     file_status = open_file(file_path)  # calls function to open file
 
+    # Displays name of file that user selected and opened or error message
     if file_status:
-        # Displays name of file that user selected and opened
+        filename = get_filename(file_path)
         showinfo(
             title="File Selected",
-            message="File Selected: " + get_filename(file_path)
+            message="File Selected: " + filename
         )
     else:
         mbox.showerror("Error", file_err_msg)  # failed opening file message box
@@ -58,19 +59,36 @@ def file_select_gui(window):
     style.configure("GWSmall.TLabel", font=("Roboto", 12), foreground="Gray", background="white")
     style.configure("BWSmall.TLabel", font=("Roboto", 12), foreground="Blue", background="white")
 
+    # Frame outline design
+    # frame = ttk.Frame(window, background="#2780e3") # owrk in progress
+    # height, width
+    # frame["borderwidth"] = 5
+    # frame["relief"] = "groove/ridge/solid"
+    # frame["padding"] = (l, t, r, b)
+    # labelName.pack(padx=1, pady=1)
+    # border_color.pack(padx=40, pady=40)
+    # add frame to the labels
+
+    # Decorative Image label and design
+    doc_up_photo = tk.PhotoImage(file=r"./images/no_bkgd_file.png")
+    lbl_image = ttk.Label(
+        window,
+        image=doc_up_photo,
+        background="white"
+    )
+    lbl_image.doc_up_photo = doc_up_photo  # image reference to display image
+    lbl_image.pack(side=TOP, pady=(50,10))  # padding
+
     # Upload File text label and design
     lbl_upload = ttk.Label(text="Upload File", style="BW.TLabel")
-    lbl_upload.pack(pady=30)  # text padding
-    lbl_upload = ttk.Label(text="Select a file (e.g. transcript) to upload:", style="GWSmall.TLabel")
+    lbl_upload.pack(pady=10)  # text padding
+    lbl_upload = ttk.Label(text="Click the button to select a file to upload:", style="GWSmall.TLabel")
     lbl_upload.pack(pady=10)  # text padding
 
-    # Button to open Window's File Explorer and design
-    style.theme_names()
-    current_theme = style.theme_use("vista")
+    # Open Window's File Explorer button and design
     btn_file_browse = ttk.Button(
         window,
         text="Browse Files",
-        value=current_theme,
         command=file_selection
     )
     btn_file_browse.pack(side=TOP, pady=20)  # button padding
@@ -86,8 +104,8 @@ def window_gui():
     window.config(background=window_color)  # Window background color
     window.geometry(window_size)  # Window size
     window.title(window_name)  # Window name
-    #icon = PhotoImage(file="./images/project_icon.png")
-    #window.iconbitmap(TRUE,icon)  # Window icon
+    icon = tk.PhotoImage(file="./images/project_icon.png")
+    window.iconphoto(FALSE, icon)  # window icon logo
 
     file_select_gui(window)  # file selection window gui
 
@@ -101,7 +119,6 @@ def main():
 if __name__ == '__main__':
     main()
 
-# I'll remove these side comments later
 # adding "file_path = file_selection()" in file_select_gui() causes file explorer to open before the button is clicked
 # adding "return file_path" in file_selection() causes file explorer to open before the button is clicked
 # don't put () after button commands or the button will activate before you press it
@@ -110,10 +127,12 @@ if __name__ == '__main__':
 #  put (tkinter window gui) in a sep Window class in a sep file w/ mainloop function exposed
 #  BrowseFileButton class w/ file_selection function in a separate file
 #  pulled-out constants
-#  show file name, + upload file page pic/outline look nice
+#  show file name, + frame outline look nice
 #  add a prev + next button that goes to next window page that looks nice
 #  add homepage nice looking degree plan and audit tool label, and "+ Start" button, that goes to upload file page
 
-#  vista or default
 #  style = ttk.Style(self) and ttk.Label(self, text="", style="chosen_name.TLabel")
-#  labelName["text"] = filename
+#  add self. to filename variable to access it any within a class
+#  labelName["text"] = filename # used to change text without using config and after est.
+#  current_theme = style.theme_use("vista"), vista/default
+# rgb = (#, #, #) then add "#{:02x}{:02x}{:02x}'.format(*rgb) or "#%02x%02x%02x" % rgb or just use #colorCodeHere
