@@ -58,36 +58,34 @@ def file_select_gui(window):
     style.configure("BW.TLabel", font=("Roboto", 15), foreground="black", background="white")
     style.configure("GWSmall.TLabel", font=("Roboto", 12), foreground="Gray", background="white")
     style.configure("BWSmall.TLabel", font=("Roboto", 12), foreground="Blue", background="white")
+    style.configure("BlBord.TFrame", borderwidth=5, background="white", relief=SOLID, height=60, width=70)
+    style.configure("picBkgd.TLabel", background="white")
 
     # Frame outline design
-    # frame = ttk.Frame(window, background="#2780e3") # owrk in progress
-    # height, width
-    # frame["borderwidth"] = 5
-    # frame["relief"] = "groove/ridge/solid"
-    # frame["padding"] = (l, t, r, b)
-    # labelName.pack(padx=1, pady=1)
-    # border_color.pack(padx=40, pady=40)
-    # add frame to the labels
+    frame = ttk.Frame(window, style="BlBord.TFrame")
+    frame['padding'] = (5, 0, 5, 0)  # adjusts inner padding
+    frame.pack(fill=NONE, expand=False, pady=20)  # frame padding
 
     # Decorative Image label and design
     doc_up_photo = tk.PhotoImage(file=r"./images/no_bkgd_file.png")
     lbl_image = ttk.Label(
-        window,
+        frame,
         image=doc_up_photo,
-        background="white"
+        style="picBkgd.TLabel"
     )
     lbl_image.doc_up_photo = doc_up_photo  # image reference to display image
-    lbl_image.pack(side=TOP, pady=(50,10))  # padding
+    #frame['padding'] = (5, 0, 5, 0)  # adjusts inner padding
+    lbl_image.pack(side=TOP, pady=(20, 10))  # padding
 
     # Upload File text label and design
-    lbl_upload = ttk.Label(text="Upload File", style="BW.TLabel")
+    lbl_upload = ttk.Label(frame, text="Upload File", style="BW.TLabel")
     lbl_upload.pack(pady=10)  # text padding
-    lbl_upload = ttk.Label(text="Click the button to select a file to upload:", style="GWSmall.TLabel")
+    lbl_upload = ttk.Label(frame, text="Click the button to select a file to upload: ", style="GWSmall.TLabel")
     lbl_upload.pack(pady=10)  # text padding
 
     # Open Window's File Explorer button and design
     btn_file_browse = ttk.Button(
-        window,
+        frame,
         text="Browse Files",
         command=file_selection
     )
@@ -122,12 +120,12 @@ if __name__ == '__main__':
 # adding "file_path = file_selection()" in file_select_gui() causes file explorer to open before the button is clicked
 # adding "return file_path" in file_selection() causes file explorer to open before the button is clicked
 # don't put () after button commands or the button will activate before you press it
-# ask sujay how they want to connect their code to mine
+# ask sujay how they want to connect their code to mine since he has a mac
 
 #  put (tkinter window gui) in a sep Window class in a sep file w/ mainloop function exposed
 #  BrowseFileButton class w/ file_selection function in a separate file
-#  pulled-out constants
-#  show file name, + frame outline look nice
+#  pulled-out constants, and the import file thing
+#  show file name,
 #  add a prev + next button that goes to next window page that looks nice
 #  add homepage nice looking degree plan and audit tool label, and "+ Start" button, that goes to upload file page
 
@@ -136,3 +134,4 @@ if __name__ == '__main__':
 #  labelName["text"] = filename # used to change text without using config and after est.
 #  current_theme = style.theme_use("vista"), vista/default
 # rgb = (#, #, #) then add "#{:02x}{:02x}{:02x}'.format(*rgb) or "#%02x%02x%02x" % rgb or just use #colorCodeHere
+# background="#2780e3"
