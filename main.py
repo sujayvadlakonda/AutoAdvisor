@@ -63,7 +63,7 @@ def file_select_gui(window):
 
     # Frame outline design
     frame = ttk.Frame(window, style="BlBord.TFrame")
-    frame['padding'] = (5, 0, 5, 0)  # adjusts inner padding
+    frame['padding'] = (5, 0, 5, 0)  # adjusts inner padding to fit text
     frame.pack(fill=NONE, expand=False, pady=20)  # frame padding
 
     # Decorative Image label and design
@@ -74,7 +74,7 @@ def file_select_gui(window):
         style="picBkgd.TLabel"
     )
     lbl_image.doc_up_photo = doc_up_photo  # image reference to display image
-    #frame['padding'] = (5, 0, 5, 0)  # adjusts inner padding
+    frame['padding'] = (200, 0, 200, 0)  # adjusts inner padding for visual aesthetic
     lbl_image.pack(side=TOP, pady=(20, 10))  # padding
 
     # Upload File text label and design
@@ -124,14 +124,15 @@ if __name__ == '__main__':
 
 #  put (tkinter window gui) in a sep Window class in a sep file w/ mainloop function exposed
 #  BrowseFileButton class w/ file_selection function in a separate file
-#  pulled-out constants, and the import file thing
-#  show file name,
+#  pulled-out constants, 
+#  show file name, import file thing
 #  add a prev + next button that goes to next window page that looks nice
 #  add homepage nice looking degree plan and audit tool label, and "+ Start" button, that goes to upload file page
 
 #  style = ttk.Style(self) and ttk.Label(self, text="", style="chosen_name.TLabel")
 #  add self. to filename variable to access it any within a class
-#  labelName["text"] = filename # used to change text without using config and after est.
+# from fileName import className
+#  labelName["text"] = filename # changes parameter without needing config after value already set
 #  current_theme = style.theme_use("vista"), vista/default
-# rgb = (#, #, #) then add "#{:02x}{:02x}{:02x}'.format(*rgb) or "#%02x%02x%02x" % rgb or just use #colorCodeHere
-# background="#2780e3"
+# background color e.g.: "#2780e3"
+
