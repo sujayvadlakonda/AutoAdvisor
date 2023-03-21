@@ -43,6 +43,15 @@ class TestTranscript(unittest.TestCase):
         self.assertEqual(self.krusty_krab.get_student_id(), "2021122928")
         self.assertEqual(self.keeley_jones.get_student_id(), "2021244212")
 
+    def test_student_major(self):
+        self.assertEqual(self.ted_lasso.get_student_major(), 'Computer Science')
+        self.assertEqual(self.mike_modano.get_student_major(), 'Computer Science')
+        self.assertEqual(self.taylor_swift.get_student_major(), 'Computer Science')
+        self.assertEqual(self.roy_kent.get_student_major(), 'Computer Science')
+        self.assertEqual(self.stevie_budd.get_student_major(), 'Computer Science')
+        self.assertEqual(self.krusty_krab.get_student_major(), 'Computer Science')
+        self.assertEqual(self.keeley_jones.get_student_major(), 'Computer Science')
+
 
 
 unittest.main()

@@ -34,6 +34,21 @@ class Transcript:
         raise Exception("Student ID Not Found!")
 
 
+    def get_student_major(self):
+        first_page_words = self._get_first_page_words()
+
+        for word in first_page_words:
+            text = word['text']
+            if text.endswith('Major'):
+                if text.endswith('Computer Science Major') or text.endswith('ComputerScienceMajor'):
+                    return 'Computer Science'
+                if text.endswith('Software Engineering Major') or text.endswith('SoftwareEngineeringMajor'):
+                    return 'Software Engineering'
+
+        raise Exception("Student Major Not Found!")
+
+
+
     def close(self):
         self.transcript.close()
 
