@@ -1,10 +1,5 @@
 import pdfplumber
-
-
-def remove_label(text, label):
-    label_length = len(label)
-    removed_text = text[label_length:]
-    return removed_text.strip()
+import re
 
 
 class Transcript:
@@ -17,14 +12,10 @@ class Transcript:
 
 
     def get_student_name(self):
-        first_page_words = self._get_first_page_words()
-
-        for word in first_page_words:
-            text = word['text']
-            if text.startswith("Name:"):
-                return remove_label(text, label="Name:")
-
-        raise Exception("Student Name Not Found!")
+        match = re.search(r"^Name.*$", self.text, flags=re.MULTILINE)
+        name = match.group()
+        name = re.sub(r"Name: ", "", name)
+        return name
 
 
     def get_student_id(self):
