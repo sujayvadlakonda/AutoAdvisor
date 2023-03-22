@@ -36,6 +36,5 @@
   ```
   pip install -r TypePathTorequirements.txtFileHere
   ```
-## For mac user's testing the Upload File page related files:
-- confirmed to be working on window OS, but I'm not sure about mac OS 
+
 
