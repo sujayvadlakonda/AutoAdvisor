@@ -8,7 +8,7 @@ class DegreeApp(tk.Tk):
         super().__init__()
 
         window_name = "Degree Plan and Audit Tool"
-        window_size = "700x500+270+25"
+        window_size = "700x550+270+25"
         window_color = "white"
 
         self.config(background=window_color)  # Window background color
