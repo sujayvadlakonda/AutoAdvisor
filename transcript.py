@@ -19,22 +19,7 @@ class Transcript:
 
 
     def get_id(self):
-        first_page_words = self._get_first_page_words()
-
-        for word in first_page_words:
-            text = word['text']
-            if text.startswith("Student ID:"):
-                return remove_label(text, label="Student ID:")
-
-        raise Exception("Student ID Not Found!")
-
-
-    def _get_first_page_words(self):
-        first_page = self._get_first_page()
-        first_page_words = first_page.extract_words(x_tolerance=30, keep_blank_chars=True)
-
-        return first_page_words
-
-
-    def _get_first_page(self):
-        return self.transcript.pages[0]
+        match = re.search(r"^Student ID.*$", self.text, flags=re.MULTILINE)
+        id = match.group()
+        id = re.sub(r"Student ID: ", "", id)
+        return id
