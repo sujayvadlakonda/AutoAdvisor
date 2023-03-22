@@ -44,6 +44,18 @@ class Transcript:
         return semester
 
 
+    def get_combined_cumulative_gpa(self):
+        section_title_regex = r"^Graduate ?Career ?Totals"
+        gpa_regex = r"Combined ?Cum ?GPA ?\d\.\d{3}"
+        regex = section_title_regex + r".*" + gpa_regex
+        match = re.search(regex, self.text, flags=re.MULTILINE|re.DOTALL)
+        match = match.group()
+        match = re.search(gpa_regex, match, flags=re.MULTILINE)
+        match = match.group()
+        gpa = re.sub(r"Combined ?Cum ?GPA ?", "", match)
+        return gpa
+
+
     # https://stackoverflow.com/questions/199059/a-pythonic-way-to-insert-a-space-before-capital-letters
     # Some pdfs don't split camel case. Mike Modano is an example
     def _split_camel_case(self, text):
