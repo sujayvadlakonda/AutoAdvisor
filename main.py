@@ -116,23 +116,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-# adding "file_path = file_selection()" in file_select_gui() causes file explorer to open before the button is clicked
-# adding "return file_path" in file_selection() causes file explorer to open before the button is clicked
-# don't put () after button commands or the button will activate before you press it
-# ask sujay how they want to connect their code to mine since he has a mac
-
-#  put (tkinter window gui) in a sep Window class in a sep file w/ mainloop function exposed
-#  BrowseFileButton class w/ file_selection function in a separate file
-#  pulled-out constants, 
-#  show file name, import file thing
-#  add a prev + next button that goes to next window page that looks nice
-#  add homepage nice looking degree plan and audit tool label, and "+ Start" button, that goes to upload file page
-
-#  style = ttk.Style(self) and ttk.Label(self, text="", style="chosen_name.TLabel")
-#  add self. to filename variable to access it any within a class
-# from fileName import className
-#  labelName["text"] = filename # changes parameter without needing config after value already set
-#  current_theme = style.theme_use("vista"), vista/default
-# background color e.g.: "#2780e3"
-
