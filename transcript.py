@@ -11,14 +11,14 @@ class Transcript:
                 self.text += page.extract_text()
 
 
-    def get_student_name(self):
+    def get_name(self):
         match = re.search(r"^Name.*$", self.text, flags=re.MULTILINE)
         name = match.group()
         name = re.sub(r"Name: ", "", name)
         return name
 
 
-    def get_student_id(self):
+    def get_id(self):
         first_page_words = self._get_first_page_words()
 
         for word in first_page_words:
