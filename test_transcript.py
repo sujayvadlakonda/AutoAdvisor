@@ -44,5 +44,15 @@ class TestTranscript(unittest.TestCase):
         self.assertEqual(self.keeley_jones.get_major(), "Computer Science Major")
 
 
+    def test_beginning_of_graduate_record(self):
+        self.assertEqual(self.ted_lasso.get_beginning_of_graduate_record(), "2021 Fall")
+        self.assertEqual(self.mike_modano.get_beginning_of_graduate_record(), "2021 Fall")
+        self.assertEqual(self.taylor_swift.get_beginning_of_graduate_record(), "2021 Fall")
+        self.assertEqual(self.roy_kent.get_beginning_of_graduate_record(), "2021 Fall")
+        self.assertEqual(self.stevie_budd.get_beginning_of_graduate_record(), "2021 Fall")
+        self.assertEqual(self.krusty_krab.get_beginning_of_graduate_record(), "2021 Fall")
+        self.assertEqual(self.keeley_jones.get_beginning_of_graduate_record(), "2022 Fall")
+
+
 
 unittest.main()
