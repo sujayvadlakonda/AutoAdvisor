@@ -14,16 +14,6 @@ class TestTranscript(unittest.TestCase):
         self.keeley_jones = Transcript("transcripts/keeley-jones.pdf")
 
 
-    def tearDown(self):
-        self.ted_lasso.close()
-        self.mike_modano.close()
-        self.taylor_swift.close()
-        self.roy_kent.close()
-        self.stevie_budd.close()
-        self.krusty_krab.close()
-        self.keeley_jones.close()
-
-
     def test_student_name(self):
         self.assertEqual(self.ted_lasso.get_student_name(), "Ted Lasso")
         self.assertEqual(self.mike_modano.get_student_name(), "Mike Modano")

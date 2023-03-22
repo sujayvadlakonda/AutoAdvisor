@@ -9,7 +9,11 @@ def remove_label(text, label):
 
 class Transcript:
     def __init__(self, path_to_pdf):
-        self.transcript = pdfplumber.open(path_to_pdf)
+        self.text = ''
+
+        with pdfplumber.open(path_to_pdf) as pdf:
+            for page in pdf.pages:
+                self.text += page.extract_text()
 
 
     def get_student_name(self):
@@ -32,10 +36,6 @@ class Transcript:
                 return remove_label(text, label="Student ID:")
 
         raise Exception("Student ID Not Found!")
-
-
-    def close(self):
-        self.transcript.close()
 
 
     def _get_first_page_words(self):
