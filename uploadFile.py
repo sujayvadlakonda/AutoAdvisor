@@ -10,6 +10,7 @@ class UploadFile(ttk.Frame):
     def __init__(self, container):
         super().__init__(container)
         self.pack(fill="both", expand=True) # assigns ttk.Frame to root application window
+        self.filename = tk.StringVar()
         self.file_select_gui()
 
 
@@ -54,9 +55,8 @@ class UploadFile(ttk.Frame):
         self.btn_file_browse.pack(side=TOP, pady=20)  # button padding
 
         #file name (not file path) text label and design
-        self.filename = tk.StringVar()
-        self.filename = ttk.Label(self.frame, textvariable=self.filename, style="BWSmall.TLabel")
-        self.filename.pack(pady=10)
+        self.file_name = ttk.Label(self.frame, textvariable=self.filename, style="BWSmall.TLabel")
+        self.file_name.pack(pady=10)
 
 
     # Opens file in read-only mode and returns if it's successful or not
@@ -89,12 +89,7 @@ class UploadFile(ttk.Frame):
 
         # Displays name of file that user selected and opened
         if file_status:
-            file_name = os.path.basename(self.file_path)
-            showinfo(
-                title="File Selected",
-                message="File Selected: " + file_name
-            )
-            self.filename.set("")
+            file_name = "Uploaded File: " + os.path.basename(self.file_path)
             self.filename.set(file_name)
         else:
             mbox.showerror("Error", file_err_msg)  # failed opening file message box
