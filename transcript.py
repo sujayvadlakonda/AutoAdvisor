@@ -33,6 +33,17 @@ class Transcript:
         return major
 
 
+    def get_beginning_of_graduate_record(self):
+        section_title_regex = r"^Beginning ?of ?Graduate ?Record"
+        semester_regex = r"\d{4} ?(Summer|Spring|Fall|Winter)"
+        regex = section_title_regex + r"\n" + semester_regex
+        match = re.search(regex, self.text, flags=re.MULTILINE)
+        semester = match.group()
+        semester = re.sub("^.*\n", "", semester)
+        semester = self._split_camel_case(semester)
+        return semester
+
+
     # https://stackoverflow.com/questions/199059/a-pythonic-way-to-insert-a-space-before-capital-letters
     # Some pdfs don't split camel case. Mike Modano is an example
     def _split_camel_case(self, text):
