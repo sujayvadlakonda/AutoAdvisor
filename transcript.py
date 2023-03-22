@@ -23,3 +23,17 @@ class Transcript:
         id = match.group()
         id = re.sub(r"Student ID: ", "", id)
         return id
+
+
+    def get_major(self):
+        match = re.search(r"^.*Major$", self.text, flags=re.MULTILINE)
+        major = match.group()
+        major = re.sub(r"^.*:", "", major).strip()
+        major = self._split_camel_case(major)
+        return major
+
+
+    # https://stackoverflow.com/questions/199059/a-pythonic-way-to-insert-a-space-before-capital-letters
+    # Some pdfs don't split camel case. Mike Modano is an example
+    def _split_camel_case(self, text):
+        return re.sub(r"(?<=\w)([A-Z])", r" \1", text)
