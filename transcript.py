@@ -1,49 +1,39 @@
 import pdfplumber
-
-
-def remove_label(text, label):
-    label_length = len(label)
-    removed_text = text[label_length:]
-    return removed_text.strip()
+import re
 
 
 class Transcript:
     def __init__(self, path_to_pdf):
-        self.transcript = pdfplumber.open(path_to_pdf)
+        self.text = ''
+
+        with pdfplumber.open(path_to_pdf) as pdf:
+            for page in pdf.pages:
+                self.text += page.extract_text()
 
 
-    def get_student_name(self):
-        first_page_words = self._get_first_page_words()
-
-        for word in first_page_words:
-            text = word['text']
-            if text.startswith("Name:"):
-                return remove_label(text, label="Name:")
-
-        raise Exception("Student Name Not Found!")
+    def get_name(self):
+        match = re.search(r"^Name.*$", self.text, flags=re.MULTILINE)
+        name = match.group()
+        name = re.sub(r"Name: ", "", name)
+        return name
 
 
-    def get_student_id(self):
-        first_page_words = self._get_first_page_words()
-
-        for word in first_page_words:
-            text = word['text']
-            if text.startswith("Student ID:"):
-                return remove_label(text, label="Student ID:")
-
-        raise Exception("Student ID Not Found!")
+    def get_id(self):
+        match = re.search(r"^Student ID.*$", self.text, flags=re.MULTILINE)
+        id = match.group()
+        id = re.sub(r"Student ID: ", "", id)
+        return id
 
 
-    def close(self):
-        self.transcript.close()
+    def get_major(self):
+        match = re.search(r"^.*Major$", self.text, flags=re.MULTILINE)
+        major = match.group()
+        major = re.sub(r"^.*:", "", major).strip()
+        major = self._split_camel_case(major)
+        return major
 
 
-    def _get_first_page_words(self):
-        first_page = self._get_first_page()
-        first_page_words = first_page.extract_words(x_tolerance=30, keep_blank_chars=True)
-
-        return first_page_words
-
-
-    def _get_first_page(self):
-        return self.transcript.pages[0]
+    # https://stackoverflow.com/questions/199059/a-pythonic-way-to-insert-a-space-before-capital-letters
+    # Some pdfs don't split camel case. Mike Modano is an example
+    def _split_camel_case(self, text):
+        return re.sub(r"(?<=\w)([A-Z])", r" \1", text)
