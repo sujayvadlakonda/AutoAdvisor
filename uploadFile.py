@@ -29,7 +29,7 @@ class UploadFile(ttk.Frame):
         self.frame.pack(fill=NONE, expand=False, pady=20)  # frame padding
 
         # Decorative Image label and design
-        self.doc_upload_photo = tk.PhotoImage(file=r"./images/upload_file_decor.png")
+        self.doc_upload_photo = tk.PhotoImage(file=r"./images/upload_file.png")
         self.lbl_image = ttk.Label(
             self.frame,
             image=self.doc_upload_photo,
@@ -75,10 +75,6 @@ class UploadFile(ttk.Frame):
         excel_sheet = "Microsoft Excel Worksheet"
         file_explorer = "\\"  # path start for windows
         file_err_msg = "File could not be opened or was not chosen."
-
-        # Check's if computer is macOS
-        if os.name == 'posix':
-            file_explorer = "/"
 
         # opens Windows File Explorer and gets file path of the selected file
         self.file_path = filedialog.askopenfilename(initialdir=file_explorer, title="Open",
