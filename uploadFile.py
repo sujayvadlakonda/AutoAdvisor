@@ -1,7 +1,7 @@
 import os
 import sys
 import tkinter as tk
-from tkinter import *  # tkinter package for GUI purposes
+from tkinter import *
 from tkinter import ttk, filedialog, messagebox as mbox
 from tkinter.messagebox import showinfo
 from degreeApp import DegreeApp
@@ -29,30 +29,30 @@ class UploadFile(ttk.Frame):
         self.frame.pack(fill=NONE, expand=False, pady=20)  # frame padding
 
         # Decorative Image label and design
-        self.doc_up_photo = tk.PhotoImage(file=r"./images/no_bkgd_file.png")
+        self.doc_upload_photo = tk.PhotoImage(file=r"./images/upload_file_decor.png")
         self.lbl_image = ttk.Label(
             self.frame,
-            image=self.doc_up_photo,
+            image=self.doc_upload_photo,
             style="picBkgd.TLabel"
         )
-        self.lbl_image.doc_up_photo = self.doc_up_photo  # Reference of Image to display image
+        self.lbl_image.doc_upload_photo = self.doc_upload_photo  # Reference of Image to display image
         self.frame["padding"] = (200, 0, 200, 0)  # adjusts inner padding for visual aesthetic
-        self.lbl_image.pack(side=TOP, pady=(20, 10))  # padding
+        self.lbl_image.pack(side=TOP, fill=NONE, expand=False, padx=(20,0), pady=(20, 10))  # padding
 
         # Upload File text label and design
-        self.lbl_upload = ttk.Label(self.frame, text="Upload File", style="BW.TLabel")
-        self.lbl_upload.pack(pady=10)  # text padding
-        self.lbl_upload = ttk.Label(self.frame, text="Click the button to select a file to upload: ",
+        lbl_upload = ttk.Label(self.frame, text="Upload File", style="BW.TLabel")
+        lbl_upload.pack(fill=NONE, expand=False, padx=30, pady=10)  # text padding
+        lbl_upload = ttk.Label(self.frame, text="Click the button to select a file to upload: ",
                                     style="GWSmall.TLabel")
-        self.lbl_upload.pack(pady=10)  # text padding
+        lbl_upload.pack(fill=NONE, expand=False, padx=20, pady=10)  # text padding
 
         # Open Window's File Explorer button and design
-        self.btn_file_browse = ttk.Button(
+        btn_file_browse = ttk.Button(
             self.frame,
             text="Browse Files",
             command=self.file_selection
         )
-        self.btn_file_browse.pack(side=TOP, pady=20)  # button padding
+        btn_file_browse.pack(side=TOP, pady=20)  # button padding
 
         #file name (not file path) text label and design
         self.file_name = ttk.Label(self.frame, textvariable=self.filename, style="BWSmall.TLabel")
@@ -63,9 +63,9 @@ class UploadFile(ttk.Frame):
     def open_file(self):
         if self.file_path:
             with open(self.file_path, "r") as f:
-                return TRUE
+                return True
         else:
-            return FALSE
+            return False
 
 
     # Gets file path of file selected from file explorer by the user and opens it
@@ -73,12 +73,12 @@ class UploadFile(ttk.Frame):
         pdf = "Adobe Acrobat Document"
         word_doc = "Microsoft Word Document"
         excel_sheet = "Microsoft Excel Worksheet"
-        file_explorer = "/"  # path start for windows
-        file_err_msg = "File could not be opened."
+        file_explorer = "\\"  # path start for windows
+        file_err_msg = "File could not be opened or was not chosen."
 
         # Check's if computer is macOS
         if os.name == 'posix':
-            file_explorer = "\\"
+            file_explorer = "/"
 
         # opens Windows File Explorer and gets file path of the selected file
         self.file_path = filedialog.askopenfilename(initialdir=file_explorer, title="Open",
