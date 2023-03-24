@@ -9,7 +9,7 @@ from degreeApp import DegreeApp
 class UploadFile(ttk.Frame):
     def __init__(self, container):
         super().__init__(container)
-        self.pack(fill="both", expand=True) # assigns ttk.Frame to root application window
+        self.pack(fill=BOTH, expand=True) # assigns ttk.Frame to root application window
         self.filename = tk.StringVar()
         self.file_select_gui()
 
@@ -26,7 +26,7 @@ class UploadFile(ttk.Frame):
         # Frame outline design
         self.frame = ttk.Frame(self, style="BlBord.TFrame")
         self.frame["padding"] = (5, 0, 5, 0)  # adjusts inner padding to fit text
-        self.frame.pack(fill=NONE, expand=False, pady=20)  # frame padding
+        self.frame.pack(fill=BOTH, expand=False, pady=20)  # frame padding
 
         # Decorative Image label and design
         self.doc_upload_photo = tk.PhotoImage(file=r"./images/upload_file.png")
@@ -36,17 +36,18 @@ class UploadFile(ttk.Frame):
             style="picBkgd.TLabel"
         )
         self.lbl_image.doc_upload_photo = self.doc_upload_photo  # Reference of Image to display image
-        self.frame["padding"] = (200, 0, 200, 0)  # adjusts inner padding for visual aesthetic
-        self.lbl_image.pack(side=TOP, fill=NONE, expand=False, padx=(20,0), pady=(20, 10))  # padding
+        self.lbl_image.pack(side=TOP, fill=NONE, expand=5, padx=(20,0), pady=(20, 10))  # padding
 
         # Upload File text label and design
         lbl_upload = ttk.Label(self.frame, text="Upload File", style="BW.TLabel")
         lbl_upload.pack(fill=NONE, expand=False, padx=30, pady=10)  # text padding
+
+        # subtext label and design
         lbl_upload = ttk.Label(self.frame, text="Click the button to select a file to upload: ",
                                     style="GWSmall.TLabel")
         lbl_upload.pack(fill=NONE, expand=False, padx=20, pady=10)  # text padding
 
-        # Open Window's File Explorer button and design
+        # Window's File Explorer button and design
         btn_file_browse = ttk.Button(
             self.frame,
             text="Browse Files",
