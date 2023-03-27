@@ -1,13 +1,16 @@
 import os
 import tkinter as tk
 from tkinter import *
-from tkinter import ttk, filedialog, messagebox as mbox
+from tkinter import ttk, filedialog
+from tkinter import messagebox as mbox
+from degreePlan import DegreePlan
 
 
 class UploadFile(ttk.Frame):
-    def __init__(self, container):
+    def __init__(self, container, controller):
         super().__init__(container)
-        self.pack(fill=BOTH, expand=True)  # assigns ttk.Frame to root application window
+        self.controller = controller
+
         self.filename = tk.StringVar()  # Holds displayed name of file
         self.file_path = ""
 
@@ -18,6 +21,7 @@ class UploadFile(ttk.Frame):
         self.style.configure("BW.TLabel", font=("Roboto", 20), foreground="black", background="white")
         self.style.configure("GWSmall.TLabel", font=("Roboto", 14), foreground="Gray", background="white")
         self.style.configure("BWSmall.TLabel", font=("Roboto", 14), foreground="#107896", background="white")
+        self.style.configure("switchPage.TButton", font=("Segoe UI", 14), foreground="black", background="#800080")
 
         # Frame outline design
         frame = ttk.Frame(self, style="BlBord.TFrame")
@@ -52,7 +56,25 @@ class UploadFile(ttk.Frame):
 
         # file name (not file path) text label and design
         self.file_name = ttk.Label(frame, textvariable=self.filename, style="BWSmall.TLabel")
-        self.file_name.pack(pady=10)
+        self.file_name.pack(pady=5)
+
+        # Previous page button
+        prev_btn = ttk.Button(
+            frame,
+            text="<< Previous",
+            style="switchPage.TButton",
+            command=lambda: controller.show_frame("Homepage")
+        )
+        prev_btn.pack(side=LEFT, pady=(0, 20))  # button padding
+
+        # Next page button
+        next_btn = ttk.Button(
+            frame,
+            text="Next >>",
+            style="switchPage.TButton",
+            command=lambda : controller.show_frame(DegreePlan)
+        )
+        next_btn.pack(side=RIGHT, pady=(0, 20))  # button padding
 
     # Opens file in read-only mode and returns if it's successful or not
     def open_file(self):
