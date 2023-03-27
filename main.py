@@ -1,12 +1,7 @@
 from degreeApp import DegreeApp
-from uploadFile import UploadFile
-from homepage import Homepage
 
 if __name__ == '__main__':
     app = DegreeApp()  # application window instance
-    Homepage(app)  # passes application window object to homepage class
-    # UploadFile(app)  # passes application window object to Upload File class
-
     app.mainloop()  # keeps window running until exited
 
 
@@ -21,10 +16,11 @@ if __name__ == '__main__':
 #            image=self.doc_upload_photo,
 #            style="picBkgd.TLabel"
 #        )
-#        self.lbl_image.doc_upload_photo = self.doc_upload_photo  # Required to add in if you don't use self. (minus the self. part)
+#        self.lbl_image.doc_upload_photo = self.doc_upload_photo  # image reference needed to display image w/o self.
 #        self.lbl_image.pack(side=TOP, fill=NONE, expand=5, padx=(20, 0), pady=(20, 10))  # padding
-
-# labelName["text"] = filename # changes parameter without needing config after value already set\
+# however, if you get rid of the self for images then you need to reference the image
+# labelName["text"] = filename # changes parameter without needing config after value already set
+# to pass parameter to button command format it as command = lambda : functionName(parameterName)
 # current_theme = style.theme_use("vista"), vista/default
 #  from fileName import ClassName
 # chosenVariableName = className(), chosenVariableName.functionInClassName() used to call method in class
@@ -49,19 +45,28 @@ if __name__ == '__main__':
 # to change textvariable vari: self.textvariableVari.set(newValue)
 
 
-#  other page sep class and files
+#  add in classnames of other files to the for loop in degreeApp.py and add as "from fileName import className"
 #  pulled-out constants
 #  do we include self.master.title?
-#  add a prev + next button that goes to next window page that looks nice
-#  add nice homepage w/ degree plan and audit tool label, and "+ Start" button, that goes to upload file page
+# change to grid, why style isn't working, make button straight line
+# pre-add prev and nxt button to page3
+# fix file name shared to sujay's function
 
-# from tkinter import ttk (from degreeapp.py)
+
 # window = tk.Tk()  # makes a tkinter frame instance (from degreeApp.py)
-# from tkinter.messagebox import showinfo
-# showinfo(
-#                 title="Uploaded File",
-#                 message=file_name
-#             )
-# from upload file.py:
-# self.file_select_gui()
-# def file_select_gui(self):
+# from tkinter.messagebox import showinfo, showinfo(title="Uploaded File",message=file_name)
+# self.file_select_gui(), def file_select_gui(self):
+# pg_name = F.__name__ # other option? get rid?
+# self.frames[pg_name] = frame  # initializes each page of application,
+# self.pack(fill=BOTH, expand=True)  # assigns ttk.Frame to root application window. get rid of this
+#  Segoe UI, bookman old style, bradley hand ITC, ink free, segoe print, candara light, century gothic
+#  003300, 003333, 006600, 006633, 086623, 3DA542 (green),
+#  107896, 1287A8, 43ABC9, #4582ec, 0032A0, 1496BB, 0247fe, 2B0080 (button opt), 394C7F (blue),
+#  #593196, 7442C8, 800080, 575068 (purple), 5901c0, 8601af, 800080, 33058d, 6610F2
+# light blue background w/ black tex: #ACC8E5
+# purple w/ white text: 6610f2
+# purple button w/ white text (upload file and beyond): #553980
+# button ideas for upload file page: next >/>> box, > circle, >> with circle, -> by itself
+# blue white, purple white, b+w. no to greens.
+# new light blue background for blue and purple: #A1FCFF
+# light blue background : #E3FFFF
