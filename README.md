@@ -36,5 +36,8 @@
   ```
   pip install -r TypePathTorequirements.txtFileHere
   ```
+- To make the button work remember to: 
+1. add in the class name of the file you want to display to the for loop in degreeApp.py
+2. add to the top of the file "from insertYourFileNameHere import yourClassNameHere" as needed
 
 
