@@ -10,6 +10,7 @@ class DegreePlanPage(ttk.Frame):
 
         self.style = ttk.Style(self)
         self.style.configure("BlckBorder.TFrame", borderwidth=5, background="white", relief=SOLID, height=60, width=70)
+        self.style.configure("BlSmall.TLabel", font=("Roboto", 14), foreground="#107896", background="white")
 
         # Frame outline design
         frame = ttk.Frame(self, style="BlckBorder.TFrame")
@@ -19,6 +20,10 @@ class DegreePlanPage(ttk.Frame):
         frame.grid_columnconfigure(1, weight=1)
         frame.grid_columnconfigure(2, weight=1)
         frame.grid(column=0, row=0, sticky="nsew", columnspan=5, pady=(50, 0))  # keeps pages bundled in same location
+
+        # Text label and design
+        lbl_upload = ttk.Label(frame, text="This is a text label example", style="BlSmall.TLabel")
+        lbl_upload.grid(column=1, row=0, columnspan=1, padx=30, pady=5)  # text padding
 
         # Previous page button
         prev_btn = ttk.Button(

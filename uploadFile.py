@@ -56,7 +56,7 @@ class UploadFilePage(ttk.Frame):
         self.file_name = ttk.Label(frame, textvariable=self.filename, style="BWSmall.TLabel")
         self.file_name.pack(pady=(10, 0))
 
-        # Previous page button
+        # Previous page button and design
         prev_btn = ttk.Button(
             frame,
             text="<< Previous",
@@ -64,7 +64,7 @@ class UploadFilePage(ttk.Frame):
         )
         prev_btn.pack(pady=(5, 20))  # button padding
 
-        # Next page button
+        # Next page button and design
         next_btn = ttk.Button(
             frame,
             text="Next >>",

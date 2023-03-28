@@ -43,6 +43,9 @@ if __name__ == '__main__':
 # in classB file, to call function you do self.functionName() inside def __innit__(self) function
 # textvariable in label: est self.variName = tk.StringVar() in def innit() function, sep self. vari for labelVari and textvariable vari,
 # to change textvariable vari: self.textvariableVari.set(newValue)
+# Add to the top of the degreeApp.py file: from insertYourFileNameHere import insertYourClassNameHere
+# In the degreeApp.py file, add your file's class name to the () in the For Loop
+# In the button's command section, make sure the class name is enclosed in ""
 
 
 #  pulled-out constants
@@ -54,8 +57,6 @@ if __name__ == '__main__':
 # window = tk.Tk()  # makes a tkinter frame instance (from degreeApp.py)
 # from tkinter.messagebox import showinfo, showinfo(title="Uploaded File",message=file_name)
 # self.file_select_gui(), def file_select_gui(self):
-# pg_name = F.__name__ # other option? get rid?
-# self.frames[pg_name] = frame  # initializes each page of application,
 # self.pack(fill=BOTH, expand=True)  # assigns ttk.Frame to root application window. get rid of this
 # self.style.configure("switchPage.TButton", font=("Segoe UI", 14), foreground="black", background="#800080")
 # style="switchPage.TButton",
