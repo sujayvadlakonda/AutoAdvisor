@@ -8,9 +8,11 @@
 - Installation is successful if you see *Box* as an option in the side menu of your *File Explorer* desktop application
 
 ### Usage Instructions For Window Computers
+- The "Start" button on the homepage is used to direct the user to the Upload File page after it is clicked
+- The Upload File page has a "Browse Files" button that will open up File Explorer upon being clicked
 - The *Browse Files* button is used to select which file (i.e. transcript) the tool is going to get information from and use
-- When selecting a file, if you can't find the file you need, try changing the file type to *All Files* in the bottom right drop down menu of the *File Explorer* window
-- Once file is selected, the information will then be captured/scraped by the tool
+- When selecting a file, if you can't find the file you need, try changing the file type (located in the bottom right drop down menu of the *File Explorer* window) to *All Files* 
+- Once the file is selected, the information will then be captured/scraped by the tool, and the name of the file will be displayed on the screen
 
 ### Installation Instructions for Developers (This is for if you're using a Windows Computer)
 - Maintain *requirements.txt* file with any new dependencies
@@ -36,8 +38,12 @@
   ```
   pip install -r TypePathTorequirements.txtFileHere
   ```
-- To make the button work remember to: 
-1. add in the class name of the file you want to display to the for loop in degreeApp.py
-2. add to the top of the file "from insertYourFileNameHere import yourClassNameHere" as needed
+
+- If the previous/next page button you made isn't working, then check to see if you have the following added: 
+1. Add to the () of the For Loop located in degreeApp.py: the Class name of the file you want displayed as a page in the application 
+2. Add to the top of the degreeApp.py file: 
+```
+from insertYourFileNameHere import InsertYourClassNameHere
+```
 
 
