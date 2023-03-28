@@ -1,10 +1,9 @@
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk
-from uploadFile import UploadFile
 
 
-class Homepage(ttk.Frame):
+class HomepageStart(ttk.Frame):
     def __init__(self, container, controller):
         super().__init__(container)
         self.controller = controller
@@ -18,22 +17,18 @@ class Homepage(ttk.Frame):
         # Frame outline design
         frame = ttk.Frame(self, style="BlckBord.TFrame")
         frame["padding"] = (5, 0, 5, 0)  # adjusts inner padding to fit text
-        frame.pack(fill=BOTH, expand=False, pady=(50, 0))  # frame padding
-
-        #    container.grid_rowconfigure(0, weight=1)
-        #     container.grid_columnconfigure(0, weight=1)
-        #     frame.grid(row=0, column=0, sticky="nsew")  # keeps pages bundled in the same location
+        frame.pack(fill=BOTH, pady=(50, 0))  # frame padding
 
         # Homepage title label and design
         lbl_upload = ttk.Label(frame, text="Degree Plan and Audit Tool", style="PW.TLabel")
-        lbl_upload.pack(side=TOP, padx=30, pady=(30, 10))  # text padding
+        lbl_upload.pack(side=TOP, pady=(70, 10))  # frame padding
 
         # subtext label and design
         lbl_upload = ttk.Label(frame, text="Press the Start Button to Begin", style="GrySmall.TLabel")
-        lbl_upload.pack(fill=NONE, expand=False, padx=20, pady=10)  # text padding
+        lbl_upload.pack(side=TOP, pady=(40, 20))  # frame padding
 
         # Homepage Start button and design
-        self.start_btn = tk.Button(
+        start_btn = tk.Button(
             frame,
             text=" + Start ",
             font=("Segoe UI", 16),
@@ -43,6 +38,6 @@ class Homepage(ttk.Frame):
             height="0",
             width="10",
             relief="raised",
-            command=lambda: controller.show_frame(UploadFile)
+            command=lambda: self.controller.show_frame("UploadFilePage")
         )
-        self.start_btn.pack(side=TOP, pady=(20, 20))  # button padding
+        start_btn.pack(side=TOP, pady=(40, 80))  # frame padding

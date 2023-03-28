@@ -3,7 +3,7 @@ from tkinter import *
 from tkinter import ttk
 
 
-class DegreePlan(ttk.Frame):
+class DegreePlanPage(ttk.Frame):
     def __init__(self, container, controller):
         super().__init__(container)
         self.controller = controller
@@ -14,24 +14,28 @@ class DegreePlan(ttk.Frame):
         # Frame outline design
         frame = ttk.Frame(self, style="BlckBorder.TFrame")
         frame["padding"] = (5, 0, 5, 0)  # adjusts inner padding to fit text
-        frame.pack(fill=BOTH, expand=False, pady=90)  # frame padding
+        frame.grid_columnconfigure(0, weight=1)
+        frame.grid_rowconfigure(0, weight=1)
+        frame.grid_columnconfigure(1, weight=1)
+        frame.grid_columnconfigure(2, weight=1)
+        frame.grid(column=0, row=0, sticky="nsew", columnspan=5, pady=(50, 0))  # keeps pages bundled in same location
 
         # Previous page button
         prev_btn = ttk.Button(
             frame,
             text="<< Previous",
-            command=lambda: controller.show_frame("UploadFile")
+            command=lambda: self.controller.show_frame("UploadFilePage")
         )
-        prev_btn.pack(pady=(5, 20))  # button padding
+        prev_btn.grid(column=0, row=2, columnspan=1, sticky="sw", pady=(20, 20))  # button padding
 
         # Next page button and design
-        #next_btn = ttk.Button(
-            #frame,
-            #text="Next >>",
-            #command=lambda: controller.show_frame("Insert class name of next page here")
-        #)
-        #next_btn.pack(pady=(5, 20))  # button padding
+        # next_btn = ttk.Button(frame,text="Next >>",command=lambda: controller.show_frame("ClassNameOfNextPgHere"))
+        # next_btn.grid(column=2, row=2, columnspan=1, sticky="se", pady=(20, 20))  # button padding
 
-        # note to developers if you want to your next/previous page button to work:
-        # Add to the top of the degreeApp.py+current file: from insertFileNameHere import insertClassNameHere
+    # note to developers:
+    # This file is just a template for whoever is working on the GUI for the Degree Plan part of the project
+    # (it's not an official format, so feel free to modify)
+    # if you want to your next/previous page button to work:
+        # Add to the top of the degreeApp.py file: from insertYourFileNameHere import insertYourClassNameHere
         # In the degreeApp.py file, add your file's class name to the () in the For Loop
+        # In the button's command section, make sure the class name is enclosed in ""

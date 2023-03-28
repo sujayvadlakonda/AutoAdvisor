@@ -3,10 +3,9 @@ import tkinter as tk
 from tkinter import *
 from tkinter import ttk, filedialog
 from tkinter import messagebox as mbox
-from degreePlan import DegreePlan
 
 
-class UploadFile(ttk.Frame):
+class UploadFilePage(ttk.Frame):
     def __init__(self, container, controller):
         super().__init__(container)
         self.controller = controller
@@ -35,7 +34,7 @@ class UploadFile(ttk.Frame):
             style="picBkgd.TLabel"
         )
         lbl_image.doc_upload_photo = doc_upload_photo  # Required image reference needed for image to show up
-        lbl_image.pack(side=TOP, fill=NONE, padx=(20, 0), pady=(5,0))  # padding
+        lbl_image.pack(side=TOP, fill=NONE, padx=(20, 0), pady=(5, 0))  # padding
 
         # Upload File text label and design
         lbl_upload = ttk.Label(frame, text="Upload File", style="BW.TLabel")
@@ -61,7 +60,7 @@ class UploadFile(ttk.Frame):
         prev_btn = ttk.Button(
             frame,
             text="<< Previous",
-            command=lambda: controller.show_frame("Homepage")
+            command=lambda: self.controller.show_frame("HomepageStart")
         )
         prev_btn.pack(pady=(5, 20))  # button padding
 
@@ -69,7 +68,7 @@ class UploadFile(ttk.Frame):
         next_btn = ttk.Button(
             frame,
             text="Next >>",
-            command=lambda: controller.show_frame(DegreePlan)
+            command=lambda: self.controller.show_frame("DegreePlanPage")
         )
         next_btn.pack(pady=(5, 20))  # button padding
 
@@ -94,7 +93,7 @@ class UploadFile(ttk.Frame):
                                                     filetypes=(("All Files", "*.*"), (pdf, "*.pdf*"),
                                                                (word_doc, "*.docx*"), (excel_sheet, "*.xlsx")))
 
-        file_status = UploadFile.open_file(self)  # calls function to open file
+        file_status = UploadFilePage.open_file(self)  # calls function to open file
 
         # Displays name of file that user selected and opened
         if file_status:
