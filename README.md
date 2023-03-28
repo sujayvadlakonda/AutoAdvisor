@@ -45,5 +45,13 @@
 ```
 from insertYourFileNameHere import InsertYourClassNameHere
 ```
+3. Make sure that in the Command section of your Button, the Class Name, that you want the button to go to, is enclosed in ""
+```
+button_example = ttk.Button(
+            self,
+            text="InsertButtonNameHere",
+            command=lambda: self.controller.show_frame("InsertClassNameHere")
+        )
+```
 
 
