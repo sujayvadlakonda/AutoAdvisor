@@ -21,12 +21,11 @@ class UploadFile(ttk.Frame):
         self.style.configure("BW.TLabel", font=("Roboto", 20), foreground="black", background="white")
         self.style.configure("GWSmall.TLabel", font=("Roboto", 14), foreground="Gray", background="white")
         self.style.configure("BWSmall.TLabel", font=("Roboto", 14), foreground="#107896", background="white")
-        self.style.configure("switchPage.TButton", font=("Segoe UI", 14), foreground="black", background="#800080")
 
         # Frame outline design
         frame = ttk.Frame(self, style="BlBord.TFrame")
         frame["padding"] = (5, 0, 5, 0)  # adjusts inner padding to fit text
-        frame.pack(fill=BOTH, expand=False, pady=20)  # frame padding
+        frame.pack(fill=BOTH, expand=False)  # frame padding
 
         # Decorative Image label and design
         doc_upload_photo = tk.PhotoImage(file=r"./images/upload_file.png")
@@ -36,15 +35,15 @@ class UploadFile(ttk.Frame):
             style="picBkgd.TLabel"
         )
         lbl_image.doc_upload_photo = doc_upload_photo  # Required image reference needed for image to show up
-        lbl_image.pack(side=TOP, fill=NONE, expand=5, padx=(20, 0), pady=(20, 10))  # padding
+        lbl_image.pack(side=TOP, fill=NONE, padx=(20, 0), pady=(5,0))  # padding
 
         # Upload File text label and design
         lbl_upload = ttk.Label(frame, text="Upload File", style="BW.TLabel")
-        lbl_upload.pack(fill=NONE, expand=False, padx=30, pady=10)  # text padding
+        lbl_upload.pack(fill=NONE, expand=False, padx=30)  # text padding
 
         # subtext label and design
         lbl_upload = ttk.Label(frame, text="Click the button to select a file to upload: ", style="GWSmall.TLabel")
-        lbl_upload.pack(fill=NONE, expand=False, padx=20, pady=10)  # text padding
+        lbl_upload.pack(fill=NONE, expand=False, padx=20, pady=(10, 0))  # text padding
 
         # Window's File Explorer button and design
         btn_file_browse = ttk.Button(
@@ -52,29 +51,27 @@ class UploadFile(ttk.Frame):
             text="Browse Files",
             command=self.file_selection
         )
-        btn_file_browse.pack(side=TOP, pady=20)  # button padding
+        btn_file_browse.pack(side=TOP, pady=(15, 0))  # button padding
 
         # file name (not file path) text label and design
         self.file_name = ttk.Label(frame, textvariable=self.filename, style="BWSmall.TLabel")
-        self.file_name.pack(pady=5)
+        self.file_name.pack(pady=(10, 0))
 
         # Previous page button
         prev_btn = ttk.Button(
             frame,
             text="<< Previous",
-            style="switchPage.TButton",
             command=lambda: controller.show_frame("Homepage")
         )
-        prev_btn.pack(side=LEFT, pady=(0, 20))  # button padding
+        prev_btn.pack(pady=(5, 20))  # button padding
 
         # Next page button
         next_btn = ttk.Button(
             frame,
             text="Next >>",
-            style="switchPage.TButton",
-            command=lambda : controller.show_frame(DegreePlan)
+            command=lambda: controller.show_frame(DegreePlan)
         )
-        next_btn.pack(side=RIGHT, pady=(0, 20))  # button padding
+        next_btn.pack(pady=(5, 20))  # button padding
 
     # Opens file in read-only mode and returns if it's successful or not
     def open_file(self):

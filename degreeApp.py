@@ -30,8 +30,8 @@ class DegreeApp(tk.Tk):
 
         # Handles switching between application pages
         for class_Name in (Homepage, UploadFile, DegreePlan):
-            frame = class_Name(container, self)  # Handles Frame's parameter where self=controller
-            self.frames[class_Name] = frame  # initializes each page of application
+            frame = class_Name(container, self)  # creates instance of each class where self=controller
+            self.frames[class_Name] = frame  # initializes each class of application
             frame.grid(row=0, column=0, sticky="nsew")  # keeps pages bundled in the same location
 
         self.show_frame(Homepage)  # Displays application homepage
