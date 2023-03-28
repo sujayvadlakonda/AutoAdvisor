@@ -45,11 +45,10 @@ if __name__ == '__main__':
 # to change textvariable vari: self.textvariableVari.set(newValue)
 
 
-#  add in classnames of other files to the for loop in degreeApp.py and add as "from fileName import className"
 #  pulled-out constants
-#  do we include self.master.title?
-# change to grid, why style isn't working, make button straight line
-# pre-add prev and nxt button to page3
+# change to grid
+# make button straight line
+# fix previous button
 # fix file name shared to sujay's function
 
 
@@ -59,14 +58,10 @@ if __name__ == '__main__':
 # pg_name = F.__name__ # other option? get rid?
 # self.frames[pg_name] = frame  # initializes each page of application,
 # self.pack(fill=BOTH, expand=True)  # assigns ttk.Frame to root application window. get rid of this
-#  Segoe UI, bookman old style, bradley hand ITC, ink free, segoe print, candara light, century gothic
+# self.style.configure("switchPage.TButton", font=("Segoe UI", 14), foreground="black", background="#800080")
+# style="switchPage.TButton",
+#  Segoe UI/print, bookman old style, bradley hand ITC/ink free, candara light, century gothic
 #  003300, 003333, 006600, 006633, 086623, 3DA542 (green),
 #  107896, 1287A8, 43ABC9, #4582ec, 0032A0, 1496BB, 0247fe, 2B0080 (button opt), 394C7F (blue),
-#  #593196, 7442C8, 800080, 575068 (purple), 5901c0, 8601af, 800080, 33058d, 6610F2
-# light blue background w/ black tex: #ACC8E5
-# purple w/ white text: 6610f2
-# purple button w/ white text (upload file and beyond): #553980
-# button ideas for upload file page: next >/>> box, > circle, >> with circle, -> by itself
-# blue white, purple white, b+w. no to greens.
-# new light blue background for blue and purple: #A1FCFF
-# light blue background : #E3FFFF
+#  #593196, 7442C8, 800080, 575068 (purple), 5901c0, 8601af, 800080, 33058d, 6610F2, 6610f2, #553980
+#  light blue: #ACC8E5, #A1FCFF, #E3FFFF, A6F4FF
