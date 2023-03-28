@@ -40,12 +40,12 @@
   ```
 
 - If the previous/next page button you made isn't working, then check to see if you have the following added: 
-  1. Add to the () of the For Loop located in degreeApp.py: the Class name of the file you want displayed as a page in the application 
-  2. Add to the top of the degreeApp.py file: 
+  1. Add to the () of the *For Loop* located in *degreeApp.py*: the Class Name of the file you want displayed as a page in the application 
+  2. Add to the top of the *degreeApp.py* file: 
   ```
   from insertYourFileNameHere import InsertYourClassNameHere
   ```
-  3. Make sure that in the Command section of your Button, the Class Name, that you want the button to go to, is enclosed in ""
+  3. Make sure that in the *Command* section of your Button, the Class Name, that you want the button to go to, is enclosed in ""
   ```
   button_example = ttk.Button(
               self,
