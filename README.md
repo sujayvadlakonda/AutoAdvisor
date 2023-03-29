@@ -8,12 +8,14 @@
 - Installation is successful if you see *Box* as an option in the side menu of your *File Explorer* desktop application
 
 ### Usage Instructions For Window Computers
-- The "Start" button on the homepage is used to direct the user to the Upload File page after it is clicked
-- The Upload File page has a "Browse Files" button that will open up File Explorer upon being clicked
-- The *Browse Files* button is used to select which file (i.e. transcript) the tool is going to get information from and use
-- When selecting a file, if you can't find the file you need, try changing the file type (located in the bottom right drop down menu of the *File Explorer* window) to *All Files* 
+- Users can click the "Start" button on the homepage to direct them to the *Upload File* page 
+- The *Upload File* page has a "Browse Files" button that will open up Window's File Explorer application upon being clicked
+- The *Browse Files* button is used to select which file (e.g. transcript) the application is going to get information from and use
+- When selecting a file in the *File Explorer* application, if you can't find the file you need, try changing the file type (located in the bottom right drop down menu of the *File Explorer* window) to the option *All Files* 
 - If you want to select a new file to upload, simply click the *Browse Files" button to select the new file you want to upload
 - Once the file is selected, the information will then be captured/scraped by the tool, and the name of the file will be displayed on the screen
+- Click the *next >>* button when you are ready to continue to the rest of the application
+- If you are having trouble locating a button, try expanding the application window, using the maximize button located in the top right corner of the window
 
 ### Installation Instructions for Developers (This is for if you're using a Windows Computer)
 - Maintain *requirements.txt* file with any new dependencies
