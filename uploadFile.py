@@ -107,13 +107,15 @@ class UploadFilePage(ttk.Frame):
         pdf = "Adobe Acrobat Document"
         word_doc = "Microsoft Word Document"
         excel_sheet = "Microsoft Excel Worksheet"
+        json = "JavaScript Object Notation File"
         file_explorer = "\\"  # path start for windows
         file_err_msg = "File could not be opened or was not chosen."
 
         # opens Windows File Explorer and gets file path of the selected file
         file_path = filedialog.askopenfilename(initialdir=file_explorer, title="Open",
                                                filetypes=(("All Files", "*.*"), (pdf, "*.pdf*"),
-                                                          (word_doc, "*.docx*"), (excel_sheet, "*.xlsx")))
+                                                          (word_doc, "*.docx*"), (excel_sheet, "*.xlsx"),
+                                                          (json, ".json")))
 
         self.set_filepath(file_path)  # sets file path as instance variable/object
 
