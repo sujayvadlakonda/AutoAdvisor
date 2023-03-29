@@ -50,7 +50,7 @@ if __name__ == '__main__':
 
 # pulled-out constants
 # fix grid: column configure uniform, .grid(): rowspan for pic, ipadx, ipady (add this to template)
-# fix file path shared to sujay's function and ask how they're going to get file path from my code
+# tell leo there's a student object that sujay can access in my code using the get_filepath function etc
 
 
 # window = tk.Tk()  # makes a tkinter frame instance (from degreeApp.py)

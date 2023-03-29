@@ -98,6 +98,10 @@ class UploadFilePage(ttk.Frame):
         else:
             return False
 
+    # Sets file path object
+    def set_filepath(self, file_path):
+        self.file_path = file_path
+
     # Gets file path of file selected from file explorer by the user and opens it
     def file_selection(self):
         pdf = "Adobe Acrobat Document"
@@ -107,9 +111,11 @@ class UploadFilePage(ttk.Frame):
         file_err_msg = "File could not be opened or was not chosen."
 
         # opens Windows File Explorer and gets file path of the selected file
-        self.file_path = filedialog.askopenfilename(initialdir=file_explorer, title="Open",
-                                                    filetypes=(("All Files", "*.*"), (pdf, "*.pdf*"),
-                                                               (word_doc, "*.docx*"), (excel_sheet, "*.xlsx")))
+        file_path = filedialog.askopenfilename(initialdir=file_explorer, title="Open",
+                                               filetypes=(("All Files", "*.*"), (pdf, "*.pdf*"),
+                                                          (word_doc, "*.docx*"), (excel_sheet, "*.xlsx")))
+
+        self.set_filepath(file_path)  # sets file path as instance variable/object
 
         file_status = UploadFilePage.open_file(self)  # calls function to open file
 
@@ -119,3 +125,7 @@ class UploadFilePage(ttk.Frame):
             self.filename.set(file_name)
         else:
             mbox.showerror("Error", file_err_msg)  # failed opening file message box
+
+    # Gets file path object/instance variable
+    def get_filepath(self):
+        return self.file_path
