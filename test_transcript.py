@@ -36,6 +36,9 @@ class TestTranscript(unittest.TestCase):
         self.assertEqual(self.stevie_budd.get_id(), "2021261148")
         self.assertEqual(self.krusty_krab.get_id(), "2021122928")
         self.assertEqual(self.keeley_jones.get_id(), "2021244212")
+        self.assertEqual(self.harry_potter.get_id(), "2021316125")
+        self.assertEqual(self.ron_weasley.get_id(), "2021324553")
+        self.assertEqual(self.jaime_tartt.get_id(), "2021322330")
 
     def test_major(self):
         self.assertEqual(self.ted_lasso.get_major(), "Computer Science Major")
