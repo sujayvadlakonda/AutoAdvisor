@@ -12,6 +12,9 @@ class TestTranscript(unittest.TestCase):
         self.stevie_budd = Transcript("transcripts/stevie-budd.pdf")
         self.krusty_krab = Transcript("transcripts/krusty-krab.pdf")
         self.keeley_jones = Transcript("transcripts/keeley-jones.pdf")
+        self.harry_potter = Transcript("transcripts/harry-potter.pdf")
+        self.ron_weasley = Transcript("transcripts/ron-weasley.pdf")
+        self.jaime_tartt = Transcript("transcripts/jaime-tartt.pdf")
 
     def test_name(self):
         self.assertEqual(self.ted_lasso.get_name(), "Ted Lasso")
@@ -21,6 +24,9 @@ class TestTranscript(unittest.TestCase):
         self.assertEqual(self.stevie_budd.get_name(), "Stevie Budd")
         self.assertEqual(self.krusty_krab.get_name(), "Krusty Krab")
         self.assertEqual(self.keeley_jones.get_name(), "Keeley Jones")
+        self.assertEqual(self.harry_potter.get_name(), "Harry Potter")
+        self.assertEqual(self.ron_weasley.get_name(), "Ron Weasley")
+        self.assertEqual(self.jaime_tartt.get_name(), "Jaime Tartt")
 
     def test_id(self):
         self.assertEqual(self.ted_lasso.get_id(), "2021504218")
