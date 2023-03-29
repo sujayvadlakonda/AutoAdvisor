@@ -48,6 +48,9 @@ class TestTranscript(unittest.TestCase):
         self.assertEqual(self.stevie_budd.get_major(), "Computer Science Major")
         self.assertEqual(self.krusty_krab.get_major(), "Computer Science Major")
         self.assertEqual(self.keeley_jones.get_major(), "Computer Science Major")
+        self.assertEqual(self.harry_potter.get_major(), "Computer Science Major")
+        self.assertEqual(self.ron_weasley.get_major(), "Computer Science Major")
+        self.assertEqual(self.jaime_tartt.get_major(), "Computer Science Major")
 
     def test_beginning_of_graduate_record(self):
         self.assertEqual(self.ted_lasso.get_beginning_of_graduate_record(), "2021 Fall")
