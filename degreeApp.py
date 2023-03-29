@@ -4,6 +4,7 @@ from tkinter import *
 from uploadFile import UploadFilePage
 from homepage import HomepageStart
 from degreePlan import DegreePlanPage
+from auditReport import AuditReportPage
 
 
 class DegreeApp(tk.Tk):
@@ -29,7 +30,7 @@ class DegreeApp(tk.Tk):
         container.grid_rowconfigure(0, weight=1)
 
         # Handles switching between application pages using Class Names
-        for class_Name in (HomepageStart, UploadFilePage, DegreePlanPage):
+        for class_Name in (HomepageStart, UploadFilePage, DegreePlanPage, AuditReportPage):
             pg_name = class_Name.__name__
             frame = class_Name(container, self)  # creates instance of each class where self=controller
             self.frames[pg_name] = frame  # initializes each class of application

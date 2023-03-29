@@ -45,13 +45,13 @@ if __name__ == '__main__':
 # to change textvariable vari: self.textvariableVari.set(newValue)
 # Add to the top of the degreeApp.py file: from insertYourFileNameHere import insertYourClassNameHere
 # In the degreeApp.py file, add your file's class name to the () in the For Loop
-# In the button's command section, make sure the class name is enclosed in ""
+# In the prev/next button's command section, make sure the class name is enclosed in ""
 
 
-#  pulled-out constants
-# change to grid
-# make button straight line
-# fix file name shared to sujay's function
+# pulled-out constants
+# change/fix grid,
+# column configure uniform, .grid(): rowspan for pic, ipadx, ipady (add this to template)
+# fix file path shared to sujay's function and ask how they're going to get file path from my code
 
 
 # window = tk.Tk()  # makes a tkinter frame instance (from degreeApp.py)
@@ -65,12 +65,3 @@ if __name__ == '__main__':
 #  107896, 1287A8, 43ABC9, #4582ec, 0032A0, 1496BB, 0247fe, 2B0080 (button opt), 394C7F (blue),
 #  #593196, 7442C8, 800080, 575068 (purple), 5901c0, 8601af, 800080, 33058d, 6610F2, 6610f2, #553980
 #  light blue: #ACC8E5, #A1FCFF, #E3FFFF, A6F4FF
-
-# frame.grid_columnconfigure(0, weight=1)
-# frame.grid_rowconfigure(0, weight=1)
-# frame.grid_columnconfigure(1, weight=1)
-# frame.grid_columnconfigure(2, weight=1)
-# frame.grid(column=0, row=0, sticky="nsew", columnspan=5, pady=(50, 0))  # keeps pages bundled in same location
-# lbl_upload.grid(column=1, row=1, sticky="n", columnspan=1, pady=(30, 10))  # text padding
-# lbl_upload.grid(column=1, row=2, columnspan=1, pady=10)  # text padding
-# start_btn.grid(column=1, row=3, columnspan=1, sticky="s", pady=(20, 20))  # button padding
