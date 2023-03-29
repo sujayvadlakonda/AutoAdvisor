@@ -12,6 +12,7 @@
 - The Upload File page has a "Browse Files" button that will open up File Explorer upon being clicked
 - The *Browse Files* button is used to select which file (i.e. transcript) the tool is going to get information from and use
 - When selecting a file, if you can't find the file you need, try changing the file type (located in the bottom right drop down menu of the *File Explorer* window) to *All Files* 
+- If you want to select a new file to upload, simply click the *Browse Files" button to select the new file you want to upload
 - Once the file is selected, the information will then be captured/scraped by the tool, and the name of the file will be displayed on the screen
 
 ### Installation Instructions for Developers (This is for if you're using a Windows Computer)
