@@ -49,8 +49,7 @@ if __name__ == '__main__':
 
 
 # pulled-out constants
-# change/fix grid,
-# column configure uniform, .grid(): rowspan for pic, ipadx, ipady (add this to template)
+# fix grid: column configure uniform, .grid(): rowspan for pic, ipadx, ipady (add this to template)
 # fix file path shared to sujay's function and ask how they're going to get file path from my code
 
 
