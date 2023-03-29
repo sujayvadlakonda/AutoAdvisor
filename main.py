@@ -2,6 +2,7 @@ from degreeApp import DegreeApp
 
 if __name__ == '__main__':
     app = DegreeApp()  # application window instance
+
     app.mainloop()  # keeps window running until exited
 
 
@@ -35,6 +36,7 @@ if __name__ == '__main__':
 # assign widgets+style as self.variableName underneath super().__init__(Frame)
 # replace window variable in the labels () etc. with self, but keep frame variable
 # pass self as a function parameter
+# call function with parameters: don't include self. parameter, but add self. to begining of function call
 # can assign variable name to self. object to be able to reference them in other class methods
 # any variable that has self. attached to it must have self. when used in other locations
 # add self. to self.widgetName = ttk.widgetName, but not the right side ttk.widgetName
@@ -50,7 +52,7 @@ if __name__ == '__main__':
 
 # pulled-out constants
 # fix grid: column configure uniform, .grid(): rowspan for pic, ipadx, ipady (add this to template)
-# tell leo there's a student object that sujay can access in my code using the get_filepath function etc
+# tell leo there's a student object that sujay can access in my code, using the get_filepath function etc
 
 
 # window = tk.Tk()  # makes a tkinter frame instance (from degreeApp.py)

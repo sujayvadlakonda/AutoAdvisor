@@ -117,7 +117,7 @@ class UploadFilePage(ttk.Frame):
 
         self.set_filepath(file_path)  # sets file path as instance variable/object
 
-        file_status = UploadFilePage.open_file(self)  # calls function to open file
+        file_status = self.open_file()  # calls function to open file
 
         # Displays name of file that user selected and opened
         if file_status:
