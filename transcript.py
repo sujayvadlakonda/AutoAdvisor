@@ -23,10 +23,16 @@ class Transcript:
         return id
 
     def get_major(self):
-        match = re.search(r"^.*Major$", self.text, flags=re.MULTILINE)
+        section_title = r"^Program:.*Master"
+        major = r".*Major"
+        regex = section_title + r".*" + major
+
+        match = re.search(regex, self.text, flags=re.MULTILINE | re.DOTALL)
         major = match.group()
-        major = re.sub(r"^.*:", "", major).strip()
+        major = re.search(r"^.*Major.*$", major, flags=re.MULTILINE).group()
+        major = re.sub(r".*: ", "", major).strip()
         major = self._split_camel_case(major)
+
         return major
 
     def get_beginning_of_graduate_record(self):
