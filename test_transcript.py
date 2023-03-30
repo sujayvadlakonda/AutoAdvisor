@@ -13,7 +13,6 @@ class TestTranscript(unittest.TestCase):
         self.krusty_krab = Transcript("transcripts/krusty-krab.pdf")
         self.keeley_jones = Transcript("transcripts/keeley-jones.pdf")
 
-
     def test_name(self):
         self.assertEqual(self.ted_lasso.get_name(), "Ted Lasso")
         self.assertEqual(self.mike_modano.get_name(), "Mike Modano")
@@ -22,7 +21,6 @@ class TestTranscript(unittest.TestCase):
         self.assertEqual(self.stevie_budd.get_name(), "Stevie Budd")
         self.assertEqual(self.krusty_krab.get_name(), "Krusty Krab")
         self.assertEqual(self.keeley_jones.get_name(), "Keeley Jones")
-
 
     def test_id(self):
         self.assertEqual(self.ted_lasso.get_id(), "2021504218")
@@ -33,7 +31,6 @@ class TestTranscript(unittest.TestCase):
         self.assertEqual(self.krusty_krab.get_id(), "2021122928")
         self.assertEqual(self.keeley_jones.get_id(), "2021244212")
 
-
     def test_major(self):
         self.assertEqual(self.ted_lasso.get_major(), "Computer Science Major")
         self.assertEqual(self.mike_modano.get_major(), "Computer Science Major")
@@ -43,6 +40,33 @@ class TestTranscript(unittest.TestCase):
         self.assertEqual(self.krusty_krab.get_major(), "Computer Science Major")
         self.assertEqual(self.keeley_jones.get_major(), "Computer Science Major")
 
+    def test_beginning_of_graduate_record(self):
+        self.assertEqual(self.ted_lasso.get_beginning_of_graduate_record(), "2021 Fall")
+        self.assertEqual(
+            self.mike_modano.get_beginning_of_graduate_record(), "2021 Fall"
+        )
+        self.assertEqual(
+            self.taylor_swift.get_beginning_of_graduate_record(), "2021 Fall"
+        )
+        self.assertEqual(self.roy_kent.get_beginning_of_graduate_record(), "2021 Fall")
+        self.assertEqual(
+            self.stevie_budd.get_beginning_of_graduate_record(), "2021 Fall"
+        )
+        self.assertEqual(
+            self.krusty_krab.get_beginning_of_graduate_record(), "2021 Fall"
+        )
+        self.assertEqual(
+            self.keeley_jones.get_beginning_of_graduate_record(), "2022 Fall"
+        )
+
+    def test_combined_cumulative_gpa(self):
+        self.assertEqual(self.ted_lasso.get_combined_cumulative_gpa(), "3.709")
+        self.assertEqual(self.mike_modano.get_combined_cumulative_gpa(), "3.571")
+        self.assertEqual(self.taylor_swift.get_combined_cumulative_gpa(), "3.963")
+        self.assertEqual(self.roy_kent.get_combined_cumulative_gpa(), "3.293")
+        self.assertEqual(self.stevie_budd.get_combined_cumulative_gpa(), "3.481")
+        self.assertEqual(self.krusty_krab.get_combined_cumulative_gpa(), "3.800")
+        self.assertEqual(self.keeley_jones.get_combined_cumulative_gpa(), "3.953")
 
 
 unittest.main()
