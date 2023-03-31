@@ -23,7 +23,7 @@ class DegreeApp(tk.Tk):
         icon = tk.PhotoImage(file="./images/project_icon.png")
         self.iconphoto(FALSE, icon)  # window icon logo
 
-        # Sets up application container and placement
+        # Sets up application frame container and placement
         container = ttk.Frame(self)
         container.pack(expand=TRUE, fill=BOTH, side=TOP)
         container.grid_columnconfigure(0, weight=1)
@@ -33,8 +33,8 @@ class DegreeApp(tk.Tk):
         for class_Name in (HomepageStart, UploadFilePage, DegreePlanPage, AuditReportPage):
             pg_name = class_Name.__name__
             frame = class_Name(container, self)  # creates instance of each class where self=controller
+            frame.grid(column=0, row=0, sticky="nsew")  # keeps pages bundled together when moving the Window
             self.frames[pg_name] = frame  # initializes each class of application
-            frame.grid(column=0, row=0, sticky="nsew")  # keeps pages bundled in the same location
 
         self.show_frame("HomepageStart")  # Displays application homepage
 

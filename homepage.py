@@ -9,15 +9,15 @@ class HomepageStart(ttk.Frame):
         self.controller = controller  # Used to control which page is shown
 
         # Handles the gui of the application homepage
-        self.style = ttk.Style(self)
-        self.style.configure("BlckBord.TFrame", borderwidth=5, background="white", relief=SOLID, height=60, width=70)
-        self.style.configure("CW.TLabel", font=("Segoe print", 30), foreground="#0032A0", background="white")
-        self.style.configure("GrySmall.TLabel", font=("Bookman Old Style,", 14), foreground="Gray", background="white")
+        style = ttk.Style(self)
+        style.configure("BlckBord.TFrame", borderwidth=5, background="white", relief=SOLID)
+        style.configure("CW.TLabel", font=("Segoe print", 30), foreground="#0032A0", background="white")
+        style.configure("GrySmall.TLabel", font=("Bookman Old Style,", 14), foreground="Gray", background="white")
 
         # Frame outline design
         frame = ttk.Frame(self, style="BlckBord.TFrame")
         frame["padding"] = (5, 0, 5, 0)  # adjusts inner padding to fit text
-        frame.pack(fill=BOTH, pady=(50, 0))  # frame padding
+        frame.pack(fill=BOTH, pady=(60, 0))  # frame padding
 
         # Homepage title label and design
         lbl_upload = ttk.Label(frame, text="Degree Plan and Audit Tool", style="CW.TLabel")
@@ -35,9 +35,8 @@ class HomepageStart(ttk.Frame):
             foreground="white",
             background="#553980",
             bd="5",
-            height="0",
             width="10",
             relief="raised",
             command=lambda: self.controller.show_frame("UploadFilePage")
         )
-        start_btn.pack(side=TOP, pady=(40, 80))  # frame padding
+        start_btn.pack(side=TOP, pady=(40, 90))  # frame padding

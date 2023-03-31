@@ -13,6 +13,10 @@ class DegreePlanPage(ttk.Frame):
         self.style.configure("BlckBorder.TFrame", borderwidth=5, background="white", relief=SOLID, height=60, width=70)
         self.style.configure("BlSmall.TLabel", font=("Roboto", 14), foreground="#107896", background="white")
 
+        # Handles frame expansion when application window is expanded
+        self.columnconfigure(0, weight=1)
+        self.rowconfigure(0, weight=1)
+
         # Frame outline and design
         frame = ttk.Frame(self, style="BlckBorder.TFrame")
         frame["padding"] = (5, 0, 5, 0)  # adjusts inner padding to fit text
@@ -22,7 +26,7 @@ class DegreePlanPage(ttk.Frame):
         frame.grid_rowconfigure(0, weight=1)
         frame.grid_columnconfigure(2, weight=1)
         frame.grid_columnconfigure(3, weight=1)
-        frame.grid(column=0, row=0, sticky="nsew", columnspan=5, pady=(10, 0))  # keeps pages bundled in same location
+        frame.grid(column=0, row=0, sticky="nsew", columnspan=5, pady=(10, 0))
 
         # Previous Page button and design
         prev_btn = ttk.Button(
@@ -33,6 +37,8 @@ class DegreePlanPage(ttk.Frame):
         prev_btn.grid(column=0, row=1, columnspan=1, sticky="sw", pady=(10, 20))  # button padding
 
         # Text label and design
+        lbl_report = ttk.Label(frame, text="Insert degree plan ui here?:", style="BlSmall.TLabel")
+        lbl_report.grid(column=1, row=0, columnspan=1, sticky="s", padx=5, pady=10)  # text padding
         lbl_report = ttk.Label(frame, text="Generate Audit Report:", style="BlSmall.TLabel")
         lbl_report.grid(column=1, row=1, columnspan=1, sticky="s", padx=5, pady=10)  # text padding
 
