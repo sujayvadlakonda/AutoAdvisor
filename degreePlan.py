@@ -38,9 +38,9 @@ class DegreePlanPage(ttk.Frame):
 
         # Text label and design
         lbl_report = ttk.Label(frame, text="Insert degree plan ui here?:", style="BlSmall.TLabel")
-        lbl_report.grid(column=1, row=0, columnspan=1, sticky="s", padx=5, pady=10)  # text padding
+        lbl_report.grid(column=1, row=0, columnspan=1, sticky="n", padx=5, pady=10)  # text padding
         lbl_report = ttk.Label(frame, text="Generate Audit Report:", style="BlSmall.TLabel")
-        lbl_report.grid(column=1, row=1, columnspan=1, sticky="s", padx=5, pady=10)  # text padding
+        lbl_report.grid(column=1, row=1, columnspan=1, padx=5, pady=10)  # text padding
 
         # Button to direct user to generate Audit Report and design
         next_btn = ttk.Button(
@@ -48,7 +48,7 @@ class DegreePlanPage(ttk.Frame):
             text="Yes",
             command=lambda: controller.show_frame("AuditReportPage")
         )
-        next_btn.grid(column=2, row=1, columnspan=1, sticky="s", pady=(10, 20))  # button padding
+        next_btn.grid(column=2, row=1, columnspan=1, pady=(10, 20))  # button padding
 
         # Button to direct user to go back to homepage
         homepage_btn = ttk.Button(
@@ -56,11 +56,11 @@ class DegreePlanPage(ttk.Frame):
             text="No",
             command=lambda: self.controller.show_frame("HomepageStart")
         )
-        homepage_btn.grid(column=3, row=1, columnspan=1, sticky="es", pady=(10, 20))  # positioning
+        homepage_btn.grid(column=3, row=1, columnspan=1, pady=(10, 20))  # positioning
 
     # note to developers:
-    # This file is just a template for whoever is working on the GUI for the Degree Plan part of the project
-    # modify it as much as you want to, but make sure the user can get to the audit report if they want to
+    # This file is just a template for whoever is working on the Degree Plan GUI to get them started
+    # modify it as much as you want to, just make sure there's a way for the user to get to the audit report page
     # if you want to your next/previous page button to work:
         # Add to the top of the degreeApp.py file: from insertYourFileNameHere import insertYourClassNameHere
         # In the degreeApp.py file, add your file's class name to the () in the For Loop

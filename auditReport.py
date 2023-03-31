@@ -30,7 +30,7 @@ class AuditReportPage(ttk.Frame):
 
         # Text label and design
         lbl_aud_report = ttk.Label(frame, text="Insert audit report ui here?", style="BlackSmall.TLabel")
-        lbl_aud_report.grid(column=0, row=1, columnspan=1, sticky="", padx=5, pady=10)  # text padding
+        lbl_aud_report.grid(column=0, row=1, columnspan=1, sticky="n", padx=5, pady=10)  # text padding
 
         homepage_btn = ttk.Button(
             frame,

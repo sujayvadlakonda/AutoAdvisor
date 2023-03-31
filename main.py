@@ -54,7 +54,7 @@ if __name__ == '__main__':
 # Add to the top of the degreeApp.py file: from insertYourFileNameHere import insertYourClassNameHere
 # In the degreeApp.py file, add your file's class name to the () in the For Loop
 # In the prev/next button's command section, make sure the class name is enclosed in ""
-
+# run a file other than my own: edit run configurations, to have script path be the file you want to run
 
 # pulled out constants
 # ask where they store the name of the track so that I could add it to audit report
@@ -82,7 +82,8 @@ if __name__ == '__main__':
 # if you want a column to be uniform width: columnconfigure include: uniform
 #  Segoe UI/print, bookman old style, bradley hand ITC/ink free, candara light, century gothic
 #  003300, 003333, 006600, 006633, 086623, 3DA542 (green),
-#  107896, 1287A8, 43ABC9, #4582ec, 0032A0, 1496BB, 0247fe, 2B0080 (button opt), 394C7F (blue),
+#  107896, 1287A8, 43ABC9, #4582ec, 0032A0, 1496BB, 0247fe, 2B0080 (button opt), 394C7F (blue), 97DFFC (bg)
 #  #593196, 7442C8, 800080, 575068 (purple), 5901c0, 8601af, 800080, 33058d, 6610F2, 6610f2, #553980
 #  light blue: #ACC8E5, #A1FCFF, #E3FFFF, A6F4FF
+# dark gray: #
 # .grid(): rowspan, ipadx, ipady

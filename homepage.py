@@ -10,9 +10,9 @@ class HomepageStart(ttk.Frame):
 
         # Handles the gui of the application homepage
         style = ttk.Style(self)
-        style.configure("BlckBord.TFrame", borderwidth=5, background="white", relief=SOLID)
-        style.configure("CW.TLabel", font=("Segoe print", 30), foreground="#0032A0", background="white")
-        style.configure("GrySmall.TLabel", font=("Bookman Old Style,", 14), foreground="Gray", background="white")
+        style.configure("BlckBord.TFrame", borderwidth=5, background="#97DFFC", relief=SOLID)
+        style.configure("CW.TLabel", font=("Segoe print", 30), foreground="#0032A0", background="#97DFFC")
+        style.configure("GrySmall.TLabel", font=("Bookman Old Style,", 14), foreground="#343a40", background="#97DFFC")
 
         # Frame outline design
         frame = ttk.Frame(self, style="BlckBord.TFrame")

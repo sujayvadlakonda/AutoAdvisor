@@ -28,7 +28,7 @@ class UploadFilePage(ttk.Frame):
         # Frame outline and design
         frame = ttk.Frame(self, style="BlBord.TFrame")
         frame["padding"] = (5, 0, 5, 0)  # adjusts inner padding to fit text
-        frame.grid(column=0, row=0, sticky="nsew", columnspan=5, pady=(20, 0))  # frame placement
+        frame.grid(column=0, row=0, sticky="nsew", columnspan=5)  # frame placement
 
         # Handles frame's space distribution
         frame.grid_columnconfigure(0, weight=1)
@@ -41,9 +41,7 @@ class UploadFilePage(ttk.Frame):
         frame.grid_rowconfigure(3, weight=1)
         frame.grid_columnconfigure(4, weight=1)
         frame.grid_rowconfigure(4, weight=1)
-        frame.grid_columnconfigure(5, weight=1)
         frame.grid_rowconfigure(5, weight=1)
-        frame.grid_rowconfigure(6, weight=1)
 
         # Decorative Image label and design
         doc_upload_photo = tk.PhotoImage(file=r"./images/upload_file.png")
@@ -53,7 +51,7 @@ class UploadFilePage(ttk.Frame):
             style="picBkgd.TLabel"
         )
         lbl_image.doc_upload_photo = doc_upload_photo  # Required image reference needed for image to show up
-        lbl_image.grid(column=1, row=0, sticky="n", columnspan=3, pady=(10, 0))  # positioning
+        lbl_image.grid(column=1, row=0, columnspan=3, pady=(10, 0))  # positioning
 
         # Upload File text label and design
         lbl_upload = ttk.Label(frame, text="Upload File", style="BW.TLabel")
@@ -73,7 +71,7 @@ class UploadFilePage(ttk.Frame):
 
         # file name (not file path) text label and design
         self.file_name = ttk.Label(frame, textvariable=self.filename, style="BWSmall.TLabel")
-        self.file_name.grid(column=1, row=4, sticky="ew", columnspan=5, padx=(0, 5), pady=(10, 10))  # positioning
+        self.file_name.grid(column=0, row=4, columnspan=5, padx=(0, 5), pady=(10, 10))  # positioning
 
         # Previous page button and design
         prev_btn = ttk.Button(
