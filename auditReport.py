@@ -45,5 +45,3 @@ class AuditReportPage(ttk.Frame):
         # Add to the top of the degreeApp.py file: from insertYourFileNameHere import insertYourClassNameHere
         # In the degreeApp.py file, add your file's class name to the () in the For Loop
         # In the button's command section, make sure the class name is enclosed in ""
-
-
