@@ -1,4 +1,8 @@
 from degreeApp import DegreeApp
+from uploadFile import UploadFilePage
+from homepage import HomepageStart
+from degreePlan import DegreePlanPage
+from auditReport import AuditReportPage
 from transcript import *
 # from uploadFile import UploadFilePage
 
@@ -10,13 +14,18 @@ if __name__ == '__main__':
     # filepath = files.get_filepath()
     # pass file path to sujay's code?
 
-    ted_lasso = Transcript("transcripts/ted-lasso.pdf")
-    name = ted_lasso.get_name()
-    id = ted_lasso.get_id()
-    major = ted_lasso.get_major()
-    semester = ted_lasso.get_beginning_of_graduate_record()
-    print(name, id, major, semester)
-    ted_lasso.course_finder()
+    files = UploadFilePage()
+    filepath = files.get_filepath()
+    # selected_file = Transcript(filepath)
+
+    # selected_file = Transcript("transcripts/ted-lasso.pdf")
+    # name = selected_file.get_name()
+    # id = selected_file.get_id()
+    # major = selected_file.get_major()
+    # semester = selected_file.get_beginning_of_graduate_record()
+    # print(name, id, major, semester)
+    # selected_file.course_finder()
+
 
 
 
