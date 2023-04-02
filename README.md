@@ -8,9 +8,14 @@
 - Installation is successful if you see *Box* as an option in the side menu of your *File Explorer* desktop application
 
 ### Usage Instructions For Window Computers
-- The *Browse Files* button is used to select which file (i.e. transcript) the tool is going to get information from and use
-- When selecting a file, if you can't find the file you need, try changing the file type to *All Files* in the bottom right drop down menu of the *File Explorer* window
-- Once file is selected, the information will then be captured/scraped by the tool
+- Users can click the "Start" button on the homepage to direct them to the *Upload File* page 
+- The *Upload File* page has a "Browse Files" button that will open up Window's File Explorer application upon being clicked
+- The *Browse Files* button is used to select which file (e.g. transcript) the application is going to get information from and use
+- When selecting a file in the *File Explorer* application, if you can't find the file you need, try changing the file type (located in the bottom right drop down menu of the *File Explorer* window) to the option *All Files* 
+- If you want to select a new file to upload, simply click the *Browse Files" button to select the new file you want to upload
+- Once the file is selected, the information will then be captured/scraped by the tool, and the name of the file will be displayed on the screen
+- Click the *next >>* button when you are ready to continue to the rest of the application
+- If you are having trouble locating a button, try expanding the application window, using the maximize button located in the top right corner of the window
 
 ### Installation Instructions for Developers (This is for if you're using a Windows Computer)
 - Maintain *requirements.txt* file with any new dependencies
@@ -35,6 +40,21 @@
   4. If you aren't in the mentioned directory, where your *requirements.txt* file is located, then enter into *Command Prompt*:
   ```
   pip install -r TypePathTorequirements.txtFileHere
+  ```
+
+- If the previous/next page button you made isn't working, then check to see if you have the following added: 
+  1. Add to the () of the *For Loop* located in *degreeApp.py*: the Class Name of the file you want displayed as a page in the application 
+  2. Add to the top of the *degreeApp.py* file: 
+  ```
+  from insertYourFileNameHere import InsertYourClassNameHere
+  ```
+  3. Make sure that in the *Command* section of your Button, the Class Name, that you want the button to go to, is enclosed in ""
+  ```
+  button_example = ttk.Button(
+              self,
+              text="InsertButtonNameHere",
+              command=lambda: self.controller.show_frame("InsertClassNameHere")
+              )
   ```
 
 
