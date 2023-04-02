@@ -15,11 +15,11 @@ class UploadFilePage(ttk.Frame):
 
         # Handles the gui of the Upload File page
         style = ttk.Style(self)
-        style.configure("BlBord.TFrame", borderwidth=5, background="white", relief=SOLID, height=500, width=700)
-        style.configure("picBkgd.TLabel", background="white")
-        style.configure("BW.TLabel", font=("Roboto", 20), foreground="black", background="white")
-        style.configure("GWSmall.TLabel", font=("Roboto", 14), foreground="Gray", background="white")
-        style.configure("BWSmall.TLabel", font=("Roboto", 14), foreground="#107896", background="white")
+        style.configure("BlBord.TFrame", borderwidth=5, background="#f8f8ff", relief=SOLID)
+        style.configure("pic_background.TLabel", background="#f8f8ff")
+        style.configure("BW.TLabel", font=("Roboto", 20), foreground="black", background="#f8f8ff")
+        style.configure("GWSmall.TLabel", font=("Roboto", 14), foreground="Gray", background="#f8f8ff")
+        style.configure("BWSmall.TLabel", font=("Roboto", 14), foreground="#107896", background="#f8f8ff")
 
         # Handles frame expansion when application window is expanded
         self.columnconfigure(0, weight=1)
@@ -30,27 +30,20 @@ class UploadFilePage(ttk.Frame):
         frame["padding"] = (5, 0, 5, 0)  # adjusts inner padding to fit text
         frame.grid(column=0, row=0, sticky="nsew", columnspan=5)  # frame placement
 
-        # Handles frame's space distribution
-        frame.grid_columnconfigure(0, weight=1)
-        frame.grid_rowconfigure(0, weight=1)
-        frame.grid_columnconfigure(1, weight=1)
-        frame.grid_rowconfigure(1, weight=1)
-        frame.grid_columnconfigure(2, weight=1)
-        frame.grid_rowconfigure(2, weight=1)
-        frame.grid_columnconfigure(3, weight=1)
-        frame.grid_rowconfigure(3, weight=1)
-        frame.grid_columnconfigure(4, weight=1)
-        frame.grid_rowconfigure(4, weight=1)
-        frame.grid_rowconfigure(5, weight=1)
+        # Handles frame's page space distribution
+        for row_index in range(6):
+            frame.grid_rowconfigure(row_index, weight=1)
+        for col_index in range(5):
+            frame.grid_columnconfigure(col_index, weight=1)
 
         # Decorative Image label and design
         doc_upload_photo = tk.PhotoImage(file=r"./images/upload_file.png")
         lbl_image = ttk.Label(
             frame,
             image=doc_upload_photo,
-            style="picBkgd.TLabel"
+            style="pic_background.TLabel"
         )
-        lbl_image.doc_upload_photo = doc_upload_photo  # Required image reference needed for image to show up
+        lbl_image.doc_upload_photo = doc_upload_photo  # image reference needed for image to load
         lbl_image.grid(column=1, row=0, columnspan=3, pady=(10, 0))  # positioning
 
         # Upload File text label and design
@@ -58,7 +51,8 @@ class UploadFilePage(ttk.Frame):
         lbl_upload.grid(column=2, row=1, columnspan=1, pady=(5, 5))  # positioning
 
         # subtext label and design
-        lbl_upload_instruct = ttk.Label(frame, text="Click the button to select a file to upload", style="GWSmall.TLabel")
+        upload_instruct = "Click the button to select a file to upload"
+        lbl_upload_instruct = ttk.Label(frame, text=upload_instruct, style="GWSmall.TLabel")
         lbl_upload_instruct.grid(column=1, row=2, columnspan=3, pady=(10, 0))  # positioning
 
         # Window's File Explorer button and design
@@ -109,12 +103,11 @@ class UploadFilePage(ttk.Frame):
         json = "JavaScript Object Notation File"
         file_explorer = "\\"  # path start for windows
         file_err_msg = "File could not be opened or was not chosen."
+        file_types = [("All Files", "*.*"), (pdf, "*.pdf*"), (word_doc, "*.docx*"), (excel_sheet, "*.xlsx"),
+                     (json, ".json")]
 
         # opens Windows File Explorer and gets file path of the selected file
-        file_path = filedialog.askopenfilename(initialdir=file_explorer, title="Open",
-                                               filetypes=(("All Files", "*.*"), (pdf, "*.pdf*"),
-                                                          (word_doc, "*.docx*"), (excel_sheet, "*.xlsx"),
-                                                          (json, ".json")))
+        file_path = filedialog.askopenfilename(initialdir=file_explorer, title="Open", filetypes=file_types)
 
         self.set_filepath(file_path)  # sets file path as instance variable/object
 
@@ -125,7 +118,7 @@ class UploadFilePage(ttk.Frame):
             file_name = "Uploaded File: " + os.path.basename(self.file_path)
             self.filename.set(file_name)
         else:
-            mbox.showerror("Error", file_err_msg)  # failed opening file message box
+            mbox.showerror("Error", file_err_msg)  # File not opened message box alert
 
     # Gets file path object/instance variable
     def get_filepath(self):

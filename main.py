@@ -1,12 +1,7 @@
-from degreeApp import DegreeApp
-# from uploadFile import UploadFilePage
+from degree_app import DegreeApp
+
 
 if __name__ == '__main__':
     app = DegreeApp()  # application window instance
-
-    # leo, did you mean something like this?
-    # files = UploadFilePage()
-    # filepath = files.get_filepath()
-    # pass file path to sujay's code somewhere here?
 
     app.mainloop()  # keeps window running until exited

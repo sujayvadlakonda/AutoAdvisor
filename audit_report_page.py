@@ -10,28 +10,28 @@ class AuditReportPage(ttk.Frame):
 
         # Handles gui for audit report page
         style = ttk.Style(self)
-        style.configure("BlackBord.TFrame", borderwidth=5, background="white", relief=SOLID, height=60, width=70)
+        style.configure("aud_report_gui.TFrame", background="white")
         style.configure("BlackSmall.TLabel", font=("Roboto", 14), foreground="#107896", background="white")
 
         # Handles frame expansion when application window is expanded
         self.columnconfigure(0, weight=1)
         self.rowconfigure(0, weight=1)
 
-        # Frame outline design
-        frame = ttk.Frame(self, style="BlackBord.TFrame")
-        frame["padding"] = (5, 0, 5, 0)  # adjusts inner padding to fit text
-        frame.grid_columnconfigure(0, weight=1)
-        frame.grid_rowconfigure(0, weight=1)
-        frame.grid_columnconfigure(1, weight=1)
-        frame.grid_rowconfigure(1, weight=1)
-        frame.grid_columnconfigure(2, weight=1)
-        frame.grid_rowconfigure(2, weight=1)
-        frame.grid(column=0, row=0, sticky="nsew", columnspan=5, pady=(10, 0))
+        # Frame background design
+        frame = ttk.Frame(self, style="aud_report_gui.TFrame")
+
+        # Handles frame's page space distribution
+        for row_index in range(6):
+            frame.grid_rowconfigure(row_index, weight=1)
+        for col_index in range(5):
+            frame.grid_columnconfigure(col_index, weight=1)
+        frame.grid(column=0, row=0, sticky="nsew", columnspan=5)
 
         # Text label and design
         lbl_aud_report = ttk.Label(frame, text="Insert audit report ui here?", style="BlackSmall.TLabel")
         lbl_aud_report.grid(column=0, row=1, columnspan=1, sticky="n", padx=5, pady=10)  # text padding
 
+        # Go to homepage button and design
         homepage_btn = ttk.Button(
             frame,
             text="Go to Homepage",
@@ -39,9 +39,7 @@ class AuditReportPage(ttk.Frame):
         )
         homepage_btn.grid(column=1, row=2, columnspan=1, sticky="es", pady=(10, 20))  # positioning
 
-        # note to developers:
-        # this is another template for whoever is working on the audit report gui
-        # if you want to your next/previous page button to work:
-        # Add to the top of the degreeApp.py file: from insertYourFileNameHere import insertYourClassNameHere
-        # In the degreeApp.py file, add your file's class name to the () in the For Loop
+        # page navigation button to work:
+        # Add to the top of the degree_app.py file: from insertYourFileNameHere import insertYourClassNameHere
+        # In the degree_app.py file, add your file's class name to the () in the For Loop
         # In the button's command section, make sure the class name is enclosed in ""

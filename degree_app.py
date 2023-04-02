@@ -1,10 +1,10 @@
 import tkinter as tk
 from tkinter import ttk
 from tkinter import *
-from uploadFile import UploadFilePage
+from upload_file_page import UploadFilePage
 from homepage import HomepageStart
-from degreePlan import DegreePlanPage
-from auditReport import AuditReportPage
+from degree_plan_page import DegreePlanPage
+from audit_report_page import AuditReportPage
 
 
 class DegreeApp(tk.Tk):
@@ -31,14 +31,14 @@ class DegreeApp(tk.Tk):
 
         # Handles switching between application pages using Class Names
         for class_Name in (HomepageStart, UploadFilePage, DegreePlanPage, AuditReportPage):
-            pg_name = class_Name.__name__
+            page_name = class_Name.__name__
             frame = class_Name(container, self)  # creates instance of each class where self=controller
-            frame.grid(column=0, row=0, sticky="nsew")  # keeps pages bundled together when moving the Window
-            self.frames[pg_name] = frame  # initializes each class of application
+            frame.grid(column=0, row=0, sticky="nsew")  # keeps pages bundled when moving the Window
+            self.frames[page_name] = frame  # initializes classes
 
         self.show_frame("HomepageStart")  # Displays application homepage
 
     # Displays page the user navigated to
-    def show_frame(self, pg_name):
-        frame = self.frames[pg_name]
+    def show_frame(self, page_name):
+        frame = self.frames[page_name]
         frame.tkraise()
