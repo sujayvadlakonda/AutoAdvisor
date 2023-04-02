@@ -14,7 +14,7 @@ if __name__ == '__main__':
     # filepath = files.get_filepath()
     # pass file path to sujay's code?
 
-    files = UploadFilePage()
+    files = UploadFilePage()  # Need to find away to pass container and controller 
     filepath = files.get_filepath()
     # selected_file = Transcript(filepath)
 
