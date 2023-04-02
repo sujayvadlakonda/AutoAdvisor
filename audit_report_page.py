@@ -27,6 +27,26 @@ class AuditReportPage(ttk.Frame):
             frame.grid_columnconfigure(col_index, weight=1)
         frame.grid(column=0, row=0, sticky="nsew", columnspan=5)
 
+        # display the top part of gpa
+
+        # ask the user if the student is taking extra elective
+
+        # ask user if taking graduate courses(ask how many extra graduate courses if yes)
+
+        # display other gpa stuff
+
+        # select disposition of all uncompleted pre-reqs where you
+        # list uncompleted prerequisite (track/admission pre-req)/leveling courses where:
+        # the user can select which disposition option (completed/waived/not required by plan or elective/other)...
+        # ...they want to assign to that class for the audit report.
+        # Completed: This must be followed by semester of completion (this info would appear on transcript)
+        # Waived: should have a field where the user can enter either a semester or a short comment
+        # Not required by plan or electives:
+        # Other: have a field where the user can enter either a semester or short comment
+        # it should be done if there's no uncompelted pre-reqs (audit check for that?)
+
+        # save/print/generate audit report options)
+
         # Text label and design
         lbl_aud_report = ttk.Label(frame, text="Insert audit report ui here?", style="BlackSmall.TLabel")
         lbl_aud_report.grid(column=0, row=1, columnspan=1, sticky="n", padx=5, pady=10)  # text padding
@@ -39,6 +59,7 @@ class AuditReportPage(ttk.Frame):
         )
         homepage_btn.grid(column=1, row=2, columnspan=1, sticky="es", pady=(10, 20))  # positioning
 
+        # # "Audit Report" title< name:, plan: Master, id:, major:, track: (based on degree plan)
         # page navigation button to work:
         # Add to the top of the degree_app.py file: from insertYourFileNameHere import insertYourClassNameHere
         # In the degree_app.py file, add your file's class name to the () in the For Loop
