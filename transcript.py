@@ -4,6 +4,7 @@ import re
 
 class Transcript:
     def __init__(self, path_to_pdf):
+        self.path_to_pdf = path_to_pdf
         self.text = ""
 
         with pdfplumber.open(path_to_pdf) as pdf:
