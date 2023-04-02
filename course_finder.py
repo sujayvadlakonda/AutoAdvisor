@@ -53,3 +53,5 @@ def get_courses(path_to_pdf):
     for course in courses:
         print(course)
     print(len(courses))
+
+    return courses
