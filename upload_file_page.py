@@ -3,6 +3,7 @@ import tkinter as tk
 from tkinter import *
 from tkinter import ttk, filedialog
 from tkinter import messagebox as mbox
+from transcript import *
 
 
 class UploadFilePage(ttk.Frame):
@@ -87,6 +88,19 @@ class UploadFilePage(ttk.Frame):
     def open_file(self):
         if self.file_path:
             with open(self.file_path, "r") as f:
+
+                ## This part to check if Transcript run in background
+                ## Will need to edit more when other part complete.
+                # Then it can pass to next class to process
+                selected_file = Transcript(self.file_path)
+                name = selected_file.get_name()
+                id = selected_file.get_id()
+                major = selected_file.get_major()
+                semester = selected_file.get_beginning_of_graduate_record()
+                print(name, id, major, semester)
+                selected_file.course_finder()
+                ##
+
                 return True
         else:
             return False
