@@ -50,16 +50,15 @@ if __name__ == '__main__':
 # In the degree_app.py file, add your file's class name to the () in the For Loop
 # In the prev/next button's command section, make sure the class name is enclosed in ""
 # run a file other than my own: edit run configurations, to have script path be the file you want to run
+# mac: can't use filetypes (mac doesn't have file type dropdown menu), but can use initialdir = "/"
 
 # pulled out constants
-# ask where they store the name of the track so that I could add it to audit report
-# mac: can't use filetypes (mac doesn't have file type dropdown menu), but can use initialdir = "/"
-# file_path = filedialog.askopenfilename(initialdir="/", title="Open"), figure out how to adjust single options row
+# asks what the extra elec and addtional grad courses questions are for
+# add in leo's code into upload file page
 # have audit_report_page.py inherit the class's/functions from audit_report.py
-# include in degree_plan_page prompt for User to specify track/degree plan w/ next button to new page
-# new page: graph rep of degree plan w/ Generate audit report button (comment it out) the pre-written buttons
-# controller
+# fix controller stuff
 
+# mac:  import os, if os.name == 'posix': file_path = filedialog.askopenfilename(initialdir="/", title="Open")
 # window = tk.Tk()  # makes a tkinter frame instance (from degree_app.py)
 # from tkinter.messagebox import showinfo, showinfo(title="Uploaded File",message=file_name)
 # if you want a column to be uniform width: columnconfigure include: uniform
