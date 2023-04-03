@@ -40,6 +40,5 @@ class DegreeApp(tk.Tk):
 
     # Displays page the user navigated to
     def show_frame(self, pg_name):
-        print(pg_name) # For trouble shooting
         frame = self.frames[pg_name]
         frame.tkraise()

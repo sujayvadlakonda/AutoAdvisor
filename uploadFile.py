@@ -14,11 +14,6 @@ class UploadFilePage(ttk.Frame):
         self.filename = tk.StringVar()  # Holds displayed name of file
         self.file_path = ""
 
-        ## Trouble shooting
-        print('Testing uploadFile')
-        print('path init' + self.file_path)
-        ##
-
         # Handles the gui of the Upload File page
         self.style = ttk.Style(self)
         self.style.configure("BlBord.TFrame", borderwidth=5, background="white", relief=SOLID, height=60, width=70)
@@ -111,11 +106,6 @@ class UploadFilePage(ttk.Frame):
     # Gets file path of file selected from file explorer by the user and opens it
     def file_selection(self):
 
-        
-        ## Trouble shooting
-        print('Testing beginning file_selection') 
-        ## Trouble shooting
-
         pdf = "Adobe Acrobat Document"
         word_doc = "Microsoft Word Document"
         excel_sheet = "Microsoft Excel Worksheet"
@@ -139,10 +129,9 @@ class UploadFilePage(ttk.Frame):
             self.filename.set(file_name)
 
             
-            ## Trouble shooting
-            print('Testing after file selected') 
-            print('path: ' + self.file_path)
-
+            ## This part to check if Transcript run in background
+            ## Will need to edit more when other part complete.
+            # Then it can pass to next class to process
             selected_file = Transcript(self.file_path)
             name = selected_file.get_name()
             id = selected_file.get_id()
@@ -150,12 +139,9 @@ class UploadFilePage(ttk.Frame):
             semester = selected_file.get_beginning_of_graduate_record()
             print(name, id, major, semester)
             selected_file.course_finder()
+            ##
 
-            ## Trouble shooting
-
-            ## Note for self (Leo)
-            # After file selected. Depend on what type of file. Then enable buttons accordingly
-
+            
         else:
             mbox.showerror("Error", file_err_msg)  # failed opening file message box
 

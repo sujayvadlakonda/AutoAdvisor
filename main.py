@@ -9,24 +9,4 @@ from transcript import *
 if __name__ == '__main__':
     app = DegreeApp()  # application window instance
 
-    # leo did you mean something like this?
-    # files = UploadFilePage()
-    # filepath = files.get_filepath()
-    # pass file path to sujay's code?
-
-    # files = UploadFilePage(app, any)  # Need to find away to pass container and controller 
-    # filepath = files.get_filepath()
-    # print(filepath)
-    # selected_file = Transcript(filepath)
-
-
-    # selected_file = Transcript("transcripts/ted-lasso.pdf")
-    # name = selected_file.get_name()
-    # id = selected_file.get_id()
-    # major = selected_file.get_major()
-    # semester = selected_file.get_beginning_of_graduate_record()
-    # print(name, id, major, semester)
-    # selected_file.course_finder()
-
-
     app.mainloop()  # keeps window running until exited
