@@ -19,7 +19,8 @@
 - After navigating to and selecting your chosen file, click the "Open" button to open and upload the file to the application
 - To change the file you want to upload, simply click the *Browse Files" button to select the new file you want to upload
 - Once the file is selected, the information will then be captured by the application, and the name of your chosen file will be displayed on the screen
-- Click the *next >>* button, when you are ready to continue to the next step
+- If uploading a student object, select the "Make New Degree Plan" button to continue. 
+- If uploading a transcript, select the "Edit Existing Degree Plan" button to continue. 
 
 ## Adding New Courses (w/ Course Name and Number) to your Degree Plan
 - 
