@@ -3,6 +3,7 @@ import tkinter as tk
 from tkinter import *
 from tkinter import ttk, filedialog
 from tkinter import messagebox as mbox
+from transcript import *
 
 
 class UploadFilePage(ttk.Frame):
@@ -141,7 +142,19 @@ class UploadFilePage(ttk.Frame):
             ## Trouble shooting
             print('Testing after file selected') 
             print('path: ' + self.file_path)
+
+            selected_file = Transcript(self.file_path)
+            name = selected_file.get_name()
+            id = selected_file.get_id()
+            major = selected_file.get_major()
+            semester = selected_file.get_beginning_of_graduate_record()
+            print(name, id, major, semester)
+            selected_file.course_finder()
+
             ## Trouble shooting
+
+            ## Note for self (Leo)
+            # After file selected. Depend on what type of file. Then enable buttons accordingly
 
         else:
             mbox.showerror("Error", file_err_msg)  # failed opening file message box
