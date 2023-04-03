@@ -1,4 +1,5 @@
-from degreeApp import DegreeApp
+from degree_app import DegreeApp
+
 
 if __name__ == '__main__':
     app = DegreeApp()  # application window instance
