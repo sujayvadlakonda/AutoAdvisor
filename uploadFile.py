@@ -13,6 +13,11 @@ class UploadFilePage(ttk.Frame):
         self.filename = tk.StringVar()  # Holds displayed name of file
         self.file_path = ""
 
+        ## Trouble shooting
+        print('Testing uploadFile')
+        print('path init' + self.file_path)
+        ##
+
         # Handles the gui of the Upload File page
         self.style = ttk.Style(self)
         self.style.configure("BlBord.TFrame", borderwidth=5, background="white", relief=SOLID, height=60, width=70)
@@ -104,6 +109,12 @@ class UploadFilePage(ttk.Frame):
 
     # Gets file path of file selected from file explorer by the user and opens it
     def file_selection(self):
+
+        
+        ## Trouble shooting
+        print('Testing beginning file_selection') 
+        ## Trouble shooting
+
         pdf = "Adobe Acrobat Document"
         word_doc = "Microsoft Word Document"
         excel_sheet = "Microsoft Excel Worksheet"
@@ -125,6 +136,13 @@ class UploadFilePage(ttk.Frame):
         if file_status:
             file_name = "Uploaded File: " + os.path.basename(self.file_path)
             self.filename.set(file_name)
+
+            
+            ## Trouble shooting
+            print('Testing after file selected') 
+            print('path: ' + self.file_path)
+            ## Trouble shooting
+
         else:
             mbox.showerror("Error", file_err_msg)  # failed opening file message box
 

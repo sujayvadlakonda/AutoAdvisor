@@ -8,6 +8,10 @@ class HomepageStart(ttk.Frame):
         super().__init__(container)
         self.controller = controller  # Used to control which page is shown
 
+        ## Trouble shooting
+        print('Testing Homepage') 
+        ## Trouble shooting
+
         # Handles the gui of the application homepage
         self.style = ttk.Style(self)
         self.style.configure("BlckBord.TFrame", borderwidth=5, background="white", relief=SOLID, height=60, width=70)

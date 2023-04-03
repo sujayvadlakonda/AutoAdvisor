@@ -14,9 +14,11 @@ if __name__ == '__main__':
     # filepath = files.get_filepath()
     # pass file path to sujay's code?
 
-    files = UploadFilePage()  # Need to find away to pass container and controller 
-    filepath = files.get_filepath()
+    # files = UploadFilePage(app, any)  # Need to find away to pass container and controller 
+    # filepath = files.get_filepath()
+    # print(filepath)
     # selected_file = Transcript(filepath)
+
 
     # selected_file = Transcript("transcripts/ted-lasso.pdf")
     # name = selected_file.get_name()
@@ -25,8 +27,6 @@ if __name__ == '__main__':
     # semester = selected_file.get_beginning_of_graduate_record()
     # print(name, id, major, semester)
     # selected_file.course_finder()
-
-
 
 
     app.mainloop()  # keeps window running until exited

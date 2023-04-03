@@ -8,6 +8,11 @@ class DegreePlanPage(ttk.Frame):
         super().__init__(container)
         self.controller = controller  # allows for switching between application pages
 
+        ## Trouble shooting
+        print('Testing degreePlan') 
+        ## Trouble shooting
+
+
         # Handles the gui of the Degree Plan page
         self.style = ttk.Style(self)
         self.style.configure("BlckBorder.TFrame", borderwidth=5, background="white", relief=SOLID, height=60, width=70)
