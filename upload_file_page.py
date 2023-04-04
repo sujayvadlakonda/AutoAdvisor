@@ -3,6 +3,7 @@ import tkinter as tk
 from tkinter import *
 from tkinter import ttk, filedialog
 from tkinter import messagebox as mbox
+# from transcript import *  # leo's request
 
 
 class UploadFilePage(ttk.Frame):
@@ -95,6 +96,16 @@ class UploadFilePage(ttk.Frame):
     def open_file(self):
         if self.file_path:
             with open(self.file_path, "r") as f:
+                # This section is leo's in progress code so ignore it.
+                # Checks if Transcript.py runs in bkgd. gets edited later when other proj parts done.
+                # Then it can pass to next class to process
+                # selected_file = Transcript(self.file_path)
+                # name = selected_file.get_name()
+                # id = selected_file.get_id()
+                # major = selected_file.get_major()
+                # semester = selected_file.get_beginning_of_graduate_record()
+                # print(name, id, major, semester)
+                # selected_file.course_finder()
                 return True
         else:
             return False
@@ -114,8 +125,11 @@ class UploadFilePage(ttk.Frame):
         file_types = [("All Files", "*.*"), (pdf, "*.pdf*"), (word_doc, "*.docx*"),
                       (excel_sheet, "*.xlsx"), (json, ".json")]
 
-        # opens Windows File Explorer and gets file path of the selected file
-        file_path = filedialog.askopenfilename(initialdir=file_explorer, title="Open", filetypes=file_types)
+        # opens File Explorer and gets file path of the selected file
+        if os.name == 'posix':
+            file_path = filedialog.askopenfilename(initialdir="/", title="Open")
+        else:
+            file_path = filedialog.askopenfilename(initialdir=file_explorer, title="Open", filetypes=file_types)
 
         self.set_filepath(file_path)  # sets file path as instance variable/object
 

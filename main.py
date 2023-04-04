@@ -53,8 +53,9 @@ if __name__ == '__main__':
 # mac: can't use filetypes (mac doesn't have file type dropdown menu), but can use initialdir = "/"
 
 # pulled out constants
-# asks what the extra elec and addtional grad courses questions are for
-# add in leo's code into upload file page
+# add in leo's code into upload file page (combine w/ new look etc branch)
+
+# asks what the extra elec and additional grad courses questions are for
 # have audit_report_page.py inherit the class's/functions from audit_report.py
 # fix controller stuff
 
