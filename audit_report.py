@@ -8,23 +8,24 @@ class AuditReport:
             self.courses.append(course_identifier)
         self.requirements = requirements
 
-    def get_requirements_fulfilled(self):
-        return self.requirements.requirements_fulfilled(self.courses)
+        self.requirements.fulfill(self.courses)
 
+    def core_completed(self):
+        return self.requirements.core
 
 
 class Requirement:
-    def fulfilled(self, courses):
+    def fulfill(self, completed_courses):
         pass
 
 
-class SimpleRequirement(Requirement):
+class ExactRequirement(Requirement):
     def __init__(self, course):
         self.course = course
 
-    def fulfilled(self, courses):
+    def fulfill(self, completed_courses):
         # more pythonic way?
-        if self.course in courses:
+        if self.course in completed_courses:
             return self.course
 
         return False
@@ -34,34 +35,38 @@ class MultiRequirement(Requirement):
     def __init__(self, course_options):
         self.course_options = course_options
 
-
-    def fulfilled(self, courses):
+    def fulfill(self, completed_courses):
         for course in self.course_options:
-            if course in courses:
+            if course in completed_courses:
                 return course
 
         return False
 
 
 class Requirements:
-    requirements = []
+    def __init__(self):
+        self.requirements = []
+        self.core = []
+        self.electives = []
+        self.unfulfilled_requirements = []
 
-    def requirements_fulfilled(self, courses):
-        requirements_fulfilled = []
-
+    def fulfill(self, completed_courses):
         for requirement in self.requirements:
-            fulfilled_course = requirement.fulfilled(courses)
+            fulfilled_course = requirement.fulfill(completed_courses)
             if fulfilled_course:
-                requirements_fulfilled.append(fulfilled_course)
-
-        return requirements_fulfilled
+                self.core.append(fulfilled_course)
+            else:
+                self.unfulfilled_requirements.append(requirement)
 
 
 class DataScience(Requirements):
-    requirements = [
-        SimpleRequirement("CS 6313"),
-        SimpleRequirement("CS 6350"),
-        SimpleRequirement("CS 6363"),
-        SimpleRequirement("CS 6375"),
-        MultiRequirement(["CS 6301", "CS 6320", "CS 6327", "CS 6347", "CS 6360"]),
-    ]
+    def __init__(self):
+        super().__init__()
+
+        self.requirements = [
+            ExactRequirement("CS 6313"),
+            ExactRequirement("CS 6350"),
+            ExactRequirement("CS 6363"),
+            ExactRequirement("CS 6375"),
+            MultiRequirement(["CS 6301", "CS 6320", "CS 6327", "CS 6347", "CS 6360"]),
+        ]
