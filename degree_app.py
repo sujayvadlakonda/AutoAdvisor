@@ -15,7 +15,7 @@ class DegreeApp(tk.Tk):
         window_name = "Degree Plan and Audit Tool"
         window_size = "760x550+270+25"
         window_color = "white"
-        self.frames = {}  # initializes application page to array
+        self.frames = {}  # initializes application pages to dictionary
 
         # Sets up the application window
         self.config(background=window_color)  # Window background color
