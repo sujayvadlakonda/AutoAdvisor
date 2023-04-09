@@ -35,7 +35,7 @@ class DegreePlanReportPage(ttk.Frame):
 
         # insert here a way for user to edit degree plan (move/add/change/delete courses and pre-requisite's)?
 
-        # Insert here a way for user to generate & save a student object (that has the new changes) via clicking a button?
+        # Insert here a way for this info to be saved to student object (that has the new changes)?
 
         # Insert here a way for user to generate, save and/or print degree plan (pdf?) they've finished changing?
 

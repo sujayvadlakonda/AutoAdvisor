@@ -53,7 +53,7 @@ class DegreePlanPage(ttk.Frame):
 
         # Insert here a way for user to select if the student is doing Thesis, and save value to student object?
 
-        # Insert here way for user to generate & save student object with a click of a button?
+        # Insert here way for user to generate, update with all info & save where user wants to save student object?
 
         # Previous Page button and design
         prev_btn = ttk.Button(
