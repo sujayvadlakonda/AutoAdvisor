@@ -12,6 +12,7 @@ class DegreePlanPage(ttk.Frame):
         style = ttk.Style(self)
         style.configure("BlckBorder.TFrame", background="white")
         style.configure("BlSmall.TLabel", font=("Roboto", 14), foreground="#107896", background="white")
+        style.configure("CW.TLabel", font=("Segoe print", 30), foreground="#0032A0", background="#87ceeb")
 
         # Handles frame expansion when application window is expanded
         self.columnconfigure(0, weight=1)
@@ -31,8 +32,12 @@ class DegreePlanPage(ttk.Frame):
         frame.grid(column=0, row=0, sticky="nsew", columnspan=5)  # positioning
 
         # Text label and design
-        lbl_dp = ttk.Label(frame, text="Teammate's degree plan/student object related gui goes here?:", style="BlSmall.TLabel")
-        lbl_dp.grid(column=1, row=0, columnspan=3, sticky="n", pady=10)  # text positioning
+        # lbl_dp = ttk.Label(frame, text="Teammate's degree plan/student object related gui goes here?:", style="BlSmall.TLabel")
+        # lbl_dp.grid(column=1, row=0, columnspan=3, sticky="n", pady=10)  # text positioning
+
+        lbl_dp = ttk.Label(frame, text="Degree Plan Editor", style="CW.TLabel")
+        lbl_dp.grid(column=2, row=0,)  # positioning
+
 
         # Choose student's degree plan track text label and design
         # lbl_dp_track = ttk.Label(frame, text="Choose student's chosen track/Degree Plan:", style="BlSmall.TLabel")
