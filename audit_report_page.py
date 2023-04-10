@@ -13,7 +13,7 @@ class AuditReportPage(ttk.Frame):
 
         # Handles gui for audit report page
         style = ttk.Style(self)
-        style.configure("aud_report_gui.TFrame", background="white")
+        style.configure("aud_report_gui.TFrame", background="black")
         style.configure("BlWht.TLabel", font=("Segoe UI", 20), foreground="black", background="white")
         style.configure("BlackSmall.TLabel", font=("Arial", 14), foreground="black", background="orange")
         style.configure("Black_txt.TLabel", font=("Calibri", 12), foreground="black", background="green")

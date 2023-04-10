@@ -10,33 +10,32 @@ class DegreePlanPage(ttk.Frame):
 
         # Handles Degree Plan page style options
         style = ttk.Style(self)
-        style.configure("BlckBorder.TFrame", background="white")
-        style.configure("BlSmall.TLabel", font=("Roboto", 14), foreground="#107896", background="white")
-        style.configure("CW.TLabel", font=("Segoe print", 30), foreground="#0032A0", background="#87ceeb")
+        style.configure("degree_plan_gui.TFrame", background="orange")
+        style.configure("Title.TLabel", font=("Segoe UI", 30), foreground="black", background="orange")
+        style.configure("BlSmall.TLabel", font=("Roboto", 14), foreground="black", background="white")
 
+    
         # Handles frame expansion when application window is expanded
         self.columnconfigure(0, weight=1)
         self.rowconfigure(0, weight=1)
 
         # Frame outline and design
-        frame = ttk.Frame(self, style="BlckBorder.TFrame")
-        frame["padding"] = (5, 0, 5, 0)  # adjusts inner padding for spacing
+        frame = ttk.Frame(self, style="degree_plan_gui.TFrame")
 
+       
         # Handles weight distribution of the frame page (you can also just use a For Loop)
         frame.grid_columnconfigure(0, weight=1)
         frame.grid_rowconfigure(0, weight=1)
-        frame.grid_columnconfigure(1, weight=1)
-        frame.grid_rowconfigure(0, weight=1)
-        frame.grid_columnconfigure(2, weight=1)
-        frame.grid_columnconfigure(3, weight=1)
-        frame.grid(column=0, row=0, sticky="nsew", columnspan=5)  # positioning
+        # frame.grid_columnconfigure(1, weight=1)
+        # frame.grid_rowconfigure(0, weight=1)
+        # frame.grid_columnconfigure(2, weight=1)
+        # frame.grid_columnconfigure(3, weight=1)
+        frame.grid(column=0, row=0, sticky="nsew")  # positioning
 
-        # Text label and design
-        # lbl_dp = ttk.Label(frame, text="Teammate's degree plan/student object related gui goes here?:", style="BlSmall.TLabel")
-        # lbl_dp.grid(column=1, row=0, columnspan=3, sticky="n", pady=10)  # text positioning
-
-        lbl_dp = ttk.Label(frame, text="Degree Plan Editor", style="CW.TLabel")
-        lbl_dp.grid(column=2, row=0,)  # positioning
+        # Degree Plan Editor label and design
+        lbl_dp = ttk.Label(frame, text="Degree Plan Editor", style="Title.TLabel")
+        lbl_dp.grid(row=0, column=0, sticky="n")  # text positioning
+        
 
 
         # Choose student's degree plan track text label and design
