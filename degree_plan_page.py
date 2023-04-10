@@ -28,6 +28,8 @@ class DegreePlanPage(ttk.Frame):
         section = 10
         for r in range(section):
             frame.rowconfigure(r, weight=1)
+        # frame.columnconfigure(0, weight=1)
+        # frame.rowconfigure(0, weight=1)
         frame.grid(column=0, row=0, sticky="nsew")  # positioning
 
 
@@ -39,6 +41,8 @@ class DegreePlanPage(ttk.Frame):
         fr_title.columnconfigure(0, weight=1)
         for r in range(r1):
             fr_title.rowconfigure(r, weight=1)
+        # fr_title.columnconfigure(0, weight=1)
+        # fr_title.rowconfigure(0, weight=1)
         fr_title.grid(column=0, row=0, sticky="nsew")
 
         # 2. Student Frame
@@ -48,76 +52,80 @@ class DegreePlanPage(ttk.Frame):
         fr_student.columnconfigure(0, weight=1)
         for r in range(r2):
             fr_student.rowconfigure(r, weight=1)
+        # fr_student.columnconfigure(0, weight=1)
+        # fr_student.rowconfigure(0, weight=1)
         fr_student.grid(column=0, row=1, sticky="nsew")
 
-        # 3. Core Frame
-        c3=0
-        r3=10
-        fr_core = ttk.Frame(frame, style="section.TFrame")
-        fr_core.columnconfigure(0, weight=1)
-        for r in range(r3):
-            fr_core.rowconfigure(r, weight=1)
-        fr_core.grid(column=0, row=2, sticky="nsew")
+        # # 3. Core Frame
+        # c3=0
+        # r3=10
+        # fr_core = ttk.Frame(frame, style="section.TFrame")
+        # fr_core.columnconfigure(0, weight=1)
+        # for r in range(r3):
+        #     fr_core.rowconfigure(r, weight=1)
+        # .columnconfigure(0, weight=1)
+        # .rowconfigure(0, weight=1)
+        # fr_core.grid(column=0, row=2, sticky="nsew")
 
-        # 4. Core_Option Frame
-        c4=0
-        r4=7
-        fr_coreOption = ttk.Frame(frame, style="section.TFrame")
-        fr_coreOption.columnconfigure(0, weight=1)
-        for r in range(r4):
-            fr_coreOption.rowconfigure(r, weight=1)
-        fr_coreOption.grid(column=0, row=3, sticky="nsew")
+        # # 4. Core_Option Frame
+        # c4=0
+        # r4=7
+        # fr_coreOption = ttk.Frame(frame, style="section.TFrame")
+        # fr_coreOption.columnconfigure(0, weight=1)
+        # for r in range(r4):
+        #     fr_coreOption.rowconfigure(r, weight=1)
+        # fr_coreOption.grid(column=0, row=3, sticky="nsew")
 
-        # 5. Five Elective Frame
-        c5=0
-        r5=7
-        fr_elective = ttk.Frame(frame, style="section.TFrame")
-        fr_elective.columnconfigure(0, weight=1)
-        for r in range(r5):
-            fr_elective.rowconfigure(r, weight=1)
-        fr_elective.grid(column=0, row=4, sticky="nsew")
+        # # 5. Five Elective Frame
+        # c5=0
+        # r5=7
+        # fr_elective = ttk.Frame(frame, style="section.TFrame")
+        # fr_elective.columnconfigure(0, weight=1)
+        # for r in range(r5):
+        #     fr_elective.rowconfigure(r, weight=1)
+        # fr_elective.grid(column=0, row=4, sticky="nsew")
 
-        # 6. Additional Elective Frame
-        c6=0
-        r6=7
-        fr_electiveAdd = ttk.Frame(frame, style="section.TFrame")
-        fr_electiveAdd.columnconfigure(0, weight=1)
-        for r in range(r6):
-            fr_electiveAdd.rowconfigure(r, weight=1)
-        fr_elective.grid(column=0, row=5, sticky="nsew")
+        # # 6. Additional Elective Frame
+        # c6=0
+        # r6=7
+        # fr_electiveAdd = ttk.Frame(frame, style="section.TFrame")
+        # fr_electiveAdd.columnconfigure(0, weight=1)
+        # for r in range(r6):
+        #     fr_electiveAdd.rowconfigure(r, weight=1)
+        # fr_elective.grid(column=0, row=5, sticky="nsew")
 
-        # 7. Other Requirement Frame
-        c7=0
-        r7=3
-        fr_otherReg = ttk.Frame(frame, style="section.TFrame")
-        fr_otherReg.columnconfigure(0, weight=1)
-        for r in range(r7):
-            fr_otherReg.rowconfigure(r, weight=1)
-        fr_otherReg.grid(column=0, row=6, sticky="nsew")
+        # # 7. Other Requirement Frame
+        # c7=0
+        # r7=3
+        # fr_otherReg = ttk.Frame(frame, style="section.TFrame")
+        # fr_otherReg.columnconfigure(0, weight=1)
+        # for r in range(r7):
+        #     fr_otherReg.rowconfigure(r, weight=1)
+        # fr_otherReg.grid(column=0, row=6, sticky="nsew")
 
-        # 8. Prerequisites Frame
-        c8=0
-        r8=3
-        fr_Prereq= ttk.Frame(frame, style="section.TFrame")
-        fr_Prereq.columnconfigure(0, weight=1)
-        for r in range(r8):
-            fr_Prereq.rowconfigure(r, weight=1)
-        fr_Prereq.grid(column=0, row=7, sticky="nsew")
+        # # 8. Prerequisites Frame
+        # c8=0
+        # r8=3
+        # fr_Prereq= ttk.Frame(frame, style="section.TFrame")
+        # fr_Prereq.columnconfigure(0, weight=1)
+        # for r in range(r8):
+        #     fr_Prereq.rowconfigure(r, weight=1)
+        # fr_Prereq.grid(column=0, row=7, sticky="nsew")
 
-        # 9. Note Frame
-        c9=0
-        r9=7
-        fr_note = ttk.Frame(frame, style="section.TFrame")
-        fr_note.columnconfigure(0, weight=1)
-        for r in range(7):
-            fr_note.rowconfigure(r, weight=1)
-        fr_note.grid(column=0, row=6, sticky="nsew")
+        # # 9. Note Frame
+        # c9=0
+        # r9=7
+        # fr_note = ttk.Frame(frame, style="section.TFrame")
+        # fr_note.columnconfigure(0, weight=1)
+        # for r in range(7):
+        #     fr_note.rowconfigure(r, weight=1)
+        # fr_note.grid(column=0, row=6, sticky="nsew")
 
         # 10. Linkup Frame
         fr_link= ttk.Frame(frame, style="section.TFrame")
         fr_link.columnconfigure(0, weight=1)
         fr_link.rowconfigure(0, weight=1)
-        fr_link.grid(column=0, row=0, sticky="nsew")
+        fr_link.grid(column=0, row=9, sticky="nsew")
 
         
 
