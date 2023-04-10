@@ -15,9 +15,13 @@ class DegreePlanPage(ttk.Frame):
         
         style.configure("big_heading.TLabel", font=("Segoe print", 30), foreground="black", background="orange")
         style.configure("medium_heading.TLabel", font=("Verdana", 25), foreground="black", background="orange")
-        style.configure("small_heading.TLabel", font=("Verdana", 10), foreground="black", background="orange")
+        style.configure("small_heading.TLabel", font=("Verdana", 15), foreground="black", background="orange")
 
         style.configure("normal_text.TLabel", font=("Bookman Old Style,", 14), foreground="black", background="orange")
+        style.configure("filling_text.TLabel", font=("Bookman Old Style,", 14), foreground="black", background="white", relief="sunken")
+
+        style.configure("TRadiobutton", font=("Bookman Old Style,", 14), foreground="black", background="orange", relief="flat")
+
 
 
         # style.configure("GuiTitle.TLabel", font=("Segoe UI", 25), foreground="black", background="orange")
@@ -43,55 +47,115 @@ class DegreePlanPage(ttk.Frame):
         fr_titleGui = ttk.Frame(frame, style="section.TFrame")
         fr_titleGui.columnconfigure(0, weight=1)
         fr_titleGui.rowconfigure(0, weight=1)   
-        # fr_titleGui.grid(column=0, row=0, sticky="nsew", padx=100, pady=5)
-        fr_titleGui.pack(expand=TRUE, fill=BOTH, side=TOP)
-
+        fr_titleGui.grid(column=0, row=0, sticky="nsew", padx=100, pady=5)
+      
 
         lbl_gui = ttk.Label(fr_titleGui, text="DEGREE PLAN EDITOR", style="big_heading.TLabel")
         lbl_gui.grid(column=0, row=0)  # text positioning
-
-        # #   1. Title Frame
-        # c1=0
-        # r1=4
-        # fr_title = ttk.Frame(frame, style="section.TFrame")
-        # fr_title.columnconfigure(0, weight=1)
-        # for r in range(r1):
-        #     fr_title.rowconfigure(r, weight=1)
-        # fr_title.grid(column=0, row=1, sticky="nsew", pady=5)
-
-        # # Labeling
-        # lbl_title = ttk.Label(fr_title, text="DEGREE PLAN", style="medium_heading.TLabel")
-        # lbl_title.grid(column=0, row=0, padx=5, pady=5)
-        # lbl_title = ttk.Label(fr_title, text="UNIVERSITY OF TEXAS AT DALLAS", style="medium_heading.TLabel")
-        # # lbl_title.grid(column=0, row=1, padx=5, pady=5)
-        # lbl_title.grid(column=0, row=1, *)
-        # lbl_title = ttk.Label(fr_title, text="MASTER OF COMPUTER SCIENCE", style="medium_heading.TLabel")
-        # lbl_title.grid(column=0, row=2, padx=5, pady=5)
-
-        # # Get and Display Student's Major
-        # major = "Data Science"  # Will pass a function to get major later
-        # lbl_major = ttk.Label(fr_title, text=major, style="medium_heading.TLabel")
-        # lbl_major.grid(column=0, row=4)
        
-        # # 2. Student Frame
-        # c2=5
-        # r2=4
-        # fr_student = ttk.Frame(frame, style="section.TFrame")
-        # for c in range(c2):
-        #     fr_student.columnconfigure(c, weight=1)
-        # for r in range(r2):
-        #     fr_student.rowconfigure(r, weight=1)
-        # fr_student.grid(column=0, row=2, sticky="nsew", pady=5)
+#   1. Title Frame
+        c1=0
+        r1=4
+        fr_title = ttk.Frame(frame, style="section.TFrame")
+        fr_title.columnconfigure(0, weight=1)
+        for r in range(r1):
+            fr_title.rowconfigure(r, weight=1)
+        fr_title.grid(column=0, row=1, sticky="nsew", pady=5)
 
-        # lbl_name = ttk.Label(fr_student, text="Name of Student:", style="normal_text.TLabel")
-        # lbl_name.grid(column=0, row=1, sticky='w')
-        # name = 
+ # Labeling
+        lbl_title = ttk.Label(fr_title, text="DEGREE PLAN", style="medium_heading.TLabel")
+        lbl_title.grid(column=0, row=0, padx=5, pady=5)
+        lbl_title = ttk.Label(fr_title, text="UNIVERSITY OF TEXAS AT DALLAS", style="medium_heading.TLabel")
+        # lbl_title.grid(column=0, row=1, padx=5, pady=5)
+        lbl_title.grid(column=0, row=1)
+        lbl_title = ttk.Label(fr_title, text="MASTER OF COMPUTER SCIENCE", style="medium_heading.TLabel")
+        lbl_title.grid(column=0, row=2, padx=5, pady=5)
+
+# Get and Display Student's Major
+        major = "Data Science"  # Will pass a function to get major later
+        lbl_major = ttk.Label(fr_title, text=major, style="medium_heading.TLabel")
+        lbl_major.grid(column=0, row=4)
+       
+# 2. Student Frame
+        c2=5
+        r2=3
+        fr_student = ttk.Frame(frame, style="section.TFrame")
+        for c in range(c2):
+            fr_student.columnconfigure(c, weight=1)
+        for r in range(r2):
+            fr_student.rowconfigure(r, weight=1)
+        fr_student.grid(column=0, row=2, sticky="nsew", pady=5)
+
+# Labeling 
+# Student Name
+        lbl_name = ttk.Label(fr_student, text="Name of Student:", style="normal_text.TLabel")
+        lbl_name.grid(column=0, row=0, sticky='w', padx=(10,0))
+        std_name = "Name 1"
+        lbl_name = ttk.Label(fr_student, text=std_name, style="filling_text.TLabel")
+        lbl_name.grid(column=1, row=0, sticky='w', padx=(10,0))
+        # entry = Entry(fr_student, width=25)
+        # entry.grid(column=1, row=1)
+
+# Student ID
+        lbl_name = ttk.Label(fr_student, text="Student ID Number:", style="normal_text.TLabel")
+        lbl_name.grid(column=0, row=1, sticky='w', padx=(10,0))
+        std_id = "ID 1"
+        lbl_name = ttk.Label(fr_student, text=std_id, style="filling_text.TLabel")
+        lbl_name.grid(column=1, row=1, sticky='w', padx=(10,0))
+
+#  Semester Additted
+        lbl_name = ttk.Label(fr_student, text="Semester Admitted to Program:", style="normal_text.TLabel")
+        lbl_name.grid(column=0, row=2, sticky='w', padx=(10,0))
+        sem_ad = "Semester 1"
+        lbl_name = ttk.Label(fr_student, text=sem_ad, style="filling_text.TLabel")
+        lbl_name.grid(column=1, row=2, sticky='w', padx=(10,0))
+
+# FT and Thesis
+        def yes_no(c_index, r_index):
+            # print('Test yes_no')
+            selected_value = tk.StringVar()
+            sizes = (   ('Yes', 'S'),
+                    ('No', 'M'))
+            for size in sizes:
+                r = ttk.Radiobutton(        
+                                fr_student,
+                                text=size[0],
+                                value=size[1],
+                                variable=selected_value,
+                                style="TRadiobutton"
+                )
+                r.grid(column=c_index, row=r_index, sticky='w')
+                c_index += 1
+
+    # Fast Track
+        lbl_name = ttk.Label(fr_student, text="FT:", style="normal_text.TLabel")
+        lbl_name.grid(column=2, row=0, sticky='w', padx=(10,0))
+        yes_no(3, 0)
+
+    # Thesis
+        lbl_name = ttk.Label(fr_student, text="Thesis:", style="normal_text.TLabel")
+        lbl_name.grid(column=2, row=1, sticky='w', padx=(10,0))
+        yes_no(3, 1)
+
+# Anticipated Graduation
+        lbl_name = ttk.Label(fr_student, text="Anticipated Graduation", style="normal_text.TLabel")
+        lbl_name.grid(column=2, row=2, sticky='w', padx=(10,0))
+        expect_grad = "Grad Expect 1"
+        lbl_name = ttk.Label(fr_student, text=expect_grad, style="filling_text.TLabel")
+        lbl_name.grid(column=3, row=2, sticky='w', columnspan=2, padx=(10,10))
 
 
-        # lbl_name = ttk.Label(fr_student, text="Student ID Number:", style="normal_text.TLabel")
-        # lbl_name.grid(column=0, row=2, sticky='w')
-        # lbl_name = ttk.Label(fr_student, text="Semester Admitted to Program:", style="normal_text.TLabel")
-        # lbl_name.grid(column=0, row=3, sticky='w')
+
+
+
+
+
+
+
+        # e = Entry(root, width=50, borderwidth=5)
+# e = Entry(root, width=50)
+# e.pack()
+# e.insert(0, "Enter Your Name:") # Default Text inside box
 
 
 
@@ -160,11 +224,11 @@ class DegreePlanPage(ttk.Frame):
     #     #     fr_note.rowconfigure(r, weight=1)
     #     # fr_note.grid(column=0, row=6, sticky="nsew")
 
-        # #   10. Linkup Frame
-        # fr_link= ttk.Frame(frame, style="section.TFrame")
-        # fr_link.columnconfigure(0, weight=1)
-        # fr_link.rowconfigure(0, weight=1)
-        # fr_link.grid(column=0, row=10, sticky="nsew")
+        #   10. Linkup Frame
+        fr_link= ttk.Frame(frame, style="section.TFrame")
+        fr_link.columnconfigure(0, weight=1)
+        fr_link.rowconfigure(0, weight=1)
+        fr_link.grid(column=0, row=10, sticky="nsew")
 
         
 
@@ -200,24 +264,24 @@ class DegreePlanPage(ttk.Frame):
 
     # #     # Insert here way for user to generate, update with all info & save where user wants to save student object?
 
-        # # Previous Page button and design
-        # prev_btn = ttk.Button(
-        #     fr_link,
-        #     text="<< Previous",
-        #     command=lambda: self.controller.show_frame("UploadFilePage")
-        # )
-        # prev_btn.grid(column=0, row=9, columnspan=1, sticky="sw")  # button positioning
+        # Previous Page button and design
+        prev_btn = ttk.Button(
+            fr_link,
+            text="<< Previous",
+            command=lambda: self.controller.show_frame("UploadFilePage")
+        )
+        prev_btn.grid(column=0, row=9, columnspan=1, sticky="sw")  # button positioning
 
-        # # Button to direct user to degree_plan_report_page.py in order for user to edit degree plan
-        # next_btn = ttk.Button(
-        #     fr_link,
-        #     text="Next >>",
-        #     command=lambda: controller.show_frame("DegreePlanReportPage")
-        # )
-        # next_btn.grid(column=0, row=9, columnspan=1, sticky="se")  # button padding
+        # Button to direct user to degree_plan_report_page.py in order for user to edit degree plan
+        next_btn = ttk.Button(
+            fr_link,
+            text="Next >>",
+            command=lambda: controller.show_frame("DegreePlanReportPage")
+        )
+        next_btn.grid(column=0, row=9, columnspan=1, sticky="se")  # button padding
 
-    # # # note to the developer in charge of the degree plan gui:
-    # # # This file is just to get, whoever is working on the Degree Plan GUI, a head start on the gui.
-    # # # there's still the rest of the gui, student object stuff, etc. that you'll need to figure out and add to this
-    # # # modify it as much as you want to, just make sure to:
-    # # # include a way for audit_report_page.py to know what degree plan track and prerequisite courses are chosen
+    # # note to the developer in charge of the degree plan gui:
+    # # This file is just to get, whoever is working on the Degree Plan GUI, a head start on the gui.
+    # # there's still the rest of the gui, student object stuff, etc. that you'll need to figure out and add to this
+    # # modify it as much as you want to, just make sure to:
+    # # include a way for audit_report_page.py to know what degree plan track and prerequisite courses are chosen
