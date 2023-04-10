@@ -11,7 +11,8 @@ class DegreePlanPage(ttk.Frame):
         # Handles Degree Plan page style options
         style = ttk.Style(self)
         style.configure("degree_plan_gui.TFrame", background="orange")
-        style.configure("Title.TLabel", font=("Segoe UI", 30), foreground="black", background="orange")
+        style.configure("GuiTitle.TLabel", font=("Segoe UI", 25), foreground="black", background="orange")
+        style.configure("DegreeTitle.TLabel", font=("Segoe UI", 20), foreground="black", background="orange")
         style.configure("BlSmall.TLabel", font=("Roboto", 14), foreground="black", background="white")
 
     
@@ -23,18 +24,21 @@ class DegreePlanPage(ttk.Frame):
         frame = ttk.Frame(self, style="degree_plan_gui.TFrame")
 
        
-        # Handles weight distribution of the frame page (you can also just use a For Loop)
+        # Handles weight distribution of the frame page
         frame.grid_columnconfigure(0, weight=1)
         frame.grid_rowconfigure(0, weight=1)
-        # frame.grid_columnconfigure(1, weight=1)
-        # frame.grid_rowconfigure(0, weight=1)
-        # frame.grid_columnconfigure(2, weight=1)
-        # frame.grid_columnconfigure(3, weight=1)
+        frame['padding'] = 10
+        frame['relief'] = 'raised'
         frame.grid(column=0, row=0, sticky="nsew")  # positioning
+        
 
         # Degree Plan Editor label and design
-        lbl_dp = ttk.Label(frame, text="Degree Plan Editor", style="Title.TLabel")
-        lbl_dp.grid(row=0, column=0, sticky="n")  # text positioning
+        lbl_dp = ttk.Label(frame, text="Degree Plan Editor", style="GuiTitle.TLabel")
+        lbl_dp.grid(column=0, row=0, sticky="n")  # text positioning
+
+        # Degree Title Label and design
+        lbl_dt = ttk.Label(frame, text="", style="GuiTitle.TLabel")
+        lbl_dt.grid(column=0, row=0, sticky="n")  # text positioning
         
 
 
