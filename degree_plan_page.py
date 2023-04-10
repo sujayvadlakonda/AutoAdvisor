@@ -43,7 +43,9 @@ class DegreePlanPage(ttk.Frame):
         fr_titleGui = ttk.Frame(frame, style="section.TFrame")
         fr_titleGui.columnconfigure(0, weight=1)
         fr_titleGui.rowconfigure(0, weight=1)   
-        fr_titleGui.grid(column=0, row=0, sticky="nsew", padx=100, pady=5)
+        # fr_titleGui.grid(column=0, row=0, sticky="nsew", padx=100, pady=5)
+        fr_titleGui.pack(expand=TRUE, fill=BOTH, side=TOP)
+
 
         lbl_gui = ttk.Label(fr_titleGui, text="DEGREE PLAN EDITOR", style="big_heading.TLabel")
         lbl_gui.grid(column=0, row=0)  # text positioning
