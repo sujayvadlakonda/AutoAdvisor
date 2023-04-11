@@ -62,6 +62,7 @@ if __name__ == '__main__':
 # light blue: ACC8E5, A1FCFF, E3FFFF, A6F4FF, 89cff0, 87ceeb (bg), b0e0e6
 # gray: #f5f5f5, #d3d3d3,
 # off white: f8f8ff (bg)
+# optional row adjustmenet: canvas.bind('<Configure>', lambda e: canvas.itemconfig(canvas_win, width=e.width, height=e.height))
 
 # make constants
 # add in leo's code into upload_file_page.py (combine w/ new look etc. branch)
