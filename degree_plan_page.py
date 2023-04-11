@@ -13,7 +13,7 @@ class DegreePlanPage(ttk.Frame):
         style.configure("dp_gui.TFrame", background="black", relief="sunken")
         style.configure("section.TFrame", background="orange", relief="raised")
         
-        style.configure("big_heading.TLabel", font=("Segoe print", 30), foreground="black", background="orange")
+        style.configure("big_heading.TLabel", font=("Segoe print", 30, "bold"), foreground="black", background="orange")
         style.configure("medium_heading.TLabel", font=("Verdana", 25), foreground="black", background="orange")
         style.configure("small_heading.TLabel", font=("Verdana", 15), foreground="black", background="orange")
 
