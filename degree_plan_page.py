@@ -86,11 +86,22 @@ class DegreePlanPage(ttk.Frame):
             fr_student.rowconfigure(r, weight=1)
         fr_student.grid(column=0, row=2, sticky="nsew", pady=5)
 
+# Get student info function
+        def get_student_info():
+            name    = "Name 111111111111111"
+            id      = "ID 1"
+            sem     = "Semester 1"
+
+            return name, id, sem
+
+
 # Labeling 
+        std_name, std_id, sem_ad = get_student_info()
+
 # Student Name
         lbl_name = ttk.Label(fr_student, text="Name of Student:", style="normal_text.TLabel")
         lbl_name.grid(column=0, row=0, sticky='w', padx=(10,0))
-        std_name = "Name 111111111111111"
+
         lbl_name = ttk.Label(fr_student, text=std_name, style="filling_text.TLabel")
         lbl_name.grid(column=1, row=0, sticky='w', padx=(10,0))
         # entry = Entry(fr_student, width=25)
@@ -99,14 +110,14 @@ class DegreePlanPage(ttk.Frame):
 # Student ID
         lbl_name = ttk.Label(fr_student, text="Student ID Number:", style="normal_text.TLabel")
         lbl_name.grid(column=0, row=1, sticky='w', padx=(10,0))
-        std_id = "ID 1"
+   
         lbl_name = ttk.Label(fr_student, text=std_id, style="filling_text.TLabel")
         lbl_name.grid(column=1, row=1, sticky='w', padx=(10,0))
 
-#  Semester Additted
+# Semester Additted
         lbl_name = ttk.Label(fr_student, text="Semester Admitted to Program:", style="normal_text.TLabel")
         lbl_name.grid(column=0, row=2, sticky='w', padx=(10,0))
-        sem_ad = "Semester 1"
+   
         lbl_name = ttk.Label(fr_student, text=sem_ad, style="filling_text.TLabel")
         lbl_name.grid(column=1, row=2, sticky='w', padx=(10,0))
 
