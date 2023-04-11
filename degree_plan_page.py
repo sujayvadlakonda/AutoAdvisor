@@ -17,10 +17,10 @@ class DegreePlanPage(ttk.Frame):
         style.configure("medium_heading.TLabel", font=("Verdana", 25), foreground="black", background="orange")
         style.configure("small_heading.TLabel", font=("Verdana", 15), foreground="black", background="orange")
 
-        style.configure("normal_text.TLabel", font=("Bookman Old Style,", 14), foreground="black", background="orange")
-        style.configure("filling_text.TLabel", font=("Bookman Old Style,", 14), foreground="black", background="white", relief="sunken")
+        style.configure("normal_text.TLabel", font=("Bookman Old Style", 14), foreground="black", background="orange")
+        style.configure("filling_text.TLabel", font=("Bookman Old Style", 14), foreground="black", background="white", relief="sunken")
 
-        style.configure("TRadiobutton", font=("Bookman Old Style,", 14), foreground="black", background="orange", relief="flat")
+        style.configure("TRadiobutton", font=("Bookman Old Style", 14), foreground="black", background="orange", relief="flat")
 
 
 
@@ -140,14 +140,13 @@ class DegreePlanPage(ttk.Frame):
 # Anticipated Graduation
         lbl_name = ttk.Label(fr_student, text="Anticipated Graduation", style="normal_text.TLabel")
         lbl_name.grid(column=2, row=2, sticky='w', padx=(10,0))
-        expect_grad = "Grad Expect 1"
-        lbl_name = ttk.Label(fr_student, text=expect_grad, style="filling_text.TLabel")
-        lbl_name.grid(column=3, row=2, sticky='w', columnspan=2, padx=(10,10))
 
+        expect_grad = tk.StringVar()      
+        entry_name = ttk.Entry(fr_student, text=expect_grad, font=("Bookman Old Style", 14), foreground="black")
+        entry_name.grid(column=3, row=2, sticky='w', columnspan=2, padx=(10,10))
+        # entry_name.focus()
 
-
-
-
+        
 
 
 
