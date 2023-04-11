@@ -18,7 +18,7 @@ class DegreePlanPage(ttk.Frame):
         style.configure("small_heading.TLabel", font=("Verdana", 15), foreground="black", background="orange")
 
         style.configure("normal_text.TLabel", font=("Bookman Old Style", 14), foreground="black", background="orange")
-        style.configure("filling_text.TLabel", font=("Bookman Old Style", 14), foreground="black", background="white", relief="sunken")
+        style.configure("filling_text.TLabel", font=("Bookman Old Style", 14), foreground="black", background="white", relief="ridge")
 
         style.configure("TRadiobutton", font=("Bookman Old Style", 14), foreground="black", background="orange", relief="flat")
 
@@ -90,7 +90,7 @@ class DegreePlanPage(ttk.Frame):
 # Student Name
         lbl_name = ttk.Label(fr_student, text="Name of Student:", style="normal_text.TLabel")
         lbl_name.grid(column=0, row=0, sticky='w', padx=(10,0))
-        std_name = "Name 1"
+        std_name = "Name 111111111111111"
         lbl_name = ttk.Label(fr_student, text=std_name, style="filling_text.TLabel")
         lbl_name.grid(column=1, row=0, sticky='w', padx=(10,0))
         # entry = Entry(fr_student, width=25)
