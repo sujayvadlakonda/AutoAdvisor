@@ -52,8 +52,23 @@ class DegreePlanPage(ttk.Frame):
 
         lbl_gui = ttk.Label(fr_titleGui, text="DEGREE PLAN EDITOR", style="big_heading.TLabel")
         lbl_gui.grid(column=0, row=0)  # text positioning
+
+# Get student info function
+
+        # Need to check student object
+        # How to get below info
+        def get_student_info():
+            
+            major       = "Data Science" 
+            name        = "Name 111111111111111"
+            id          = "ID 1"
+
+            sem_ad      = "Semester 111"
+
+            return major, name, id, sem_ad
        
-#   1. Title Frame
+        std_major, std_name, std_id, std_sem_admitted = get_student_info()
+#   1. Title Frame        
         c1=0
         r1=4
         fr_title = ttk.Frame(frame, style="section.TFrame")
@@ -66,14 +81,12 @@ class DegreePlanPage(ttk.Frame):
         lbl_title = ttk.Label(fr_title, text="DEGREE PLAN", style="medium_heading.TLabel")
         lbl_title.grid(column=0, row=0, padx=5, pady=5)
         lbl_title = ttk.Label(fr_title, text="UNIVERSITY OF TEXAS AT DALLAS", style="medium_heading.TLabel")
-        # lbl_title.grid(column=0, row=1, padx=5, pady=5)
         lbl_title.grid(column=0, row=1)
         lbl_title = ttk.Label(fr_title, text="MASTER OF COMPUTER SCIENCE", style="medium_heading.TLabel")
         lbl_title.grid(column=0, row=2, padx=5, pady=5)
 
 # Get and Display Student's Major
-        major = "Data Science"  # Will pass a function to get major later
-        lbl_major = ttk.Label(fr_title, text=major, style="medium_heading.TLabel")
+        lbl_major = ttk.Label(fr_title, text=std_major, style="medium_heading.TLabel")
         lbl_major.grid(column=0, row=4)
        
 # 2. Student Frame
@@ -86,18 +99,7 @@ class DegreePlanPage(ttk.Frame):
             fr_student.rowconfigure(r, weight=1)
         fr_student.grid(column=0, row=2, sticky="nsew", pady=5)
 
-# Get student info function
-        def get_student_info():
-            name    = "Name 111111111111111"
-            id      = "ID 1"
-            sem     = "Semester 1"
-
-            return name, id, sem
-
-
 # Labeling 
-        std_name, std_id, sem_ad = get_student_info()
-
 # Student Name
         lbl_name = ttk.Label(fr_student, text="Name of Student:", style="normal_text.TLabel")
         lbl_name.grid(column=0, row=0, sticky='w', padx=(10,0))
@@ -118,7 +120,7 @@ class DegreePlanPage(ttk.Frame):
         lbl_name = ttk.Label(fr_student, text="Semester Admitted to Program:", style="normal_text.TLabel")
         lbl_name.grid(column=0, row=2, sticky='w', padx=(10,0))
    
-        lbl_name = ttk.Label(fr_student, text=sem_ad, style="filling_text.TLabel")
+        lbl_name = ttk.Label(fr_student, text=std_sem_admitted, style="filling_text.TLabel")
         lbl_name.grid(column=1, row=2, sticky='w', padx=(10,0))
 
 # FT and Thesis
