@@ -34,7 +34,7 @@ class DegreePlanPage(ttk.Frame):
         
         # Frame outline and design
         frame = ttk.Frame(self, style="dp_gui.TFrame")
-        frame["padding"] = 10
+        frame["padding"] = 10 
         frame.columnconfigure(0, weight=1)
         section = 11
         for r in range(section):
@@ -42,14 +42,24 @@ class DegreePlanPage(ttk.Frame):
         # frame.grid(column=0, row=0, sticky="nsew")  # positioning
         frame.pack(expand=TRUE, fill=BOTH, side=TOP)
 
-        # Creating frame sections
-        #   0. Gui Title Frame
+# Creating frame sections
+# Frame Setup Function
+        def frame_setup(position, column, row, parent, style):
+            fr = ttk.Frame(parent, style=style)
+            for c in range(column):
+                fr.columnconfigure(c, weight=1)
+            for r in range(row):
+                fr_student.rowconfigure(r, weight=1)
+            fr.grid(column=0, row=position, sticky="nsew", pady=5) # column=0 because Gui has only 1 column
+
+            return fr
+
+# 0. Gui Title Frame
         fr_titleGui = ttk.Frame(frame, style="section.TFrame")
         fr_titleGui.columnconfigure(0, weight=1)
         fr_titleGui.rowconfigure(0, weight=1)   
         fr_titleGui.grid(column=0, row=0, sticky="nsew", padx=100, pady=5)
       
-
         lbl_gui = ttk.Label(fr_titleGui, text="DEGREE PLAN EDITOR", style="big_heading.TLabel")
         lbl_gui.grid(column=0, row=0)  # text positioning
 
@@ -57,37 +67,46 @@ class DegreePlanPage(ttk.Frame):
 
         # Need to check student object
         # How to get below info
-        def get_student_info():
-            
+        def get_student_info():   
             major       = "Data Science" 
             name        = "Name 111111111111111"
             id          = "ID 1"
-
             sem_ad      = "Semester 111"
 
             return major, name, id, sem_ad
        
         std_major, std_name, std_id, std_sem_admitted = get_student_info()
-#   1. Title Frame        
-        c1=0
-        r1=4
-        fr_title = ttk.Frame(frame, style="section.TFrame")
-        fr_title.columnconfigure(0, weight=1)
-        for r in range(r1):
-            fr_title.rowconfigure(r, weight=1)
-        fr_title.grid(column=0, row=1, sticky="nsew", pady=5)
 
- # Labeling
+# 1. Title Frame        
+        # c1=0
+        # r1=4
+        # fr_title = ttk.Frame(frame, style="section.TFrame")
+        # fr_title.columnconfigure(0, weight=1)
+        # for r in range(r1):
+        #     fr_title.rowconfigure(r, weight=1)
+        # fr_title.grid(column=0, row=1, sticky="nsew", pady=5)
+
+        pos1    = 1
+        c1      = 0
+        r1      = 4
+        p1       = frame
+        s1     = "section.TFrame"
+
+        fr_title = frame_setup(pos1, c1, r1, p1, s1)
+        
+
+
+        # Labeling
         lbl_title = ttk.Label(fr_title, text="DEGREE PLAN", style="medium_heading.TLabel")
-        lbl_title.grid(column=0, row=0, padx=5, pady=5)
+        lbl_title.grid(column=0, row=0)
         lbl_title = ttk.Label(fr_title, text="UNIVERSITY OF TEXAS AT DALLAS", style="medium_heading.TLabel")
         lbl_title.grid(column=0, row=1)
         lbl_title = ttk.Label(fr_title, text="MASTER OF COMPUTER SCIENCE", style="medium_heading.TLabel")
-        lbl_title.grid(column=0, row=2, padx=5, pady=5)
+        lbl_title.grid(column=0, row=2)
 
-# Get and Display Student's Major
+        # Get and Display Student's Major
         lbl_major = ttk.Label(fr_title, text=std_major, style="medium_heading.TLabel")
-        lbl_major.grid(column=0, row=4)
+        lbl_major.grid(column=0, row=4, pady=10)
        
 # 2. Student Frame
         c2=5
@@ -99,79 +118,80 @@ class DegreePlanPage(ttk.Frame):
             fr_student.rowconfigure(r, weight=1)
         fr_student.grid(column=0, row=2, sticky="nsew", pady=5)
 
-# Labeling 
-# Student Name
-        lbl_name = ttk.Label(fr_student, text="Name of Student:", style="normal_text.TLabel")
-        lbl_name.grid(column=0, row=0, sticky='w', padx=(10,0))
+        # Labeling 
+        # Student Name
+        lbl_student = ttk.Label(fr_student, text="Name of Student:", style="normal_text.TLabel")
+        lbl_student.grid(column=0, row=0, sticky='w', padx=(10,0))
 
-        lbl_name = ttk.Label(fr_student, text=std_name, style="filling_text.TLabel")
-        lbl_name.grid(column=1, row=0, sticky='w', padx=(10,0))
-        # entry = Entry(fr_student, width=25)
-        # entry.grid(column=1, row=1)
+        lbl_student = ttk.Label(fr_student, text=std_name, style="filling_text.TLabel")
+        lbl_student.grid(column=1, row=0, sticky='w', padx=(10,0))
 
-# Student ID
-        lbl_name = ttk.Label(fr_student, text="Student ID Number:", style="normal_text.TLabel")
-        lbl_name.grid(column=0, row=1, sticky='w', padx=(10,0))
+        # Student ID
+        lbl_student = ttk.Label(fr_student, text="Student ID Number:", style="normal_text.TLabel")
+        lbl_student.grid(column=0, row=1, sticky='w', padx=(10,0))
    
-        lbl_name = ttk.Label(fr_student, text=std_id, style="filling_text.TLabel")
-        lbl_name.grid(column=1, row=1, sticky='w', padx=(10,0))
+        lbl_student = ttk.Label(fr_student, text=std_id, style="filling_text.TLabel")
+        lbl_student.grid(column=1, row=1, sticky='w', padx=(10,0))
 
-# Semester Additted
-        lbl_name = ttk.Label(fr_student, text="Semester Admitted to Program:", style="normal_text.TLabel")
-        lbl_name.grid(column=0, row=2, sticky='w', padx=(10,0))
+        # Semester Additted
+        lbl_student = ttk.Label(fr_student, text="Semester Admitted to Program:", style="normal_text.TLabel")
+        lbl_student.grid(column=0, row=2, sticky='w', padx=(10,0))
    
-        lbl_name = ttk.Label(fr_student, text=std_sem_admitted, style="filling_text.TLabel")
-        lbl_name.grid(column=1, row=2, sticky='w', padx=(10,0))
+        lbl_student = ttk.Label(fr_student, text=std_sem_admitted, style="filling_text.TLabel")
+        lbl_student.grid(column=1, row=2, sticky='w', padx=(10,0))
 
-# FT and Thesis
+        # FT, Thesis, Anticipated
+# Need to do something after FT and Thesis was selected
         def yes_no(c_index, r_index):
-            # print('Test yes_no')
             selected_value = tk.StringVar()
-            sizes = (   ('Yes', 'S'),
-                    ('No', 'M'))
-            for size in sizes:
+            options = (   ('Yes', 'Y'),
+                    ('No', 'N'))
+            for opt in options:
                 r = ttk.Radiobutton(        
                                 fr_student,
-                                text=size[0],
-                                value=size[1],
+                                text=opt[0],
+                                value=opt[1],
                                 variable=selected_value,
                                 style="TRadiobutton"
                 )
                 r.grid(column=c_index, row=r_index, sticky='w')
                 c_index += 1
 
-    # Fast Track
-        lbl_name = ttk.Label(fr_student, text="FT:", style="normal_text.TLabel")
-        lbl_name.grid(column=2, row=0, sticky='w', padx=(10,0))
+        # Fast Track
+        lbl_student = ttk.Label(fr_student, text="FT:", style="normal_text.TLabel")
+        lbl_student.grid(column=2, row=0, sticky='w', padx=(10,0))
         yes_no(3, 0)
 
-    # Thesis
-        lbl_name = ttk.Label(fr_student, text="Thesis:", style="normal_text.TLabel")
-        lbl_name.grid(column=2, row=1, sticky='w', padx=(10,0))
+        # Thesis
+        lbl_student = ttk.Label(fr_student, text="Thesis:", style="normal_text.TLabel")
+        lbl_student.grid(column=2, row=1, sticky='w', padx=(10,0))
         yes_no(3, 1)
 
-# Anticipated Graduation
-        lbl_name = ttk.Label(fr_student, text="Anticipated Graduation", style="normal_text.TLabel")
-        lbl_name.grid(column=2, row=2, sticky='w', padx=(10,0))
+        # Anticipated Graduation
+# need to save this info somewhere for Degree Plan Report Later
+        lbl_student = ttk.Label(fr_student, text="Anticipated Graduation", style="normal_text.TLabel")
+        lbl_student.grid(column=2, row=2, sticky='w', padx=(10,0))
 
         expect_grad = tk.StringVar()      
-        entry_name = ttk.Entry(fr_student, text=expect_grad, font=("Bookman Old Style", 14), foreground="black")
-        entry_name.grid(column=3, row=2, sticky='w', columnspan=2, padx=(10,10))
-        # entry_name.focus()
+        entry_student = ttk.Entry(fr_student, text=expect_grad, font=("Bookman Old Style", 14), foreground="black")
+        entry_student.grid(column=3, row=2, sticky='w', columnspan=2, padx=(10,10))
 
+
+# 3. Courses Frame
+        c3=5
+        r3=7
+        fr_course = ttk.Frame(frame, style="section.TFrame")
+        for c in range(c2):
+            fr_course.columnconfigure(c, weight=1)
+        for r in range(r2):
+            fr_course.rowconfigure(r, weight=1)
+        fr_course.grid(column=0, row=3, sticky="nsew", pady=5)
+
+        # Sub-Frames
+        # Core Frame
         
 
-
-
-
-        # e = Entry(root, width=50, borderwidth=5)
-# e = Entry(root, width=50)
-# e.pack()
-# e.insert(0, "Enter Your Name:") # Default Text inside box
-
-
-
-        # # 3. Core Frame
+# 3. Core Frame
         # c3=0
         # r3=10
         # fr_core = ttk.Frame(frame, style="section.TFrame")
