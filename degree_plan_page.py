@@ -43,17 +43,6 @@ class DegreePlanPage(ttk.Frame):
         frame.pack(expand=TRUE, fill=BOTH, side=TOP)
 
 # Creating frame sections
-# Frame Setup Function
-        def frame_setup(position, column, row, parent, style):
-            fr = ttk.Frame(parent, style=style)
-            for c in range(column):
-                fr.columnconfigure(c, weight=1)
-            for r in range(row):
-                fr_student.rowconfigure(r, weight=1)
-            fr.grid(column=0, row=position, sticky="nsew", pady=5) # column=0 because Gui has only 1 column
-
-            return fr
-
 # 0. Gui Title Frame
         fr_titleGui = ttk.Frame(frame, style="section.TFrame")
         fr_titleGui.columnconfigure(0, weight=1)
@@ -78,23 +67,13 @@ class DegreePlanPage(ttk.Frame):
         std_major, std_name, std_id, std_sem_admitted = get_student_info()
 
 # 1. Title Frame        
-        # c1=0
-        # r1=4
-        # fr_title = ttk.Frame(frame, style="section.TFrame")
-        # fr_title.columnconfigure(0, weight=1)
-        # for r in range(r1):
-        #     fr_title.rowconfigure(r, weight=1)
-        # fr_title.grid(column=0, row=1, sticky="nsew", pady=5)
-
-        pos1    = 1
-        c1      = 0
-        r1      = 4
-        p1       = frame
-        s1     = "section.TFrame"
-
-        fr_title = frame_setup(pos1, c1, r1, p1, s1)
-        
-
+        c1=0
+        r1=4
+        fr_title = ttk.Frame(frame, style="section.TFrame")
+        fr_title.columnconfigure(0, weight=1)
+        for r in range(r1):
+            fr_title.rowconfigure(r, weight=1)
+        fr_title.grid(column=0, row=1, sticky="nsew", pady=5)   
 
         # Labeling
         lbl_title = ttk.Label(fr_title, text="DEGREE PLAN", style="medium_heading.TLabel")
