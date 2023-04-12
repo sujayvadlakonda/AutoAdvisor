@@ -3,7 +3,7 @@ import tkinter as tk
 from tkinter import *
 from tkinter import ttk, filedialog
 from tkinter import messagebox as mbox
-# from transcript import *  # leo's request
+from transcript import *
 
 
 class UploadFilePage(ttk.Frame):
