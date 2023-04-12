@@ -12,6 +12,7 @@ class DegreePlanPage(ttk.Frame):
         style = ttk.Style(self)
         style.configure("dp_gui.TFrame", background="black", relief="sunken")
         style.configure("section.TFrame", background="orange", relief="raised")
+        style.configure("sub_section.TFrame", background="orange", relief="flat")
         
         style.configure("big_heading.TLabel", font=("Segoe print", 30, "bold"), foreground="black", background="orange")
         style.configure("medium_heading.TLabel", font=("Verdana", 25), foreground="black", background="orange")
@@ -156,18 +157,96 @@ class DegreePlanPage(ttk.Frame):
         entry_student.grid(column=3, row=2, sticky='w', columnspan=2, padx=(10,10))
 
 
-# 3. Courses Frame
+# 3. Course Header Frame
         c3=5
-        r3=7
-        fr_course = ttk.Frame(frame, style="section.TFrame")
-        for c in range(c2):
-            fr_course.columnconfigure(c, weight=1)
-        for r in range(r2):
-            fr_course.rowconfigure(r, weight=1)
-        fr_course.grid(column=0, row=3, sticky="nsew", pady=5)
+        r3=1
+        fr_header = ttk.Frame(frame, style="section.TFrame")
+        for c in range(c3):
+            fr_header.columnconfigure(c, weight=1)
+        for r in range(r3):
+            fr_header.rowconfigure(r, weight=1)
+        fr_header.grid(column=0, row=3, sticky="nsew", pady=5)
 
-        # Sub-Frames
-        # Core Frame
+        # Labling
+        lbl_header= ttk.Label(fr_header, text="Course Title", style="normal_text.TLabel")
+        lbl_header.grid(column=0, row=0, sticky='w', padx=(10,0))
+
+        lbl_header= ttk.Label(fr_header, text="Course Number", style="normal_text.TLabel")
+        lbl_header.grid(column=1, row=0, sticky='w', padx=(10,0))
+        
+        lbl_header= ttk.Label(fr_header, text="UTD Semester", style="normal_text.TLabel")
+        lbl_header.grid(column=2, row=0, sticky='w', padx=(10,0))
+
+        lbl_header= ttk.Label(fr_header, text="Transfer", style="normal_text.TLabel")
+        lbl_header.grid(column=3, row=0, sticky='w', padx=(10,0))
+
+        lbl_header= ttk.Label(fr_header, text="Grade", style="normal_text.TLabel")
+        lbl_header.grid(column=4, row=0, sticky='w', padx=(10,0))
+
+# 4. Core Frame
+        c4=5
+        r4=7
+        fr_core = ttk.Frame(frame, style="section.TFrame")
+        for c in range(c4):
+            fr_core.columnconfigure(c, weight=1)
+        for r in range(r4):
+            fr_core.rowconfigure(r, weight=1)
+        fr_core.grid(column=0, row=4, sticky="nsew", pady=5)       
+
+        # Labling
+        lbl_core= ttk.Label(fr_core, text="CORE COURSES \t (15 Credit Hours) \t 3.19 Grade Point Average Required", style="normal_text.TLabel")
+        lbl_core.grid(column=0, row=0, columnspan=5, padx=(10,0))
+
+## Function to auto fill
+        core_name       = "Natural Language Processing"
+        core_id         = "CS 6320"
+        core_utd_sem    = "22F"
+        core_transfer   = ""
+        core_grade      = "B+"
+
+
+
+        lbl_core= ttk.Label(fr_header, text=core_name, style="normal_text.TLabel")
+        lbl_core.grid(column=0, row=1, sticky='w', padx=(10,0))
+
+        lbl_core= ttk.Label(fr_header, text=core_id, style="normal_text.TLabel")
+        lbl_core.grid(column=1, row=1, sticky='nsew', padx=(10,0))
+
+        lbl_core= ttk.Label(fr_header, text=core_utd_sem, style="normal_text.TLabel")
+        lbl_core.grid(column=2, row=1, sticky='nsew', padx=(10,0))
+
+        lbl_core= ttk.Label(fr_header, text=core_transfer, style="normal_text.TLabel")
+        lbl_core.grid(column=3, row=1, sticky='nsew', padx=(10,0))
+
+        lbl_core= ttk.Label(fr_header, text=core_grade, style="normal_text.TLabel")
+        lbl_core.grid(column=4, row=1, sticky='nsew', padx=(10,0))
+
+
+
+# # 3. Courses Frames
+#         c3=5
+#         r3=7
+#         fr_course = ttk.Frame(frame, style="section.TFrame")
+#         for c in range(c2):
+#             fr_course.columnconfigure(c, weight=1)
+#         for r in range(r2):
+#             fr_course.rowconfigure(r, weight=1)
+#         fr_course.grid(column=0, row=3, sticky="nsew", pady=5)
+
+#     # Sub-Frames
+#     # Course Heading Frame
+#         r3_core=1
+#         fr_course_header = ttk.Frame(fr_course, style="section.TFrame")
+#         for c in range(c3):
+#             fr_course_header.columnconfigure(c, weight=1)
+#         for r in range(r3_core):
+#             fr_course_header.rowconfigure(r, weight=1)
+#         fr_course_header.grid(column=0, row=0, sticky="nsew")
+
+#         # # Labling
+#         # lbl_ = ttk.Label(fr_student, text="Student ID Number:", style="normal_text.TLabel")
+#         # lbl_student.grid(column=0, row=1, sticky='w', padx=(10,0))
+
         
 
 # 3. Core Frame
