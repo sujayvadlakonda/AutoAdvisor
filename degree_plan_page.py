@@ -218,12 +218,49 @@ class DegreePlanPage(ttk.Frame):
         auto_course_lable(course_info, 8)
         auto_course_lable(course_info, 9)
 
-# 4. Linkup Frame
-        linkup_row = 4
+
+# 4. Note, Advisor, Date Frame
+        c4=4
+        r4=4
+        fr_note = ttk.Frame(frame, style="section.TFrame")
+        for c in range(c4):
+            fr_note.columnconfigure(c, weight=1)
+        for r in range(r4):
+            fr_note.rowconfigure(r, weight=1)
+        fr_note.grid(column=0, row=4, sticky="nsew", pady=5)
+
+         # Labeling note
+# Should i hard code note or get info depend on which major.
+# Need to talk to Aleky and Aiden about it
+        lbl_note= ttk.Label(fr_note, text="* May include any 6000 or 7000 level CS course with prior permission", style="normal_text.TLabel")
+        lbl_note.grid(column=0, row=1, columnspan=5, pady=(10,10), padx=(10,0))
+
+        # Labeling Advisor, Create Entry
+        lbl_note = ttk.Label(fr_note, text="Academic Advisor", style="normal_text.TLabel")
+        lbl_note.grid(column=0, row=3, sticky='w', padx=10, pady=10)
+
+        advisor_name = tk.StringVar()      
+        entry_note = ttk.Entry(fr_note, text=advisor_name, font=("Bookman Old Style", 14), foreground="black")
+        entry_note.grid(column=1, row=3, sticky='w', pady=10)
+
+ # Labeling Advisor, Create Entry
+        lbl_note = ttk.Label(fr_note, text="Date Submitted", style="normal_text.TLabel")
+        lbl_note.grid(column=2, row=3, sticky='w', padx=(10,0))
+
+        advisor_name = tk.StringVar()      
+        entry_note = ttk.Entry(fr_note, text=advisor_name, font=("Bookman Old Style", 14), foreground="black")
+        entry_note.grid(column=3, row=3, sticky='w', pady=10)
+
+        
+
+
+
+# 5. Linkup Frame
+        linkup_row = 5
         fr_link= ttk.Frame(frame, style="section.TFrame")
         fr_link.columnconfigure(0, weight=1)
         fr_link.rowconfigure(0, weight=1)
-        fr_link.grid(column=0, row=linkup_row, sticky="nsew")  
+        fr_link.grid(column=0, row=linkup_row, sticky="nsew", pady=5)  
 
 
     # #     # Choose student's degree plan track text label and design
