@@ -159,7 +159,7 @@ class DegreePlanPage(ttk.Frame):
 
 # 3. Courses Frame
         c3=5
-        r3=30 # Need edit later, maybe some more extra line so auditor can manually add more cores if needed
+        r3=50 # Need edit later, maybe some more extra line so auditor can manually add more cores if needed
         fr_course = ttk.Frame(frame, style="section.TFrame")
         for c in range(c3):
             fr_course.columnconfigure(c, weight=1)
@@ -184,30 +184,46 @@ class DegreePlanPage(ttk.Frame):
         lbl_course.grid(column=4, row=0, sticky='w', pady=(10,0))
 
         # Labling CORE COURSES Info
-        lbl_course= ttk.Label(fr_course, text="CORE COURSES \t\t (15 Credit Hours) \t\t 3.19 Grade Point Average Required", style="filling_text.TLabel")
-        lbl_course.grid(column=0, row=1, columnspan=5)
+        lbl_course= ttk.Label(fr_course, text="CORE COURSES \t\t (15 Credit Hours) \t\t 3.19 Grade Point Average Required", style="normal_text.TLabel")
+        lbl_course.grid(column=0, row=1, columnspan=5, pady=(10,10), padx=(10,0))
 
-        # Course Filling
-        core_name       = "Natural Language Processing"
-        core_id         = "CS 6320"
-        core_utd_sem    = "22F"
-        core_transfer   = ""
-        core_grade      = "B+"
+# Auto fill dummmy course: Row by row
+        # course_info = [name, id, utd_semester, transfer, grade]
+        # parent: is the frame hold the label
+        def auto_course_lable(course_info, fr_parent, row):
+            c = 0
+            for e in course_info:
+                lbl_course= ttk.Label(fr_parent, text=e, style="normal_text.TLabel")
+                lbl_course.grid(column=c, row=row, sticky='w', padx=(10,0))
+                c += 1
 
-        lbl_course= ttk.Label(fr_course, text=core_name, style="normal_text.TLabel")
-        lbl_course.grid(column=0, row=2, sticky='w', padx=(10,0))
+        course_info = ["Natural Language Processing",
+                       "CS 6320", 
+                       "22F", 
+                       "20F" ,
+                       "B+"]
+        auto_course_lable(course_info, fr_course, 2)
+        # # Course Filling
+        # core_name       = "Natural Language Processing"
+        # core_id         = "CS 6320"
+        # core_utd_sem    = "22F"
+        # core_transfer   = ""
+        # core_grade      = "B+"
 
-        lbl_course= ttk.Label(fr_course, text=core_id, style="normal_text.TLabel")
-        lbl_course.grid(column=1, row=2, sticky='w')
+        # lbl_course= ttk.Label(fr_course, text=core_name, style="normal_text.TLabel")
+        # lbl_course.grid(column=0, row=2, sticky='w', padx=(10,0))
 
-        lbl_course= ttk.Label(fr_course, text=core_utd_sem, style="normal_text.TLabel")
-        lbl_course.grid(column=2, row=2, sticky='w')
+        # lbl_course= ttk.Label(fr_course, text=core_id, style="normal_text.TLabel")
+        # lbl_course.grid(column=1, row=2, sticky='w')
 
-        lbl_course= ttk.Label(fr_course, text=core_transfer, style="normal_text.TLabel")
-        lbl_course.grid(column=3, row=2, sticky='w')
+        # lbl_course= ttk.Label(fr_course, text=core_utd_sem, style="normal_text.TLabel")
+        # lbl_course.grid(column=2, row=2, sticky='w')
 
-        lbl_course= ttk.Label(fr_course, text=core_grade, style="normal_text.TLabel")
-        lbl_course.grid(column=4, row=2, sticky='w')
+        # lbl_course= ttk.Label(fr_course, text=core_transfer, style="normal_text.TLabel")
+        # lbl_course.grid(column=3, row=2, sticky='w')
+
+        # lbl_course= ttk.Label(fr_course, text=core_grade, style="normal_text.TLabel")
+        # lbl_course.grid(column=4, row=2, sticky='w')
 
 
 
