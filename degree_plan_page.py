@@ -190,11 +190,11 @@ class DegreePlanPage(ttk.Frame):
 # Auto fill dummmy course: Row by row
         # course_info = [name, id, utd_semester, transfer, grade]
         # parent: is the frame hold the label
-        def auto_course_lable(course_info, fr_parent, row):
+        def auto_course_lable(course_info, at_row):
             c = 0
             for e in course_info:
-                lbl_course= ttk.Label(fr_parent, text=e, style="normal_text.TLabel")
-                lbl_course.grid(column=c, row=row, sticky='w', padx=(10,0))
+                lbl_course= ttk.Label(fr_course, text=e, style="normal_text.TLabel")
+                lbl_course.grid(column=c, row=at_row, sticky='w', padx=(10,0))
                 c += 1
 
         course_info = ["Natural Language Processing",
@@ -202,7 +202,8 @@ class DegreePlanPage(ttk.Frame):
                        "22F", 
                        "20F" ,
                        "B+"]
-        auto_course_lable(course_info, fr_course, 2)
+        auto_course_lable(course_info, 2)
+        auto_course_lable(course_info, 3)
         # # Course Filling
         # core_name       = "Natural Language Processing"
         # core_id         = "CS 6320"
