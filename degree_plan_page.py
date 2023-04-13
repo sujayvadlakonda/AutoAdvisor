@@ -20,6 +20,7 @@ class DegreePlanPage(ttk.Frame):
 
         style.configure("normal_text.TLabel", font=("Bookman Old Style", 14), foreground="black", background="orange")
         style.configure("filling_text.TLabel", font=("Bookman Old Style", 14), foreground="black", background="white", relief="sunken")
+        style.configure("course_section.TLabel", font=("Bookman Old Style", 14), foreground="orange", background="black")
 
         style.configure("TRadiobutton", font=("Bookman Old Style", 14), foreground="black", background="orange", relief="flat")
 
@@ -183,13 +184,11 @@ class DegreePlanPage(ttk.Frame):
         lbl_course= ttk.Label(fr_course, text="Grade", style="normal_text.TLabel")
         lbl_course.grid(column=4, row=0, sticky='w', pady=(10,0))
 
-        # Labling CORE COURSES Info
-        lbl_course= ttk.Label(fr_course, text="CORE COURSES \t\t (15 Credit Hours) \t\t 3.19 Grade Point Average Required", style="normal_text.TLabel")
+        # Labeling CORE COURSES Info
+        lbl_course= ttk.Label(fr_course, text="CORE COURSES \t\t (15 Credit Hours) \t\t 3.19 Grade Point Average Required", style="course_section.TLabel")
         lbl_course.grid(column=0, row=1, columnspan=5, pady=(10,10), padx=(10,0))
 
-# Auto fill dummmy course: Row by row
-        # course_info = [name, id, utd_semester, transfer, grade]
-        # parent: is the frame hold the label
+        # Function to auto fill dummmy course row by row
         def auto_course_lable(course_info, at_row):
             c = 0
             for e in course_info:
@@ -204,143 +203,27 @@ class DegreePlanPage(ttk.Frame):
                        "B+"]
         auto_course_lable(course_info, 2)
         auto_course_lable(course_info, 3)
-        # # Course Filling
-        # core_name       = "Natural Language Processing"
-        # core_id         = "CS 6320"
-        # core_utd_sem    = "22F"
-        # core_transfer   = ""
-        # core_grade      = "B+"
 
-        # lbl_course= ttk.Label(fr_course, text=core_name, style="normal_text.TLabel")
-        # lbl_course.grid(column=0, row=2, sticky='w', padx=(10,0))
+        # Labeling 1 of 5 CORE COURSES
+        lbl_course= ttk.Label(fr_course, text="One of the following Five Core Courses", style="normal_text.TLabel")
+        lbl_course.grid(column=0, row=4, columnspan=5, pady=(10,10), padx=(10,0))
 
-        # lbl_course= ttk.Label(fr_course, text=core_id, style="normal_text.TLabel")
-        # lbl_course.grid(column=1, row=2, sticky='w')
+        auto_course_lable(course_info, 5)
+        auto_course_lable(course_info, 6)
 
-        # lbl_course= ttk.Label(fr_course, text=core_utd_sem, style="normal_text.TLabel")
-        # lbl_course.grid(column=2, row=2, sticky='w')
+        # Labeling 6000 LEVEL ELECTIVE
+        lbl_course= ttk.Label(fr_course, text="FIVE APPROVED 6000 LEVEL ElECTIVES \t\t (15* Credit Hours) \t\t 3.0 Grade Point Average Required", style="normal_text.TLabel")
+        lbl_course.grid(column=0, row=7, columnspan=5, pady=(10,10), padx=(10,0))
 
-        # lbl_course= ttk.Label(fr_course, text=core_transfer, style="normal_text.TLabel")
-        # lbl_course.grid(column=3, row=2, sticky='w')
+        auto_course_lable(course_info, 8)
+        auto_course_lable(course_info, 9)
 
-        # lbl_course= ttk.Label(fr_course, text=core_grade, style="normal_text.TLabel")
-        # lbl_course.grid(column=4, row=2, sticky='w')
-
-
-
-# # 3. Courses Frames
-#         c3=5
-#         r3=7
-#         fr_course = ttk.Frame(frame, style="section.TFrame")
-#         for c in range(c2):
-#             fr_course.columnconfigure(c, weight=1)
-#         for r in range(r2):
-#             fr_course.rowconfigure(r, weight=1)
-#         fr_course.grid(column=0, row=3, sticky="nsew", pady=5)
-
-#     # Sub-Frames
-#     # Course Heading Frame
-#         r3_core=1
-#         fr_course_header = ttk.Frame(fr_course, style="section.TFrame")
-#         for c in range(c3):
-#             fr_course_header.columnconfigure(c, weight=1)
-#         for r in range(r3_core):
-#             fr_course_header.rowconfigure(r, weight=1)
-#         fr_course_header.grid(column=0, row=0, sticky="nsew")
-
-#         # # Labling
-#         # lbl_ = ttk.Label(fr_student, text="Student ID Number:", style="normal_text.TLabel")
-#         # lbl_student.grid(column=0, row=1, sticky='w', padx=(10,0))
-
-        
-
-# 3. Core Frame
-        # c3=0
-        # r3=10
-        # fr_core = ttk.Frame(frame, style="section.TFrame")
-        # fr_core.columnconfigure(0, weight=1)
-        # for r in range(r3):
-        #     fr_core.rowconfigure(r, weight=1)
-        # .columnconfigure(0, weight=1)
-        # .rowconfigure(0, weight=1)
-        # fr_core.grid(column=0, row=2, sticky="nsew")
-
-        # # 4. Core_Option Frame
-        # c4=0
-        # r4=7
-        # fr_coreOption = ttk.Frame(frame, style="section.TFrame")
-        # fr_coreOption.columnconfigure(0, weight=1)
-        # for r in range(r4):
-        #     fr_coreOption.rowconfigure(r, weight=1)
-        # fr_coreOption.grid(column=0, row=3, sticky="nsew")
-
-    #     # # 5. Five Elective Frame
-    #     # c5=0
-    #     # r5=7
-    #     # fr_elective = ttk.Frame(frame, style="section.TFrame")
-    #     # fr_elective.columnconfigure(0, weight=1)
-    #     # for r in range(r5):
-    #     #     fr_elective.rowconfigure(r, weight=1)
-    #     # fr_elective.grid(column=0, row=4, sticky="nsew")
-
-    #     # # 6. Additional Elective Frame
-    #     # c6=0
-    #     # r6=7
-    #     # fr_electiveAdd = ttk.Frame(frame, style="section.TFrame")
-    #     # fr_electiveAdd.columnconfigure(0, weight=1)
-    #     # for r in range(r6):
-    #     #     fr_electiveAdd.rowconfigure(r, weight=1)
-    #     # fr_elective.grid(column=0, row=5, sticky="nsew")
-
-    #     # # 7. Other Requirement Frame
-    #     # c7=0
-    #     # r7=3
-    #     # fr_otherReg = ttk.Frame(frame, style="section.TFrame")
-    #     # fr_otherReg.columnconfigure(0, weight=1)
-    #     # for r in range(r7):
-    #     #     fr_otherReg.rowconfigure(r, weight=1)
-    #     # fr_otherReg.grid(column=0, row=6, sticky="nsew")
-
-    #     # # 8. Prerequisites Frame
-    #     # c8=0
-    #     # r8=3
-    #     # fr_Prereq= ttk.Frame(frame, style="section.TFrame")
-    #     # fr_Prereq.columnconfigure(0, weight=1)
-    #     # for r in range(r8):
-    #     #     fr_Prereq.rowconfigure(r, weight=1)
-    #     # fr_Prereq.grid(column=0, row=7, sticky="nsew")
-
-    #     # # 9. Note Frame
-    #     # c9=0
-    #     # r9=7
-    #     # fr_note = ttk.Frame(frame, style="section.TFrame")
-    #     # fr_note.columnconfigure(0, weight=1)
-    #     # for r in range(7):
-    #     #     fr_note.rowconfigure(r, weight=1)
-    #     # fr_note.grid(column=0, row=6, sticky="nsew")
-
-        #   10. Linkup Frame
+# 4. Linkup Frame
+        linkup_row = 4
         fr_link= ttk.Frame(frame, style="section.TFrame")
         fr_link.columnconfigure(0, weight=1)
         fr_link.rowconfigure(0, weight=1)
-        fr_link.grid(column=0, row=10, sticky="nsew")
-
-        
-
-
-    #     # Title Frame Section
-    #     # fr_title = ttk.Frame(frame, style="degree_plan_gui.TFrame")
-    #     # fr_title.columnconfigure(0, weight=1)
-    #     # for r in range(3):
-    #     #     fr_title.rowconfigure(r, weight=1)
-
-    #     # lbl_dp = ttk.Label(fr_title, text="Degree Plan Editor", style="GuiTitle.TLabel").grid(column=0, row=0, sticky="n")
-    #     # lbl_dp.grid(column=0, row=0, sticky="n")  # text positioning
-
-    #     # # Degree Title Label and design
-    #     # lbl_dt = ttk.Label(frame, text="UNIVERSITY OF TEXAS AT DALLAS", style="DegreeTitle.TLabel")
-    #     # lbl_dt.grid(column=0, row=1, pady=5)  # text positioning
-        
+        fr_link.grid(column=0, row=linkup_row, sticky="nsew")  
 
 
     # #     # Choose student's degree plan track text label and design
@@ -365,7 +248,7 @@ class DegreePlanPage(ttk.Frame):
             text="<< Previous",
             command=lambda: self.controller.show_frame("UploadFilePage")
         )
-        prev_btn.grid(column=0, row=9, columnspan=1, sticky="sw")  # button positioning
+        prev_btn.grid(column=0, row=linkup_row, columnspan=1, sticky="sw")  # button positioning
 
         # Button to direct user to degree_plan_report_page.py in order for user to edit degree plan
         next_btn = ttk.Button(
@@ -373,7 +256,7 @@ class DegreePlanPage(ttk.Frame):
             text="Next >>",
             command=lambda: controller.show_frame("DegreePlanReportPage")
         )
-        next_btn.grid(column=0, row=9, columnspan=1, sticky="se")  # button padding
+        next_btn.grid(column=0, row=linkup_row, columnspan=1, sticky="se")  # button padding
 
     # # note to the developer in charge of the degree plan gui:
     # # This file is just to get, whoever is working on the Degree Plan GUI, a head start on the gui.
