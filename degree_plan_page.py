@@ -206,20 +206,20 @@ class DegreePlanPage(ttk.Frame):
 
 
 
-        lbl_core= ttk.Label(fr_header, text=core_name, style="normal_text.TLabel")
+        lbl_core= ttk.Label(fr_core, text=core_name, style="normal_text.TLabel")
         lbl_core.grid(column=0, row=1, sticky='w', padx=(10,0))
 
-        lbl_core= ttk.Label(fr_header, text=core_id, style="normal_text.TLabel")
-        lbl_core.grid(column=1, row=1, sticky='nsew', padx=(10,0))
+        lbl_core= ttk.Label(fr_core, text=core_id, style="normal_text.TLabel")
+        lbl_core.grid(column=1, row=1, sticky='w', padx=(10,0))
 
-        lbl_core= ttk.Label(fr_header, text=core_utd_sem, style="normal_text.TLabel")
-        lbl_core.grid(column=2, row=1, sticky='nsew', padx=(10,0))
+        lbl_core= ttk.Label(fr_core, text=core_utd_sem, style="normal_text.TLabel")
+        lbl_core.grid(column=2, row=1, sticky='w', padx=(10,0))
 
-        lbl_core= ttk.Label(fr_header, text=core_transfer, style="normal_text.TLabel")
-        lbl_core.grid(column=3, row=1, sticky='nsew', padx=(10,0))
+        lbl_core= ttk.Label(fr_core, text=core_transfer, style="normal_text.TLabel")
+        lbl_core.grid(column=3, row=1, sticky='w', padx=(10,0))
 
-        lbl_core= ttk.Label(fr_header, text=core_grade, style="normal_text.TLabel")
-        lbl_core.grid(column=4, row=1, sticky='nsew', padx=(10,0))
+        lbl_core= ttk.Label(fr_core, text=core_grade, style="normal_text.TLabel")
+        lbl_core.grid(column=4, row=1, sticky='w', padx=(10,0))
 
 
 
