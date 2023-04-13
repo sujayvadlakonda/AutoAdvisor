@@ -19,7 +19,7 @@ class DegreePlanPage(ttk.Frame):
         style.configure("small_heading.TLabel", font=("Verdana", 15), foreground="black", background="orange")
 
         style.configure("normal_text.TLabel", font=("Bookman Old Style", 14), foreground="black", background="orange")
-        style.configure("filling_text.TLabel", font=("Bookman Old Style", 14), foreground="black", background="white", relief="ridge")
+        style.configure("filling_text.TLabel", font=("Bookman Old Style", 14), foreground="black", background="white", relief="sunken")
 
         style.configure("TRadiobutton", font=("Bookman Old Style", 14), foreground="black", background="orange", relief="flat")
 
@@ -119,7 +119,7 @@ class DegreePlanPage(ttk.Frame):
    
         lbl_student = ttk.Label(fr_student, text=std_sem_admitted, style="filling_text.TLabel")
         lbl_student.grid(column=1, row=2, sticky='w', padx=(10,0))
-
+ 
         # FT, Thesis, Anticipated
 # Need to do something after FT and Thesis was selected
         def yes_no(c_index, r_index):
@@ -134,7 +134,7 @@ class DegreePlanPage(ttk.Frame):
                                 variable=selected_value,
                                 style="TRadiobutton"
                 )
-                r.grid(column=c_index, row=r_index, sticky='w')
+                r.grid(column=c_index, row=r_index, sticky='w', padx=(10,0))
                 c_index += 1
 
         # Fast Track
@@ -154,7 +154,7 @@ class DegreePlanPage(ttk.Frame):
 
         expect_grad = tk.StringVar()      
         entry_student = ttk.Entry(fr_student, text=expect_grad, font=("Bookman Old Style", 14), foreground="black")
-        entry_student.grid(column=3, row=2, sticky='w', columnspan=2, padx=(10,10))
+        entry_student.grid(column=3, row=2, sticky='w', columnspan=2)
 
 
 # 3. Courses Frame
@@ -169,22 +169,22 @@ class DegreePlanPage(ttk.Frame):
 
         # Labling Header
         lbl_course= ttk.Label(fr_course, text="Course Title", style="normal_text.TLabel")
-        lbl_course.grid(column=0, row=0, sticky='w', padx=(10,0))
+        lbl_course.grid(column=0, row=0, sticky='w', padx=(10,0), pady=(10,0))
 
         lbl_course= ttk.Label(fr_course, text="Course Number", style="normal_text.TLabel")
-        lbl_course.grid(column=1, row=0, sticky='w', padx=(10,0))
+        lbl_course.grid(column=1, row=0, sticky='w', pady=(10,0))
         
         lbl_course= ttk.Label(fr_course, text="UTD Semester", style="normal_text.TLabel")
-        lbl_course.grid(column=2, row=0, sticky='w', padx=(10,0))
+        lbl_course.grid(column=2, row=0, sticky='w', pady=(10,0))
 
         lbl_course= ttk.Label(fr_course, text="Transfer", style="normal_text.TLabel")
-        lbl_course.grid(column=3, row=0, sticky='w', padx=(10,0))
+        lbl_course.grid(column=3, row=0, sticky='w', pady=(10,0))
 
         lbl_course= ttk.Label(fr_course, text="Grade", style="normal_text.TLabel")
-        lbl_course.grid(column=4, row=0, sticky='w', padx=(10,0))
+        lbl_course.grid(column=4, row=0, sticky='w', pady=(10,0))
 
         # Labling CORE COURSES Info
-        lbl_course= ttk.Label(fr_course, text="CORE COURSES \t\t (15 Credit Hours) \t\t 3.19 Grade Point Average Required", style="normal_text.TLabel")
+        lbl_course= ttk.Label(fr_course, text="CORE COURSES \t\t (15 Credit Hours) \t\t 3.19 Grade Point Average Required", style="filling_text.TLabel")
         lbl_course.grid(column=0, row=1, columnspan=5)
 
         # Course Filling
@@ -198,16 +198,16 @@ class DegreePlanPage(ttk.Frame):
         lbl_course.grid(column=0, row=2, sticky='w', padx=(10,0))
 
         lbl_course= ttk.Label(fr_course, text=core_id, style="normal_text.TLabel")
-        lbl_course.grid(column=1, row=2, sticky='w', padx=(10,0))
+        lbl_course.grid(column=1, row=2, sticky='w')
 
         lbl_course= ttk.Label(fr_course, text=core_utd_sem, style="normal_text.TLabel")
-        lbl_course.grid(column=2, row=2, sticky='w', padx=(10,0))
+        lbl_course.grid(column=2, row=2, sticky='w')
 
         lbl_course= ttk.Label(fr_course, text=core_transfer, style="normal_text.TLabel")
-        lbl_course.grid(column=3, row=2, sticky='w', padx=(10,0))
+        lbl_course.grid(column=3, row=2, sticky='w')
 
         lbl_course= ttk.Label(fr_course, text=core_grade, style="normal_text.TLabel")
-        lbl_course.grid(column=4, row=2, sticky='w', padx=(10,0))
+        lbl_course.grid(column=4, row=2, sticky='w')
 
 
 
