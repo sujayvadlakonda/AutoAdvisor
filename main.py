@@ -31,7 +31,7 @@ if __name__ == '__main__':
 # if want classB(vari of vari = classA()) in main, then in classB.py: use def init(self, container) & super().init(container)
 # (under def __init__(self) function) def initUI(self): self.master.title("windowTitle"), self.pack(fill=BOTH)
 # the self.master makes variable known to root tk() window
-# pass ttk.Frame to classB(): self. is assigning widgets to ttk.Frame, so assign frame to root window w/ self.grid(row=0, column=0) or self.pack(fill="both", expand=True) in def __innit__()
+# classB(ttk.Frame): self. is assign widgets to ttk.Frame, so assign frame to root win w/ def innit() self.grid(row=0, column=0)
 # initUI(self) is e.g.'s example function used to call to make window ui since class ClassName(Frame)
 # super() for inherit methods+properties from another class
 # in def init(), to set up variables can do with self or without self.variableName = passedParameter/chosenValue
@@ -62,23 +62,17 @@ if __name__ == '__main__':
 # light blue: ACC8E5, A1FCFF, E3FFFF, A6F4FF, 89cff0, 87ceeb (bg), b0e0e6
 # gray: #f5f5f5, #d3d3d3,
 # off white: f8f8ff (bg)
-# optional row adjustmenet: canvas.bind('<Configure>', lambda e: canvas.itemconfig(canvas_win, width=e.width, height=e.height))
-
-# make constants
-# add in leo's code into upload_file_page.py (combine w/ new look etc. branch)
-# add in leo's code into the dp pg + dp report page since they're using my template
-# calibri 12 text, calibri 14 for audit report title
-# pr: leo's buttons, the mac file, audit report gui outline
-
-# ask leo to let me know when they're done w/ way for audit report to get "Leveling Courses and Pre-requisites from Admission Letter" section info
-# have audit_report_page.py inherit the class's/functions from audit_report.py
-# opens/saves file, spacing/indents/txt justify,
-# user input, columnspan
-# maybe some Tkinter, event binding for entry?
-
-# "userInput": tk.StringVar(),
+# "userInput": tk.StringVar()
 # entry1 = ttk.Entry(self, textvariable=self.controller.frames["userInput"]) # swap [[ for () if doesn't work
 # userInputOne = self.controller.frames["userInput"].get()
 # tk.StringVar(container, value), name_var.get() for same file StringVar() stuff
+
+# ask sujay if they're handling getting the pre-req (& sem of complete) from the dp plan so that I can use them for ui
+# ask akelanda how they're storing the string vari for the outstanding gpa lines
+# opens/saves file, spacing/indents/txt justify,
+# user input (disposition), columnspan, maybe some Tkinter event binding for entry?
+# calibri 12 text, calibri 14 for audit report title
+
+
 
 
