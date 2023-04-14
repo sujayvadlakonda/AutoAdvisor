@@ -33,16 +33,45 @@ class DegreePlanPage(ttk.Frame):
         # Handles frame expansion when application window is expanded
         self.columnconfigure(0, weight=1)
         self.rowconfigure(0, weight=1)
+
+
+        # Create Main Frame
+        main_frame = ttk.Frame(self)
+        main_frame.pack(fill=BOTH, expand=1)
+
+        # Create Canvas
+        dp_canvas = Canvas(main_frame)
+        dp_canvas.pack(side=LEFT, fill=BOTH, expand=1)
+
+        # Create Scollbar for Canvas
+        dp_scrollbar = ttk.Scrollbar(main_frame, orient=VERTICAL, command=dp_canvas.yview)
+        dp_scrollbar.pack(side=RIGHT, fill=Y)
+    
+        # Configure Canvas
+        dp_canvas.configure(yscrollcommand=dp_scrollbar.set)
+        dp_canvas.bind('<Configure>', lambda e: dp_canvas.configure(scrollregion=dp_canvas.bbox("all")))
         
-        # Frame outline and design
-        frame = ttk.Frame(self, style="dp_gui.TFrame")
-        frame["padding"] = 10 
-        frame.columnconfigure(0, weight=1)
-        section = 11
-        for r in range(section):
-            frame.rowconfigure(r, weight=1)
-        # frame.grid(column=0, row=0, sticky="nsew")  # positioning
-        frame.pack(expand=TRUE, fill=BOTH, side=TOP)
+        # # Create Degree Plan Frame
+        # frame = ttk.Frame(self, style="dp_gui.TFrame")
+        # frame["padding"] = 10 
+        # frame.columnconfigure(0, weight=1)
+        # section = 11
+        # for r in range(section):
+        #     frame.rowconfigure(r, weight=1)
+        # # frame.grid(column=0, row=0, sticky="nsew")  # positioning
+        # frame.pack(expand=TRUE, fill=BOTH, side=TOP)
+
+        # Create Degree Plan Frame
+        frame = Frame(dp_canvas)
+        dp_canvas.create_window((0,0), window=frame, anchor="nw") 
+        
+        # frame.columnconfigure(0, weight=1)
+        # section = 11
+        # for r in range(section):
+        #     frame.rowconfigure(r, weight=1)
+        # # frame.grid(column=0, row=0, sticky="nsew")  # positioning
+        # frame.pack(expand=TRUE, fill=BOTH, side=TOP)
+
 
 # Creating frame sections
 # 0. Gui Title Frame
