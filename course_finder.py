@@ -43,9 +43,4 @@ def get_courses(text):
                 }
                 courses.append(course)
 
-    # Print the list of courses
-    for course in courses:
-        print(course)
-    print(len(courses))
-
     return courses
