@@ -17,7 +17,8 @@ class MultiRequirement(Requirement):
 
     def is_met(self, courses):
         for option in self.options:
-            if courses.contains(option):
-                return option
+            course = courses.contains(option)
+            if course:
+                return course
 
         return False
