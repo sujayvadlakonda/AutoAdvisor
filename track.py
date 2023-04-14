@@ -1,9 +1,9 @@
 # A set of requirements
 # Though about calling it a track, but that doesn't make sense w/ Software Engineering
 # Better name welcome
-class Requirements:
+class Track:
     def __init__(self):
-        self.requirements = []
+        self.core_requirements = []
         self.core = []
         self.electives = []
         self.unfulfilled_requirements = []
@@ -21,11 +21,11 @@ class Requirements:
                 self.unfulfilled_requirements.append(requirement)
 
 
-class DataScience(Requirements):
+class DataScience(Track):
     def __init__(self):
         super().__init__()
 
-        self.requirements = [
+        self.core_requirements = [
             ExactRequirement("CS 6313"),
             ExactRequirement("CS 6350"),
             ExactRequirement("CS 6363"),
