@@ -1,6 +1,7 @@
 import pdfplumber
 import re
 
+import course_finder
 
 class Transcript:
     def __init__(self, path_to_pdf):
@@ -55,6 +56,9 @@ class Transcript:
         match = match.group()
         gpa = re.sub(r"Combined ?Cum ?GPA ?", "", match)
         return gpa
+
+    def get_courses(self):
+        return course_finder.get_courses(self.text)
 
     # https://stackoverflow.com/questions/199059/a-pythonic-way-to-insert-a-space-before-capital-letters
     # Some pdfs don't split camel case. Mike Modano is an example

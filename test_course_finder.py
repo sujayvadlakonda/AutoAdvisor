@@ -1,10 +1,11 @@
 import unittest
 
-from course_finder import get_courses
+from transcript import Transcript
 
 class TestCourseFinder(unittest.TestCase):
     def test_ted_lasso(self):
-        self.assertEqual(len(get_courses("transcripts/ted-lasso.pdf")), 12)
+        transcript = Transcript("transcripts/ted-lasso.pdf")
+        self.assertEqual(len(transcript.get_courses()), 12)
 
 
 

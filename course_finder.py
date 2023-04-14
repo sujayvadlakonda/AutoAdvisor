@@ -2,7 +2,7 @@ import re
 import pdfplumber
 
 
-def get_courses(path_to_pdf):
+def get_courses(text):
     courses = []  # A list of dictionaries to store the course information
     season, year = "", ""  # Empty strings to avoid nulls
     semester_pattern = r"(\d{4}\s?)(Summer|Spring|Fall|Winter)"  # A regular expression pattern to find course semesters
@@ -15,12 +15,6 @@ def get_courses(path_to_pdf):
         r"([A-Z]{1,2}[+|-]?\s)?"
         r"(\d+.\d+)?"
     )  # A regular expression pattern to find course information
-
-    # Open the PDF file, and concatenate all text into one string keeping as much formatting as possible
-    with pdfplumber.open(path_to_pdf) as pdf:
-        text = ""
-        for page in pdf.pages:
-            text += page.extract_text()
 
     # Find all semesters in the text
     sections = re.split(semester_pattern, text)
