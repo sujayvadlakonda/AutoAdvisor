@@ -1,6 +1,3 @@
-# A set of requirements
-# Though about calling it a track, but that doesn't make sense w/ Software Engineering
-# Better name welcome
 class Track:
     def __init__(self):
         self.core_requirements = []
