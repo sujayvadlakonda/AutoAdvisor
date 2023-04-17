@@ -1,36 +1,43 @@
+import os
+
+from transcript import Transcript
+from course import Courses
+from track import DataScience
+
+
 class AuditReport:
-    def __init__(self, courses, requirements):
+    def __init__(self, transcript, track):
+        courses = transcript.get_courses()
+        courses = Courses(courses)
         self.courses = courses
-        self.requirements = requirements
+        self.track = track
 
-    def get_core_fulfilled(self):
-        core_fulfilled = []
+    def print_core(self):
+        core = self._get_core_identifiers()
+        print("Core Courses: ", end="")  # w/o new line
+        print(", ".join(core))
 
-        for course in self.courses:
-            course_full_id = (
-                course["subject"].strip() + " " + course["course_id"].strip()
-            )
-            if self.requirements.is_requirement(course_full_id):
-                core_fulfilled.append(course_full_id)
+    # Returns core courses on transcript regardless of completion status
+    def _get_core_identifiers(self):
+        core_courses = []
 
-        return core_fulfilled
+        for requirement in self.track.core_requirements:
+            course_dict = requirement.is_met(self.courses)
+            if course_dict:
+                identifier = (
+                    course_dict["subject"].strip()
+                    + " "
+                    + course_dict["course_id"].strip()
+                )
+                core_courses.append(identifier)
 
-
-class CoreRequirements:
-    requirements = []
-
-    def is_requirement(self, course):
-        if course in self.requirements:
-            return True
-
-        return False
+        return core_courses
 
 
-class DataScience(CoreRequirements):
-    requirements = [
-        "CS 6313",
-        "CS 6350",
-        "CS 6363",
-        "CS 6375",
-        ["CS 6301", "CS 6320", "CS 6327", "CS 6347", "CS 6360"],
-    ]
+for filename in os.listdir("transcripts"):
+    transcript = Transcript("transcripts/" + filename)
+    track = DataScience()
+    audit_report = AuditReport(transcript, track)
+    name = transcript.get_name()
+    print(name)
+    audit_report.print_core()
