@@ -51,6 +51,7 @@ if __name__ == '__main__':
 # mac: can't use filetypes (mac doesn't have file type dropdown menu), but can use initialdir = "/"
 # from tkinter.messagebox import showinfo, showinfo(title="Saved File",message="File Saved)
 # if you want a column to be uniform width: columnconfigure include: uniform
+# radio button: add command for it to save value, num val in num order otherwise it pre-selects the smaller num for you
 # page navigation button to work:
 # Add to the top of the degree_app.py file: from insertYourFileNameHere import insertYourClassNameHere
 # In the degree_app.py file, add your file's class name to the () in the For Loop
@@ -67,11 +68,9 @@ if __name__ == '__main__':
 # userInputOne = self.controller.frames["userInput"].get()
 # tk.StringVar(container, value), name_var.get() for same file StringVar() stuff
 
-# ask sujay if they're handling getting the pre-req (& sem of complete) from the dp plan so that I can use them for ui
-# ask akelanda how they're storing the string vari for the outstanding gpa lines
-# opens/saves file, spacing/indents/txt justify,
-# user input (disposition), columnspan, maybe some Tkinter event binding for entry?
-# calibri 12 text, calibri 14 for audit report title
+# ask sujay if they're handling getting pre-req (& sem complete w/ grade) from dp plan so that I can use them for ui
+# save file, word doc line spacing, add in classInstance.variOrMethod for instance,
+# disposition, columnspan, row weight configure make dynamic for buttons and disp opt
 
 
 
