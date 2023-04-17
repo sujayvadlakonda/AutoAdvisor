@@ -155,7 +155,7 @@ class DegreePlanPage(ttk.Frame):
             options = (   ('Yes', 'Y'),
                     ('No', 'N'))
             for opt in options:
-                r = ttk.Radiobutton(        
+                r = ttk.Radiobutton(                        
                                 fr_student,
                                 text=opt[0],
                                 value=opt[1],
