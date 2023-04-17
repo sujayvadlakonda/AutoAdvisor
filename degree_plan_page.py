@@ -312,7 +312,7 @@ class DegreePlanPage(ttk.Frame):
             text="<< Previous",
             command=lambda: self.controller.show_frame("UploadFilePage")
         )
-        prev_btn.grid(column=0, row=linkup_row, columnspan=1, sticky="sw")  # button positioning
+        prev_btn.grid(column=0, row=linkup_row, columnspan=1, sticky="sw", pady=20)  # button positioning
 
         # Button to direct user to degree_plan_report_page.py in order for user to edit degree plan
         next_btn = ttk.Button(
@@ -320,7 +320,7 @@ class DegreePlanPage(ttk.Frame):
             text="Next >>",
             command=lambda: controller.show_frame("DegreePlanReportPage")
         )
-        next_btn.grid(column=0, row=linkup_row, columnspan=1, sticky="se")  # button padding
+        next_btn.grid(column=0, row=linkup_row, columnspan=1, sticky="se", pady=20)  # button padding
 
     # note to the developer in charge of the degree plan gui:
     # This file is just to get, whoever is working on the Degree Plan GUI, a head start on the gui.
