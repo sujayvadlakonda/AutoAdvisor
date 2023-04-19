@@ -49,7 +49,7 @@ class DegreePlanPage(ttk.Frame):
         fr_titleGui = ttk.Frame(frame, style="section.TFrame")
         fr_titleGui.columnconfigure(0, weight=1)
         fr_titleGui.rowconfigure(0, weight=1)   
-        fr_titleGui.grid(column=0, row=0, sticky="nsew")
+        fr_titleGui.grid(column=0, row=0, sticky="nsew", pady=5)
       
         lbl_gui = ttk.Label(fr_titleGui, text="DEGREE PLAN EDITOR", style="big_heading.TLabel")
         lbl_gui.grid(column=0, row=0)  # text positioning
@@ -89,38 +89,38 @@ class DegreePlanPage(ttk.Frame):
         lbl_major.grid(column=0, row=4)
        
 # 2. Student Frame
-#         c2=5
-#         r2=3
-#         fr_student = ttk.Frame(frame, style="section.TFrame")
-#         for c in range(c2):
-#             fr_student.columnconfigure(c, weight=1)
-#         for r in range(r2):
-#             fr_student.rowconfigure(r, weight=1)
-#         fr_student.grid(column=0, row=2, sticky="nsew", pady=5)
+        c2=5
+        r2=3
+        fr_student = ttk.Frame(frame, style="section.TFrame")
+        for c in range(c2):
+            fr_student.columnconfigure(c, weight=1)
+        for r in range(r2):
+            fr_student.rowconfigure(r, weight=1)
+        fr_student.grid(column=0, row=2, sticky="nsew", pady=5)
 
-#         # Labeling 
-#         # Student Name
-#         lbl_student = ttk.Label(fr_student, text="Name of Student:", style="normal_text.TLabel")
-#         lbl_student.grid(column=0, row=0, sticky='w', padx=(10,0))
+        # Labeling 
+        # Student Name
+        lbl_student = ttk.Label(fr_student, text="Name of Student:", style="normal_text.TLabel")
+        lbl_student.grid(column=0, row=0, sticky='w', padx=(10,0), po)
 
-#         lbl_student = ttk.Label(fr_student, text=std_name, style="filling_text.TLabel")
-#         lbl_student.grid(column=1, row=0, sticky='w', padx=(10,0))
+        lbl_student = ttk.Label(fr_student, text=std_name, style="filling_text.TLabel")
+        lbl_student.grid(column=1, row=0, sticky='w', padx=(10,0))
 
-#         # Student ID
-#         lbl_student = ttk.Label(fr_student, text="Student ID Number:", style="normal_text.TLabel")
-#         lbl_student.grid(column=0, row=1, sticky='w', padx=(10,0))
+        # Student ID
+        lbl_student = ttk.Label(fr_student, text="Student ID Number:", style="normal_text.TLabel")
+        lbl_student.grid(column=0, row=1, sticky='w', padx=(10,0))
    
-#         lbl_student = ttk.Label(fr_student, text=std_id, style="filling_text.TLabel")
-#         lbl_student.grid(column=1, row=1, sticky='w', padx=(10,0))
+        lbl_student = ttk.Label(fr_student, text=std_id, style="filling_text.TLabel")
+        lbl_student.grid(column=1, row=1, sticky='w', padx=(10,0))
 
-#         # Semester Additted
-#         lbl_student = ttk.Label(fr_student, text="Semester Admitted to Program:", style="normal_text.TLabel")
-#         lbl_student.grid(column=0, row=2, sticky='w', padx=(10,0))
+        # Semester Additted
+        lbl_student = ttk.Label(fr_student, text="Semester Admitted to Program:", style="normal_text.TLabel")
+        lbl_student.grid(column=0, row=2, sticky='w', padx=(10,0))
    
-#         lbl_student = ttk.Label(fr_student, text=std_sem_admitted, style="filling_text.TLabel")
-#         lbl_student.grid(column=1, row=2, sticky='w', padx=(10,0))
+        lbl_student = ttk.Label(fr_student, text=std_sem_admitted, style="filling_text.TLabel")
+        lbl_student.grid(column=1, row=2, sticky='w', padx=(10,0))
  
-#         # FT, Thesis, Anticipated
+        # FT, Thesis, Anticipated
 # # Need to do something after FT and Thesis was selected
 #         def yes_no(c_index, r_index):
 #             selected_value = tk.StringVar()
