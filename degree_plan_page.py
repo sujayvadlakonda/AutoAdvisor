@@ -101,24 +101,24 @@ class DegreePlanPage(ttk.Frame):
         # Labeling 
         # Student Name
         lbl_student = ttk.Label(fr_student, text="Name of Student:", style="normal_text.TLabel")
-        lbl_student.grid(column=0, row=0, sticky='w', padx=(10,0), po)
+        lbl_student.grid(column=0, row=0, sticky='w', padx=5, pady=5)
 
         lbl_student = ttk.Label(fr_student, text=std_name, style="filling_text.TLabel")
-        lbl_student.grid(column=1, row=0, sticky='w', padx=(10,0))
+        lbl_student.grid(column=1, row=0, sticky='w', padx=5)
 
         # Student ID
         lbl_student = ttk.Label(fr_student, text="Student ID Number:", style="normal_text.TLabel")
-        lbl_student.grid(column=0, row=1, sticky='w', padx=(10,0))
+        lbl_student.grid(column=0, row=1, sticky='w', padx=5)
    
         lbl_student = ttk.Label(fr_student, text=std_id, style="filling_text.TLabel")
-        lbl_student.grid(column=1, row=1, sticky='w', padx=(10,0))
+        lbl_student.grid(column=1, row=1, sticky='w', padx=5)
 
         # Semester Additted
         lbl_student = ttk.Label(fr_student, text="Semester Admitted to Program:", style="normal_text.TLabel")
-        lbl_student.grid(column=0, row=2, sticky='w', padx=(10,0))
+        lbl_student.grid(column=0, row=2, sticky='w', padx=5)
    
         lbl_student = ttk.Label(fr_student, text=std_sem_admitted, style="filling_text.TLabel")
-        lbl_student.grid(column=1, row=2, sticky='w', padx=(10,0))
+        lbl_student.grid(column=1, row=2, sticky='w', padx=5)
  
         # FT, Thesis, Anticipated
 # # Need to do something after FT and Thesis was selected
