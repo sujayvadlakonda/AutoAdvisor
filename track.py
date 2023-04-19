@@ -66,9 +66,6 @@ class ComputerScience:
             id = subject + " " + number
             ids.append(id)
 
-        for id in ids:
-            print("CONSUMED", id)
-
         return ids
 
 
