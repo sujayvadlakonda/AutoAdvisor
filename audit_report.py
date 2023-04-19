@@ -12,10 +12,38 @@ class AuditReport:
         self.courses = courses
         self.track = track
 
+    def print_courses(self):
+        self.print_core()
+        self.print_electives()
+        print()
+        self.print_leveling()
+
     def print_core(self):
         core = self._get_core_identifiers()
         print("Core Courses: ", end="")  # w/o new line
         print(", ".join(core))
+
+    def print_electives(self):
+        print("Elective Courses: ", end="")  # w/o new line
+        electives = self.track.get_electives(self.courses)
+
+        ids = []
+        for elective in electives:
+            number = elective["course_id"].strip()
+            subject = elective["subject"].strip()
+            id = subject + " " + number
+            ids.append(id)
+
+        ids.sort()
+
+        ids = ", ".join(ids)
+        print(ids)
+
+    def print_leveling(self):
+        print("Leveling Courses and Pre-requisites from Admission Letter:")
+        print()
+        for leveling in self.track.leveling_courses:
+            leveling.print()
 
     # Returns core courses on transcript regardless of completion status
     def _get_core_identifiers(self):
@@ -32,12 +60,3 @@ class AuditReport:
                 core_courses.append(identifier)
 
         return core_courses
-
-
-for filename in os.listdir("transcripts"):
-    transcript = Transcript("transcripts/" + filename)
-    track = DataScience()
-    audit_report = AuditReport(transcript, track)
-    name = transcript.get_name()
-    print(name)
-    audit_report.print_core()
