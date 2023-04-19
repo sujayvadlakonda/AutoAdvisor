@@ -79,7 +79,7 @@ class DegreePlanPage(ttk.Frame):
         
       
         lbl_gui = ttk.Label(fr_titleGui, text="DEGREE PLAN EDITOR", style="big_heading.TLabel")
-        lbl_gui.grid(column=0, row=0, sticky='nsew')  # text positioning
+        lbl_gui.grid(column=0, row=0, sticky='nsew', padx=200)  # text positioning
 
 # Get student info function
 
