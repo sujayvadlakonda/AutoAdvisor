@@ -32,7 +32,7 @@ with pdfplumber.open(path_to_pdf) as pdf:
 
 # Track Information
 track_name = track['Name']
-track_update = track['Update']py
+track_update = track['Update']
 track_color = track['Color']
 track_core = track['Core Courses']
 track_choices = {'Name': 6040, 'Name2': 6030}
