@@ -3,6 +3,7 @@ from tkinter import *
 from tkinter import ttk
 from plan_printer import launch_pdf
 import transcript
+from tkinter.messagebox import showinfo
 
 
 class DegreePlanPage(ttk.Frame):
@@ -38,6 +39,7 @@ class DegreePlanPage(ttk.Frame):
             frame.rowconfigure(r, weight=1)
         # frame.grid(column=0, row=0, sticky="nsew")  # positioning
         frame.pack(expand=TRUE, fill=BOTH, side=TOP)
+
 
 # Get path_to_pdf
         path_to_pdf = "transcripts\\keeley-jones.pdf"
@@ -116,35 +118,70 @@ class DegreePlanPage(ttk.Frame):
    
         lbl_student = ttk.Label(fr_student, text=std_sem_admitted, style="filling_text.TLabel")
         lbl_student.grid(column=1, row=2, sticky='w', padx=5, pady=5)
- 
+
+        # selected_value = tk.StringVar()
         # FT, Thesis, Anticipated
-        def yes_no(c_index, r_index):
-            selected_value = tk.StringVar()
-            options = (   ('Yes', 'Y'),
+        # def yes_no(c_index, r_index):
+        #     selected_value = tk.StringVar()
+        #     options = (   ('Yes', 'Y'),
+        #             ('No', 'N'))
+        #     for opt in options:
+        #         r = ttk.Radiobutton(                        
+        #                         fr_student,
+        #                         text=opt[0],
+        #                         value=opt[1],
+        #                         variable=selected_value,
+        #                         style="TRadiobutton"
+        #         )
+        #         r.grid(column=c_index, row=r_index, sticky='w', padx=(10,0))
+        #         c_index += 1
+
+        #     print(selected_value)
+        #     return selected_value.get()
+
+
+
+        options = (   ('Yes', 'Y'),
                     ('No', 'N'))
-            for opt in options:
-                r = ttk.Radiobutton(                        
-                                fr_student,
-                                text=opt[0],
-                                value=opt[1],
-                                variable=selected_value,
-                                style="TRadiobutton"
-                )
-                r.grid(column=c_index, row=r_index, sticky='w', padx=(10,0))
-                c_index += 1
 
         # Fast Track
         lbl_student = ttk.Label(fr_student, text="FT:", style="normal_text.TLabel")
         lbl_student.grid(column=2, row=0, sticky='w', padx=5, pady=5)
-        yes_no(3, 0)  # (column, row)
+        # ft_selected = yes_no(3, 0)  # (column, row)
+        ft_selected = tk.StringVar()
+        c_index = 3
+        r_index = 0
+        for opt in options:
+            ft_rdb = ttk.Radiobutton(                        
+                            fr_student,
+                            text=opt[0],
+                            value=opt[1],
+                            variable=ft_selected,
+                            style="TRadiobutton"
+            )
+            ft_rdb.grid(column=c_index, row=r_index, sticky='w', padx=(10,0))
+            c_index += 1
 
         # Thesis
         lbl_student = ttk.Label(fr_student, text="Thesis:", style="normal_text.TLabel")
         lbl_student.grid(column=2, row=1, sticky='w', padx=5, pady=5)
-        yes_no(3, 1)
-
+        # thesis_selected = yes_no(3, 1)
+        thesis_selected = tk.StringVar()
+        c_index = 3
+        r_index = 1
+        for opt in options:
+            thesis_rdb = ttk.Radiobutton(                        
+                            fr_student,
+                            text=opt[0],
+                            value=opt[1],
+                            variable=thesis_selected,
+                            style="TRadiobutton"
+            )
+            thesis_rdb.grid(column=c_index, row=r_index, sticky='w', padx=(10,0))
+            c_index += 1
+            
         # Anticipated Graduation
-# need to save this info somewhere for Degree Plan Report Later
+# need to save this info somewhere for Degree Plan =thesisort Later
         lbl_student = ttk.Label(fr_student, text="Anticipated \n Graduation", style="normal_text.TLabel")
         lbl_student.grid(column=2, row=2, sticky='w', padx=5, pady=5)
 
@@ -218,13 +255,27 @@ class DegreePlanPage(ttk.Frame):
             command=launch_pdf
         )
         launch_pdf_btn.grid(column=1, row=0, padx=5, pady=10)  # button positioning
-        
-        # Button to direct user to degree_plan_report_page.py in order for user to edit degree plan
+
+###
+        def show_ft():
+            showinfo(
+                     title='Result',
+                     message=ft_selected.get()
+        )
+    
+        button1 = ttk.Button(
+                            fr_link,
+                            text="FT selected",
+                            command=show_ft)
+        button1.grid(column=1, row=0, padx=5, pady=10)  # button padding
+
+        # Next Button
         next_btn = ttk.Button(
             fr_link,
             text="Next >>",
             command=lambda: controller.show_frame("DegreePlanReportPage")
         )
+        # next_btn.grid(column=1, row=0, sticky="e", padx=(0,10), pady=10)  # button padding
         next_btn.grid(column=1, row=0, sticky="e", padx=(0,10), pady=10)  # button padding
 
        
