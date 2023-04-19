@@ -47,12 +47,3 @@ class AuditReport:
                 core_courses.append(identifier)
 
         return core_courses
-
-
-# for filename in os.listdir("transcripts"):
-#     transcript = Transcript("transcripts/" + filename)
-#     track = DataScience()
-#     audit_report = AuditReport(transcript, track)
-#     name = transcript.get_name()
-#     print(name)
-#     audit_report.print_core()
