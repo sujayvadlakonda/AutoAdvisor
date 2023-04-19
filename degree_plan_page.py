@@ -230,21 +230,44 @@ class DegreePlanPage(ttk.Frame):
                        "B+"]
         auto_course_lable(course_info, 2)
         auto_course_lable(course_info, 3)
+        auto_course_lable(course_info, 4)
+        auto_course_lable(course_info, 5)
+        
 
         # Labeling 1 of 5 CORE COURSES
-        lbl_course= ttk.Label(fr_course, text="One of the following Five Core Courses", style="normal_text.TLabel")
-        lbl_course.grid(column=0, row=4, columnspan=5, pady=(10,10), padx=(10,0))
+        lbl_course= ttk.Label(fr_course, text="One of the following Five Core Courses", style="course_section.TLabel")
+        lbl_course.grid(column=0, row=6, columnspan=5, pady=(10,10), padx=(10,0))
 
-        auto_course_lable(course_info, 5)
-        auto_course_lable(course_info, 6)
-
-        # Labeling 6000 LEVEL ELECTIVE
-        lbl_course= ttk.Label(fr_course, text="FIVE APPROVED 6000 LEVEL ElECTIVES \t\t (15* Credit Hours) \t\t 3.0 Grade Point Average Required", style="normal_text.TLabel")
-        lbl_course.grid(column=0, row=7, columnspan=5, pady=(10,10), padx=(10,0))
-
+        auto_course_lable(course_info, 7)
         auto_course_lable(course_info, 8)
         auto_course_lable(course_info, 9)
+        auto_course_lable(course_info, 10)
+        auto_course_lable(course_info, 11)
 
+
+        # Labeling 6000 LEVEL ELECTIVE
+        lbl_course= ttk.Label(fr_course, text="FIVE APPROVED 6000 LEVEL ElECTIVES \t\t (15* Credit Hours) \t\t 3.0 Grade Point Average Required", 
+                              style="course_section.TLabel")
+        lbl_course.grid(column=0, row=12, columnspan=5, pady=(10,10), padx=(30,0))
+
+
+        course_info1 = ["Select from Drop Box",
+                       "Auto match", 
+                       "22F", 
+                       "20F" ,
+                       "B+"]
+        auto_course_lable(course_info1, 13)
+        auto_course_lable(course_info1, 14)
+        auto_course_lable(course_info1, 15)
+        auto_course_lable(course_info1, 16)
+        auto_course_lable(course_info1, 17)
+
+        # Labeling Additional Electtive
+        lbl_course= ttk.Label(fr_course, text="Additional Elective (3 Credits Hours Mimimum)", 
+                              style="course_section.TLabel")
+        lbl_course.grid(column=0, row=18, columnspan=5, pady=(10,10), padx=(30,0))
+        
+       
 
 # 4. Note, Advisor, Date Frame
         c4=4
