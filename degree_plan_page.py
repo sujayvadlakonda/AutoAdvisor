@@ -3,6 +3,8 @@ from tkinter import *
 from tkinter import ttk
 
 
+
+
 class DegreePlanPage(ttk.Frame):
     def __init__(self, container, controller):
         super().__init__(container)
@@ -180,31 +182,51 @@ class DegreePlanPage(ttk.Frame):
         entry_note = ttk.Entry(fr_note, text=advisor_name, font=("Bookman Old Style", 14), foreground="black")
         entry_note.grid(column=3, row=3, sticky='e', padx=5, pady=5)
 
-# 6. Linkup Frame
-        linkup_row = 4
-        fr_link= ttk.Frame(frame, style="section.TFrame")
-        fr_link.columnconfigure(0, weight=1)
-        fr_link.rowconfigure(0, weight=1)
-        fr_link.grid(column=0, row=linkup_row, sticky="nsew", pady=5)  
+# 4. Linkup Frame
+        # fr_link= ttk.Frame(frame, style="section.TFrame")
+        # fr_link.columnconfigure(0, weight=1)
+        # fr_link.rowconfigure(0, weight=1)
+        # fr_link.grid(column=0, row=4, sticky="nsew", pady=5)  
 
-        # Previous Page button and design
+        c_link=2
+        r_link=1
+        fr_link = ttk.Frame(frame, style="section.TFrame")
+        for c in range(c_link):
+            fr_link.columnconfigure(c, weight=1)
+        for r in range(r_link):
+            fr_link.rowconfigure(r, weight=1)
+        fr_link.grid(column=0, row=4, sticky="nsew", pady=5)
+        
+        # Previous Page Button
         prev_btn = ttk.Button(
             fr_link,
             text="<< Previous",
             command=lambda: self.controller.show_frame("UploadFilePage")
         )
-        prev_btn.grid(column=0, row=0, sticky="w", columnspan=1, padx=10, pady=10)  # button positioning
+        prev_btn.grid(column=0, row=0, sticky='w', padx=(10,5), pady=10)  # button positioning
 
+        # Go to Homepage Button
+        homepage_btn = ttk.Button(
+            fr_link,
+            text="Go to Homepage",
+            command=lambda: self.controller.show_frame("HomepageStart")
+        )
+        homepage_btn.grid(column=0, row=0, padx=5, pady=10)  # button positioning
+        
+        # Launch PDF Button
+        launch_pdf_btn = ttk.Button(
+            fr_link,
+            text="Launch PDF Editor",
+            # command=lambda: controller.show_frame("DegreePlanReportPage")
+        )
+        launch_pdf_btn.grid(column=1, row=0, padx=5, pady=10)  # button positioning
+        
         # Button to direct user to degree_plan_report_page.py in order for user to edit degree plan
         next_btn = ttk.Button(
             fr_link,
             text="Next >>",
             command=lambda: controller.show_frame("DegreePlanReportPage")
         )
-        next_btn.grid(column=0, row=0, sticky="e", columnspan=1, padx=10, pady=10)  # button padding
+        next_btn.grid(column=1, row=0, sticky="e", padx=(0,10), pady=10)  # button padding
 
-#     # note to the developer in charge of the degree plan gui:
-#     # This file is just to get, whoever is working on the Degree Plan GUI, a head start on the gui.
-#     # there's still the rest of the gui, student object stuff, etc. that you'll need to figure out and add to this
-#     # modify it as much as you want to, just make sure to:
-#     # include a way for audit_report_page.py to know what degree plan track and prerequisite courses are chosen
+       
