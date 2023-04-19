@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import *
 from tkinter import ttk
 from plan_printer import launch_pdf
-
+import transcript
 
 
 class DegreePlanPage(ttk.Frame):
@@ -39,6 +39,9 @@ class DegreePlanPage(ttk.Frame):
         # frame.grid(column=0, row=0, sticky="nsew")  # positioning
         frame.pack(expand=TRUE, fill=BOTH, side=TOP)
 
+# Get path_to_pdf
+        path_to_pdf = "transcripts\\keeley-jones.pdf"
+
 # Creating frame sections
 # 0. Gui Title Frame
         fr_titleGui = ttk.Frame(frame, style="section.TFrame")
@@ -50,17 +53,16 @@ class DegreePlanPage(ttk.Frame):
         lbl_gui.grid(column=0, row=0, pady=5)  # text positioning
 
 # Get student info function
-## Need to check where should i get this information.
-## from transcrip directly or from Aiden File
-        def get_student_info():   
-            major       = "Data Science" 
-            name        = "Name 111111111111111"
-            id          = "ID 1"
-            sem_ad      = "Semester 111"
+        def get_student_info(path_to_pdf):  
+            student_info    = transcript.Transcript(path_to_pdf)
+            name            = student_info.get_name()
+            id              = student_info.get_id()
+            sem_ad          = student_info.get_beginning_of_graduate_record()
+            major           = student_info.get_major()
 
             return major, name, id, sem_ad
        
-        std_major, std_name, std_id, std_sem_admitted = get_student_info()
+        std_major, std_name, std_id, std_sem_admitted = get_student_info(path_to_pdf)
 
 # 1. Title Frame        
         c1=0
@@ -183,11 +185,6 @@ class DegreePlanPage(ttk.Frame):
         entry_note.grid(column=3, row=3, sticky='e', padx=5, pady=5)
 
 # 4. Linkup Frame
-        # fr_link= ttk.Frame(frame, style="section.TFrame")
-        # fr_link.columnconfigure(0, weight=1)
-        # fr_link.rowconfigure(0, weight=1)
-        # fr_link.grid(column=0, row=4, sticky="nsew", pady=5)  
-
         c_link=2
         r_link=1
         fr_link = ttk.Frame(frame, style="section.TFrame")
