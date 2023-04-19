@@ -12,23 +12,16 @@ class DegreePlanPage(ttk.Frame):
         style = ttk.Style(self)
         style.configure("dp_gui.TFrame", background="black", relief="flat")
         style.configure("section.TFrame", background="orange", relief="raised")
-        style.configure("sub_section.TFrame", background="orange", relief="flat")
         
         style.configure("big_heading.TLabel", font=("Segoe print", 30, "bold"), foreground="black", background="orange")
         style.configure("medium_heading.TLabel", font=("Verdana", 25), foreground="black", background="orange")
-        style.configure("small_heading.TLabel", font=("Verdana", 15), foreground="black", background="orange")
+        style.configure("bold_heading.TLabel", font=("Segoe print", 25, "bold"), foreground="black", background="orange")
 
         style.configure("normal_text.TLabel", font=("Bookman Old Style", 14), foreground="black", background="orange")
         style.configure("filling_text.TLabel", font=("Bookman Old Style", 14), foreground="black", background="white", relief="sunken")
         style.configure("course_section.TLabel", font=("Bookman Old Style", 14), foreground="orange", background="black")
 
         style.configure("TRadiobutton", font=("Bookman Old Style", 14), foreground="black", background="orange", relief="flat")
-
-
-
-        # style.configure("GuiTitle.TLabel", font=("Segoe UI", 25), foreground="black", background="orange")
-        # style.configure("DegreeTitle.TLabel", font=("Segoe UI", 15), foreground="black", background="orange")
-        # style.configure("BlSmall.TLabel", font=("Roboto", 14), foreground="black", background="white")
     
         # Handles frame expansion when application window is expanded
         self.columnconfigure(0, weight=1)
@@ -85,7 +78,7 @@ class DegreePlanPage(ttk.Frame):
         lbl_title.grid(column=0, row=2)
 
         # Get and Display Student's Major
-        lbl_major = ttk.Label(fr_title, text=std_major, style="medium_heading.TLabel")
+        lbl_major = ttk.Label(fr_title, text=std_major, style="bold_heading.TLabel")
         lbl_major.grid(column=0, row=4, pady=(0,10))
        
 # 2. Student Frame
