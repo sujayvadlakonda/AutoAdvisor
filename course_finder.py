@@ -1,12 +1,12 @@
 import re
+import pdfplumber
 
 
 def get_courses(pdf):
     courses = []  # A list of dictionaries to store the course information
     season, year = "", ""  # Empty strings to avoid nulls
     semester_pattern = r"(\d{4}\s?)(Summer|Spring|Fall|Winter)"  # A regular expression pattern to find course semesters
-    course_pattern = r"([A-Z]{2,4}\s)" \
-                     r"(\d{4}\s)" \
+    course_pattern = r"([A-Z]{2,4}\s\d{4})" \
                      r"([A-Z\:\+\s\/&-]+\s)" \
                      r"(\d+.\d+\s)" \
                      r"(\d+.\d+\s)" \
@@ -35,15 +35,17 @@ def get_courses(pdf):
                 course = {
                     "year": year,
                     "season": season,
-                    "subject": found_course[0],
-                    "course_id": found_course[1],
-                    "course_name": found_course[2],
-                    "attempted": float(found_course[3]),
-                    "earned": float(found_course[4]),
-                    "grade": found_course[5] if found_course[5] else None,
-                    "points": float(found_course[6])
+                    "course_id": found_course[0],
+                    "course_name": found_course[1],
+                    "attempted": float(found_course[2]),
+                    "earned": float(found_course[3]),
+                    "grade": found_course[4] if found_course[4] else None,
+                    "points": float(found_course[5])
                 }
                 courses.append(course)
 
     # Print the list of courses
     return courses
+
+
+
