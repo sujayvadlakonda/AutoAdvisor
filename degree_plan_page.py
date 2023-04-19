@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk
-import plan_printer as pp
+from plan_printer import launch_pdf
 
 
 
@@ -218,7 +218,7 @@ class DegreePlanPage(ttk.Frame):
             fr_link,
             text="Launch PDF Editor",
             # command=lambda: controller.show_frame("DegreePlanReportPage")
-            command=pp
+            command=launch_pdf
         )
         launch_pdf_btn.grid(column=1, row=0, padx=5, pady=10)  # button positioning
         
