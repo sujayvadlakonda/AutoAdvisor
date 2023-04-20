@@ -1,7 +1,8 @@
-import upload_file_page as ufp
+from upload_file_page import *
 
 print("Hello World")
+ufp = UploadFilePage()
 
-file_path = ufp.UploadFilePage().get_filepath()
+file_path = ufp.get_filepath()
 
 print(file_path)

@@ -145,3 +145,4 @@ class UploadFilePage(ttk.Frame):
     # Gets file path object/instance variable
     def get_filepath(self):
         return self.file_path
+

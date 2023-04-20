@@ -11,16 +11,18 @@ from reportlab.pdfgen import canvas
 import degree_requirements
 import transcript
 from course_finder import get_courses
-import degree_plan_page as dpp
 
 
-
-def launch_pdf():
+def plan_printer(path, grad):
     # User input
-    path_to_pdf = "transcripts\\keeley-jones.pdf"
-    graduation = "Spring 2033"
+    # path_to_pdf = "transcripts\\keeley-jones.pdf"
+    # graduation = "Spring 2033"
     fast_track = True
     thesis = False
+
+    path_to_pdf = path
+    graduation = grad
+    
     track = degree_requirements.DegreePlans().get_libraries('data_science')
 
     # General Student
