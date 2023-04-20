@@ -256,17 +256,17 @@ class DegreePlanPage(ttk.Frame):
         launch_pdf_btn.grid(column=1, row=0, padx=5, pady=10)  # button positioning
 
 ###
-        def show_ft():
-            showinfo(
-                     title='Result',
-                     message=expect_grad.get()
-        )
+        # def show_ft():
+        #     showinfo(
+        #              title='Result',
+        #              message=expect_grad.get()
+        # )
     
-        button1 = ttk.Button(
-                            fr_link,
-                            text="demo",
-                            command=show_ft)
-        button1.grid(column=1, row=0, padx=5, pady=10)  # button padding
+        # button1 = ttk.Button(
+        #                     fr_link,
+        #                     text="demo",
+        #                     command=show_ft)
+        # button1.grid(column=1, row=0, padx=5, pady=10)  # button padding
 
         # Next Button
         next_btn = ttk.Button(
