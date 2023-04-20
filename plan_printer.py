@@ -11,11 +11,14 @@ from reportlab.pdfgen import canvas
 import degree_requirements
 import transcript
 from course_finder import get_courses
+import degree_plan_page as dpp
+
+
 
 def launch_pdf():
     # User input
     path_to_pdf = "transcripts\\keeley-jones.pdf"
-    graduation = 'Spring 2024'
+    graduation = "Spring 2033"
     fast_track = True
     thesis = False
     track = degree_requirements.DegreePlans().get_libraries('data_science')
