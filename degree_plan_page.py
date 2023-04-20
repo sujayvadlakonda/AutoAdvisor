@@ -140,7 +140,7 @@ class DegreePlanPage(ttk.Frame):
         #     return selected_value.get()
 
 
-
+        #   FT, Thesis, Anticipated
         options = (   ('Yes', 'Y'),
                     ('No', 'N'))
 
@@ -200,8 +200,6 @@ class DegreePlanPage(ttk.Frame):
         fr_note.grid(column=0, row=3, sticky="nsew", pady=5)
 
          # Labeling note
-# Should i hard code note or get info depend on which major.
-# Need to talk to Aleky and Aiden about it
         lbl_note= ttk.Label(fr_note, text="* May include any 6000 or 7000 level CS course with prior permission", style="normal_text.TLabel")
         lbl_note.grid(column=0, row=1, columnspan=4, pady=(10,20))
 
@@ -217,8 +215,8 @@ class DegreePlanPage(ttk.Frame):
         lbl_note = ttk.Label(fr_note, text="Date Submitted", style="normal_text.TLabel")
         lbl_note.grid(column=2, row=3, sticky='e', padx=(0,5), pady=5)
 
-        advisor_name = tk.StringVar()      
-        entry_note = ttk.Entry(fr_note, text=advisor_name, font=("Bookman Old Style", 14), foreground="black")
+        date_submitted = tk.StringVar()      
+        entry_note = ttk.Entry(fr_note, text=date_submitted, font=("Bookman Old Style", 14), foreground="black")
         entry_note.grid(column=3, row=3, sticky='e', padx=5, pady=5)
 
 # 4. Linkup Frame
@@ -260,12 +258,12 @@ class DegreePlanPage(ttk.Frame):
         def show_ft():
             showinfo(
                      title='Result',
-                     message=ft_selected.get()
+                     message=advisor_name.get()
         )
     
         button1 = ttk.Button(
                             fr_link,
-                            text="FT selected",
+                            text="demo",
                             command=show_ft)
         button1.grid(column=1, row=0, padx=5, pady=10)  # button padding
 
@@ -275,7 +273,19 @@ class DegreePlanPage(ttk.Frame):
             text="Next >>",
             command=lambda: controller.show_frame("DegreePlanReportPage")
         )
-        # next_btn.grid(column=1, row=0, sticky="e", padx=(0,10), pady=10)  # button padding
         next_btn.grid(column=1, row=0, sticky="e", padx=(0,10), pady=10)  # button padding
 
-       
+        def get_ft_value(self):
+            return ft_selected.get()
+
+        def get_thesis_value(self):
+            return thesis_selected.get()
+
+        def get_anticipated_grad(self):
+            return expect_grad.get()
+
+        def get_advisor(self):
+            return advisor_name.get()
+
+        def get_date(self):
+            return date_submitted.get()
