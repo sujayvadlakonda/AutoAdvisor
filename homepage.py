@@ -10,18 +10,18 @@ class HomepageStart(ttk.Frame):
 
         # Handles the gui of the application homepage
         style = ttk.Style(self)
-        style.configure("BlckBord.TFrame", borderwidth=5, background="#87ceeb", relief=SOLID)
-        style.configure("CW.TLabel", font=("Segoe print", 30), foreground="#0032A0", background="#87ceeb")
-        style.configure("GrySmall.TLabel", font=("Bookman Old Style,", 14), foreground="#343a40", background="#87ceeb")
+        style.configure("BlckBord.TFrame", borderwidth=5, background="#92D3EC", relief=SOLID)
+        style.configure("CW.TLabel", font=("Segoe print", 30), foreground="#0032A0", background="#92D3EC")
+        style.configure("GrySmall.TLabel", font=("Bookman Old Style,", 14), foreground="#343a40", background="#92D3EC")
 
         # Frame outline design
         frame = ttk.Frame(self, style="BlckBord.TFrame")
         frame["padding"] = (5, 0, 5, 0)  # adjusts inner padding to fit text
-        frame.pack(fill=BOTH, pady=(60, 0))  # frame padding
+        frame.pack(fill=BOTH, expand=1)  # frame padding
 
         # Homepage title label and design
         lbl_upload = ttk.Label(frame, text="Degree Plan and Audit Tool", style="CW.TLabel")
-        lbl_upload.pack(side=TOP, pady=(70, 10))  # frame padding
+        lbl_upload.pack(side=TOP, pady=(120, 10))  # frame padding
 
         # subtext label and design
         lbl_upload = ttk.Label(frame, text="Press the Start Button to Begin", style="GrySmall.TLabel")

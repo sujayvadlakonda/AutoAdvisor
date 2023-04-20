@@ -4,6 +4,7 @@ from tkinter import *
 from upload_file_page import UploadFilePage
 from homepage import HomepageStart
 from degree_plan_page import DegreePlanPage
+from degree_plan_report_page import DegreePlanReportPage
 from audit_report_page import AuditReportPage
 
 
@@ -14,7 +15,7 @@ class DegreeApp(tk.Tk):
         window_name = "Degree Plan and Audit Tool"
         window_size = "760x550+270+25"
         window_color = "white"
-        self.frames = {}  # initializes application page to array
+        self.frames = {}  # initializes application pages to dictionary
 
         # Sets up the application window
         self.config(background=window_color)  # Window background color
@@ -30,7 +31,7 @@ class DegreeApp(tk.Tk):
         container.grid_rowconfigure(0, weight=1)
 
         # Handles switching between application pages using Class Names
-        for class_Name in (HomepageStart, UploadFilePage, DegreePlanPage, AuditReportPage):
+        for class_Name in (HomepageStart, UploadFilePage, DegreePlanPage, DegreePlanReportPage, AuditReportPage):
             page_name = class_Name.__name__
             frame = class_Name(container, self)  # creates instance of each class where self=controller
             frame.grid(column=0, row=0, sticky="nsew")  # keeps pages bundled when moving the Window
