@@ -1,15 +1,22 @@
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk
+from tkinter.messagebox import showinfo
 from plan_printer import launch_pdf
 import transcript
-from tkinter.messagebox import showinfo
+
 
 
 class DegreePlanPage(ttk.Frame):
     def __init__(self, container, controller):
         super().__init__(container)
         self.controller = controller  # allows for switching between application pages
+        
+        self.ft_selected = tk.StringVar()
+        self.thesis_selected = tk.StringVar()
+        self.expect_grad = tk.StringVar()
+        self.advisor_name = tk.StringVar() 
+        self.date_submitted = tk.StringVar()  
 
         # Handles Degree Plan page style options
         style = ttk.Style(self)
@@ -148,7 +155,6 @@ class DegreePlanPage(ttk.Frame):
         lbl_student = ttk.Label(fr_student, text="FT:", style="normal_text.TLabel")
         lbl_student.grid(column=2, row=0, sticky='w', padx=5, pady=5)
         # ft_selected = yes_no(3, 0)  # (column, row)
-        ft_selected = tk.StringVar()
         c_index = 3
         r_index = 0
         for opt in options:
@@ -156,7 +162,7 @@ class DegreePlanPage(ttk.Frame):
                             fr_student,
                             text=opt[0],
                             value=opt[1],
-                            variable=ft_selected,
+                            variable=self.ft_selected,
                             style="TRadiobutton"
             )
             ft_rdb.grid(column=c_index, row=r_index, sticky='w', padx=(10,0))
@@ -166,7 +172,6 @@ class DegreePlanPage(ttk.Frame):
         lbl_student = ttk.Label(fr_student, text="Thesis:", style="normal_text.TLabel")
         lbl_student.grid(column=2, row=1, sticky='w', padx=5, pady=5)
         # thesis_selected = yes_no(3, 1)
-        thesis_selected = tk.StringVar()
         c_index = 3
         r_index = 1
         for opt in options:
@@ -174,7 +179,7 @@ class DegreePlanPage(ttk.Frame):
                             fr_student,
                             text=opt[0],
                             value=opt[1],
-                            variable=thesis_selected,
+                            variable=self.thesis_selected,
                             style="TRadiobutton"
             )
             thesis_rdb.grid(column=c_index, row=r_index, sticky='w', padx=(10,0))
@@ -185,8 +190,7 @@ class DegreePlanPage(ttk.Frame):
         lbl_student = ttk.Label(fr_student, text="Anticipated \n Graduation", style="normal_text.TLabel")
         lbl_student.grid(column=2, row=2, sticky='w', padx=5, pady=5)
 
-        expect_grad = tk.StringVar()      
-        entry_student = ttk.Entry(fr_student, text=expect_grad, font=("Bookman Old Style", 14), foreground="black")
+        entry_student = ttk.Entry(fr_student, text=self.expect_grad, font=("Bookman Old Style", 14), foreground="black")
         entry_student.grid(column=3, row=2, sticky='w', columnspan=2)      
 
 # 3. Note, Advisor, Date Frame
@@ -206,17 +210,15 @@ class DegreePlanPage(ttk.Frame):
         # Labeling Academic Advisor
         lbl_note = ttk.Label(fr_note, text="Academic Advisor", style="normal_text.TLabel")
         lbl_note.grid(column=0, row=3, sticky='w', padx=(5,0), pady=(5,10))
-
-        advisor_name = tk.StringVar()      
-        entry_note = ttk.Entry(fr_note, text=advisor_name, font=("Bookman Old Style", 14), foreground="black")
+     
+        entry_note = ttk.Entry(fr_note, text=self.advisor_name, font=("Bookman Old Style", 14), foreground="black")
         entry_note.grid(column=1, row=3, sticky='w', padx=5, pady=5)
 
         # Labeling Date
         lbl_note = ttk.Label(fr_note, text="Date Submitted", style="normal_text.TLabel")
         lbl_note.grid(column=2, row=3, sticky='e', padx=(0,5), pady=5)
-
-        date_submitted = tk.StringVar()      
-        entry_note = ttk.Entry(fr_note, text=date_submitted, font=("Bookman Old Style", 14), foreground="black")
+    
+        entry_note = ttk.Entry(fr_note, text=self.date_submitted, font=("Bookman Old Style", 14), foreground="black")
         entry_note.grid(column=3, row=3, sticky='e', padx=5, pady=5)
 
 # 4. Linkup Frame
@@ -255,17 +257,17 @@ class DegreePlanPage(ttk.Frame):
         launch_pdf_btn.grid(column=1, row=0, padx=5, pady=10)  # button positioning
 
 ###
-        def show_ft():
-            showinfo(
-                     title='Result',
-                     message=advisor_name.get()
-        )
+        # def show_ft():
+        #     showinfo(
+        #              title='Result',
+        #              message=self.advisor_name.get()
+        # )
     
-        button1 = ttk.Button(
-                            fr_link,
-                            text="demo",
-                            command=show_ft)
-        button1.grid(column=1, row=0, padx=5, pady=10)  # button padding
+        # button1 = ttk.Button(
+        #                     fr_link,
+        #                     text="demo",
+        #                     command=show_ft)
+        # button1.grid(column=1, row=0, padx=5, pady=10)  # button padding
 
         # Next Button
         next_btn = ttk.Button(
@@ -275,17 +277,17 @@ class DegreePlanPage(ttk.Frame):
         )
         next_btn.grid(column=1, row=0, sticky="e", padx=(0,10), pady=10)  # button padding
 
-        def get_ft_value(self):
-            return ft_selected.get()
+    def get_ft_value(self):
+        return self.ft_selected.get()
 
-        def get_thesis_value(self):
-            return thesis_selected.get()
+    def get_thesis_value(self):
+        return self.thesis_selected.get()
 
-        def get_anticipated_grad(self):
-            return expect_grad.get()
+    def get_anticipated_grad(self):
+        return self.expect_grad.get()
 
-        def get_advisor(self):
-            return advisor_name.get()
+    def get_advisor(self):
+        return self.advisor_name.get()
 
-        def get_date(self):
-            return date_submitted.get()
+    def get_date(self):
+        return self.date_submitted.get()
