@@ -17,12 +17,12 @@ class AuditReportPage(ttk.Frame):
         self.style = ttk.Style(self)
         self.style.configure("aud_report_gui.TFrame", background="white")
         self.style.configure("BlWht.TLabel", font=("Segoe UI", 20), foreground="black", background="white")
-        self.style.configure("BlackSmall.TLabel", font=("Arial", 14), foreground="black", background="orange")
-        self.style.configure("instruct_txt.TLabel", font=("Georgia", 14), foreground="black", background="orange")
-        self.style.configure("Black_txt.TLabel", font=("Calibri", 14), foreground="black", background="yellow")
-        self.style.configure("gray_subtext.TLabel", font=("Calibri", 12), foreground="gray", background="yellow")
-        self.style.configure("input.TRadiobutton", background="pink")
-        self.style.configure("data.TEntry", background="black")
+        self.style.configure("BlackSmall.TLabel", font=("Arial", 14), foreground="black", background="white")
+        self.style.configure("instruct_txt.TLabel", font=("Georgia", 14), foreground="black", background="white")
+        self.style.configure("Black_txt.TLabel", font=("Calibri", 14), foreground="black", background="white")
+        self.style.configure("gray_subtext.TLabel", font=("Calibri", 12), foreground="#4C4E52", background="white")
+        self.style.configure("black_subtext.TLabel", font=("Calibri", 12), foreground="black", background="white")
+        self.style.configure("input.TRadiobutton", background="white")
 
         # Handles frame expansion when application window is expanded
         self.columnconfigure(0, weight=1)
@@ -92,7 +92,6 @@ class AuditReportPage(ttk.Frame):
         lbl_elective_gpa_display.grid(column=1, row=7, columnspan=1, sticky="w")  # text positioning
         lbl_overall_gpa_display = ttk.Label(self.scrollable_frame, text=self.overall_gpa, style="Black_txt.TLabel")
         lbl_overall_gpa_display.grid(column=1, row=8, columnspan=1, sticky="w", pady=(0, 20))  # text positioning
-        # waiting on akelanda to provide gpa variable data for this section
 
         # Prompts user to answer questions label and design
         prompt_user_instruct = "Answer the Following Questions:"
@@ -178,7 +177,6 @@ class AuditReportPage(ttk.Frame):
         lbl_overall_gpa_req.grid(column=0, row=20, columnspan=2, sticky="w", pady=(0, 5))  # text positioning
         lbl_overall_gpa_pass = ttk.Label(self.scrollable_frame, text=self.overall_gpa_req, style="Black_txt.TLabel")
         lbl_overall_gpa_pass.grid(column=0, row=21, columnspan=15, sticky="w", pady=(0, 20))  # text positioning
-        # waiting on akelanda to provide me the string variable that has text line that they want me to print
 
         # Displays instructions to select disposition of pre-reqs from degree plan
         pre_req_prompt = "Select Disposition for each Leveling Course(s) & Prerequisite(s):"
@@ -191,33 +189,45 @@ class AuditReportPage(ttk.Frame):
         lbl_none_choice_instruct.grid(column=0, row=23, columnspan=7, sticky="w", pady=(5, 5))  # positioning
 
         # User prompted to select disposition of pre-reqs from degree plan via the GUI's drop down menu
-        self.row_count = 23  # holds row of menu & text
+        row_count = 23  # holds row of menu & text
         self.disposition_dict = {
             "dp_pre_req_class": ["CS 3341", "CS 5303", "CS 5330", "CS 5333", "CS 5343", "CS 5348", "CS 5349", "CS 5354", "CS 5390"],
             "disp_options": ["None", "Completed", "Waived", "Not required by plan or elective", "Other"],
             "disp_selections": [],  # holds user selected disposition choice
             "opt_menu": [],  # holds disposition menu widget
-            "user_course_comment": []  # Hold's user's entry in text entry box
+            "user_course_comment": [],  # Hold's user's entry in text entry box
+            "entry_box": []  # holds entry text box widget
         }
         for pre_req_class in self.disposition_dict["dp_pre_req_class"]:
-            self.row_count += 1
-            disp_select = tk.StringVar()  # holds user disposition selection
-            disp_select.set(self.disposition_dict["disp_options"][0])  # sets default value of disposition
-            disp_select.trace("w", self.disposition_update)  # updates saved disposition when user changes choice
-            disp_comment = tk.StringVar()  # Holds user's text entry in text box
+            row_count += 1  # holds what row widget should be
+            self.disp_select = tk.StringVar()  # holds user disposition selection
+            self.disp_select.set(self.disposition_dict["disp_options"][0])  # sets default value of disposition
+            self.disp_select.trace("w", self.disposition_update)  # updates saved disposition when user changes choice
+            self.disp_comment = tk.StringVar()  # Holds user's text entry in text box
+            self.disp_comment.set("")  # sets default value of text entry box
             # Displays classes on screen
             lbl_disp_class = ttk.Label(self.scrollable_frame, text=pre_req_class, style="Black_txt.TLabel")
-            lbl_disp_class.grid(column=0, row=self.row_count, columnspan=1, sticky="w", pady=(10, 0))  # positioning
+            lbl_disp_class.grid(column=0, row=row_count, columnspan=1, sticky="w", pady=(10, 0))  # positioning
             # Displays drop down menu's on screen
             option_menu = ttk.OptionMenu(
                 self.scrollable_frame,
-                disp_select,
+                self.disp_select,
                 self.disposition_dict["disp_options"][0],
                 *self.disposition_dict["disp_options"])
-            option_menu.grid(column=1, row=self.row_count, columnspan=3, sticky="w", pady=(10, 0))  # positioning
-            self.disposition_dict["disp_selections"].append(disp_select)  # adds needed number of StringVar() to list
+            option_menu.grid(column=1, row=row_count, columnspan=3, sticky="w", pady=(10, 0))  # positioning
+            # Display Comment label for text entry box and design
+            lbl_disp_comment = ttk.Label(self.scrollable_frame, text="Comment:", style="black_subtext.TLabel")
+            lbl_disp_comment.grid(column=3, row=row_count, columnspan=1, sticky="e", pady=(10, 0))  # positioning
+            # Displays text entry box for user to enter short comment or semester of completion
+            text_entry_box = ttk.Entry(self.scrollable_frame, textvariable=self.disp_comment)
+            text_entry_box.grid(column=4, row=row_count, columnspan=1, sticky="w", pady=(10, 0))  # positioning
+            # Displays button to submit contents of text entry box
+            submit_btn = ttk.Button(self.scrollable_frame, text="Submit", command=self.comment_tracker)
+            submit_btn.grid(column=5, row=row_count, columnspan=1, sticky="e", pady=(10, 0))  # positioning
+            self.disposition_dict["disp_selections"].append(self.disp_select)  # appends needed amount of StringVar()
             self.disposition_dict["opt_menu"].append(option_menu)  # Adds disposition menu with unique variable to list
-            self.disposition_dict["user_course_comment"].append(disp_comment)  # adds placement StringVar to list
+            self.disposition_dict["user_course_comment"].append(self.disp_comment)  # adds entry StringVar() to list
+            self.disposition_dict["entry_box"].append(text_entry_box)  # adds entry widget to list
 
         # Previous Page button and design
         prev_btn = ttk.Button(
@@ -225,7 +235,7 @@ class AuditReportPage(ttk.Frame):
             text="<< Previous",
             command=lambda: self.controller.show_frame("DegreePlanReportPage")
         )
-        prev_btn.grid(column=0, row=self.row_count+1, columnspan=1, sticky="sw", padx=(5, 0), pady=(20, 20))  # positioning
+        prev_btn.grid(column=0, row=row_count+1, columnspan=1, sticky="sw", padx=(5, 0), pady=(20, 20))  # positioning
 
         # Saves printable audit report in File Explorer
         audit_report_btn = ttk.Button(
@@ -233,7 +243,7 @@ class AuditReportPage(ttk.Frame):
             text="Save Audit Report",
             command=lambda: self.save_file()
         )
-        audit_report_btn.grid(column=3, row=self.row_count+1, columnspan=1, sticky="sw", padx=(0, 5), pady=(20, 20))  # positioning
+        audit_report_btn.grid(column=3, row=row_count+1, columnspan=1, sticky="sw", padx=(0, 5), pady=(20, 20))  # positioning
 
         # Go to homepage button and design
         homepage_btn = ttk.Button(
@@ -241,7 +251,7 @@ class AuditReportPage(ttk.Frame):
             text="Go to Homepage",
             command=lambda: self.controller.show_frame("HomepageStart")
         )
-        homepage_btn.grid(column=4, row=self.row_count+1, columnspan=1, sticky="se", pady=(20, 20))  # positioning
+        homepage_btn.grid(column=4, row=row_count+1, columnspan=1, sticky="se", pady=(20, 20))  # positioning
 
     # Saves value of Taking Extra Elective Question selection
     def xtra_elective_question_value(self):
@@ -258,7 +268,7 @@ class AuditReportPage(ttk.Frame):
             lbl_quan_class = ttk.Label(self.scrollable_frame, text=class_amount_question, style="Black_txt.TLabel")
             lbl_quan_class.grid(column=0, row=14, columnspan=3, sticky="w", pady=(5, 10))  # text positioning
             # Entry text box for user to enter how many additional graduate courses the student is taking
-            class_quantity_box = ttk.Entry(self.scrollable_frame, textvariable=self.class_quantity, style="data.TEntry")
+            class_quantity_box = ttk.Entry(self.scrollable_frame, textvariable=self.class_quantity)
             class_quantity_box.grid(column=3, row=14, columnspan=1, sticky="w", pady=(5, 10))  # positioning
             class_quantity_box.bind("<Return>", self.addi_course_entry)  # saves entry upon user press Enter
             # Displays instructions for user to press enter to save their entry
@@ -269,18 +279,17 @@ class AuditReportPage(ttk.Frame):
     def addi_course_entry(self, event):
         self.class_quantity_output = self.class_quantity.get()
 
-    # Updates saved user selected disposition values stored in list
+    # Ensures updated user selected disposition values are tracked upon selection in the GUI
     def disposition_update(self, *args):
-        # for saved_disp in self.disposition_dict["disp_selections"]:
-        #   print(saved_disp.get())
-        print(self.disposition_dict["disp_options"][0])
-        # entry_row = self.row_count+1
-        # the "if statement" detects if it's completed/waived/other/none to get entry box open+sem of completion
-        # self. disp entry txt, event binding, & save to self. list in dict via stringVar, remember dynamic rows
-        # Completed: followed by semester of completion (info on transcript)
-        # Waived+other: should have a field where the user can enter either a semester or a short comment
-        # (check if user selected none/no opt)
-        #             "user_course_comment": []  # Hold's user's entry in text entry box
+        course_tracker = ""
+        for saved_disp in self.disposition_dict["disp_selections"]:
+            course_tracker = saved_disp.get()
+
+    # Ensures text entry box values are tracked upon clicking the submit button
+    def comment_tracker(self):
+        comment_tracker = ""
+        for entry in self.disposition_dict["user_course_comment"]:
+            comment_tracker = entry.get()
 
     # Opens File Explorer to save file
     def save_file(self):
@@ -358,7 +367,7 @@ class AuditReportPage(ttk.Frame):
         # self.core_courses = ""
         # Displays "Elective Courses" row in file (in course number order, title bold, calibri 12)
         # self.elective_courses = ""
-        # waiting on sujay to provide the string/list/dictionary that holds the line of text to print
+        # use sujay's code to provide the string/list/dictionary that holds the line of text to print
 
         # Adds spacing between lines
 
@@ -369,14 +378,17 @@ class AuditReportPage(ttk.Frame):
 
         # Displays Course (Name & Number e.g. CS 5333) and user selected disposition of pre-reqs in file (Calibri 12)
         # display [course abbrev and #]: [user selected disposition option] - [additional text, if applicable]
-        # use for loop w/ .get() to get value in dict's stringVar to append to new [] to write to word doc
+        # use for loop w/ .get() to get value in dictionary's stringVar to append to new [] to write to word doc
+        # use for loop to ck index of stringvar that has "Completed" opt & use index to get class name to get sem info
+        # ...and use same index to replace (not insert ) sem info in the comment list in dict. append to new list?
         # disp_choice_print = []
         # for saved_disp in self.disposition_dict["disp_selections"]:
-        #   final_disp = saved_disp.get()
-        #   disp_choice_print.append(final_disp)
+        #     final_disp = saved_disp.get()
+        #    disp_choice_print.append(final_disp)
+        # print(disp_choice_print)
         # If user selected "Completed" disposition option: additionally display sem. of completion + grade in file
         # If user selected "Waived/Other" disposition option: additionally display user inputted comment/sem. in file
-        # Display "None" if there's no uncompleted pre-reqs in file
+        # Display "None" if all choices are none and check for it
         # note to self: look at sujay's gitHub for list/dict of pre-req to print them out in a list in the gui + file
 
         # Adds spacing between lines
