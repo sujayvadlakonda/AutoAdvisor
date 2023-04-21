@@ -1,5 +1,9 @@
 ## CS 4485 Team 3 Degree Planning and Audit Tool Project 
 
+### Enviroment Required For This Application
+- 64-bit versions of Microsoft Windows 10, 11, or higher
+- 2 GB free RAM minimum, 8 GB of free RAM recommended for smoother performance
+
 ### Installation Instructions for Window Computers:
 1. Download *[Box Drive](https://www.box.com/resources/downloads)* for Windows
 - Instructions on how to install it *[here](https://support.box.com/hc/en-us/articles/360043697474-Installing-and-Updating-Box-Drive)*
@@ -8,14 +12,27 @@
 - Installation is successful if you see *Box* as an option in the side menu of your *File Explorer* desktop application
 
 ### Usage Instructions For Window Computers
-- Users can click the "Start" button on the homepage to direct them to the *Upload File* page 
-- The *Upload File* page has a "Browse Files" button that will open up Window's File Explorer application upon being clicked
-- The *Browse Files* button is used to select which file (e.g. transcript) the application is going to get information from and use
-- When selecting a file in the *File Explorer* application, if you can't find the file you need, try changing the file type (located in the bottom right drop down menu of the *File Explorer* window) to the option *All Files* 
-- If you want to select a new file to upload, simply click the *Browse Files" button to select the new file you want to upload
-- Once the file is selected, the information will then be captured/scraped by the tool, and the name of the file will be displayed on the screen
-- Click the *next >>* button when you are ready to continue to the rest of the application
-- If you are having trouble locating a button, try expanding the application window, using the maximize button located in the top right corner of the window
+- Users can click the "Start" button on the application's homepage to direct them to the *Upload File* page 
+- The *Upload File* page has a "Browse Files" button that will open up Window's *File Explorer* upon being clicked
+- In Window's File Explorer, select the transcript file of the student that your degree plan will be about. Alternatively, you can select your *student object* file, if you have previously made one
+- When selecting a file in Windows *File Explorer* , if you can't find the file you need, try changing the file type (located in the bottom right drop down menu of the *File Explorer* window) to the option *All Files* 
+- After navigating to and selecting your chosen file, click the "Open" button to open and upload the file to the application
+- To change the file you want to upload, simply click the *Browse Files" button to select the new file you want to upload
+- Once the file is selected, the information will then be captured by the application, and the name of your chosen file will be displayed on the screen
+- If uploading a student object, select the "Make New Degree Plan" button to continue. 
+- If uploading a transcript, select the "Edit Existing Degree Plan" button to continue. 
+
+## Adding New Courses (w/ Course Name and Number) to your Degree Plan
+- 
+
+## Changing Course Numbers and/or Course Names in your Degree Plan
+- 
+
+## Adding New Degree Plan Track to Existing Options
+- 
+
+## Changing Existing Degree Plan Track Name
+- 
 
 ### Installation Instructions for Developers (This is for if you're using a Windows Computer)
 - Maintain *requirements.txt* file with any new dependencies
