@@ -14,7 +14,7 @@ from course_finder import get_courses
 
 
 def plan_printer(path, gui_entry):
-    path_to_pdf = path  # Do this to make sure both file use the same transcrip
+    path_to_pdf = path  # Do this to make sure both file use the same transcript
 
     # Content of gui_entry = [ft, thesis, grad, advisor, date]
     fast_track = gui_entry[0]
