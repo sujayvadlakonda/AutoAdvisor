@@ -1,73 +1,262 @@
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk
+from tkinter.messagebox import showinfo
+import transcript
+from plan_printer import *
 
-
-class DegreePlanPage(ttk.Frame):
+class DegreePlanPage(ttk.Frame):    
     def __init__(self, container, controller):
         super().__init__(container)
         self.controller = controller  # allows for switching between application pages
 
+        self.ft_selected = tk.StringVar()
+        self.thesis_selected = tk.StringVar()
+        self.expect_grad = tk.StringVar()
+        self.advisor_name = tk.StringVar()
+        self.date_submitted = tk.StringVar()
+
+
+# Get path_to_pdf for transcript file
+        path_to_pdf = "transcripts\\ted-lasso.pdf"
+
         # Handles Degree Plan page style options
         style = ttk.Style(self)
-        style.configure("BlckBorder.TFrame", background="white")
-        style.configure("BlSmall.TLabel", font=("Roboto", 14), foreground="#107896", background="white")
+        style.configure("dp_gui.TFrame", background="black", relief="flat")
+        style.configure("section.TFrame", background="orange", relief="raised")
+        
+        style.configure("big_heading.TLabel", font=("Segoe print", 30, "bold"), foreground="black", background="orange")
+        style.configure("medium_heading.TLabel", font=("Verdana", 25), foreground="black", background="orange")
+        style.configure("bold_heading.TLabel", font=("Segoe print", 25, "bold"), foreground="black", background="orange")
 
+        style.configure("normal_text.TLabel", font=("Bookman Old Style", 14), foreground="black", background="orange")
+        style.configure("filling_text.TLabel", font=("Bookman Old Style", 14), foreground="black", background="white", relief="sunken")
+        style.configure("course_section.TLabel", font=("Bookman Old Style", 14), foreground="orange", background="black")
+
+        style.configure("TRadiobutton", font=("Bookman Old Style", 14), foreground="black", background="orange", relief="flat")
+    
         # Handles frame expansion when application window is expanded
         self.columnconfigure(0, weight=1)
         self.rowconfigure(0, weight=1)
+        
+        # Create Degree Plan Frame
+        frame = ttk.Frame(self, style="dp_gui.TFrame")
+        frame["padding"] = 10 
+        frame.columnconfigure(0, weight=1)
+        section = 11
+        for r in range(section):
+            frame.rowconfigure(r, weight=1)
+        frame.pack(expand=TRUE, fill=BOTH, side=TOP)
 
-        # Frame outline and design
-        frame = ttk.Frame(self, style="BlckBorder.TFrame")
-        frame["padding"] = (5, 0, 5, 0)  # adjusts inner padding for spacing
+# Creating frame sections
+# 0. Gui Title Frame
+        fr_titleGui = ttk.Frame(frame, style="section.TFrame")
+        fr_titleGui.columnconfigure(0, weight=1)
+        fr_titleGui.rowconfigure(0, weight=1)   
+        fr_titleGui.grid(column=0, row=0, sticky="nsew", pady=5)
+      
+        lbl_gui = ttk.Label(fr_titleGui, text="DEGREE PLAN EDITOR", style="big_heading.TLabel")
+        lbl_gui.grid(column=0, row=0, pady=5)  # text positioning
 
-        # Handles weight distribution of the frame page (you can also just use a For Loop)
-        frame.grid_columnconfigure(0, weight=1)
-        frame.grid_rowconfigure(0, weight=1)
-        frame.grid_columnconfigure(1, weight=1)
-        frame.grid_rowconfigure(0, weight=1)
-        frame.grid_columnconfigure(2, weight=1)
-        frame.grid_columnconfigure(3, weight=1)
-        frame.grid(column=0, row=0, sticky="nsew", columnspan=5)  # positioning
+# Get student info function
+        def get_student_info(path_to_pdf):  
+            student_info    = transcript.Transcript(path_to_pdf)
+            name            = student_info.get_name()
+            id              = student_info.get_id()
+            sem_ad          = student_info.get_beginning_of_graduate_record()
+            major           = student_info.get_major()
 
-        # Text label and design
-        lbl_dp = ttk.Label(frame, text="Teammate's degree plan/student object related gui goes here?:", style="BlSmall.TLabel")
-        lbl_dp.grid(column=1, row=0, columnspan=3, sticky="n", pady=10)  # text positioning
+            return major, name, id, sem_ad
+       
+        std_major, std_name, std_id, std_sem_admitted = get_student_info(path_to_pdf)
 
-        # Choose student's degree plan track text label and design
-        # lbl_dp_track = ttk.Label(frame, text="Choose student's chosen track/Degree Plan:", style="BlSmall.TLabel")
-        # lbl_dp_track.grid(column=1, row=1, columnspan=1, padx=5, pady=10)  # text positioning
+# 1. Title Frame        
+        c1=0
+        r1=4
+        fr_title = ttk.Frame(frame, style="section.TFrame")
+        fr_title.columnconfigure(0, weight=1)
+        for r in range(r1):
+            fr_title.rowconfigure(r, weight=1)
+        fr_title.grid(column=0, row=1, sticky="nsew", pady=5)   
 
-        # Insert here a Degree Plan Track options list, where the user can add/select/change/remove tracks?
+        # Labeling
+        lbl_title = ttk.Label(fr_title, text="DEGREE PLAN", style="medium_heading.TLabel")
+        lbl_title.grid(column=0, row=0, pady=(10,5))
+        lbl_title = ttk.Label(fr_title, text="UNIVERSITY OF TEXAS AT DALLAS", style="medium_heading.TLabel")
+        lbl_title.grid(column=0, row=1)
+        lbl_title = ttk.Label(fr_title, text="MASTER OF COMPUTER SCIENCE", style="medium_heading.TLabel")
+        lbl_title.grid(column=0, row=2)
 
-        # Insert here a list of prerequisite courses, where the user can change/delete/add new/add to degree plan?
+        # Get and Display Student's Major
+        lbl_major = ttk.Label(fr_title, text=std_major, style="bold_heading.TLabel")
+        lbl_major.grid(column=0, row=4, pady=(0,10))
+       
+# 2. Student Frame
+        c2=5
+        r2=3
+        fr_student = ttk.Frame(frame, style="section.TFrame")
+        for c in range(c2):
+            fr_student.columnconfigure(c, weight=1)
+        for r in range(r2):
+            fr_student.rowconfigure(r, weight=1)
+        fr_student.grid(column=0, row=2, sticky="nsew", pady=5)
 
-        # save what track option was selected in a way that the audit report can access it
+        # Labeling 
+        # Student Name
+        lbl_student = ttk.Label(fr_student, text="Name of Student:", style="normal_text.TLabel")
+        lbl_student.grid(column=0, row=0, sticky='w', padx=5, pady=(10,5))
 
-        # Insert here a way for user to select if the student is doing Fast Track, and save value to student object?
+        lbl_student = ttk.Label(fr_student, text=std_name, style="filling_text.TLabel")
+        lbl_student.grid(column=1, row=0, sticky='w', padx=5, pady=5)
 
-        # Insert here a way for user to select if the student is doing Thesis, and save value to student object?
+        # Student ID
+        lbl_student = ttk.Label(fr_student, text="Student ID Number:", style="normal_text.TLabel")
+        lbl_student.grid(column=0, row=1, sticky='w', padx=5, pady=5)
+   
+        lbl_student = ttk.Label(fr_student, text=std_id, style="filling_text.TLabel")
+        lbl_student.grid(column=1, row=1, sticky='w', padx=5, pady=5)
 
-        # Insert here way for user to generate, update with all info & save where user wants to save student object?
+        # Semester Additted
+        lbl_student = ttk.Label(fr_student, text="Semester Admitted \n to Program:", style="normal_text.TLabel")
+        lbl_student.grid(column=0, row=2, sticky='w', padx=5, pady=(5,10))
+   
+        lbl_student = ttk.Label(fr_student, text=std_sem_admitted, style="filling_text.TLabel")
+        lbl_student.grid(column=1, row=2, sticky='w', padx=5, pady=5)
 
-        # Previous Page button and design
+
+        #   FT, Thesis, Anticipated
+        options = (   ('Yes', "Y"),
+                    ('No', "N"))
+
+        # Fast Track
+        lbl_student = ttk.Label(fr_student, text="FT:", style="normal_text.TLabel")
+        lbl_student.grid(column=2, row=0, sticky='w', padx=5, pady=5)
+        c_index = 3
+        r_index = 0
+        for opt in options:
+            ft_rdb = ttk.Radiobutton(                        
+                            fr_student,
+                            text=opt[0],
+                            value=opt[1],
+                            variable=self.ft_selected,
+                            style="TRadiobutton"
+            )
+            ft_rdb.grid(column=c_index, row=r_index, sticky='w', padx=(10,0))
+            c_index += 1
+
+        # Thesis
+        lbl_student = ttk.Label(fr_student, text="Thesis:", style="normal_text.TLabel")
+        lbl_student.grid(column=2, row=1, sticky='w', padx=5, pady=5)
+        c_index = 3
+        r_index = 1
+        for opt in options:
+            thesis_rdb = ttk.Radiobutton(                        
+                            fr_student,
+                            text=opt[0],
+                            value=opt[1],
+                            variable=self.thesis_selected,
+                            style="TRadiobutton"
+            )
+            thesis_rdb.grid(column=c_index, row=r_index, sticky='w', padx=(10,0))
+            c_index += 1
+            
+        # Anticipated Graduation
+        lbl_student = ttk.Label(fr_student, text="Anticipated \n Graduation", style="normal_text.TLabel")
+        lbl_student.grid(column=2, row=2, sticky='w', padx=5, pady=5)
+
+        entry_student = ttk.Entry(fr_student, text=self.expect_grad, font=("Bookman Old Style", 14), foreground="black")
+        entry_student.grid(column=3, row=2, sticky='w', columnspan=2)      
+
+# 3. Note, Advisor, Date Frame
+        c3=4
+        r3=4
+        fr_note = ttk.Frame(frame, style="section.TFrame")
+        for c in range(c3):
+            fr_note.columnconfigure(c, weight=1)
+        for r in range(r3):
+            fr_note.rowconfigure(r, weight=1)
+        fr_note.grid(column=0, row=3, sticky="nsew", pady=5)
+
+         # Labeling note
+        lbl_note= ttk.Label(fr_note, text="* May include any 6000 or 7000 level CS course with prior permission", style="normal_text.TLabel")
+        lbl_note.grid(column=0, row=1, columnspan=4, pady=(10,20))
+
+        # Labeling Academic Advisor
+        lbl_note = ttk.Label(fr_note, text="Academic Advisor", style="normal_text.TLabel")
+        lbl_note.grid(column=0, row=3, sticky='w', padx=(5,0), pady=(5,10))
+        
+        # advisor_name = tk.StringVar()
+        entry_note = ttk.Entry(fr_note, text=self.advisor_name, font=("Bookman Old Style", 14), foreground="black")
+        entry_note.grid(column=1, row=3, sticky='w', padx=5, pady=5)
+
+        # Labeling Date
+        lbl_note = ttk.Label(fr_note, text="Date Submitted", style="normal_text.TLabel")
+        lbl_note.grid(column=2, row=3, sticky='e', padx=(0,5), pady=5)
+        
+        # date_submitted = tk.StringVar()
+        entry_note = ttk.Entry(fr_note, text=self.date_submitted, font=("Bookman Old Style", 14), foreground="black")
+        entry_note.grid(column=3, row=3, sticky='e', padx=5, pady=5)
+
+# 4. Linkup Frame
+        c_link=2
+        r_link=1
+        fr_link = ttk.Frame(frame, style="section.TFrame")
+        for c in range(c_link):
+            fr_link.columnconfigure(c, weight=1)
+        for r in range(r_link):
+            fr_link.rowconfigure(r, weight=1)
+        fr_link.grid(column=0, row=4, sticky="nsew", pady=5)
+        
+        # Previous Page Button
         prev_btn = ttk.Button(
-            frame,
+            fr_link,
             text="<< Previous",
             command=lambda: self.controller.show_frame("UploadFilePage")
         )
-        prev_btn.grid(column=0, row=1, columnspan=1, sticky="sw", padx=(5, 0), pady=(10, 20))  # button positioning
+        prev_btn.grid(column=0, row=0, sticky='w', padx=(10,5), pady=10)  # button positioning
 
-        # Button to direct user to degree_plan_report_page.py in order for user to edit degree plan
+        # Go to Homepage Button
+        homepage_btn = ttk.Button(
+            fr_link,
+            text="Go to Homepage",
+            command=lambda: self.controller.show_frame("HomepageStart")
+        )
+        homepage_btn.grid(column=0, row=0, padx=5, pady=10)  # button positioning
+        
+        def launch_pdf():
+            path = path_to_pdf
+
+            if self.ft_selected.get() == "Y":
+                ft = True
+            else:
+                ft =  False
+
+            if self.thesis_selected.get() == "Y":
+                thesis = True
+            else:
+                thesis =  False
+
+            grad = self.expect_grad.get()
+            advisor = self.advisor_name.get()
+            date =  self.date_submitted.get()            
+
+            gui_entry = [ft, thesis, grad, advisor, date]
+            plan_printer(path, gui_entry)
+
+        # Launch PDF Button
+        launch_pdf_btn = ttk.Button(
+            fr_link,
+            text="Launch PDF Editor",
+            # command=lambda: controller.show_frame("DegreePlanReportPage")
+            command=launch_pdf
+        )
+        launch_pdf_btn.grid(column=1, row=0, padx=5, pady=10)  # button positioning
+
+        # Next Button
         next_btn = ttk.Button(
-            frame,
+            fr_link,
             text="Next >>",
             command=lambda: controller.show_frame("DegreePlanReportPage")
         )
-        next_btn.grid(column=4, row=1, columnspan=1, sticky="es", pady=(10, 20))  # button padding
-
-    # note to the developer in charge of the degree plan gui:
-    # This file is just to get, whoever is working on the Degree Plan GUI, a head start on the gui.
-    # there's still the rest of the gui, student object stuff, etc. that you'll need to figure out and add to this
-    # modify it as much as you want to, just make sure to:
-    # include a way for audit_report_page.py to know what degree plan track and prerequisite courses are chosen
+        next_btn.grid(column=1, row=0, sticky="e", padx=(0,10), pady=10)  # button padding
+       

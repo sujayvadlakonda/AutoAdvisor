@@ -20,9 +20,9 @@
 #           'Earned': 30.0,
 #           'GPA_Uts': 30.0,
 #           'Points': 97.02
-#       })
+#       }, 'Traditional')
 class Student:
-    def __init__(self, student_id, name, program, major, courses, cumulative, transfer_cumulative, combined_cumulative):
+    def __init__(self, student_id, name, program, major, courses, cumulative, transfer_cumulative, combined_cumulative, track):
         self.student_id = student_id
         self.name = name
         self.program = program
@@ -31,5 +31,6 @@ class Student:
         self.cumulative = cumulative
         self.transfer_cumulative = transfer_cumulative
         self.combined_cumulative = combined_cumulative
+        self.track = track
 
 

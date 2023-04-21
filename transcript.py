@@ -2,6 +2,10 @@ import pdfplumber
 import re
 
 
+def _split_camel_case(text):
+    return re.sub(r"(?<=\w)([A-Z])", r" \1", text)
+
+
 class Transcript:
     def __init__(self, path_to_pdf):
         self.text = ""
@@ -18,9 +22,9 @@ class Transcript:
 
     def get_id(self):
         match = re.search(r"^Student ID.*$", self.text, flags=re.MULTILINE)
-        id = match.group()
-        id = re.sub(r"Student ID: ", "", id)
-        return id
+        stu_id = match.group()
+        stu_id = re.sub(r"Student ID: ", "", stu_id)
+        return stu_id
 
     def get_major(self):
         section_title = r"^Program:.*Master"
@@ -31,7 +35,7 @@ class Transcript:
         major = match.group()
         major = re.search(r"^.*Major.*$", major, flags=re.MULTILINE).group()
         major = re.sub(r".*: ", "", major).strip()
-        major = self._split_camel_case(major)
+        major = _split_camel_case(major)
 
         return major
 
@@ -42,7 +46,7 @@ class Transcript:
         match = re.search(regex, self.text, flags=re.MULTILINE)
         semester = match.group()
         semester = re.sub("^.*\n", "", semester)
-        semester = self._split_camel_case(semester)
+        semester = _split_camel_case(semester)
         return semester
 
     def get_combined_cumulative_gpa(self):
@@ -56,51 +60,5 @@ class Transcript:
         gpa = re.sub(r"Combined ?Cum ?GPA ?", "", match)
         return gpa
 
-    def get_courses(self):
-        courses = []  # A list of dictionaries to store the course information
-
-        season, year = "", ""  # Empty strings to avoid nulls
-        semester_pattern = r"(\d{4}\s?)(Summer|Spring|Fall|Winter)"  # A regular expression pattern to find course semesters
-        course_pattern = (
-            r"([A-Z]{2,4}\s)"
-            r"(\d{4}\s)"
-            r"([A-Z\:\+\s\/&-]+\s)"
-            r"(\d+.\d+\s)"
-            r"(\d+.\d+\s)"
-            r"([A-Z]{1,2}[+|-]?\s)?"
-            r"(\d+.\d+)?"
-        )  # A regular expression pattern to find course information
-
-        # Find all semesters in the text
-        sections = re.split(semester_pattern, self.text)
-
-        # Divide sections into three parts and treat accordingly
-        for x, section in enumerate(sections):
-            if x % 3 == 2:
-                season = section.strip()
-            elif x % 3 == 1:
-                year = section.strip()
-            else:
-                # Find all matches of the course pattern in the semester section
-                found_courses = re.findall(course_pattern, section)
-                # Iterate over the matches and add them to the list of courses
-                for found_course in found_courses:
-                    course = {
-                        "year": year,
-                        "season": season,
-                        "subject": found_course[0],
-                        "course_id": found_course[1],
-                        "course_name": found_course[2],
-                        "attempted": float(found_course[3]),
-                        "earned": float(found_course[4]),
-                        "grade": found_course[5] if found_course[5] else None,
-                        "points": float(found_course[6]),
-                    }
-                    courses.append(course)
-
-        return courses
-
     # https://stackoverflow.com/questions/199059/a-pythonic-way-to-insert-a-space-before-capital-letters
     # Some pdfs don't split camel case. Mike Modano is an example
-    def _split_camel_case(self, text):
-        return re.sub(r"(?<=\w)([A-Z])", r" \1", text)
