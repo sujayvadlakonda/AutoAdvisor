@@ -160,6 +160,3 @@ def plan_printer(path, gui_entry):
 
     # View the file
     subprocess.Popen(["degree_plan.pdf"], shell=True)
-
-
-plan_printer("transcripts\\krusty-krab.pdf", [True, False, 'Spring 2023'])
