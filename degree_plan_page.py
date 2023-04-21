@@ -5,8 +5,6 @@ from tkinter.messagebox import showinfo
 import transcript
 from plan_printer import *
 
-
-
 class DegreePlanPage(ttk.Frame):    
     def __init__(self, container, controller):
         super().__init__(container)
@@ -17,7 +15,11 @@ class DegreePlanPage(ttk.Frame):
         self.expect_grad = tk.StringVar()
         self.advisor_name = tk.StringVar()
         self.date_submitted = tk.StringVar()
-        
+
+
+# Get path_to_pdf for transcript file
+        path_to_pdf = "transcripts\\ted-lasso.pdf"
+
         # Handles Degree Plan page style options
         style = ttk.Style(self)
         style.configure("dp_gui.TFrame", background="black", relief="flat")
@@ -44,12 +46,7 @@ class DegreePlanPage(ttk.Frame):
         section = 11
         for r in range(section):
             frame.rowconfigure(r, weight=1)
-        # frame.grid(column=0, row=0, sticky="nsew")  # positioning
         frame.pack(expand=TRUE, fill=BOTH, side=TOP)
-
-
-# Get path_to_pdf
-        path_to_pdf = "transcripts\\keeley-jones.pdf"
 
 # Creating frame sections
 # 0. Gui Title Frame
@@ -126,26 +123,6 @@ class DegreePlanPage(ttk.Frame):
         lbl_student = ttk.Label(fr_student, text=std_sem_admitted, style="filling_text.TLabel")
         lbl_student.grid(column=1, row=2, sticky='w', padx=5, pady=5)
 
-        # selected_value = tk.StringVar()
-        # FT, Thesis, Anticipated
-        # def yes_no(c_index, r_index):
-        #     selected_value = tk.StringVar()
-        #     options = (   ('Yes', 'Y'),
-        #             ('No', 'N'))
-        #     for opt in options:
-        #         r = ttk.Radiobutton(                        
-        #                         fr_student,
-        #                         text=opt[0],
-        #                         value=opt[1],
-        #                         variable=selected_value,
-        #                         style="TRadiobutton"
-        #         )
-        #         r.grid(column=c_index, row=r_index, sticky='w', padx=(10,0))
-        #         c_index += 1
-
-        #     print(selected_value)
-        #     return selected_value.get()
-
 
         #   FT, Thesis, Anticipated
         options = (   ('Yes', "Y"),
@@ -154,10 +131,8 @@ class DegreePlanPage(ttk.Frame):
         # Fast Track
         lbl_student = ttk.Label(fr_student, text="FT:", style="normal_text.TLabel")
         lbl_student.grid(column=2, row=0, sticky='w', padx=5, pady=5)
-        # ft_selected = yes_no(3, 0)  # (column, row)
         c_index = 3
         r_index = 0
-        # ft_selected = tk.StringVar()
         for opt in options:
             ft_rdb = ttk.Radiobutton(                        
                             fr_student,
@@ -172,10 +147,8 @@ class DegreePlanPage(ttk.Frame):
         # Thesis
         lbl_student = ttk.Label(fr_student, text="Thesis:", style="normal_text.TLabel")
         lbl_student.grid(column=2, row=1, sticky='w', padx=5, pady=5)
-        # thesis_selected = yes_no(3, 1)
         c_index = 3
         r_index = 1
-        # thesis_selected = tk.StringVar()
         for opt in options:
             thesis_rdb = ttk.Radiobutton(                        
                             fr_student,
@@ -188,11 +161,9 @@ class DegreePlanPage(ttk.Frame):
             c_index += 1
             
         # Anticipated Graduation
-# need to save this info somewhere for Degree Plan =thesisort Later
         lbl_student = ttk.Label(fr_student, text="Anticipated \n Graduation", style="normal_text.TLabel")
         lbl_student.grid(column=2, row=2, sticky='w', padx=5, pady=5)
 
-        # expect_grad = tk.StringVar()
         entry_student = ttk.Entry(fr_student, text=self.expect_grad, font=("Bookman Old Style", 14), foreground="black")
         entry_student.grid(column=3, row=2, sticky='w', columnspan=2)      
 
@@ -253,16 +224,25 @@ class DegreePlanPage(ttk.Frame):
         homepage_btn.grid(column=0, row=0, padx=5, pady=10)  # button positioning
         
         def launch_pdf():
-            # ft = self.ft_selected.get()
-            # thesis = self.thesis_selected.get()
-            # graduation = self.expect_grad.get()
-            
             path = path_to_pdf
+
+            if self.ft_selected.get() == "Y":
+                ft = True
+            else:
+                ft =  False
+
+            if self.thesis_selected.get() == "Y":
+                thesis = True
+            else:
+                thesis =  False
+
             grad = self.expect_grad.get()
+            advisor = self.advisor_name.get()
+            date =  self.date_submitted.get()            
 
-            plan_printer(path, grad)
+            gui_entry = [ft, thesis, grad, advisor, date]
+            plan_printer(path, gui_entry)
 
-            # test1()
         # Launch PDF Button
         launch_pdf_btn = ttk.Button(
             fr_link,
@@ -272,19 +252,6 @@ class DegreePlanPage(ttk.Frame):
         )
         launch_pdf_btn.grid(column=1, row=0, padx=5, pady=10)  # button positioning
 
-###
-        def show_ft():
-            showinfo(
-                     title='Result',
-                     message=self.expect_grad.get()
-        )
-    
-        button1 = ttk.Button(
-                            fr_link,
-                            text="demo",
-                            command=show_ft)
-        button1.grid(column=1, row=0, padx=5, pady=10)  # button padding
-
         # Next Button
         next_btn = ttk.Button(
             fr_link,
@@ -293,22 +260,3 @@ class DegreePlanPage(ttk.Frame):
         )
         next_btn.grid(column=1, row=0, sticky="e", padx=(0,10), pady=10)  # button padding
        
-    #     self.ft_selected = ft_selected.get()
-    # def get_ft_value(self):
-    #     # return self.ft_selected.get()
-    #     return self.ft_selected
-
-    # # def get_thesis_value(self):
-    # #     return self.thesis_selected.get()
-
-    #     self.expect_grad= expect_grad.get()
-    # def get_anticipated_grad(self):
-    #     # return self.expect_grad.get()
-    #     return self.expect_grad
-
-    # def get_advisor(self):
-    #     return self.advisor_name.get()
-
-    # def get_date(self):
-    #     return self.date_submitted.get()
-    

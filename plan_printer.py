@@ -13,15 +13,15 @@ import transcript
 from course_finder import get_courses
 
 
-def plan_printer(path, grad):
+def plan_printer(path, gui_entry):
     # User input
     # path_to_pdf = "transcripts\\keeley-jones.pdf"
-    # graduation = "Spring 2033"
-    fast_track = True
-    thesis = False
+    path_to_pdf = path  # Do this to make sure both file use the same transcrip
 
-    path_to_pdf = path
-    graduation = grad
+    # Content of gui_entry = [ft, thesis, grad, advisor, date]
+    graduation = gui_entry[2]
+    fast_track = gui_entry[0]
+    thesis = gui_entry[1]
     
     track = degree_requirements.DegreePlans().get_libraries('data_science')
 
