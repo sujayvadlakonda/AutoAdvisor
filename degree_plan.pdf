@@ -21,7 +21,7 @@ endobj
 /Font <<
 /F1 6 0 R
 /F2 7 0 R
-/F1cbbb76c9-3288-4130-b6b3-ccbd6001fdde <<
+/F14360e417-849b-4389-81ce-17b8dcdc75ce <<
 /BaseFont /Helvetica
 /Encoding /WinAnsiEncoding
 /Name /F1
@@ -29,7 +29,7 @@ endobj
 /Type /Font
 >>
 >>
-/ProcSet [ /PDF /ImageB /ImageI /ImageC /Text ]
+/ProcSet [ /ImageB /ImageI /Text /ImageC /PDF ]
 >>
 /Rotate 0
 /Trans <<
@@ -115,7 +115,7 @@ T*
 T*
 (Semester\040Admitted\072\0402021\040Fall) Tj
 T*
-(Anticipated\040Graduation\072\040Fall\0403001) Tj
+(Anticipated\040Graduation\072\040Fall\0403010) Tj
 T*
 ET
 Q
@@ -345,7 +345,7 @@ Q
 q
 1 0 0 1 0 0 cm
 BT
-/F1cbbb76c9-3288-4130-b6b3-ccbd6001fdde 12 Tf
+/F14360e417-849b-4389-81ce-17b8dcdc75ce 12 Tf
 14.4 TL
 ET
 BT

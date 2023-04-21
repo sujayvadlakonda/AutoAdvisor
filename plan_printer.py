@@ -20,7 +20,7 @@ def plan_printer(path, gui_entry):
     fast_track = gui_entry[0]
     thesis = gui_entry[1]
     graduation = gui_entry[2]
-    
+
     track = degree_requirements.DegreePlans().get_libraries('data_science')
 
     # General Student
