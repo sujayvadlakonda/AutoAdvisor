@@ -18,7 +18,7 @@ class DegreePlanPage(ttk.Frame):
 
 
 # Get path_to_pdf for transcript file
-        path_to_pdf = "transcripts\\ted-lasso.pdf"
+        path_to_pdf = "transcripts\\keeley-jones.pdf"
 
         # Handles Degree Plan page style options
         style = ttk.Style(self)
