@@ -14,14 +14,12 @@ from course_finder import get_courses
 
 
 def plan_printer(path, gui_entry):
-    # User input
-    # path_to_pdf = "transcripts\\keeley-jones.pdf"
     path_to_pdf = path  # Do this to make sure both file use the same transcrip
 
     # Content of gui_entry = [ft, thesis, grad, advisor, date]
-    graduation = gui_entry[2]
     fast_track = gui_entry[0]
     thesis = gui_entry[1]
+    graduation = gui_entry[2]
     
     track = degree_requirements.DegreePlans().get_libraries('data_science')
 
@@ -157,6 +155,3 @@ def plan_printer(path, gui_entry):
 
     # View the file
     subprocess.Popen(["degree_plan.pdf"], shell=True)
-
-if __name__ == "__main__":
-    launch_pdf()
