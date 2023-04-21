@@ -21,6 +21,7 @@
 - Once the file is selected, the information will then be captured by the application, and the name of your chosen file will be displayed on the screen
 - If uploading a student object, select the "Make New Degree Plan" button to continue. 
 - If uploading a transcript, select the "Edit Existing Degree Plan" button to continue. 
+- Pages can be navigated to using the buttons located near the bottom of the screen
 
 ## Adding New Courses (w/ Course Name and Number) to your Degree Plan
 - 
