@@ -12,6 +12,7 @@
 - Installation is successful if you see *Box* as an option in the side menu of your *File Explorer* desktop application
 
 ### Usage Instructions For Window Computers
+- Due to different PC monitor sizes, should you have trouble locating the page navigation buttons, try adjusting the size of the window, or clicking the Expand window button located in the top right corner of the window
 - Users can click the "Start" button on the application's homepage to direct them to the *Upload File* page 
 - The *Upload File* page has a "Browse Files" button that will open up Window's *File Explorer* upon being clicked
 - In Window's File Explorer, select the transcript file of the student that your degree plan will be about. Alternatively, you can select your *student object* file, if you have previously made one
@@ -73,5 +74,6 @@
               command=lambda: self.controller.show_frame("InsertClassNameHere")
               )
   ```
+  
 
 
