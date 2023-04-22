@@ -96,16 +96,6 @@ class UploadFilePage(ttk.Frame):
     def open_file(self):
         if self.file_path:
             with open(self.file_path, "r") as f:
-                # This section is leo's in progress code so ignore it.
-                # Checks if Transcript.py runs in bkgd. gets edited later when other proj parts done.
-                # Then it can pass to next class to process
-                # selected_file = Transcript(self.file_path)
-                # name = selected_file.get_name()
-                # id = selected_file.get_id()
-                # major = selected_file.get_major()
-                # semester = selected_file.get_beginning_of_graduate_record()
-                # print(name, id, major, semester)
-                # selected_file.course_finder()
                 return True
         else:
             return False
