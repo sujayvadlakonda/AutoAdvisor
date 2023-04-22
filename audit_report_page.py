@@ -17,12 +17,12 @@ class AuditReportPage(ttk.Frame):
         self.style = ttk.Style(self)
         self.style.configure("aud_report_gui.TFrame", background="white")
         self.style.configure("BlWht.TLabel", font=("Segoe UI", 20), foreground="black", background="white")
-        self.style.configure("BlackSmall.TLabel", font=("Arial", 14), foreground="black", background="white")
-        self.style.configure("instruct_txt.TLabel", font=("Georgia", 14), foreground="black", background="white")
-        self.style.configure("Black_txt.TLabel", font=("Calibri", 14), foreground="black", background="white")
+        self.style.configure("BlackSmall.TLabel", font=("Arial", 14), foreground="black", background="orange")
+        self.style.configure("instruct_txt.TLabel", font=("Georgia", 14), foreground="black", background="orange")
+        self.style.configure("Black_txt.TLabel", font=("Calibri", 14), foreground="black", background="yellow")
         self.style.configure("gray_subtext.TLabel", font=("Calibri", 12), foreground="#4C4E52", background="white")
         self.style.configure("black_subtext.TLabel", font=("Calibri", 12), foreground="black", background="white")
-        self.style.configure("input.TRadiobutton", background="white")
+        self.style.configure("input.TRadiobutton", background="pink")
 
         # Handles frame expansion when application window is expanded
         self.columnconfigure(0, weight=1)
@@ -83,9 +83,9 @@ class AuditReportPage(ttk.Frame):
         lbl_overall_gpa.grid(column=0, row=8, columnspan=1, sticky="w", pady=(0, 20))  # text positioning
 
         # Displays core, elective, and overall gpa on screen
-        self.core_gpa = ""
-        self.elective_gpa = ""
-        self.overall_gpa = ""
+        self.core_gpa = "3.583"
+        self.elective_gpa = "4.000"
+        self.overall_gpa = "3.814"
         lbl_core_gpa_display = ttk.Label(self.scrollable_frame, text=self.core_gpa, style="Black_txt.TLabel")
         lbl_core_gpa_display.grid(column=1, row=6, columnspan=1, sticky="w", pady=(20, 0))  # text positioning
         lbl_elective_gpa_display = ttk.Label(self.scrollable_frame, text=self.elective_gpa, style="Black_txt.TLabel")
@@ -159,12 +159,12 @@ class AuditReportPage(ttk.Frame):
         lbl_gpa_req.grid(column=0, row=15, columnspan=2, sticky="w", pady=(30, 5))  # text positioning
 
         # Displays outstanding core, elective, and overall gpa requirements information lines on screen
-        self.maintain_core_gpa = ""
-        self.maintain_elective_gpa = ""
-        self.maintain_overall_gpa = ""
-        self.core_gpa_req = ""
-        self.elective_gpa_req = ""
-        self.overall_gpa_req = ""
+        self.maintain_core_gpa = "To maintain a 3.19 core GPA:"
+        self.maintain_elective_gpa = "To maintain a 3.0 elective GPA:"
+        self.maintain_overall_gpa = "To maintain a 3.0 overall GPA:"
+        self.core_gpa_req = "The student must pass: CS 6380"
+        self.elective_gpa_req = "The student must pass: CS 6324, CS 6350, CS 6385 "
+        self.overall_gpa_req = "The student must pass: CS 6324, CS 6350, CS 6380, CS 6385"
         lbl_core_gpa_req = ttk.Label(self.scrollable_frame, text=self.maintain_core_gpa, style="Black_txt.TLabel")
         lbl_core_gpa_req.grid(column=0, row=16, columnspan=2, sticky="w", pady=(0, 5))  # text positioning
         lbl_core_gpa_pass = ttk.Label(self.scrollable_frame, text=self.core_gpa_req, style="Black_txt.TLabel")
@@ -191,7 +191,7 @@ class AuditReportPage(ttk.Frame):
         # User prompted to select disposition of pre-reqs from degree plan via the GUI's drop down menu
         row_count = 23  # holds row of menu & text
         self.disposition_dict = {
-            "dp_pre_req_class": ["CS 3341", "CS 5303", "CS 5330", "CS 5333", "CS 5343", "CS 5348", "CS 5349", "CS 5354", "CS 5390"],
+            "dp_pre_req_class": ["CS 5333", "CS 5343", "CS 5348", "CS 5349", "CS 5354", "CS 5390"],
             "disp_options": ["None", "Completed", "Waived", "Not required by plan or elective", "Other"],
             "disp_selections": [],  # holds user selected disposition choice
             "opt_menu": [],  # holds disposition menu widget
@@ -281,15 +281,17 @@ class AuditReportPage(ttk.Frame):
 
     # Ensures updated user selected disposition values are tracked upon selection in the GUI
     def disposition_update(self, *args):
-        course_tracker = ""
+        disp_tracker = []
         for saved_disp in self.disposition_dict["disp_selections"]:
-            course_tracker = saved_disp.get()
+            disp_status_word = saved_disp.get()
+            disp_tracker.append(disp_status_word)
 
     # Ensures text entry box values are tracked upon clicking the submit button
     def comment_tracker(self):
-        comment_tracker = ""
+        comment_tracker = []
         for entry in self.disposition_dict["user_course_comment"]:
-            comment_tracker = entry.get()
+            comment_word = entry.get()
+            comment_tracker.append(comment_word)
 
     # Opens File Explorer to save file
     def save_file(self):
@@ -329,12 +331,19 @@ class AuditReportPage(ttk.Frame):
 
     # Writes information to audit report file
     def generate_report_content(self, audit_report_filepath):
+        doc_name = os.path.basename(audit_report_filepath)  # gets name of file from file path with .docx extension
+
         # Creates a file using given filename
         # with open(audit_report_filepath, "w") as f:
-
-        print(audit_report_filepath)
+        #     print(audit_report_filepath)
+        #    print(os.path.abspath(audit_report_filepath))
 
         document = Document()  # sets up Word doc object to generate audit report
+        paragraph = document.add_paragraph("Audit Report")
+
+
+        # document = Document(audit_report_filepath
+
 
         # Displays "Audit Report" title sent in file (centered, bolded & calibri font size 14)
         # ap_title = "Audit Report"
@@ -411,4 +420,4 @@ class AuditReportPage(ttk.Frame):
         #   Adds with indents for the "the student" lines of section?
         # waiting on akelanda to provide me the string variable that has text line that they want me to print
 
-        # this method is in progress/being revamped at the moment
+        document.save(audit_report_filepath)  # saves the word doc
