@@ -1,3 +1,6 @@
 docx==0.2.4
 pdfplumber==0.8.0
 python_docx==0.8.11
+
+PyPDF4~=1.27.0
+reportlab~=3.6.12

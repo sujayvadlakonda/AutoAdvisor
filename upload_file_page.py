@@ -1,9 +1,8 @@
 import os
 import tkinter as tk
-from tkinter import *
 from tkinter import ttk, filedialog
 from tkinter import messagebox as mbox
-from transcript import *
+import transcript
 
 
 class UploadFilePage(ttk.Frame):
@@ -113,6 +112,13 @@ class UploadFilePage(ttk.Frame):
     # Sets file path object
     def set_filepath(self, file_path):
         self.file_path = file_path
+        script = transcript.Transcript(file_path)
+        DPP = self.controller.get_page("DegreePlanPage")
+        DPP.path_to_pdf = file_path
+        DPP.lbl_major.configure(text=script.get_major())
+        DPP.lbl_student_name.configure(text=script.get_name())
+        DPP.lbl_student_id.configure(text=script.get_id())
+        DPP.lbl_student_admit.configure(text=script.get_beginning_of_graduate_record())
 
     # Gets file path of file selected from file explorer by the user and opens it
     def file_selection(self):

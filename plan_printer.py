@@ -1,37 +1,30 @@
 import subprocess
 import PyPDF4
 import pdfplumber
+import degree_requirements
+import transcript
 from io import BytesIO
+from course_finder import get_courses
 from reportlab.lib import colors
 from reportlab.lib.pagesizes import letter, portrait
 from reportlab.lib.styles import ParagraphStyle
 from reportlab.platypus import SimpleDocTemplate, Spacer, Table, TableStyle, Paragraph
 from reportlab.pdfgen import canvas
-import degree_requirements
-import transcript
-from course_finder import get_courses
-
-
 
 def plan_printer(path, gui_entry):
-    # Content of gui_entry = [ft, thesis, grad, advisor, date]
-
-    # User input
-    path_to_pdf = path  # Do this to make sure both file use the same transcript
-    grad = gui_entry[2]
     fast_track = gui_entry[0]
     thesis = gui_entry[1]
+    grad = gui_entry[2]
     track = degree_requirements.DegreePlans().get_libraries('data_science')
 
     # General Student
-    student_info = transcript.Transcript(path_to_pdf)
+    student_info = transcript.Transcript(path)
     student_name = student_info.get_name()
     student_id = student_info.get_id()
     admit = student_info.get_beginning_of_graduate_record()
-    major = student_info.get_major()
 
     # Student Credit
-    with pdfplumber.open(path_to_pdf) as pdf:
+    with pdfplumber.open(path) as pdf:
         courses = get_courses(pdf)
 
     # Track Information
@@ -69,16 +62,16 @@ def plan_printer(path, gui_entry):
 
     # Define student info
     elements.append(Paragraph("<b>DEGREE PLAN<br/>"
-                            "UNIVERSITY OF TEXAS AT DALLAS<br/>"
-                            "MASTER OF COMPUTER SCIENCE</b>", style=title_style))
+                              "UNIVERSITY OF TEXAS AT DALLAS<br/>"
+                              "MASTER OF COMPUTER SCIENCE</b>", style=title_style))
     elements.append(Spacer(1, 4))
     elements.append(Paragraph("<b>{}</b><br/>"
-                            "({})".format(track_name, track_update), style=subtitle_style))
+                              "({})".format(track_name, track_update), style=subtitle_style))
     elements.append(Spacer(1, 4))
     elements.append(Paragraph("Name of Student: {}<br/>"
-                            "Student I.D. number: {}<br/>"
-                            "Semester Admitted: {}<br/>"
-                            "Anticipated Graduation: {}".format(student_name, student_id, admit, grad), style=info_style))
+                              "Student I.D. number: {}<br/>"
+                              "Semester Admitted: {}<br/>"
+                              "Anticipated Graduation: {}".format(student_name, student_id, admit, grad), style=info_style))
     elements.append(Spacer(1, 4))
 
     # Define Elements
@@ -86,10 +79,10 @@ def plan_printer(path, gui_entry):
         try:
             keys = track[entry].keys()
             data = [["                            Course Name                            ",
-                    "       Course ID       ",
-                    "       Semester        ",
-                    "        Credit         ",
-                    "         Grade         "]]
+                     "       Course ID       ",
+                     "       Semester        ",
+                     "        Credit         ",
+                     "         Grade         "]]
             for key in keys:
                 line = [key, track[entry][key]]
                 for credit in courses:
@@ -108,30 +101,30 @@ def plan_printer(path, gui_entry):
             try:
                 track[entry].sort()
                 data = [["                            Course Name                            ",
-                        "       Course ID       ",
-                        "       Semester        ",
-                        "        Credit         ",
-                        "         Grade         "]]
+                         "       Course ID       ",
+                         "       Semester        ",
+                         "        Credit         ",
+                         "         Grade         "]]
                 for slot in track[entry]:
+                    found = False
                     for credit in courses:
                         if int(slot) < int(credit['course_id'][-4:]):
                             data.append([credit['course_name'],
-                                        credit['course_id'],
-                                        str(credit['season'] + " " + str(credit['year'])),
-                                        credit['earned'],
-                                        credit['grade']])
+                                         credit['course_id'],
+                                         str(credit['season'] + " " + str(credit['year'])),
+                                         credit['earned'],
+                                         credit['grade']])
                             courses.remove(credit)
+                            found = True
                             break
-                        if credit is courses[len(courses)-1]:
-                            data.append(['', '', '', '', ''])
+                    if not found:
+                        data.append(['', '', '', '', ''])
                 table = Table(data)
                 table.setStyle(table_style)
                 elements.append(table)
                 elements.append(Spacer(1, 4))
             except AttributeError:
                 elements.append(Paragraph(track[entry].format(), style=info_style))
-    for credit in courses:
-        print(credit)
     pdf.build(elements)
 
     # Create canvas objects
@@ -142,8 +135,8 @@ def plan_printer(path, gui_entry):
     c.acroForm.textfield(height=18, width=100, x=455, y=690, name="text3")
     c.acroForm.textfield(height=18, width=100, x=455, y=670, name="text4")
     c.drawString(455, 640, "FT:           TH:")
-    c.acroForm.checkbox(size=20, x=480, y=635, name="fastrack")
-    c.acroForm.checkbox(size=20, x=535, y=635, name="Thesis")
+    c.acroForm.checkbox(size=20, x=480, y=635, name="fastrack", checked=fast_track)
+    c.acroForm.checkbox(size=20, x=535, y=635, name="Thesis", checked=thesis)
     c.showPage()
     c.save()
 

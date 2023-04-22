@@ -5,7 +5,7 @@ class DegreePlans:
     def __init__(self):
         data_science = {
             'Name': 'Data Science',
-            'Update': 'Fall 2020',
+            'Update': 'Fall 2023',
             'Color': colors.salmon,
 
             'Core_text': 'Core Courses: 15 Credit Hours (3.19 Grade Point Average Required)',
