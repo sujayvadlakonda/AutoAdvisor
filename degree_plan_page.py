@@ -57,16 +57,6 @@ class DegreePlanPage(ttk.Frame):
         lbl_gui = ttk.Label(fr_titleGui, text="DEGREE PLAN EDITOR", style="big_heading.TLabel")
         lbl_gui.grid(column=0, row=0, pady=5)  # text positioning
 
-        # Get student info function
-        def get_student_info(path):
-            student_info = transcript.Transcript(path)
-            name = student_info.get_name()
-            id = student_info.get_id()
-            sem_ad = student_info.get_beginning_of_graduate_record()
-            major = student_info.get_major()
-
-            return major, name, id, sem_ad
-
         # 1. Title Frame
         c1 = 0
         r1 = 4
