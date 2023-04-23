@@ -1,6 +1,5 @@
 import subprocess
 import PyPDF4
-import pdfplumber
 import degree_requirements
 import transcript
 from io import BytesIO
@@ -24,8 +23,7 @@ def plan_printer(path, gui_entry):
     admit = student_info.get_beginning_of_graduate_record()
 
     # Student Credit
-    with pdfplumber.open(path) as pdf:
-        courses = get_courses(pdf)
+    courses = get_courses(path)
 
     # Track Information
     track_name = track['Name']

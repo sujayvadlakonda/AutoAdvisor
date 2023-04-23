@@ -2,7 +2,8 @@ import re
 import pdfplumber
 
 
-def get_courses(pdf):
+def get_courses(path_to_pdf):
+    pdf = pdfplumber.open(path_to_pdf)
     courses = []  # A list of dictionaries to store the course information
     season, year = "", ""  # Empty strings to avoid nulls
     semester_pattern = r"(\d{4}\s?)(Summer|Spring|Fall|Winter)"  # A regular expression pattern to find course semesters

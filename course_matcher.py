@@ -1,14 +1,12 @@
 import degree_tracks
 import course_finder
-import pdfplumber
 
 # Get info from the user
 student = 'transcripts\\roy-kent.pdf'
 chosen_track = 'Software Engineering'
 
 # Establish variables
-script = pdfplumber.open(student)
-course_credits = course_finder.get_courses(script)
+course_credits = course_finder.get_courses(student)
 track = degree_tracks.degrees[chosen_track]
 
 
