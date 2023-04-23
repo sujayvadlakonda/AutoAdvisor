@@ -2,6 +2,8 @@ import pdfplumber
 import re
 
 
+# https://stackoverflow.com/questions/199059/a-pythonic-way-to-insert-a-space-before-capital-letters
+# Some pdfs don't split camel case. Mike Modano is an example
 def _split_camel_case(text):
     return re.sub(r"(?<=\w)([A-Z])", r" \1", text)
 
@@ -59,6 +61,3 @@ class Transcript:
         match = match.group()
         gpa = re.sub(r"Combined ?Cum ?GPA ?", "", match)
         return gpa
-
-    # https://stackoverflow.com/questions/199059/a-pythonic-way-to-insert-a-space-before-capital-letters
-    # Some pdfs don't split camel case. Mike Modano is an example
