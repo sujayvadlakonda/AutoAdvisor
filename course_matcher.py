@@ -25,7 +25,12 @@ def find_prerequisites():
     return prerequisites
 
 def find_core_credits():
+    pass
+
 
 def find_():
+    pass
+
 
 def find_prerequisites():
+    pass
