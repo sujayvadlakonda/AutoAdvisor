@@ -29,9 +29,7 @@ class AuditReport:
 
         ids = []
         for elective in electives:
-            number = elective["course_id"].strip()
-            subject = elective["subject"].strip()
-            id = subject + " " + number
+            id = elective["course_id"]
             ids.append(id)
 
         ids.sort()
@@ -52,11 +50,7 @@ class AuditReport:
         for requirement in self.track.core_requirements:
             course_dict = requirement.is_met(self.courses)
             if course_dict:
-                identifier = (
-                    course_dict["subject"].strip()
-                    + " "
-                    + course_dict["course_id"].strip()
-                )
+                identifier = course_dict["course_id"]
                 core_courses.append(identifier)
 
         return core_courses

@@ -28,8 +28,9 @@ class ComputerScience:
         consumed = self._get_core_consumed(courses)
 
         for course in courses.courses:
-            number = int(course["course_id"].strip())
-            subject = course["subject"].strip()
+            id = course["course_id"].strip()
+            subject = id[0:2]
+            number = int(id[3:7])
             if number >= 6000 and (subject == "CS" or subject == "SE"):
                 id = subject + " " + str(number)
                 if not id in consumed:
@@ -66,9 +67,7 @@ class ComputerScience:
 
         ids = []
         for course in consumed_courses:
-            number = course["course_id"].strip()
-            subject = course["subject"].strip()
-            id = subject + " " + number
+            id = course["course_id"].strip()
             ids.append(id)
 
         return ids

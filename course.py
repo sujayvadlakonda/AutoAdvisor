@@ -31,7 +31,7 @@ class Courses:
     # Input: "CS 1234"
     def contains(self, course_identifier):
         for course in self.courses:
-            identifier = course["subject"].strip() + " " + course["course_id"].strip()
+            identifier = course["course_id"]
             if identifier == course_identifier:
                 return course
 
