@@ -6,6 +6,7 @@ class Track:
     def __init__(self):
         self.core_requirements = []
         self.leveling_courses = []
+        self.name = ""
 
 
 class ComputerScience:
@@ -17,6 +18,7 @@ class ComputerScience:
             LevelingCourse("CS 5343"),
             LevelingCourse("CS 5348"),
         ]
+        self.name = "Computer Science (Please Specialize!)"
 
     def get_electives(self, courses):
         electives = self._get_5xxx_electives(courses)
@@ -72,6 +74,8 @@ class ComputerScience:
 class DataScience(ComputerScience):
     def __init__(self):
         super().__init__()
+
+        self.name = "Data Science"
 
         self.core_requirements = [
             SimpleRequirement("CS 6313"),
