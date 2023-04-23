@@ -1,8 +1,5 @@
-import os
-
 from course_finder import get_courses
 from course import Courses
-from track import DataScience
 
 
 class AuditReport:
@@ -12,19 +9,23 @@ class AuditReport:
         self.courses = courses
         self.track = track
 
-    def print_courses(self):
-        self.print_core()
-        self.print_electives()
-        print()
-        self.print_leveling()
+    def get_courses_section(self):
+        courses_section = ""
+        courses_section += self.get_core_section() + "\n"
+        courses_section += self.get_electives_section() + "\n\n"
+        courses_section += self.get_leveling_section() + "\n"
+        return courses_section
 
-    def print_core(self):
+    def get_core_section(self):
+        core_section = "Core Courses: "
         core = self._get_core_identifiers()
-        print("Core Courses: ", end="")  # w/o new line
-        print(", ".join(core))
+        core = ", ".join(core)
+        core_section += core
+        return core_section
 
-    def print_electives(self):
-        print("Elective Courses: ", end="")  # w/o new line
+    def get_electives_section(self):
+        electives_section = "Elective Courses: "
+
         electives = self.track.get_electives(self.courses)
 
         ids = []
@@ -35,13 +36,18 @@ class AuditReport:
         ids.sort()
 
         ids = ", ".join(ids)
-        print(ids)
+        electives_section += ids
+        return electives_section
 
-    def print_leveling(self):
-        print("Leveling Courses and Pre-requisites from Admission Letter:")
-        print()
+    def get_leveling_section(self):
+        leveling_section = (
+            "Leveling Courses and Pre-requisites from Admission Letter:\n"
+        )
+
         for leveling in self.track.leveling_courses:
-            leveling.print()
+            leveling_section += str(leveling) + "\n"
+
+        return leveling_section
 
     # Returns core courses on transcript regardless of completion status
     def _get_core_identifiers(self):

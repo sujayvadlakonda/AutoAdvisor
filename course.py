@@ -23,6 +23,9 @@ class LevelingCourse(Course):
     def print(self):
         print(self.id, self.status)
 
+    def __str__(self):
+        return self.id + " " + self.status
+
 
 class Courses:
     def __init__(self, courses=[]):
