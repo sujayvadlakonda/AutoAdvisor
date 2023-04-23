@@ -43,3 +43,9 @@ class DegreeApp(tk.Tk):
     def show_frame(self, page_name):
         frame = self.frames[page_name]
         frame.tkraise()
+
+    def get_page(self, className):
+        for page in self.frames.values():
+            if str(page.__class__.__name__) == className:
+                return page
+        return None
