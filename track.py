@@ -1,3 +1,6 @@
+# This is where I read all the requirements from
+# https://catalog.utdallas.edu/2021/graduate/programs/ecs/computer-science
+
 from requirement import SimpleRequirement, MultiRequirement
 from course import LevelingCourse
 
@@ -86,3 +89,48 @@ class DataScience(ComputerScience):
         ]
 
         self.leveling_courses.append(LevelingCourse("CS 3341"))
+
+
+class IntelligentSystems(ComputerScience):
+    def __init__(self):
+        super().__init__()
+
+        self.name = "Intelligent Systems"
+
+        self.core_requirements = [
+            SimpleRequirement("CS 6320"),
+            SimpleRequirement("CS 6363"),
+            SimpleRequirement("CS 6364"),
+            SimpleRequirement("CS 6375"),
+            MultiRequirement(["CS 6360", "CS 6378"]),
+        ]
+
+
+class Systems(ComputerScience):
+    def __init__(self):
+        super().__init__()
+
+        self.name = "Systems"
+
+        self.core_requirements = [
+            SimpleRequirement("CS 6304"),
+            SimpleRequirement("CS 6363"),
+            SimpleRequirement("CS 6378"),
+            SimpleRequirement("CS 6396"),
+            MultiRequirement(
+                [
+                    "CS 6349",
+                    "CS 6376",
+                    "CS 6380",
+                    "CS 6397",
+                ]
+            ),
+        ]
+
+
+# Data Science: Ted Lasso, Taylor Swift, Roy Kent, Krusty Krab, Monica Geller
+# Intelligent Systems: Mike Modano, Stevie Budd
+# Traditional Computer Science: Harry Potter
+# Interactive Computing: Jamie Tartt, Ron Weasley
+# Systems: Chandler Bing
+# Software Engineering: Rachel Green
