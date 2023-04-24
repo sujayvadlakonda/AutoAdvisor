@@ -1,10 +1,13 @@
 import tkinter as tk
 import os
+import docx
 from tkinter import *
 from tkinter import ttk
 from tkinter.filedialog import asksaveasfilename
 from tkinter import messagebox as mbox
 from docx import Document
+from docx.shared import Pt, Inches
+from docx.enum.text import WD_PARAGRAPH_ALIGNMENT
 # from audit_report import AuditReport
 
 
@@ -12,6 +15,15 @@ class AuditReportPage(ttk.Frame):
     def __init__(self, container, controller):
         super().__init__(container)
         self.controller = controller
+
+        self.student_name = "example name"
+        self.student_id = "example id"
+        self.student_plan = "Master"
+        self.student_major = "example major"
+        self.student_track = "example track"
+
+        self.core_courses = "example line of core course"
+        self.elective_courses = "example line of elective course"
 
         # Handles gui for audit report page
         self.style = ttk.Style(self)
@@ -83,9 +95,9 @@ class AuditReportPage(ttk.Frame):
         lbl_overall_gpa.grid(column=0, row=8, columnspan=1, sticky="w", pady=(0, 20))  # text positioning
 
         # Displays core, elective, and overall gpa on screen
-        self.core_gpa = "3.583"
-        self.elective_gpa = "4.000"
-        self.overall_gpa = "3.814"
+        self.core_gpa = "example core gpa"
+        self.elective_gpa = "example elective gpa"
+        self.overall_gpa = "example overall gpa"
         lbl_core_gpa_display = ttk.Label(self.scrollable_frame, text=self.core_gpa, style="Black_txt.TLabel")
         lbl_core_gpa_display.grid(column=1, row=6, columnspan=1, sticky="w", pady=(20, 0))  # text positioning
         lbl_elective_gpa_display = ttk.Label(self.scrollable_frame, text=self.elective_gpa, style="Black_txt.TLabel")
@@ -159,12 +171,12 @@ class AuditReportPage(ttk.Frame):
         lbl_gpa_req.grid(column=0, row=15, columnspan=2, sticky="w", pady=(30, 5))  # text positioning
 
         # Displays outstanding core, elective, and overall gpa requirements information lines on screen
-        self.maintain_core_gpa = "To maintain a 3.19 core GPA:"
-        self.maintain_elective_gpa = "To maintain a 3.0 elective GPA:"
-        self.maintain_overall_gpa = "To maintain a 3.0 overall GPA:"
-        self.core_gpa_req = "The student must pass: CS 6380"
-        self.elective_gpa_req = "The student must pass: CS 6324, CS 6350, CS 6385 "
-        self.overall_gpa_req = "The student must pass: CS 6324, CS 6350, CS 6380, CS 6385"
+        self.maintain_core_gpa = "To maintain a example core GPA:"
+        self.maintain_elective_gpa = "To maintain a example elective GPA:"
+        self.maintain_overall_gpa = "To maintain a example overall GPA:"
+        self.core_gpa_req = "The student must pass: example class"
+        self.elective_gpa_req = "The student must pass: example class "
+        self.overall_gpa_req = "The student must pass: example class"
         lbl_core_gpa_req = ttk.Label(self.scrollable_frame, text=self.maintain_core_gpa, style="Black_txt.TLabel")
         lbl_core_gpa_req.grid(column=0, row=16, columnspan=2, sticky="w", pady=(0, 5))  # text positioning
         lbl_core_gpa_pass = ttk.Label(self.scrollable_frame, text=self.core_gpa_req, style="Black_txt.TLabel")
@@ -243,7 +255,7 @@ class AuditReportPage(ttk.Frame):
             text="Save Audit Report",
             command=lambda: self.save_file()
         )
-        audit_report_btn.grid(column=3, row=row_count+1, columnspan=1, sticky="sw", padx=(0, 5), pady=(20, 20))  # positioning
+        audit_report_btn.grid(column=3, row=row_count+1, columnspan=1, sticky="sw", padx=(0, 5), pady=20)  # positioning
 
         # Go to homepage button and design
         homepage_btn = ttk.Button(
@@ -331,61 +343,129 @@ class AuditReportPage(ttk.Frame):
 
     # Writes information to audit report file
     def generate_report_content(self, audit_report_filepath):
-        doc_name = os.path.basename(audit_report_filepath)  # gets name of file from file path with .docx extension
+        document = docx.Document()  # sets up Word doc object to generate audit report
 
-        # Creates a file using given filename
-        # with open(audit_report_filepath, "w") as f:
-        #     print(audit_report_filepath)
-        #    print(os.path.abspath(audit_report_filepath))
+        # sets default font
+        report_style = document.styles["Normal"]
+        fonts = report_style.font
+        fonts.name = "Calibri"
 
-        document = Document()  # sets up Word doc object to generate audit report
-        paragraph = document.add_paragraph("Audit Report")
+        # Handles word doc margin
+        sections = document.sections
+        for section in sections:
+            section.top_margin = Inches(0.5)
+            section.bottom_margin = Inches(0.5)
+            section.left_margin = Inches(0.5)
+            section.right_margin = Inches(0.5)
 
+        # Displays "Audit Report" title sent in file
+        ar_title = document.add_paragraph()
+        ar_title.paragraph_format.alignment = WD_PARAGRAPH_ALIGNMENT.CENTER  # centers text
+        ar_title.paragraph_format.space_after = Pt(12)  # adds space after paragraph
+        format_ar_title = ar_title.add_run("Audit Report")  # adds text
+        format_ar_title.bold = True  # sets text to bold
+        format_ar_title.font.size = Pt(14)  # sets font size
 
-        # document = Document(audit_report_filepath
+        # Displays student name in audit report word doc
+        ar_student_name = document.add_paragraph()
+        format_ar_student_lbl = ar_student_name.add_run("Name: ")  # adds text
+        format_ar_student_lbl.bold = True  # sets text to bold
+        format_ar_student_lbl.font.size = Pt(12)  # sets font size
+        format_ar_student_name = ar_student_name.add_run(self.student_name)
+        format_ar_student_name.font.size = Pt(12)  # sets font size
 
+        # Displays id in audit report word doc
+        format_ar_student_id_lbl = ar_student_name.add_run("               ID: ")  # adds text
+        format_ar_student_id_lbl.bold = True  # sets text to bold
+        format_ar_student_id_lbl.font.size = Pt(12)  # sets font size
+        format_ar_student_id = ar_student_name.add_run(self.student_id)
+        format_ar_student_id.font.size = Pt(12)  # sets font size
+        ar_student_name.paragraph_format.space_after = Pt(0)  # removes space after paragraph
 
-        # Displays "Audit Report" title sent in file (centered, bolded & calibri font size 14)
-        # ap_title = "Audit Report"
+        # Displays Plan in audit report word doc
+        ar_student_plan = document.add_paragraph()
+        format_ar_student_plan_lbl = ar_student_plan.add_run("Plan: ")  # adds text
+        format_ar_student_plan_lbl.bold = True  # sets text to bold
+        format_ar_student_plan_lbl.font.size = Pt(12)  # sets font size
+        format_ar_student_plan = ar_student_plan.add_run(self.student_plan)
+        format_ar_student_plan.font.size = Pt(12)  # sets font size
 
-        # Adds spacing between lines
+        # Displays Student major in word doc
+        format_ar_student_major_lbl = ar_student_plan.add_run("                               Major: ")  # adds text
+        format_ar_student_major_lbl.bold = True  # sets text to bold
+        format_ar_student_major_lbl.font.size = Pt(12)  # sets font size
+        format_ar_student_major = ar_student_plan.add_run(self.student_plan)
+        format_ar_student_major.font.size = Pt(12)  # sets font size
+        ar_student_plan.paragraph_format.space_after = Pt(0)  # removes space after paragraph
 
-        # Displays student information in file
-        # self.student_name = ""
-        # self.student_id = ""
-        # self.student_plan = "Master"
-        # self.student_major = ""
-        # self.student_track = ""
-        # Name: (r1 left side, title bold, calibri 12)
-        # ID: (r1 right side (but has the align left option chosen), title bold, calibri 12)
-        # Plan: Master (r2 Left Side, title bold, calibri 12)
-        # Major: (r2 right side (but has the align left option chosen), title bold, calibri 12)
-        # Track: (r3 right side (but has the align left option chosen), based on degree plan, title bold, calibri 12)
+        # Displays student track in word doc
+        ar_student_track = document.add_paragraph()
+        format_ar_student_track_lbl = ar_student_track.add_run("Track: ")  # adds text
+        format_ar_student_track_lbl.bold = True  # sets text to bold
+        format_ar_student_track_lbl.font.size = Pt(12)  # sets font size
+        format_ar_student_track = ar_student_track.add_run(self.student_track)
+        format_ar_student_track.font.size = Pt(12)  # sets font size
+        ar_student_track.paragraph_format.space_after = Pt(12)  # adds space after paragraph
 
-        # Adds spacing between lines
+        # Displays "Core GPA" row in word doc
+        ar_core_gpa = document.add_paragraph()
+        format_ar_core_gpa_lbl = ar_core_gpa.add_run("Core GPA: ")  # adds text
+        format_ar_core_gpa_lbl.bold = True  # sets text to bold
+        format_ar_core_gpa_lbl.font.size = Pt(12)  # sets font size
+        format_ar_core_gpa = ar_core_gpa.add_run(self.core_gpa)
+        format_ar_core_gpa.font.size = Pt(12)  # sets font size
+        ar_core_gpa.paragraph_format.space_after = Pt(0)  # removes space after paragraph
 
-        # Displays core, elective, and overall gpa in file
-        # Displays "Core GPA" row in file (r1, title bold, calibri 12)
-        # Displays "Elective GPA" row in file (r2, title bold, calibri 12)
-        # Displays "Overall GPA" row in fil (r3, title bold, calibri 12)
-        # waiting on akelanda to finish making a way for me to access their gpa calculation answers
+        # Displays "Elective GPA" row in file
+        ar_elective_gpa = document.add_paragraph()
+        format_ar_elective_gpa_lbl = ar_elective_gpa.add_run("Elective GPA: ")  # adds text
+        format_ar_elective_gpa_lbl.bold = True  # sets text to bold
+        format_ar_elective_gpa_lbl.font.size = Pt(12)  # sets font size
+        format_ar_elective_gpa = ar_elective_gpa.add_run(self.elective_gpa)
+        format_ar_elective_gpa.font.size = Pt(12)  # sets font size
+        ar_elective_gpa.paragraph_format.space_after = Pt(0)  # removes space after paragraph
 
-        # Adds spacing between lines
+        # Displays "Overall GPA" row in file
+        ar_overall_gpa = document.add_paragraph()
+        format_ar_overall_gpa_lbl = ar_overall_gpa.add_run("Combined GPA: ")  # adds text
+        format_ar_overall_gpa_lbl.bold = True  # sets text to bold
+        format_ar_overall_gpa_lbl.font.size = Pt(12)  # sets font size
+        format_ar_overall_gpa = ar_overall_gpa.add_run(self.elective_gpa)
+        format_ar_overall_gpa.font.size = Pt(12)  # sets font size
+        ar_overall_gpa.paragraph_format.space_after = Pt(12)  # adds space after paragraph
 
-        # Displays "Core Courses" row in file (title bold, calibri 12)
-        # self.core_courses = ""
-        # Displays "Elective Courses" row in file (in course number order, title bold, calibri 12)
-        # self.elective_courses = ""
-        # use sujay's code to provide the string/list/dictionary that holds the line of text to print
+        # Displays "Core Courses" row in file
+        ar_core_courses = document.add_paragraph()
+        format_ar_core_courses_lbl = ar_core_courses.add_run("Core Courses: ")  # adds text
+        format_ar_core_courses_lbl.bold = True  # sets text to bold
+        format_ar_core_courses_lbl.font.size = Pt(12)  # sets font size
+        format_ar_core_courses = ar_core_courses.add_run(self.core_courses)
+        format_ar_core_courses.font.size = Pt(12)  # sets font size
+        ar_core_courses.paragraph_format.space_after = Pt(0)  # removes space after paragraph
 
-        # Adds spacing between lines
+        # Displays "Elective Courses" row in file
+        ar_elective_courses = document.add_paragraph()
+        format_ar_elective_courses_lbl = ar_elective_courses.add_run("Elective Courses: ")  # adds text
+        format_ar_elective_courses_lbl.bold = True  # sets text to bold
+        format_ar_elective_courses_lbl.font.size = Pt(12)  # sets font size
+        format_ar_elective_courses = ar_elective_courses.add_run(self.elective_courses)
+        format_ar_elective_courses.font.size = Pt(12)  # sets font size
+        ar_elective_courses.paragraph_format.space_after = Pt(12)  # adds space after paragraph
 
-        # Displays "Leveling Courses and Pre-requisites from Admission Letter:" title in file (bold, calibri 12)
-        # pre_req_sect_title = "Leveling Courses and Pre-requisites from Admission Letter:"
+        # Displays "Leveling Courses and Pre-requisites from Admission Letter:" title in word doc
+        pre_req_section_title = "Leveling Courses and Pre-requisites from Admission Letter:"
+        ar_pre_req_title = document.add_paragraph()
+        format_ar_pre_req_title_lbl = ar_pre_req_title.add_run(pre_req_section_title)  # adds text
+        format_ar_pre_req_title_lbl.bold = True  # sets text to bold
+        format_ar_pre_req_title_lbl.font.size = Pt(12)  # sets font size
+        ar_pre_req_title.paragraph_format.space_after = Pt(12)  # adds space after paragraph
 
-        # Adds spacing between lines
-
-        # Displays Course (Name & Number e.g. CS 5333) and user selected disposition of pre-reqs in file (Calibri 12)
+        # Displays Course and disposition of pre-reqs in file
+        ar_pre_req_courses = document.add_paragraph()
+        # for loop to print out courses and disposition
+        format_ar_pre_req_courses = ar_pre_req_courses.add_run()  # adds text
+        format_ar_pre_req_courses.font.size = Pt(12)  # sets font size
+        ar_pre_req_courses.paragraph_format.space_after = Pt(0)  # removes space after paragraph
         # display [course abbrev and #]: [user selected disposition option] - [additional text, if applicable]
         # use for loop w/ .get() to get value in dictionary's stringVar to append to new [] to write to word doc
         # use for loop to ck index of stringvar that has "Completed" opt & use index to get class name to get sem info
@@ -398,26 +478,42 @@ class AuditReportPage(ttk.Frame):
         # If user selected "Completed" disposition option: additionally display sem. of completion + grade in file
         # If user selected "Waived/Other" disposition option: additionally display user inputted comment/sem. in file
         # Display "None" if all choices are none and check for it
-        # note to self: look at sujay's gitHub for list/dict of pre-req to print them out in a list in the gui + file
+        # figure out the self vri
 
-        # Adds spacing between lines
+        # Displays "Outstanding Requirements:" title in file
+        outstanding_req_title = "Outstanding Requirements:"
+        ar_out_req_title = document.add_paragraph()
+        format_ar_out_req_title_lbl = ar_out_req_title.add_run(outstanding_req_title)  # adds text
+        format_ar_out_req_title_lbl.bold = True  # sets text to bold
+        format_ar_out_req_title_lbl.font.size = Pt(12)  # sets font size
+        ar_out_req_title.paragraph_format.space_before = Pt(12)  # adds space before paragraph
+        ar_out_req_title.paragraph_format.space_after = Pt(12)  # adds space after paragraph
 
-        # Displays "Outstanding Requirements:" title in file (bold, calibri 12)
-        # outstanding_req_title = "Outstanding Requirements:"
+        # Displays outstanding requirements for core gpa requirements in file
+        ar_out_req = document.add_paragraph()
+        format_ar_out_req_core_gpa = ar_out_req.add_run(self.maintain_core_gpa)  # adds text
+        format_ar_out_req_core_gpa.font.size = Pt(12)  # sets font size
+        format_ar_out_req_core_gpa.paragraph_format.space_after = Pt(0)  # removes space after paragraph
+        format_ar_out_req_core_courses = ar_out_req.add_run(self.core_gpa_req)  # adds text
+        format_ar_out_req_core_courses.font.size = Pt(12)  # sets font size
+        format_ar_out_req_core_courses.paragraph_format.space_after = Pt(0)  # removes space after paragraph
 
-        # Adds spacing between lines
+        # Displays outstanding requirements for elective gpa requirements in file
+        format_ar_out_req_elective_gpa = ar_out_req.add_run(self.maintain_elective_gpa)  # adds text
+        format_ar_out_req_elective_gpa.font.size = Pt(12)  # sets font size
+        format_ar_out_req_elective_gpa.paragraph_format.space_after = Pt(0)  # removes space after paragraph
+        format_ar_out_req_elective_courses = ar_out_req.add_run(self.elective_gpa_req)  # adds text
+        format_ar_out_req_elective_courses.font.size = Pt(12)  # sets font size
+        format_ar_out_req_elective_courses.paragraph_format.space_after = Pt(0)  # removes space after paragraph
 
-        # Displays outstanding core, elective, and overall gpa requirements in file (Calibri size 12 font)
-        # requirements that akelanda would follow for their part of the code:
-        #   If GPA needed in remaining course(s) is >= 2.00:
-        #   then, if one course remaining display: The student needs >= C+, B-, etc. in CS xxxx
-        #   or if multiple courses remaining display: The student needs a GPA >= x.xx in: CS xxxx, CS xxxx, etc.
-        #   If GPA needed in remaining course(s) is < 2.00: Display: The student must pass CS xxxx, CS xxxx, etc.
-        #   or if the course completed then e.g. Core Complete.
-        #   To graduate the student must have a Core GPA >= 3.19.
-        #   or to graduate with a 3.0 <= Core GPA < 3.19 if they complete an extra 6000+ level CS/SE course.
-        #   To graduate the student must have an overall + elective GPA >= 3.00.
+        # Displays outstanding requirements for overall gpa requirements in file
+        format_ar_out_req_overall_gpa = ar_out_req.add_run(self.maintain_overall_gpa)  # adds text
+        format_ar_out_req_overall_gpa.font.size = Pt(12)  # sets font size
+        format_ar_out_req_overall_gpa.paragraph_format.space_after = Pt(0)  # removes space after paragraph
+        format_ar_out_req_overall_courses = ar_out_req.add_run(self.overall_gpa_req)  # adds text
+        format_ar_out_req_overall_courses.font.size = Pt(12)  # sets font size
+
+        # newvariName = variName.paragraph_format, newvariName.paragraph_format.left_indent = Inches(0.5)
         #   Adds with indents for the "the student" lines of section?
-        # waiting on akelanda to provide me the string variable that has text line that they want me to print
 
-        document.save(audit_report_filepath)  # saves the word doc
+        document.save(audit_report_filepath)  # saves the Word doc
