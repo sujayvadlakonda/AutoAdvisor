@@ -10,11 +10,22 @@ class LevelingCourse():
         self.id = id
         self.status = status
 
-    def print(self):
-        print(self.id, self.status)
+    def to_string(self, courses):
+        string = self.id + " " + self.status
 
-    def __str__(self):
-        return self.id + " " + self.status
+        if self.status == LevelingCourseStatus.COMPLETED:
+            course = courses_contains(courses, self.id)
+            if course:
+                # Spring and Summer have the same acronym??
+                year = course["year"][2:4]
+                season = course["season"][0]
+                string += " " + year + season
+            else:
+                string += " Leveling Course Marked Completed. Not Found on Transcript."
+
+        return string
+
+
 
 def courses_contains(courses, course_id):
     for course in courses:

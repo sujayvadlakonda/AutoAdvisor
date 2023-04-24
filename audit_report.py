@@ -43,7 +43,7 @@ class AuditReport:
         )
 
         for leveling in self.track.leveling_courses:
-            leveling_section += str(leveling) + "\n"
+            leveling_section += leveling.to_string(self.courses) + "\n"
 
         return leveling_section
 
