@@ -32,6 +32,9 @@ class MultiRequirement(Requirement):
                 if not self._compare_grade(best_grade, course["grade"]):
                     best_course = course
                     best_grade = course["grade"]
+                if best_course == None:
+                    best_course = course
+                    best_grade = course["grade"]
 
         return best_course
 
