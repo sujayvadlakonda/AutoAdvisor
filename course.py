@@ -1,13 +1,3 @@
-# Add parameters iff they are used somewhere
-class Course:
-    # id should be "CS 1234"
-    def __init__(self, id):
-        self.id = id
-
-    def __repr__(self):
-        return self.id
-
-
 class LevelingCourseStatus:
     COMPLETED = "Completed"
     WAIVED = "Waived"
@@ -15,9 +5,9 @@ class LevelingCourseStatus:
     OTHER = "Other"
 
 
-class LevelingCourse(Course):
+class LevelingCourse():
     def __init__(self, id, status=LevelingCourseStatus.COMPLETED):
-        super().__init__(id)
+        self.id = id
         self.status = status
 
     def print(self):
