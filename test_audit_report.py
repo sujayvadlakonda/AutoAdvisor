@@ -16,3 +16,19 @@ def test_core(audit_report, expected_core):
 ted_lasso = AuditReport("transcripts/ted-lasso.pdf", DataScience())
 ted_lasso_core = ["CS 6313", "CS 6350", "CS 6363", "CS 6375", "CS 6320"]
 test_core(ted_lasso, ted_lasso_core)
+
+taylor_swift = AuditReport("transcripts/taylor-swift.pdf", DataScience())
+taylor_swift_core = ["CS 6313", "CS 6350", "CS 6363", "CS 6375", "CS 6360"]
+test_core(taylor_swift, taylor_swift_core)
+
+roy_kent = AuditReport("transcripts/roy-kent.pdf", DataScience())
+roy_kent_core = ["CS 6313", "CS 6350", "CS 6363", "CS 6375", "CS 6360"]
+test_core(roy_kent, roy_kent_core)
+
+krusty_krab = AuditReport("transcripts/krusty-krab.pdf", DataScience())
+krusty_krab_core = ["CS 6313", "CS 6350", "CS 6363", "CS 6375", "CS 6360"]
+test_core(krusty_krab, krusty_krab_core)
+
+monica_geller = AuditReport("transcripts/monica-geller.pdf", DataScience())
+monica_geller_core = ["CS 6313", "CS 6350", "CS 6363", "CS 6375", "CS 6360"]
+test_core(monica_geller, monica_geller_core)
