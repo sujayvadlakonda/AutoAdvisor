@@ -2,7 +2,7 @@
 # https://catalog.utdallas.edu/2021/graduate/programs/ecs/computer-science
 
 from requirement import SimpleRequirement, MultiRequirement
-from course import LevelingCourse
+from course import LevelingCourse, courses_contains
 
 
 class Track:
@@ -27,7 +27,7 @@ class ComputerScience:
         electives = self._get_5xxx_electives(courses)
         consumed = self._get_core_consumed(courses)
 
-        for course in courses.courses:
+        for course in courses:
             id = course["course_id"].strip()
             subject = id[0:2]
             number = int(id[3:7])
@@ -40,9 +40,10 @@ class ComputerScience:
 
     def _get_5xxx_electives(self, courses):
         electives = []
-        cs5343 = courses.contains("CS 5343")
-        cs5348 = courses.contains("CS 5348")
-        cs5333 = courses.contains("CS 5333")
+
+        cs5343 = courses_contains(courses, "CS 5343")
+        cs5348 = courses_contains(courses, "CS 5348")
+        cs5333 = courses_contains(courses, "CS 5333")
 
         # Add grade comparison some day
         if cs5343:

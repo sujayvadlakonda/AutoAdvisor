@@ -1,3 +1,5 @@
+from course import courses_contains
+
 class Requirement:
     def is_met(self, completed_courses):
         pass
@@ -8,7 +10,7 @@ class SimpleRequirement(Requirement):
         self.course = course
 
     def is_met(self, courses):
-        return courses.contains(self.course)
+        return courses_contains(courses, self.course)
 
 
 class MultiRequirement(Requirement):
@@ -17,8 +19,8 @@ class MultiRequirement(Requirement):
 
     def is_met(self, courses):
         for option in self.options:
-            course = courses.contains(option)
+            course = courses_contains(courses, option)
             if course:
                 return course
 
-        return False
+        return None

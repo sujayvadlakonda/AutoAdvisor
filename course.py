@@ -16,16 +16,9 @@ class LevelingCourse():
     def __str__(self):
         return self.id + " " + self.status
 
+def courses_contains(courses, course_id):
+    for course in courses:
+        if course["course_id"] == course_id:
+            return course
 
-class Courses:
-    def __init__(self, courses=[]):
-        self.courses = courses
-
-    # Input: "CS 1234"
-    def contains(self, course_identifier):
-        for course in self.courses:
-            identifier = course["course_id"]
-            if identifier == course_identifier:
-                return course
-
-        return False
+    return None

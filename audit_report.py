@@ -1,11 +1,9 @@
 from course_finder import get_courses
-from course import Courses
 
 
 class AuditReport:
     def __init__(self, path_to_transcript, track):
         courses = get_courses(path_to_transcript)
-        courses = Courses(courses)
         self.courses = courses
         self.track = track
 
