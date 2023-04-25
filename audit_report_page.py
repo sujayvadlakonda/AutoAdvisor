@@ -463,7 +463,7 @@ class AuditReportPage(ttk.Frame):
         # Displays Course and disposition of pre-reqs in file
         ar_pre_req_courses = document.add_paragraph()
         # for loop to print out courses and disposition
-        format_ar_pre_req_courses = ar_pre_req_courses.add_run()  # adds text
+        format_ar_pre_req_courses = ar_pre_req_courses.add_run("CS egCourse: Completed: Spring 24")  # adds text
         format_ar_pre_req_courses.font.size = Pt(12)  # sets font size
         ar_pre_req_courses.paragraph_format.space_after = Pt(0)  # removes space after paragraph
         # display [course abbrev and #]: [user selected disposition option] - [additional text, if applicable]
@@ -493,27 +493,32 @@ class AuditReportPage(ttk.Frame):
         ar_out_req = document.add_paragraph()
         format_ar_out_req_core_gpa = ar_out_req.add_run(self.maintain_core_gpa)  # adds text
         format_ar_out_req_core_gpa.font.size = Pt(12)  # sets font size
-        format_ar_out_req_core_gpa.paragraph_format.space_after = Pt(0)  # removes space after paragraph
-        format_ar_out_req_core_courses = ar_out_req.add_run(self.core_gpa_req)  # adds text
+        ar_out_req.paragraph_format.space_after = Pt(0)  # removes space after paragraph
+        ar_out_req_core_courses = document.add_paragraph()
+        format_ar_out_req_core_courses = ar_out_req_core_courses.add_run(self.core_gpa_req)  # adds text
         format_ar_out_req_core_courses.font.size = Pt(12)  # sets font size
-        format_ar_out_req_core_courses.paragraph_format.space_after = Pt(0)  # removes space after paragraph
+        ar_out_req_core_courses.paragraph_format.space_after = Pt(0)  # removes space after paragraph
+        ar_out_req_core_courses.paragraph_format.left_indent = Inches(0.5)  # sets indentation
 
         # Displays outstanding requirements for elective gpa requirements in file
-        format_ar_out_req_elective_gpa = ar_out_req.add_run(self.maintain_elective_gpa)  # adds text
+        ar_out_req_elective_gpa = document.add_paragraph()
+        format_ar_out_req_elective_gpa = ar_out_req_elective_gpa.add_run(self.maintain_elective_gpa)  # adds text
         format_ar_out_req_elective_gpa.font.size = Pt(12)  # sets font size
-        format_ar_out_req_elective_gpa.paragraph_format.space_after = Pt(0)  # removes space after paragraph
-        format_ar_out_req_elective_courses = ar_out_req.add_run(self.elective_gpa_req)  # adds text
+        ar_out_req_elective_gpa.paragraph_format.space_after = Pt(0)  # removes space after paragraph
+        ar_out_req_elective_courses = document.add_paragraph()
+        format_ar_out_req_elective_courses = ar_out_req_elective_courses.add_run(self.elective_gpa_req)  # adds text
         format_ar_out_req_elective_courses.font.size = Pt(12)  # sets font size
-        format_ar_out_req_elective_courses.paragraph_format.space_after = Pt(0)  # removes space after paragraph
+        ar_out_req_elective_courses.paragraph_format.space_after = Pt(0)  # removes space after paragraph
+        ar_out_req_elective_courses.paragraph_format.left_indent = Inches(0.5)  # sets indentation
 
         # Displays outstanding requirements for overall gpa requirements in file
-        format_ar_out_req_overall_gpa = ar_out_req.add_run(self.maintain_overall_gpa)  # adds text
+        ar_out_req_overall_gpa = document.add_paragraph()
+        format_ar_out_req_overall_gpa = ar_out_req_overall_gpa.add_run(self.maintain_overall_gpa)  # adds text
         format_ar_out_req_overall_gpa.font.size = Pt(12)  # sets font size
-        format_ar_out_req_overall_gpa.paragraph_format.space_after = Pt(0)  # removes space after paragraph
-        format_ar_out_req_overall_courses = ar_out_req.add_run(self.overall_gpa_req)  # adds text
+        ar_out_req_overall_gpa.paragraph_format.space_after = Pt(0)  # removes space after paragraph
+        ar_out_req_overall_courses = document.add_paragraph()
+        format_ar_out_req_overall_courses = ar_out_req_overall_courses.add_run(self.overall_gpa_req)  # adds text
         format_ar_out_req_overall_courses.font.size = Pt(12)  # sets font size
-
-        # newvariName = variName.paragraph_format, newvariName.paragraph_format.left_indent = Inches(0.5)
-        #   Adds with indents for the "the student" lines of section?
+        ar_out_req_overall_courses.paragraph_format.left_indent = Inches(0.5)  # sets indentation
 
         document.save(audit_report_filepath)  # saves the Word doc
