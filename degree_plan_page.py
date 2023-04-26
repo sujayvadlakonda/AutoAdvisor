@@ -79,7 +79,7 @@ class DegreePlanPage(ttk.Frame):
         self.lbl_major.grid(column=0, row=4, pady=(0, 10))
 
         # 2. Student Frame
-        c2 = 5
+        c2 = 6
         r2 = 3
         fr_student = ttk.Frame(frame, style="section.TFrame")
         for c in range(c2):
@@ -152,6 +152,11 @@ class DegreePlanPage(ttk.Frame):
 
         entry_student = ttk.Entry(fr_student, font=("Bookman Old Style", 14), foreground="black")
         entry_student.grid(column=3, row=2, sticky='w', columnspan=2)
+
+
+        # Track Selection
+        lbl_student = ttk.Label(fr_student, text="Track Selections", style="normal_text.TLabel")
+        lbl_student.grid(column=5, row=0, sticky='w', padx=5, pady=5)
 
         # 3. Note, Advisor, Date Frame
         c3 = 4
