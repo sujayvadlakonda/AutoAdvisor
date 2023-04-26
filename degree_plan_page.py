@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import *
 from tkinter import ttk
 from plan_printer import *
+from tkinter.messagebox import showinfo
 
 
 class DegreePlanPage(ttk.Frame):
@@ -11,9 +12,19 @@ class DegreePlanPage(ttk.Frame):
         self.ft_selected = tk.StringVar()
         self.thesis_selected = tk.StringVar()
         self.expect_grad = tk.StringVar()
+        self.track_selected = tk.StringVar()
         self.advisor_name = tk.StringVar()
         self.date_submitted = tk.StringVar()
         self.path_to_pdf = tk.StringVar()
+
+        # Track Option List
+        cs_track_options = ['cyber_security',
+                         'data_science', 
+                         'intelligent systems', 
+                         'interactive_computing', 
+                         'networks_and_telecommunications', 
+                         'systems', 
+                         'traditional_computer_science']
 
         # Handles Degree Plan page style options
         style = ttk.Style(self)
@@ -150,13 +161,31 @@ class DegreePlanPage(ttk.Frame):
         lbl_student = ttk.Label(fr_student, text="Anticipated \n Graduation", style="normal_text.TLabel")
         lbl_student.grid(column=2, row=2, sticky='w', padx=5, pady=5)
 
-        entry_student = ttk.Entry(fr_student, font=("Bookman Old Style", 14), foreground="black")
+        entry_student = ttk.Entry(fr_student, textvariable=self.expect_grad, font=("Bookman Old Style", 14), foreground="black")
         entry_student.grid(column=3, row=2, sticky='w', columnspan=2)
 
 
         # Track Selection
         lbl_student = ttk.Label(fr_student, text="Track Selections", style="normal_text.TLabel")
         lbl_student.grid(column=5, row=0, sticky='w', padx=5, pady=5)
+
+        cbb_student_track = ttk.Combobox(fr_student, textvariable=self.track_selected, font=("Bookman Old Style", 14), foreground="black") 
+        cbb_student_track.grid(column=5, row=1, sticky='w', padx=5, pady=5)
+
+        # Track Option List
+        cbb_student_track['value'] = cs_track_options
+        cbb_student_track['state'] = 'readonly'
+
+
+## demo track option
+        def demo_track(event):
+            showinfo(
+                title='Result',
+                message=f'You selected {self.track_selected.get()}!'
+            )
+
+        # Bind the selected value changes
+        cbb_student_track.bind('<<ComboboxSelected>>', demo_track)
 
         # 3. Note, Advisor, Date Frame
         c3 = 4
@@ -178,7 +207,7 @@ class DegreePlanPage(ttk.Frame):
         lbl_note.grid(column=0, row=3, sticky='w', padx=(5, 0), pady=(5, 10))
 
         # advisor_name = tk.StringVar()
-        entry_note = ttk.Entry(fr_note, font=("Bookman Old Style", 14), foreground="black")
+        entry_note = ttk.Entry(fr_note, textvariable=self.advisor_name, font=("Bookman Old Style", 14), foreground="black")
         entry_note.grid(column=1, row=3, sticky='w', padx=5, pady=5)
 
         # Labeling Date
@@ -186,7 +215,7 @@ class DegreePlanPage(ttk.Frame):
         lbl_note.grid(column=2, row=3, sticky='e', padx=(0, 5), pady=5)
 
         # date_submitted = tk.StringVar()
-        entry_note = ttk.Entry(fr_note, font=("Bookman Old Style", 14), foreground="black")
+        entry_note = ttk.Entry(fr_note, textvariable=self.date_submitted, font=("Bookman Old Style", 14), foreground="black")
         entry_note.grid(column=3, row=3, sticky='e', padx=5, pady=5)
 
         # 4. Linkup Frame
