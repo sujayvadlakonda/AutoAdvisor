@@ -2,7 +2,7 @@
 # https://catalog.utdallas.edu/2021/graduate/programs/ecs/computer-science
 
 from requirement import SimpleRequirement, MultiRequirement
-from course import LevelingCourse
+from course import LevelingCourse, courses_contains
 
 
 class Track:
@@ -27,9 +27,10 @@ class ComputerScience:
         electives = self._get_5xxx_electives(courses)
         consumed = self._get_core_consumed(courses)
 
-        for course in courses.courses:
-            number = int(course["course_id"].strip())
-            subject = course["subject"].strip()
+        for course in courses:
+            id = course["course_id"].strip()
+            subject = id[0:2]
+            number = int(id[3:7])
             if number >= 6000 and (subject == "CS" or subject == "SE"):
                 id = subject + " " + str(number)
                 if not id in consumed:
@@ -39,9 +40,10 @@ class ComputerScience:
 
     def _get_5xxx_electives(self, courses):
         electives = []
-        cs5343 = courses.contains("CS 5343")
-        cs5348 = courses.contains("CS 5348")
-        cs5333 = courses.contains("CS 5333")
+
+        cs5343 = courses_contains(courses, "CS 5343")
+        cs5348 = courses_contains(courses, "CS 5348")
+        cs5333 = courses_contains(courses, "CS 5333")
 
         # Add grade comparison some day
         if cs5343:
@@ -66,9 +68,7 @@ class ComputerScience:
 
         ids = []
         for course in consumed_courses:
-            number = course["course_id"].strip()
-            subject = course["subject"].strip()
-            id = subject + " " + number
+            id = course["course_id"].strip()
             ids.append(id)
 
         return ids
@@ -110,7 +110,7 @@ class Systems(ComputerScience):
     def __init__(self):
         super().__init__()
 
-        self.name = "Intelligent Systems"
+        self.name = "Systems"
 
         self.core_requirements = [
             SimpleRequirement("CS 6304"),

@@ -14,7 +14,7 @@ def transferCredit(course_id):
 
 # Initialize variables
 pdf = pdfplumber.open('degrees\\DP-Traditional.pdf')
-script = pdfplumber.open('transcripts\\roy-kent.pdf')
+transcript_path = 'transcripts\\roy-kent.pdf'
 course_groups = {}
 title = ''
 text = ''
@@ -23,7 +23,7 @@ pattern = r"([A-Za-z\s&,]+)" \
               r"(\d{4})"
 
 # Find courses in transcript
-course_credits = course_finder.get_courses(script)
+course_credits = course_finder.get_courses(transcript_path)
 
 # Extract the text from the degree
 for page in pdf.pages:
