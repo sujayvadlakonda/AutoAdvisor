@@ -1,18 +1,16 @@
 import tkinter as tk
 import os
 import docx
-from tkinter import *
 from tkinter import ttk
 from tkinter.filedialog import asksaveasfilename
 from tkinter import messagebox as mbox
-from docx import Document
 from docx.shared import Pt, Inches
 from docx.enum.text import WD_PARAGRAPH_ALIGNMENT
-from audit_report import AuditReport
-# import transcript
 from transcript import Transcript
-import track
-# from track import Track, ComputerScience, DataScience, IntelligentSystems, Systems
+from audit_report import AuditReport
+from track import Track, ComputerScience, DataScience, IntelligentSystems, Systems
+# import transcript
+# import track
 
 
 class AuditReportPage(ttk.Frame):
@@ -25,7 +23,7 @@ class AuditReportPage(ttk.Frame):
         self.student_id = ""
         self.student_plan = ""
         self.student_major = ""
-        self.student_track = ""
+        self.student_track = tk.StringVar()
 
         self.core_gpa = "example core gpa"
         self.elective_gpa = "example elective gpa"
@@ -360,8 +358,11 @@ class AuditReportPage(ttk.Frame):
         self.student_id = transcript.get_id()
         self.student_plan = "Master"
         self.student_major = transcript.get_major()
-        self.student_track = "example track"
+        selected_track = self.student_track
 
+        track_class = DataScience()  # for testing purposes
+        audit_report = AuditReport(transcript, track_class)
+        print(audit_report.get_courses_section())  # this is for testing purposes
         self.core_courses = "example line of core course"
         self.elective_courses = "example line of elective course"
 
