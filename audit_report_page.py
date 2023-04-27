@@ -360,6 +360,9 @@ class AuditReportPage(ttk.Frame):
         self.student_major = transcript.get_major()
         selected_track = self.student_track
 
+        # if selected_track == "Data Sciences":
+        #       track_class = DataScience()
+
         track_class = DataScience()  # for testing purposes
         audit_report = AuditReport(transcript, track_class)
         print(audit_report.get_courses_section())  # this is for testing purposes
