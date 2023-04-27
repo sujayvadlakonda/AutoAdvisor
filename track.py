@@ -1,5 +1,5 @@
 # This is where I read all the requirements from
-# https://catalog.utdallas.edu/2021/graduate/programs/ecs/computer-science
+# https://catalog.utdallas.edu/now/graduate/programs/ecs/computer-science
 
 from requirement import SimpleRequirement, MultiRequirement
 from course import LevelingCourse, courses_contains
@@ -29,8 +29,9 @@ class ComputerScience:
 
         for course in courses:
             id = course["course_id"].strip()
-            subject = id[0:2]
-            number = int(id[3:7])
+            id_parts = id.split(" ")
+            subject = id_parts[0]
+            number = int(id_parts[1])
             if number >= 6000 and (subject == "CS" or subject == "SE"):
                 id = subject + " " + str(number)
                 if not id in consumed:
@@ -47,11 +48,11 @@ class ComputerScience:
 
         # Add grade comparison some day
         if cs5343:
-            electives.add(cs5343)
+            electives.append(cs5343)
         elif cs5348:
-            electives.add(cs5348)
+            electives.append(cs5348)
         elif cs5333:
-            electives.add(cs5333)
+            electives.append(cs5333)
 
         return electives
 

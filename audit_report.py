@@ -23,16 +23,7 @@ class AuditReport:
 
     def get_electives_section(self):
         electives_section = "Elective Courses: "
-
-        electives = self.track.get_electives(self.courses)
-
-        ids = []
-        for elective in electives:
-            id = elective["course_id"]
-            ids.append(id)
-
-        ids.sort()
-
+        ids = self._get_electives()
         ids = ", ".join(ids)
         electives_section += ids
         return electives_section
@@ -58,3 +49,14 @@ class AuditReport:
                 core_courses.append(identifier)
 
         return core_courses
+
+    def _get_electives(self):
+        electives = self.track.get_electives(self.courses)
+
+        ids = []
+        for elective in electives:
+            id = elective["course_id"]
+            ids.append(id)
+
+        ids.sort()
+        return ids
