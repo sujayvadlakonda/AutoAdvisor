@@ -271,7 +271,6 @@ class DegreePlanPage(ttk.Frame):
         launch_pdf_btn = ttk.Button(
             fr_link,
             text="Launch PDF Editor",
-            # command=lambda: controller.show_frame("DegreePlanReportPage")
             command=launch_pdf
         )
         launch_pdf_btn.grid(column=1, row=0, padx=5, pady=10)  # button positioning
