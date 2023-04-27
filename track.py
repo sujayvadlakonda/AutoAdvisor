@@ -15,8 +15,8 @@ class Track:
 class ComputerScience:
     def __init__(self):
         self.leveling_courses = [
-            LevelingCourse("CS 2340"),
             LevelingCourse("CS 5303"),
+            LevelingCourse("CS 5330"),
             LevelingCourse("CS 5333"),
             LevelingCourse("CS 5343"),
             LevelingCourse("CS 5348"),
