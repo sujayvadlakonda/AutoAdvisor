@@ -78,18 +78,10 @@ class UploadFilePage(ttk.Frame):
         # Next page button that goes to degree_plan_page.py (the page where the user makes a student object) and design
         next_btn = ttk.Button(
             frame,
-            text="Make New Degree Plan",
+            text="Open Degree Plan Editor",
             command=lambda: self.controller.show_frame("DegreePlanPage")
         )
         next_btn.grid(column=5, row=5, sticky="es", columnspan=1, padx=(0, 5), pady=(10, 20))  # positioning
-
-        # Next page button that goes to degree_plan_report_page.py (the editing degree plan page) and design
-        next_btn = ttk.Button(
-            frame,
-            text="Edit Existing Degree Plan",
-            command=lambda: self.controller.show_frame("DegreePlanReportPage")
-        )
-        next_btn.grid(column=6, row=5, sticky="es", columnspan=1, pady=(10, 20))  # positioning
 
     # Opens file in read-only mode and returns if it's successful or not
     def open_file(self):
