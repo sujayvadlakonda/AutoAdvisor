@@ -12,10 +12,10 @@
 - Installation is successful if you see *Box* as an option in the side menu of your *File Explorer* desktop application
 
 ### Usage Instructions For Window Computers
-- Due to different PC monitor sizes, should you have trouble locating the page navigation buttons, try adjusting the size of the window, or clicking the Expand window button located in the top right corner of the window
+- Due to different PC monitor sizes, should you have trouble locating the page navigation buttons, try manually adjusting the size of the window, or clicking the "Expand Window" button located in the top right corner of the window
 - Users can click the "Start" button on the application's homepage to direct them to the *Upload File* page 
 - The *Upload File* page has a "Browse Files" button that will open up Window's *File Explorer* upon being clicked
-- In Window's File Explorer, select the transcript file of the student that your degree plan will be about. Alternatively, you can select your *student object* file, if you have previously made one
+- In Window's *File Explorer*, select the transcript file of the student that your Degree Plan will be about. 
 - When selecting a file in Windows *File Explorer* , if you can't find the file you need, try changing the file type (located in the bottom right drop down menu of the *File Explorer* window) to the option *All Files* 
 - After navigating to and selecting your chosen file, click the "Open" button to open and upload the file to the application
 - To change the file you want to upload, simply click the *Browse Files" button to select the new file you want to upload
