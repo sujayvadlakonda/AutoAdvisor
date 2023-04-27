@@ -56,7 +56,8 @@ class DegreePlans:
             'Color': colors.brown
         }
         cyber_security = {
-            'Name': 'Data Science',
+            'Name': 'Cyber Security',
+            'Update': 'Fall 3003',
             'Core Courses': ['CS 6324', 'CS 6363', 'CS 6378'],
             'Two Courses from the following list': ['CS 6332', 'CS 6348', 'CS 6349', 'CS 6377'],
             'Two AI* Approved 6000 Level Electives': [],

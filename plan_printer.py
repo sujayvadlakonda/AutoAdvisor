@@ -14,7 +14,8 @@ def plan_printer(path, gui_entry):
     fast_track = gui_entry[0]
     thesis = gui_entry[1]
     grad = gui_entry[2]
-    track = degree_requirements.DegreePlans().get_libraries('data_science')
+    # track_value = gui_entry[3]
+    track = degree_requirements.DegreePlans().get_libraries('cyber_security')
 
     # General Student
     student_info = transcript.Transcript(path)
