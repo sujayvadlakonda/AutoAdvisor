@@ -18,13 +18,22 @@ class DegreePlanPage(ttk.Frame):
         self.path_to_pdf = tk.StringVar()
 
         # Track Option List
-        cs_track_options = ['cyber_security',
-                         'data_science', 
-                         'intelligent systems', 
-                         'interactive_computing', 
-                         'networks_and_telecommunications', 
-                         'systems', 
-                         'traditional_computer_science']
+        # cs_track_options = ['cyber_security',
+        #                  'data_science', 
+        #                  'intelligent systems', 
+        #                  'interactive_computing', 
+        #                  'networks_and_telecommunications', 
+        #                  'systems', 
+        #                  'traditional_computer_science']
+        
+        track_options = ['Data Sciences', 
+                         'Cyber Security', 
+                         'Intelligenty Systems', 
+                         'Interactive Computing', 
+                         'Networks and Telecommunications', 
+                         'Systems',
+                         'Traditional Computer Science',
+                         'Software Engineering']
 
         # Handles Degree Plan page style options
         style = ttk.Style(self)
@@ -173,7 +182,7 @@ class DegreePlanPage(ttk.Frame):
         cbb_student_track.grid(column=5, row=1, sticky='w', padx=5, pady=5)
 
         # Track Option List
-        cbb_student_track['value'] = cs_track_options
+        cbb_student_track['value'] = track_options
         cbb_student_track['state'] = 'readonly'
 
 
