@@ -12,29 +12,21 @@ class DegreePlanPage(ttk.Frame):
         self.ft_selected = tk.StringVar()
         self.thesis_selected = tk.StringVar()
         self.expect_grad = tk.StringVar()
-        self.track_selected = ""
+        # self.track_selected = ""
+        self.track_selected = tk.StringVar()
         self.advisor_name = tk.StringVar()
         self.date_submitted = tk.StringVar()
-        self.path_to_pdf = tk.StringVar()
+        self.path_to_pdf = tk.StringVar()        
 
-        # Track Option List        
-        # track_options = ['Data Sciences', 
-        #                  'Cyber Security', 
-        #                  'Intelligent Systems', 
-        #                  'Interactive Computing', 
-        #                  'Networks and Telecommunications', 
-        #                  'Systems',
-        #                  'Traditional Computer Science',
-        #                  'Software Engineering']
-        
-
-        dict_track_options = {'Data Sciences':'data_science', 
+        # When update new track.
+        # Make sure update both from here and degree_requirement.py file
+        dict_track_options = {'Data Sciences':'data_science',
+                                'Systems':'systems',
+                                'Interactive Computing':'interactive_computing',
                                 'Cyber Security':'cyber_security', 
                                 'Intelligent Systems':'intelligent_systems', 
-                                'Interactive Computing':'interactive_computing', 
-                                'Networks and Telecommunications':'network_telecommunication', 
-                                'Systems':'system',
-                                'Traditional Computer Science':'traditional_cs',
+                                'Networks and Telecommunications':'networks_telecommunication', 
+                                'Traditional Computer Science':'traditional',
                                 'Software Engineering':'software_engineering'}
 
         # Handles Degree Plan page style options
@@ -189,14 +181,6 @@ class DegreePlanPage(ttk.Frame):
                                          font=("Bookman Old Style", 14), foreground="black")
         cbb_student_track.grid(column=5, row=1, sticky='w', padx=5, pady=5)
 
-## demo track option
-        # def demo_track(event):
-        #     showinfo(
-        #         title='Result',
-        #         message=f'You selected {current_dropbox_value.get()}!'
-        #     )
-        # cbb_student_track.bind('<<ComboboxSelected>>', demo_track)
-
         # Bind the selected value changes
         def get_track(event):
             self.track_selected = current_dropbox_value.get()
@@ -275,8 +259,7 @@ class DegreePlanPage(ttk.Frame):
             grad = self.expect_grad.get()
             advisor = self.advisor_name.get()
             date = self.date_submitted.get()
-            track = self.track_selected
-            print(track)
+            track = dict_track_options[self.track_selected]
 
             gui_entry = [ft, thesis, grad, track, advisor, date]
             plan_printer(path, gui_entry)
