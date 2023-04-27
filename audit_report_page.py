@@ -8,22 +8,48 @@ from tkinter import messagebox as mbox
 from docx import Document
 from docx.shared import Pt, Inches
 from docx.enum.text import WD_PARAGRAPH_ALIGNMENT
-# from audit_report import AuditReport
+from audit_report import AuditReport
+# import transcript
+from transcript import Transcript
+import track
+# from track import Track, ComputerScience, DataScience, IntelligentSystems, Systems
 
 
 class AuditReportPage(ttk.Frame):
     def __init__(self, container, controller):
         super().__init__(container)
         self.controller = controller
+        self.transcript_path = tk.StringVar()
 
-        self.student_name = "example name"
-        self.student_id = "example id"
-        self.student_plan = "Master"
-        self.student_major = "example major"
-        self.student_track = "example track"
+        self.student_name = ""
+        self.student_id = ""
+        self.student_plan = ""
+        self.student_major = ""
+        self.student_track = ""
 
-        self.core_courses = "example line of core course"
-        self.elective_courses = "example line of elective course"
+        self.core_gpa = "example core gpa"
+        self.elective_gpa = "example elective gpa"
+        self.overall_gpa = "example overall gpa"
+
+        self.core_courses = ""
+        self.elective_courses = ""
+
+        self.disposition_dict = {
+            "dp_pre_req_class": ["CS 5303", "CS 5330", "CS 5333", "CS 5343", "CS 5348"],
+            "disp_options": ["None", "Completed", "Waived", "Not required by plan or elective", "Other"],
+            "disp_selections": [],  # holds user selected disposition choice
+            "opt_menu": [],  # holds disposition menu widget
+            "user_course_comment": [],  # Hold's user's entry in text entry box
+            "entry_box": []  # holds entry text box widget
+        }
+
+        # Holds strings to be printed for the Outstanding Requirements section of the word doc
+        self.maintain_core_gpa = "To maintain a example core GPA:"
+        self.maintain_elective_gpa = "To maintain a example elective GPA:"
+        self.maintain_overall_gpa = "To maintain a example overall GPA:"
+        self.core_gpa_req = "The student must pass: example class"
+        self.elective_gpa_req = "The student must pass: example class "
+        self.overall_gpa_req = "The student must pass: example class"
 
         # Handles gui for audit report page
         self.style = ttk.Style(self)
@@ -95,9 +121,6 @@ class AuditReportPage(ttk.Frame):
         lbl_overall_gpa.grid(column=0, row=8, columnspan=1, sticky="w", pady=(0, 20))  # text positioning
 
         # Displays core, elective, and overall gpa on screen
-        self.core_gpa = "example core gpa"
-        self.elective_gpa = "example elective gpa"
-        self.overall_gpa = "example overall gpa"
         lbl_core_gpa_display = ttk.Label(self.scrollable_frame, text=self.core_gpa, style="Black_txt.TLabel")
         lbl_core_gpa_display.grid(column=1, row=6, columnspan=1, sticky="w", pady=(20, 0))  # text positioning
         lbl_elective_gpa_display = ttk.Label(self.scrollable_frame, text=self.elective_gpa, style="Black_txt.TLabel")
@@ -171,12 +194,6 @@ class AuditReportPage(ttk.Frame):
         lbl_gpa_req.grid(column=0, row=15, columnspan=2, sticky="w", pady=(30, 5))  # text positioning
 
         # Displays outstanding core, elective, and overall gpa requirements information lines on screen
-        self.maintain_core_gpa = "To maintain a example core GPA:"
-        self.maintain_elective_gpa = "To maintain a example elective GPA:"
-        self.maintain_overall_gpa = "To maintain a example overall GPA:"
-        self.core_gpa_req = "The student must pass: example class"
-        self.elective_gpa_req = "The student must pass: example class "
-        self.overall_gpa_req = "The student must pass: example class"
         lbl_core_gpa_req = ttk.Label(self.scrollable_frame, text=self.maintain_core_gpa, style="Black_txt.TLabel")
         lbl_core_gpa_req.grid(column=0, row=16, columnspan=2, sticky="w", pady=(0, 5))  # text positioning
         lbl_core_gpa_pass = ttk.Label(self.scrollable_frame, text=self.core_gpa_req, style="Black_txt.TLabel")
@@ -202,14 +219,6 @@ class AuditReportPage(ttk.Frame):
 
         # User prompted to select disposition of pre-reqs from degree plan via the GUI's drop down menu
         row_count = 23  # holds row of menu & text
-        self.disposition_dict = {
-            "dp_pre_req_class": ["CS 5333", "CS 5343", "CS 5348", "CS 5349", "CS 5354", "CS 5390"],
-            "disp_options": ["None", "Completed", "Waived", "Not required by plan or elective", "Other"],
-            "disp_selections": [],  # holds user selected disposition choice
-            "opt_menu": [],  # holds disposition menu widget
-            "user_course_comment": [],  # Hold's user's entry in text entry box
-            "entry_box": []  # holds entry text box widget
-        }
         for pre_req_class in self.disposition_dict["dp_pre_req_class"]:
             row_count += 1  # holds what row widget should be
             self.disp_select = tk.StringVar()  # holds user disposition selection
@@ -245,7 +254,7 @@ class AuditReportPage(ttk.Frame):
         prev_btn = ttk.Button(
             self.scrollable_frame,
             text="<< Previous",
-            command=lambda: self.controller.show_frame("DegreePlanReportPage")
+            command=lambda: self.controller.show_frame("DegreePlanPage")
         )
         prev_btn.grid(column=0, row=row_count+1, columnspan=1, sticky="sw", padx=(5, 0), pady=(20, 20))  # positioning
 
@@ -344,6 +353,17 @@ class AuditReportPage(ttk.Frame):
     # Writes information to audit report file
     def generate_report_content(self, audit_report_filepath):
         document = docx.Document()  # sets up Word doc object to generate audit report
+        transcript_filepath = self.transcript_path  # holds filepath of uploaded file
+        transcript = Transcript(transcript_filepath)  # used to get info from transcript
+
+        self.student_name = transcript.get_name()
+        self.student_id = transcript.get_id()
+        self.student_plan = "Master"
+        self.student_major = transcript.get_major()
+        self.student_track = "example track"
+
+        self.core_courses = "example line of core course"
+        self.elective_courses = "example line of elective course"
 
         # sets default font
         report_style = document.styles["Normal"]
@@ -394,7 +414,7 @@ class AuditReportPage(ttk.Frame):
         format_ar_student_major_lbl = ar_student_plan.add_run("                               Major: ")  # adds text
         format_ar_student_major_lbl.bold = True  # sets text to bold
         format_ar_student_major_lbl.font.size = Pt(12)  # sets font size
-        format_ar_student_major = ar_student_plan.add_run(self.student_plan)
+        format_ar_student_major = ar_student_plan.add_run(self.student_major)
         format_ar_student_major.font.size = Pt(12)  # sets font size
         ar_student_plan.paragraph_format.space_after = Pt(0)  # removes space after paragraph
 
