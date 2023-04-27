@@ -12,7 +12,7 @@ class DegreePlanPage(ttk.Frame):
         self.ft_selected = tk.StringVar()
         self.thesis_selected = tk.StringVar()
         self.expect_grad = tk.StringVar()
-        self.track_selected = tk.StringVar()
+        self.track_selected = ""
         self.advisor_name = tk.StringVar()
         self.date_submitted = tk.StringVar()
         self.path_to_pdf = tk.StringVar()
