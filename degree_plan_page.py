@@ -17,23 +17,25 @@ class DegreePlanPage(ttk.Frame):
         self.date_submitted = tk.StringVar()
         self.path_to_pdf = tk.StringVar()
 
-        # Track Option List
-        # cs_track_options = ['cyber_security',
-        #                  'data_science', 
-        #                  'intelligent systems', 
-        #                  'interactive_computing', 
-        #                  'networks_and_telecommunications', 
-        #                  'systems', 
-        #                  'traditional_computer_science']
+        # Track Option List        
+        # track_options = ['Data Sciences', 
+        #                  'Cyber Security', 
+        #                  'Intelligent Systems', 
+        #                  'Interactive Computing', 
+        #                  'Networks and Telecommunications', 
+        #                  'Systems',
+        #                  'Traditional Computer Science',
+        #                  'Software Engineering']
         
-        track_options = ['Data Sciences', 
-                         'Cyber Security', 
-                         'Intelligenty Systems', 
-                         'Interactive Computing', 
-                         'Networks and Telecommunications', 
-                         'Systems',
-                         'Traditional Computer Science',
-                         'Software Engineering']
+
+        dict_track_options = {'Data Sciences':'data_science', 
+                                'Cyber Security':'cyber_security', 
+                                'Intelligent Systems':'intelligent_systems', 
+                                'Interactive Computing':'interactive_computing', 
+                                'Networks and Telecommunications':'network_telecommunication', 
+                                'Systems':'system',
+                                'Traditional Computer Science':'traditional_cs',
+                                'Software Engineering':'software_engineering'}
 
         # Handles Degree Plan page style options
         style = ttk.Style(self)
@@ -178,23 +180,27 @@ class DegreePlanPage(ttk.Frame):
         lbl_student = ttk.Label(fr_student, text="Track Selections", style="normal_text.TLabel")
         lbl_student.grid(column=5, row=0, sticky='w', padx=5, pady=5)
 
-        cbb_student_track = ttk.Combobox(fr_student, textvariable=self.track_selected, font=("Bookman Old Style", 14), foreground="black") 
+        # Track Options List
+        current_dropbox_value = tk.StringVar()
+        cbb_student_track = ttk.Combobox(fr_student, 
+                                         textvariable=current_dropbox_value, 
+                                         value=list(dict_track_options.keys()),
+                                         state='readonly',
+                                         font=("Bookman Old Style", 14), foreground="black")
         cbb_student_track.grid(column=5, row=1, sticky='w', padx=5, pady=5)
 
-        # Track Option List
-        cbb_student_track['value'] = track_options
-        cbb_student_track['state'] = 'readonly'
-
-
 ## demo track option
-        def demo_track(event):
-            showinfo(
-                title='Result',
-                message=f'You selected {self.track_selected.get()}!'
-            )
+        # def demo_track(event):
+        #     showinfo(
+        #         title='Result',
+        #         message=f'You selected {current_dropbox_value.get()}!'
+        #     )
+        # cbb_student_track.bind('<<ComboboxSelected>>', demo_track)
 
         # Bind the selected value changes
-        cbb_student_track.bind('<<ComboboxSelected>>', demo_track)
+        def get_track(event):
+            self.track_selected = current_dropbox_value.get()
+        cbb_student_track.bind('<<ComboboxSelected>>', get_track)
 
         # 3. Note, Advisor, Date Frame
         c3 = 4
@@ -269,8 +275,10 @@ class DegreePlanPage(ttk.Frame):
             grad = self.expect_grad.get()
             advisor = self.advisor_name.get()
             date = self.date_submitted.get()
+            track = self.track_selected
+            print(track)
 
-            gui_entry = [ft, thesis, grad, advisor, date]
+            gui_entry = [ft, thesis, grad, track, advisor, date]
             plan_printer(path, gui_entry)
 
         # Launch PDF Button
