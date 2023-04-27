@@ -16,16 +16,16 @@ class DegreePlanPage(ttk.Frame):
         self.track_selected = tk.StringVar()
         self.advisor_name = tk.StringVar()
         self.date_submitted = tk.StringVar()
-        self.path_to_pdf = tk.StringVar()        
+        self.path_to_pdf = tk.StringVar()
 
         # When update new track.
         # Make sure update both from here and degree_requirement.py file
         dict_track_options = {'Data Sciences':'data_science',
                                 'Systems':'systems',
                                 'Interactive Computing':'interactive_computing',
-                                'Cyber Security':'cyber_security', 
-                                'Intelligent Systems':'intelligent_systems', 
-                                'Networks and Telecommunications':'networks_telecommunication', 
+                                'Cyber Security':'cyber_security',
+                                'Intelligent Systems':'intelligent_systems',
+                                'Networks and Telecommunications':'networks_telecommunication',
                                 'Traditional Computer Science':'traditional',
                                 'Software Engineering':'software_engineering'}
 
@@ -102,7 +102,7 @@ class DegreePlanPage(ttk.Frame):
             fr_student.rowconfigure(r, weight=1)
         fr_student.grid(column=0, row=2, sticky="nsew", pady=5)
 
-        # Labeling 
+        # Labeling
         # Student Name
         lbl_student = ttk.Label(fr_student, text="Name of Student:", style="normal_text.TLabel")
         lbl_student.grid(column=0, row=0, sticky='w', padx=5, pady=(10, 5))
@@ -174,8 +174,8 @@ class DegreePlanPage(ttk.Frame):
 
         # Track Options List
         current_dropbox_value = tk.StringVar()
-        cbb_student_track = ttk.Combobox(fr_student, 
-                                         textvariable=current_dropbox_value, 
+        cbb_student_track = ttk.Combobox(fr_student,
+                                         textvariable=current_dropbox_value,
                                          value=list(dict_track_options.keys()),
                                          state='readonly',
                                          font=("Bookman Old Style", 14), foreground="black")
@@ -184,6 +184,9 @@ class DegreePlanPage(ttk.Frame):
         # Bind the selected value changes
         def get_track(event):
             self.track_selected = current_dropbox_value.get()
+            arp = self.controller.get_page("AuditReportPage")
+            arp.student_track = self.track_selected
+
         cbb_student_track.bind('<<ComboboxSelected>>', get_track)
 
         # 3. Note, Advisor, Date Frame
@@ -277,8 +280,7 @@ class DegreePlanPage(ttk.Frame):
         next_btn = ttk.Button(
             fr_link,
             text="Next >>",
-            command=lambda: controller.show_frame("DegreePlanReportPage")
+            command=lambda: controller.show_frame("AuditReportPage")
         )
         next_btn.grid(column=1, row=0, sticky="e", padx=(0, 10), pady=10)  # button padding
-
 
