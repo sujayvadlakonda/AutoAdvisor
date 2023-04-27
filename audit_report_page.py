@@ -362,9 +362,10 @@ class AuditReportPage(ttk.Frame):
 
         # if selected_track == "Data Sciences":
         #       track_class = DataScience()
-
+        # note to self: avoid self as parameter for function calls, self.transcript_path can't have .get() added to it
+        # ... stuff like self.student_name works just fine. it's not because of the file path format
         track_class = DataScience()  # for testing purposes
-        audit_report = AuditReport(transcript, track_class)
+        audit_report = AuditReport(transcript_filepath, track_class)
         print(audit_report.get_courses_section())  # this is for testing purposes
         self.core_courses = "example line of core course"
         self.elective_courses = "example line of elective course"
