@@ -46,20 +46,24 @@ stevie_budd_electives = ["CS 5343", "CS 6301", "CS 6314", "CS 6322", "CS 6385", 
 
 keeley_jones = AuditReport("transcripts/keeley-jones.pdf", IntelligentSystems())
 keeley_jones_core = ["CS 6320", "CS 6363", "CS 6364", "CS 6375", "CS 6360"]
+keeley_jones_electives = ["CS 6301", "CS 6313", "CS 6332", "CS 6359", "CS 6371", "CS 6380"]
 
 # Chandler never took CS 6352, only CS 6350
 chandler_bing = AuditReport("transcripts/chandler-bing.pdf", Systems())
 chandler_bing_core = ["CS 6304", "CS 6363", "CS 6378", "CS 6396", "CS 6380"]
-chandler_bing_electives = ["CS 5343", "CS 6314", "CS 6324", "CS 6352", "CS 6360", "CS 6385"]
+chandler_bing_electives = ["CS 5343", "CS 6314", "CS 6324", "CS 6350", "CS 6360", "CS 6385"]
 
 harry_potter = AuditReport("transcripts/harry-potter.pdf", Traditional())
 harry_potter_core = ["CS 6363", "CS 6378", "CS 6390", "CS 6353", "CS 6360"]
+harry_potter_electives = ["CS 5343", "CS 6314", "CS 6326", "CS 6359", "CS 6380", "CS 6396"]
 
 ron_weasley = AuditReport("transcripts/ron-weasley.pdf", Traditional())
 ron_weasley_core = ["CS 6363", "CS 6378", "CS 6390", "CS 6353", "CS 6360"]
+ron_weasley_electives = ["CS 6314", "CS 6350", "CS 6359", "CS 6364", "CS 6385", "CS 5333"]
 
 jaime_tartt = AuditReport("transcripts/jaime-tartt.pdf", InteractiveComputing())
 jaime_tartt_core = ["CS 6363", "CS 6378", "CS 6390", "CS 6353", "CS 6360"]
+jaime_tartt_electives = ["CS 6301", "CS 6313", "CS 6319", "CS 6360", "CS 6375", "CS 6384"]
 
 test_core(ted_lasso, ted_lasso_core)
 test_core(taylor_swift, taylor_swift_core)
@@ -68,12 +72,11 @@ test_core(krusty_krab, krusty_krab_core)
 test_core(monica_geller, monica_geller_core)
 test_core(mike_modano, mike_modano_core)
 test_core(stevie_budd, stevie_budd_core)
-test_core(chandler_bing, chandler_bing_core)
 test_core(keeley_jones, keeley_jones_core)
+test_core(chandler_bing, chandler_bing_core)
 test_core(harry_potter, harry_potter_core)
 test_core(ron_weasley, ron_weasley_core)
 test_core(jaime_tartt, jaime_tartt_core)
-
 
 
 test_electives(ted_lasso, ted_lasso_electives)
@@ -83,4 +86,8 @@ test_electives(krusty_krab, krusty_krab_electives)
 test_electives(monica_geller, monica_geller_electives)
 test_electives(mike_modano, mike_modano_electives)
 test_electives(stevie_budd, stevie_budd_electives)
+test_electives(keeley_jones, keeley_jones_electives)
 test_electives(chandler_bing, chandler_bing_electives)
+test_electives(harry_potter, harry_potter_electives)
+test_electives(ron_weasley, ron_weasley_electives)
+test_electives(jaime_tartt, jaime_tartt_electives)
