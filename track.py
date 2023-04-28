@@ -117,6 +117,7 @@ class CyberSecurity(ComputerScience):
                 n=2,
             ),
         ]
+        self.leveling_courses.append(LevelingCourse("CS 5390"))
 
 
 class IntelligentSystems(ComputerScience):
@@ -162,6 +163,8 @@ class Network(ComputerScience):
             SimpleRequirement("CS 6385"),
             SimpleRequirement("CS 6390"),
         ]
+        self.leveling_courses.append(LevelingCourse("CS 3341"))
+        self.leveling_courses.append(LevelingCourse("CS 5390"))
 
 
 class Systems(ComputerScience):
@@ -206,6 +209,9 @@ class Traditional(ComputerScience):
             ),
         ]
 
+        self.leveling_courses.append(LevelingCourse("CS 5349"))
+        self.leveling_courses.append(LevelingCourse("CS 5390"))
+
 
 class SoftwareEngineering:
     def __init__(self):
@@ -216,6 +222,7 @@ class SoftwareEngineering:
             SimpleRequirement("SE 6367"),
             SimpleRequirement("SE 6387"),
         ]
+        self.leveling_courses = [LevelingCourse("SE 5354")]
 
 
 # Data Science: Ted Lasso, Taylor Swift, Roy Kent, Krusty Krab, Monica Geller
