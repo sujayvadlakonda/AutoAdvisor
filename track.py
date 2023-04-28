@@ -65,7 +65,11 @@ class ComputerScience:
         for core_requirement in self.core_requirements:
             course = core_requirement.is_met(courses)
             if course:
-                consumed_courses.append(course)
+                if isinstance(course, list):
+                    for c in course:
+                        consumed_courses.append(c)
+                else:
+                    consumed_courses.append(course)
 
         ids = []
         for course in consumed_courses:

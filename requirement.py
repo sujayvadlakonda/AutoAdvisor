@@ -1,4 +1,4 @@
-from course import courses_contains
+from course import courses_contains, _compare_grade, _standardize_grade
 
 
 class Requirement:
@@ -15,61 +15,22 @@ class SimpleRequirement(Requirement):
 
 
 class MultiRequirement(Requirement):
-    def __init__(self, options):
+    def __init__(self, options, n=1):
         self.options = options
+        self.n = n
 
     def is_met(self, courses):
         """
         Return the course with the highest grade that meets an option.
         If mulitple courses meet, pick the one that comes first in self.options.
         """
-        best_course = None
-        best_grade = None
+        array = []
 
         for option in self.options:
             course = courses_contains(courses, option)
             if course:
-                if not self._compare_grade(best_grade, course["grade"]):
-                    best_course = course
-                    best_grade = course["grade"]
-                if best_course == None:
-                    best_course = course
-                    best_grade = course["grade"]
+                array.append(course)
 
-        return best_course
+        array.sort(key=lambda c: _standardize_grade(c["grade"]))
 
-    def _compare_grade(self, a, b):
-        """
-        An absolute hack, used to pick the higher grade.
-        a and b are expected to be like A+ or None.
-        If a and b are equal, return True.
-        If a is a higher grade return True.
-        If b is a higher grade return False.
-
-        This works by changing A+ to AA, A to AB and A- to AC.
-        None is an edge case for courses in progress.
-        """
-        a = self._standardize_grade(a)
-        b = self._standardize_grade(b)
-
-        if b == None:
-            return True
-        if a == None:
-            return False
-
-        return a < b
-
-    def _standardize_grade(self, grade):
-        """Implements the hack described in self._compare_grade()"""
-        if grade == None:
-            return grade
-
-        grade = grade.strip()
-        if len(grade) == 1:
-            return grade + "B"
-        elif grade[1] == "+":
-            return grade[0] + "A"
-        elif grade[1] == "-":
-            return grade[0] + "C"
-
-        raise Exception("Tried to standardize %s", grade)
+        return array[0:self.n]

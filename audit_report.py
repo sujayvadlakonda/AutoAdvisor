@@ -29,9 +29,7 @@ class AuditReport:
         return electives_section
 
     def get_leveling_section(self):
-        leveling_section = (
-            "\n"
-        )
+        leveling_section = ""
 
         for leveling in self.track.leveling_courses:
             leveling_section += leveling.to_string(self.courses) + "\n"
@@ -43,10 +41,13 @@ class AuditReport:
         core_courses = []
 
         for requirement in self.track.core_requirements:
-            course_dict = requirement.is_met(self.courses)
-            if course_dict:
-                identifier = course_dict["course_id"]
-                core_courses.append(identifier)
+            requirement_courses = requirement.is_met(self.courses)
+            if requirement_courses:
+                if not isinstance(requirement_courses, list):
+                    requirement_courses = [requirement_courses]
+                for requirement_course in requirement_courses:
+                    identifier = requirement_course["course_id"]
+                    core_courses.append(identifier)
 
         return core_courses
 
