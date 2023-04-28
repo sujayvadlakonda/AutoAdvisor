@@ -1,5 +1,6 @@
 # This is where I read all the requirements from
 # https://catalog.utdallas.edu/now/graduate/programs/ecs/computer-science
+# https://catalog.utdallas.edu/now/graduate/programs/ecs/software-engineering
 
 from requirement import SimpleRequirement, MultiRequirement
 from course import LevelingCourse, courses_contains
@@ -96,6 +97,28 @@ class DataScience(ComputerScience):
         self.leveling_courses.append(LevelingCourse("CS 3341"))
 
 
+class CyberSecurity(ComputerScience):
+    def __init__(self):
+        super().__init__()
+
+        self.name = "Cyber Security"
+
+        self.core_requirements = [
+            SimpleRequirement("CS 6324"),
+            SimpleRequirement("CS 6363"),
+            SimpleRequirement("CS 6378"),
+            MultiRequirement(
+                [
+                    "CS 6332",
+                    "CS 6348",
+                    "CS 6349",
+                    "CS 6377",
+                ],
+                n=2,
+            ),
+        ]
+
+
 class IntelligentSystems(ComputerScience):
     def __init__(self):
         super().__init__()
@@ -108,6 +131,36 @@ class IntelligentSystems(ComputerScience):
             SimpleRequirement("CS 6364"),
             SimpleRequirement("CS 6375"),
             MultiRequirement(["CS 6360", "CS 6378"]),
+        ]
+
+
+class InteractiveComputing(ComputerScience):
+    def __init__(self):
+        super().__init__()
+
+        self.name = "Interactive Computing"
+
+        self.core_requirements = [
+            SimpleRequirement("CS 6326"),
+            SimpleRequirement("CS 6363"),
+            MultiRequirement(
+                ["CS 6323", "CS 6328", "CS 6331", "CS 6334", "CS 6366"], n=3
+            ),
+        ]
+
+
+class Network(ComputerScience):
+    def __init__(self):
+        super().__init__()
+
+        self.name = "Networks and Telecommunications"
+
+        self.core_requirements = [
+            SimpleRequirement("CS 6352"),
+            SimpleRequirement("CS 6363"),
+            SimpleRequirement("CS 6378"),
+            SimpleRequirement("CS 6385"),
+            SimpleRequirement("CS 6390"),
         ]
 
 
@@ -130,6 +183,38 @@ class Systems(ComputerScience):
                     "CS 6397",
                 ]
             ),
+        ]
+
+
+class Traditional(ComputerScience):
+    def __init__(self):
+        super().__init__()
+
+        self.name = "Traditional Computer Science"
+
+        self.core_requirements = [
+            SimpleRequirement("CS 6363"),
+            SimpleRequirement("CS 6378"),
+            SimpleRequirement("CS 6390"),
+            MultiRequirement(
+                [
+                    "CS 6353",
+                    "CS 6360",
+                    "CS 6371",
+                ],
+                n=2,
+            ),
+        ]
+
+
+class SoftwareEngineering:
+    def __init__(self):
+        self.core_requirements = [
+            SimpleRequirement("SE 6329"),
+            SimpleRequirement("SE 6361"),
+            SimpleRequirement("SE 6362"),
+            SimpleRequirement("SE 6367"),
+            SimpleRequirement("SE 6387"),
         ]
 
 
