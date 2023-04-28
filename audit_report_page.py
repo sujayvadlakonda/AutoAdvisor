@@ -9,8 +9,6 @@ from docx.enum.text import WD_PARAGRAPH_ALIGNMENT
 from transcript import Transcript
 from audit_report import AuditReport
 from track import Track, ComputerScience, DataScience, IntelligentSystems, Systems
-# import transcript
-# import track
 
 
 class AuditReportPage(ttk.Frame):
@@ -354,21 +352,35 @@ class AuditReportPage(ttk.Frame):
         transcript_filepath = self.transcript_path  # holds filepath of uploaded file
         transcript = Transcript(transcript_filepath)  # used to get info from transcript
 
+        # Holds student's personal information
         self.student_name = transcript.get_name()
         self.student_id = transcript.get_id()
         self.student_plan = "Master"
         self.student_major = transcript.get_major()
         selected_track = self.student_track
 
-        # if selected_track == "Data Sciences":
-        #       track_class = DataScience()
-        # note to self: avoid self as parameter for function calls, self.transcript_path can't have .get() added to it
-        # ... stuff like self.student_name works just fine. it's not because of the file path format
-        track_class = DataScience()  # for testing purposes
+        # Retrieves courses based on which track was selected
+        track_class = DataScience()  # default track selection
+        if selected_track == "Data Sciences":
+            track_class = DataScience()
+        elif selected_track == "Systems":
+            track_class = Systems()
+        elif selected_track == "Interactive Computing":
+            print("remember to add the track.py class here")
+        elif selected_track == "Cyber Security":
+            print("remember to add the track.py class here")
+        elif selected_track == "Intelligent Systems":
+            track_class = IntelligentSystems()
+        elif selected_track == "Networks and Telecommunications":
+            print("remember to add the track.py class here")
+        elif selected_track == "Traditional Computer Science":
+            print("remember to add the corresponding track.py class here")
+        elif selected_track == "Software Engineering":
+            print("remember to add the track.py class here")
+
         audit_report = AuditReport(transcript_filepath, track_class)
-        print(audit_report.get_courses_section())  # this is for testing purposes
-        self.core_courses = "example line of core course"
-        self.elective_courses = "example line of elective course"
+        self.core_courses = audit_report.get_core_section()  # Holds core courses displayed in audit report file
+        self.elective_courses = audit_report.get_electives_section()  # Holds electives displayed in audit report file
 
         # sets default font
         report_style = document.styles["Normal"]
@@ -416,7 +428,7 @@ class AuditReportPage(ttk.Frame):
         format_ar_student_plan.font.size = Pt(12)  # sets font size
 
         # Displays Student major in word doc
-        format_ar_student_major_lbl = ar_student_plan.add_run("                               Major: ")  # adds text
+        format_ar_student_major_lbl = ar_student_plan.add_run("                         Major: ")  # adds text
         format_ar_student_major_lbl.bold = True  # sets text to bold
         format_ar_student_major_lbl.font.size = Pt(12)  # sets font size
         format_ar_student_major = ar_student_plan.add_run(self.student_major)
@@ -483,7 +495,6 @@ class AuditReportPage(ttk.Frame):
         format_ar_pre_req_title_lbl = ar_pre_req_title.add_run(pre_req_section_title)  # adds text
         format_ar_pre_req_title_lbl.bold = True  # sets text to bold
         format_ar_pre_req_title_lbl.font.size = Pt(12)  # sets font size
-        ar_pre_req_title.paragraph_format.space_after = Pt(12)  # adds space after paragraph
 
         # Displays Course and disposition of pre-reqs in file
         ar_pre_req_courses = document.add_paragraph()
@@ -504,6 +515,8 @@ class AuditReportPage(ttk.Frame):
         # If user selected "Waived/Other" disposition option: additionally display user inputted comment/sem. in file
         # Display "None" if all choices are none and check for it
         # figure out the self vri
+        # note to self: avoid self as parameter for function calls, self.transcript_path can't have .get() added to it
+        # ... stuff like self.student_name works fine. error is not because of the file path format.
 
         # Displays "Outstanding Requirements:" title in file
         outstanding_req_title = "Outstanding Requirements:"
