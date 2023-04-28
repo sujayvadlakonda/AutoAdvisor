@@ -15,14 +15,14 @@ class AuditReport:
         return courses_section
 
     def get_core_section(self):
-        core_section = "Core Courses: "
+        core_section = ""
         core = self._get_core_identifiers()
         core = ", ".join(core)
         core_section += core
         return core_section
 
     def get_electives_section(self):
-        electives_section = "Elective Courses: "
+        electives_section = ""
         ids = self._get_electives()
         ids = ", ".join(ids)
         electives_section += ids
@@ -30,7 +30,7 @@ class AuditReport:
 
     def get_leveling_section(self):
         leveling_section = (
-            "Leveling Courses and Pre-requisites from Admission Letter:\n"
+            "\n"
         )
 
         for leveling in self.track.leveling_courses:
