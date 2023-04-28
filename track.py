@@ -219,7 +219,7 @@ class SoftwareEngineering:
 
 
 # Data Science: Ted Lasso, Taylor Swift, Roy Kent, Krusty Krab, Monica Geller
-# Intelligent Systems: Mike Modano, Stevie Budd
+# Intelligent Systems: Mike Modano, Stevie Budd, Keeley Jones
 # Traditional Computer Science: Harry Potter
 # Interactive Computing: Jamie Tartt, Ron Weasley
 # Systems: Chandler Bing
