@@ -44,16 +44,16 @@ class UploadFilePage(ttk.Frame):
             style="pic_background.TLabel"
         )
         lbl_image.doc_upload_photo = doc_upload_photo  # image reference needed for image to load
-        lbl_image.grid(column=1, row=0, columnspan=5, pady=(10, 0))  # positioning
+        lbl_image.grid(column=0, row=0, columnspan=6, pady=(10, 0))  # positioning
 
         # Upload File text label and design
         lbl_upload = ttk.Label(frame, text="Upload File", style="BW.TLabel")
-        lbl_upload.grid(column=2, row=1, columnspan=3, padx=(100, 0), pady=(5, 5))  # positioning
+        lbl_upload.grid(column=0, row=1, columnspan=6, pady=(5, 5))  # positioning
 
         # subtext label and design
         upload_instruct = "Click the button to select a file to upload"
         lbl_upload_instruct = ttk.Label(frame, text=upload_instruct, style="GWSmall.TLabel")
-        lbl_upload_instruct.grid(column=1, row=2, columnspan=5, pady=(10, 0))  # positioning
+        lbl_upload_instruct.grid(column=0, row=2, columnspan=6, pady=(10, 0))  # positioning
 
         # Window's File Explorer button and design
         btn_file_browse = ttk.Button(
@@ -61,7 +61,7 @@ class UploadFilePage(ttk.Frame):
             text="Browse Files",
             command=self.file_selection
         )
-        btn_file_browse.grid(column=2, row=3, columnspan=3, padx=(100, 0), pady=(15, 5))  # positioning
+        btn_file_browse.grid(column=0, row=3, columnspan=6, pady=(15, 5))  # positioning
 
         # file name (not file path) text label and design
         self.file_name = ttk.Label(frame, textvariable=self.filename, style="BWSmall.TLabel")
