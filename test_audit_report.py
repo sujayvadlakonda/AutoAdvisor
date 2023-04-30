@@ -57,9 +57,10 @@ harry_potter = AuditReport("transcripts/harry-potter.pdf", Traditional())
 harry_potter_core = ["CS 6363", "CS 6378", "CS 6390", "CS 6353", "CS 6360"]
 harry_potter_electives = ["CS 5343", "CS 6314", "CS 6326", "CS 6359", "CS 6380", "CS 6396"]
 
+# Ron had his 5xxx elective at the end, but this differs from how other audit reports are
 ron_weasley = AuditReport("transcripts/ron-weasley.pdf", Traditional())
 ron_weasley_core = ["CS 6363", "CS 6378", "CS 6390", "CS 6353", "CS 6360"]
-ron_weasley_electives = ["CS 6314", "CS 6350", "CS 6359", "CS 6364", "CS 6385", "CS 5333"]
+ron_weasley_electives = ["CS 5333", "CS 6314", "CS 6350", "CS 6359", "CS 6364", "CS 6385"]
 
 jaime_tartt = AuditReport("transcripts/jaime-tartt.pdf", InteractiveComputing())
 jaime_tartt_core = ["CS 6326", "CS 6363", "CS 6323", "CS 6334", "CS 6366"]
