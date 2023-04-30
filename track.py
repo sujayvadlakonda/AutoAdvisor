@@ -3,7 +3,7 @@
 # https://catalog.utdallas.edu/now/graduate/programs/ecs/software-engineering
 
 from requirement import SimpleRequirement, MultiRequirement
-from course import LevelingCourse, courses_contains
+from course import LevelingCourse, courses_contains, _standardize_grade
 
 
 class Track:
@@ -50,12 +50,14 @@ class ComputerScience:
         # Add grade comparison some day
         if cs5343:
             electives.append(cs5343)
-        elif cs5348:
+        if cs5348:
             electives.append(cs5348)
-        elif cs5333:
+        if cs5333:
             electives.append(cs5333)
 
-        return electives
+        electives.sort(key=lambda e: _standardize_grade(e["grade"]))
+
+        return electives[0:1]
 
     def _get_core_consumed(self, courses):
         """
