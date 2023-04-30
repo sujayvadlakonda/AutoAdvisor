@@ -32,5 +32,7 @@ class MultiRequirement(Requirement):
                 array.append(course)
 
         array.sort(key=lambda c: _standardize_grade(c["grade"]))
+        array = array[0:self.n]
+        array.sort(key=lambda c: c["course_id"])
 
-        return array[0:self.n]
+        return array
