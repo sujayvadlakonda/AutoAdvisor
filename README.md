@@ -24,9 +24,10 @@
 - On the "Degree Plan Editor" page, you are required to select which Track the student is doing for their degree
 - When you are ready to launch the degree plan pdf, click the "Launch PDF Editor" to do so
 - When you are ready to continue to the *Audit Report* page to start the process of generating a audit report, click the "next >>" button, located in the bottom right hand corner of the application
-- On the *Audit Report* page, please follow the instructions displayed on the screen
+- On the *Audit Report* page, press the "Start Audit" button to begin the audit report process
+- Please follow the instructions displayed on the screen after pressing the "Start Audit" button
 - If you wish to add a comment, to the dispostion of the course, then you are required to click the "submit" button, (located next to the commment text entry box) after entering your comment
-- After following the instructions displayed on the screen, to generate a audit report, click the "Save Audit Report" button. This will open up Windows *File Explorer*. After navigating to where you want to save the Audit Report, press the "Save" button to save the Audit Report. 
+- After following the instructions displayed on the screen, to generate a audit report, click the "Save Audit Report" button. This will open up Windows *File Explorer*. After navigating to where you want to save the Audit Report, press the "Save Audit Report" button to save the Audit Report. 
 - After saving the file, the application will begin generating the audit report and will notify the user when it is complete. 
 - Please wait for confirmation pop-up window to show up, before closing the application, or going to the homepage. 
 - To print the audit report, simply open the audit report file in Microsoft Word, click the "file" tab located in the top left hand corner of Microsoft Word, click the "Print" tab in the side menu of Microsoft Word, and then press then print button. 
