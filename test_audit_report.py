@@ -62,7 +62,7 @@ ron_weasley_core = ["CS 6363", "CS 6378", "CS 6390", "CS 6353", "CS 6360"]
 ron_weasley_electives = ["CS 6314", "CS 6350", "CS 6359", "CS 6364", "CS 6385", "CS 5333"]
 
 jaime_tartt = AuditReport("transcripts/jaime-tartt.pdf", InteractiveComputing())
-jaime_tartt_core = ["CS 6363", "CS 6378", "CS 6390", "CS 6353", "CS 6360"]
+jaime_tartt_core = ["CS 6326", "CS 6363", "CS 6323", "CS 6334", "CS 6366"]
 jaime_tartt_electives = ["CS 6301", "CS 6313", "CS 6319", "CS 6360", "CS 6375", "CS 6384"]
 
 test_core(ted_lasso, ted_lasso_core)
