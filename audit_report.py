@@ -28,20 +28,20 @@ class AuditReport:
         
     def get_core_gpa_section(self):
 	    core_gpa_section = "Core GPA: "
-	    core_gpa = str(self.get_core_gpa)
+	    core_gpa = str(self.get_core_gpa())
 	    core_gpa_section += core_gpa
 	    return core_gpa_section
 
   
     def get_elective_gpa_section(self):
 	    elec_gpa_section = "Elective GPA: "
-	    elec_gpa = str(self.get_elec_gpa)
+	    elec_gpa = str(self.get_elec_gpa())
 	    elec_gpa_section += elec_gpa
 	    return elec_gpa_section
     
     def get_combined_gpa_section(self):  
 	    combined_gpa_section = "Combined GPA: "
-	    combined_gpa = str(self.get_combined_gpa)
+	    combined_gpa = str(self.get_combined_gpa())
 	    combined_gpa_section += combined_gpa
 	    return combined_gpa_section
 
