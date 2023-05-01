@@ -32,16 +32,4 @@
 - Please wait for confirmation pop-up window to show up, before closing the application, or going to the homepage. 
 - To print the audit report, simply open the audit report file in Microsoft Word, click the "file" tab located in the top left hand corner of Microsoft Word, click the "Print" tab in the side menu of Microsoft Word, and then press then print button. 
 - To go back to the homepage, click the "Go to homepage" button
-- To go back to a previous page, click the "<< Previous" button
-
-## Adding New Courses (w/ Course Name and Number) to your Degree Plan
-- 
-
-## Changing Course Numbers and/or Course Names in your Degree Plan
-- 
-
-## Adding New Degree Plan Track to Existing Options
-- 
-
-## Changing Existing Degree Plan Track Name
-- 
+- To go back to a previous page, click the "<< Previous" button 
