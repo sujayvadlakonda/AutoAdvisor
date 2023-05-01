@@ -1,19 +1,5 @@
 from course_finder import get_courses
 
-letter_grade_points = {
-                    "A ": 4.000,
-                    "A- ": 3.670,
-                    "B+ ": 3.330,
-                    "B ": 3.000,
-                    "B- ": 2.670,
-                    "C+ ": 2.330,
-                    "C ": 2.000,
-                    "F ": 0.000,
-                    "I ": 0.000,
-                    "P ": 0.000,
-                    "W ": 0.000
-                }
-
 class AuditReport:
     def __init__(self, path_to_transcript, track):
         courses = get_courses(path_to_transcript)
@@ -100,10 +86,9 @@ class AuditReport:
         return ids
     
     # To calculate Core GPA
-    def get_core_gpa(self, letter_grade_points):
+    def get_core_gpa(self):
         total_core_grade_points = 0 
         total_core_hours = 0 
-       
 
 	# loop thru each core course and extract, the grade points and letter grade for each course
         for requirement in self.track.core_requirements:
@@ -111,22 +96,22 @@ class AuditReport:
             if course_dict:
                 core_grade_points = float(course_dict["points"])
                 letter_grade = course_dict["grade"]
-    
-                if (letter_grade is None):
+                
+                if ((letter_grade is None) or (letter_grade == 'I ') or letter_grade == 'P '):
                     core_hours = 0
                 else:
-                    core_hours =  float(letter_grade_points[letter_grade])  # convert letter grade to num value using dictionary
-               
+                    core_hours = float(course_dict["earned"])
+            
                 total_core_grade_points += core_grade_points 
                 total_core_hours += core_hours 
 
         # calculate gpa by dividing core total grade points by total number of core credit hours
-        core_gpa = total_core_grade_points / total_core_hours
+        core_gpa = round((total_core_grade_points / total_core_hours),3)
 
         return core_gpa
 
     # To calculate Elective GPA
-    def get_elec_gpa(self, letter_grade_points):
+    def get_elec_gpa(self):
         total_elec_grade_points = 0
         total_elec_hours = 0 
         electives = self.track.get_electives(self.courses)
@@ -134,38 +119,39 @@ class AuditReport:
         for elective in electives:
             elec_grade_points =  float(elective["points"]) 
             letter_grade = elective["grade"]
-
-            if (letter_grade is None):
-                elec_hours = 0
+    
+            if ((letter_grade is None) or (letter_grade == 'I ') or letter_grade == 'P '):
+                 elec_hours = 0
             else:
-                elec_hours =  float(letter_grade_points[letter_grade])
-		
+                elec_hours = float(elective["earned"])
+
             total_elec_grade_points += elec_grade_points 
-            total_elec_hours += elec_hours       
+            total_elec_hours += elec_hours     
         
         # calculate gpa by dividing elective total grade points by total number of elective credit hours
-        elec_gpa = total_elec_grade_points / total_elec_hours
+        elec_gpa = round((total_elec_grade_points / total_elec_hours),3)
 
         return elec_gpa
 
     # To calculate overall Combined GPA
-    def get_combined_gpa(self, letter_grade_points):
+    def get_combined_gpa(self):
         total_grade_points = 0
         total_hours = 0 
         
         for course in self.courses:
             overall_grade_points =  float(course["points"]) 
             letter_grade = course["grade"]
-          
-            if (letter_grade is None):
+            
+            if ((letter_grade is None) or (letter_grade == 'I ') or letter_grade == 'P '):
                  overall_hours = 0
             else:
-                overall_hours =  float(letter_grade_points[letter_grade])
-		
+                overall_hours = float(course["earned"])
+
             total_grade_points += overall_grade_points 
             total_hours += overall_hours
                 
         # calculate gpa by dividing elective total grade points by total number of elective credit hours
-        combined_gpa = total_grade_points / total_hours
+        combined_gpa = round((total_grade_points / total_hours),3)
 
         return combined_gpa
+
