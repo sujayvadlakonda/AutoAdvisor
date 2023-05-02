@@ -12,7 +12,6 @@ class LevelingCourse:
 
     def gui_to_string(self):
         displayed_class = self.id
-
         return displayed_class
 
     def to_string(self, courses):
