@@ -10,6 +10,11 @@ class LevelingCourse:
         self.id = id
         self.status = status
 
+    def gui_to_string(self):
+        displayed_class = self.id
+
+        return displayed_class
+
     def to_string(self, courses):
         string = self.id + " " + self.status
 
