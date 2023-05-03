@@ -21,7 +21,7 @@ class DegreePlans:
                         'Statistics for Machine Learning': 'CS 6347',
                         'Database Design': 'CS 6360'},
 
-            'Prereq_text': 'Admission Prerequisites',
+            'Pre-req_text': 'Admission Prerequisites',
             'Prerequisites': {'Computer Science I': 'CS 5303',
                               'Computer Science II': 'CS 5330',
                               'Discrete Structures': 'CS 5333',
@@ -41,7 +41,7 @@ class DegreePlans:
         systems = {
             'Name': 'Systems Track',
             'Update': 'Fall 2020',
-            'Color': colors.blue,
+            'Color': colors.lightblue,
 
             'Core_text': 'Core Courses: 15 Credit Hours (3.19 Grade Point Average Required)',
             'Cores': {'Computer Architecture': 'CS 6304',
@@ -56,7 +56,7 @@ class DegreePlans:
                         'Synthesis and Opt. of High-Perf. Systems': 'CS 6397',
                         'Parallel Architectures and Systems': 'CS 6399'},
 
-            'Prereq_text': 'Admission Prerequisites',
+            'Pre-req_text': 'Admission Prerequisites',
             'Prerequisites': {'Computer Science I': 'CS 5303',
                               'Computer Science II': 'CS 5330',
                               'Discrete Structures': 'CS 5333',
@@ -89,7 +89,7 @@ class DegreePlans:
                         'Virtual Reality': 'CS 6334',
                         'Computer Graphics': 'CS 6366'},
 
-            'Prereq_text': 'Admission Prerequisites',
+            'Pre-req_text': 'Admission Prerequisites',
             'Prerequisites': {'Computer Science I': 'CS 5303',
                               'Computer Science II': 'CS 5330',
                               'Discrete Structures': 'CS 5333',
@@ -108,7 +108,7 @@ class DegreePlans:
         cyber_security = {
             'Name': 'Cyber Security',
             'Update': 'Fall 2021',
-            'Color': colors.purple,
+            'Color': colors.mediumpurple,
 
             'Core_text': 'Core Courses: 15 Credit Hours (3.19 Grade Point Average Required)',
             'Cores': {'Information Security': 'CS 6324',
@@ -121,7 +121,7 @@ class DegreePlans:
                         'Network Security': 'CS 6349',
                         'Introduction to Cryptography': 'CS 6377'},
 
-            'Prereq_text': 'Admission Prerequisites',
+            'Pre-req_text': 'Admission Prerequisites',
             'Prerequisites': {'Computer Science I': 'CS 5303',
                               'Computer Science II': 'CS 5330',
                               'Discrete Structures': 'CS 5333',
@@ -153,7 +153,7 @@ class DegreePlans:
             'Choices': {'Database Design': 'CS 6360',
                         'Advanced Operating Systems': 'CS 6378'},
 
-            'Prereq_text': 'Admission Prerequisites',
+            'Pre-req_text': 'Admission Prerequisites',
             'Prerequisites': {'Computer Science I': 'CS 5303',
                               'Computer Science II': 'CS 5330',
                               'Discrete Structures': 'CS 5333',
@@ -181,7 +181,7 @@ class DegreePlans:
                       'Algorithmic Aspects of Telecomm. Networks': 'CS 6385',
                       'Advanced Computer Networks': 'CS 6390'},
 
-            'Prereq_text': 'Admission Prerequisites',
+            'Pre-req_text': 'Admission Prerequisites',
             'Prerequisites': {'Computer Science I': 'CS 5303',
                               'Computer Science II': 'CS 5330',
                               'Discrete Structures': 'CS 5333',
@@ -214,7 +214,7 @@ class DegreePlans:
                         'Database Design': 'CS 6360',
                         'Advanced Programming Languages': 'CS 6371'},
 
-            'Prereq_text': 'Admission Prerequisites',
+            'Pre-req_text': 'Admission Prerequisites',
             'Prerequisites': {'Computer Science I': 'CS 5303',
                               'Computer Science II': 'CS 5330',
                               'Discrete Structures': 'CS 5333',
@@ -235,7 +235,7 @@ class DegreePlans:
         software_engineering = {
             'Name': 'Software Engineering',
             'Update': 'Fall 2020',
-            'Color': colors.aliceblue,
+            'Color': colors.red,
 
             'Core_text': 'Core Courses: 15 Credit Hours (3.19 Grade Point Average Required)',
             'Cores': {'Object Oriented Software Engineering': 'SE 6329',
@@ -244,7 +244,7 @@ class DegreePlans:
                       'Software Testing, Validation, Verification': 'SE 6367',
                       'Advanced Software Engineering Project': 'SE 6387'},
 
-            'Prereq_text': 'Admission Prerequisites',
+            'Pre-req_text': 'Admission Prerequisites',
             'Prerequisites': {'Computer Science I': 'CS 5303',
                               'Computer Science II': 'CS 5330',
                               'Discrete Structures': 'CS 5333',
