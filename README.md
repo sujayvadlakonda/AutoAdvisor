@@ -3,6 +3,7 @@
 ### Enviroment Required For This Application and/or Software Dependencies
 - 64-bit versions of Microsoft Windows 10, 11, or higher
 - 2 GB free RAM minimum, 8 GB of free RAM recommended for smoother performance
+- Reccomended Disk Space: At least 60 MB
 
 ### Installation Instructions for Window Computers:
 1. Download *[Box Drive](https://www.box.com/resources/downloads)* for Windows
