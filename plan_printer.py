@@ -10,12 +10,26 @@ from reportlab.lib.styles import ParagraphStyle
 from reportlab.platypus import SimpleDocTemplate, Spacer, Table, TableStyle, Paragraph
 from reportlab.pdfgen import canvas
 
+
+def compareCredits(credit_a, credit_b):
+    ranking = ['A+', 'A', 'A-', 'B+', "B", 'B-', 'CR', 'P', 'C+', 'C', 'C-', 'D+', 'D', 'D-']
+    rank_a = ranking.index(credit_a['grade'].strip())
+    rank_b = ranking.index(credit_b['grade'].strip())
+    if rank_a <= rank_b:
+        return credit_a
+    else:
+        return credit_b
+
+
 def plan_printer(path, gui_entry):
     fast_track = gui_entry[0]
     thesis = gui_entry[1]
+    thesis_credit = gui_entry[1]
     grad = gui_entry[2]
-    track_value = gui_entry[3]
-    track = degree_requirements.DegreePlans().get_libraries(track_value)
+    if len(gui_entry) == 4:
+        track = degree_requirements.DegreePlans().get_libraries(gui_entry[3])
+    else:
+        track = degree_requirements.DegreePlans().get_libraries('data_science')
 
     # General Student
     student_info = transcript.Transcript(path)
@@ -70,20 +84,29 @@ def plan_printer(path, gui_entry):
     elements.append(Paragraph("Name of Student: {}<br/>"
                               "Student I.D. number: {}<br/>"
                               "Semester Admitted: {}<br/>"
-                              "Anticipated Graduation: {}".format(student_name, student_id, admit, grad), style=info_style))
+                              "Anticipated Graduation: {}".format(student_name, student_id, admit, grad),
+                              style=info_style))
     elements.append(Spacer(1, 4))
 
-    # Define Elements
+    # Aim to fulfill requirements in every section of track
     for entry in track:
+
+        # Assuming the requirements are titled and detailed (not a blank)
         try:
+
+            # title the table
             keys = track[entry].keys()
             data = [["                            Course Name                            ",
                      "       Course ID       ",
                      "       Semester        ",
                      "        Credit         ",
                      "         Grade         "]]
+
+            # For each requirement listed:
             for key in keys:
                 line = [key, track[entry][key]]
+
+                # If a match is found, append it to the table
                 for credit in courses:
                     if str(track[entry][key]) == str(credit['course_id']):
                         line.append(str(credit['season'] + " " + str(credit['year'])))
@@ -92,38 +115,67 @@ def plan_printer(path, gui_entry):
                         courses.remove(credit)
                         break
                 data.append(line)
+
+            # Complete the table
             table = Table(data)
             table.setStyle(table_style)
             elements.append(table)
             elements.append(Spacer(1, 4))
+
+        # If the section contains blanks
         except AttributeError:
             try:
+
+                # title the table
                 track[entry].sort()
                 data = [["                            Course Name                            ",
                          "       Course ID       ",
                          "       Semester        ",
                          "        Credit         ",
                          "         Grade         "]]
+
+                # For each requirement listed:
                 for slot in track[entry]:
-                    found = False
+                    stored_credit = None
+
+                    # If an acceptable credit found, store for consideration
                     for credit in courses:
-                        if int(slot) < int(credit['course_id'][-4:]):
-                            data.append([credit['course_name'],
-                                         credit['course_id'],
-                                         str(credit['season'] + " " + str(credit['year'])),
-                                         credit['earned'],
-                                         credit['grade']])
-                            courses.remove(credit)
-                            found = True
-                            break
-                    if not found:
+                        if int(slot) < int(credit['course_id'][-4:]) and ((credit['earned']) >= 3.0):
+                            if stored_credit is None:
+                                stored_credit = credit
+
+                            # compare found credits and return the best one
+                            else:
+                                stored_credit = compareCredits(stored_credit, credit)
+
+                    # If a credit is found, append it to the table
+                    if stored_credit is not None:
+                        data.append([stored_credit['course_name'],
+                                     stored_credit['course_id'],
+                                     str(stored_credit['season'] + " " + str(stored_credit['year'])),
+                                     stored_credit['earned'],
+                                     stored_credit['grade']])
+                        courses.remove(stored_credit)
+
+                    # Thesis edge case
+                    elif int(slot) == 9000 and thesis_credit:
+                        data.append(['Thesis Research', '6V81', '', '', ''])
+                        thesis_credit = False
+
+                    # Fill blanks if no credit was found
+                    else:
                         data.append(['', '', '', '', ''])
+
+                # Complete the table
                 table = Table(data)
                 table.setStyle(table_style)
                 elements.append(table)
                 elements.append(Spacer(1, 4))
+
+            # Append the instruction line
             except AttributeError:
                 elements.append(Paragraph(track[entry].format(), style=info_style))
+
     pdf.build(elements)
 
     # Create canvas objects
