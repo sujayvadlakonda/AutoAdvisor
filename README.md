@@ -10,6 +10,8 @@
 - *Box* does not support having both *Box Sync* and *Box Drive* installed on your computer, so uninstall *Box Sync* if you have that first
 2. Sign in to *Box Drive* with your UTD email (if *Box* asks for a email), then your UTD *Box* login information (i.e. netid and password)
 - Installation is successful if you see *Box* as an option in the side menu of your *File Explorer* desktop application
+3. Download the Project's .exe file, and save it in File Explorer. 
+- To open it, navigate to the main.py file and double-click it to start the application
 
 ### Usage Instructions For Window Computers
 - Due to different PC monitor sizes, should you have trouble locating the page navigation buttons, try manually adjusting the size of the window, or clicking the "Expand Window" button located in the top right corner of the window
@@ -31,5 +33,3 @@
 - After saving the file, the application will begin generating the audit report and will notify the user when it is complete. 
 - Please wait for confirmation pop-up window to show up, before closing the application, or going to the homepage. 
 - To print the audit report, simply open the audit report file in Microsoft Word, click the "file" tab located in the top left hand corner of Microsoft Word, click the "Print" tab in the side menu of Microsoft Word, and then press then print button. 
-- To go back to the homepage, click the "Go to homepage" button
-- To go back to a previous page, click the "<< Previous" button 
