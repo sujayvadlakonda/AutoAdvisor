@@ -57,12 +57,9 @@ class AuditReport:
         for elective in electives:
             id = elective["course_id"]
             grade = elective["grade"]
+            credits_earned = elective["earned"]
 
-            if grade == None:
-                grade = ""
-
-            grade = grade.strip()
-            if not grade == "F":
+            if not credits_earned == 0 or grade is None:
                 ids.append(id)
 
         ids.sort()
