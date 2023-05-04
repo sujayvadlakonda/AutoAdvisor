@@ -189,38 +189,7 @@ class DegreePlanPage(ttk.Frame):
 
         cbb_student_track.bind('<<ComboboxSelected>>', get_track)
 
-        # 3. Note, Advisor, Date Frame
-        c3 = 4
-        r3 = 4
-        fr_note = ttk.Frame(frame, style="section.TFrame")
-        for c in range(c3):
-            fr_note.columnconfigure(c, weight=1)
-        for r in range(r3):
-            fr_note.rowconfigure(r, weight=1)
-        fr_note.grid(column=0, row=3, sticky="nsew", pady=5)
-
-        # Labeling note
-        lbl_note = ttk.Label(fr_note, text="* May include any 6000 or 7000 level CS course with prior permission",
-                             style="normal_text.TLabel")
-        lbl_note.grid(column=0, row=1, columnspan=4, pady=(10, 20))
-
-        # Labeling Academic Advisor
-        lbl_note = ttk.Label(fr_note, text="Academic Advisor", style="normal_text.TLabel")
-        lbl_note.grid(column=0, row=3, sticky='w', padx=(5, 0), pady=(5, 10))
-
-        # advisor_name = tk.StringVar()
-        entry_note = ttk.Entry(fr_note, textvariable=self.advisor_name, font=("Bookman Old Style", 14), foreground="black")
-        entry_note.grid(column=1, row=3, sticky='w', padx=5, pady=5)
-
-        # Labeling Date
-        lbl_note = ttk.Label(fr_note, text="Date Submitted", style="normal_text.TLabel")
-        lbl_note.grid(column=2, row=3, sticky='e', padx=(0, 5), pady=5)
-
-        # date_submitted = tk.StringVar()
-        entry_note = ttk.Entry(fr_note, textvariable=self.date_submitted, font=("Bookman Old Style", 14), foreground="black")
-        entry_note.grid(column=3, row=3, sticky='e', padx=5, pady=5)
-
-        # 4. Linkup Frame
+        # 3. Linkup Frame
         c_link = 2
         r_link = 1
         fr_link = ttk.Frame(frame, style="section.TFrame")
@@ -228,7 +197,7 @@ class DegreePlanPage(ttk.Frame):
             fr_link.columnconfigure(c, weight=1)
         for r in range(r_link):
             fr_link.rowconfigure(r, weight=1)
-        fr_link.grid(column=0, row=4, sticky="nsew", pady=5)
+        fr_link.grid(column=0, row=3, sticky="nsew", pady=5)
 
         # Previous Page Button
         prev_btn = ttk.Button(
