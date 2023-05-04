@@ -21,7 +21,7 @@ endobj
 /Font <<
 /F1 6 0 R
 /F2 7 0 R
-/F1f0c89728-c976-453a-a45d-08f6afe9be0c <<
+/F19de5ff57-ef3f-4309-888e-2302340bda75 <<
 /BaseFont /Helvetica
 /Encoding /WinAnsiEncoding
 /Name /F1
@@ -29,7 +29,7 @@ endobj
 /Type /Font
 >>
 >>
-/ProcSet [ /ImageC /ImageB /ImageI /PDF /Text ]
+/ProcSet [ /ImageC /PDF /ImageI /Text /ImageB ]
 >>
 /Rotate 0
 /Trans <<
@@ -1402,7 +1402,7 @@ Q
 q
 1 0 0 1 0 0 cm
 BT
-/F1f0c89728-c976-453a-a45d-08f6afe9be0c 12 Tf
+/F19de5ff57-ef3f-4309-888e-2302340bda75 12 Tf
 14.4 TL
 ET
 BT
