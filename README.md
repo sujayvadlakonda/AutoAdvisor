@@ -11,8 +11,8 @@
 - *Box* does not support having both *Box Sync* and *Box Drive* installed on your computer, so uninstall *Box Sync* if you have that first
 2. Sign in to *Box Drive* with your UTD email (if *Box* asks for a email), then your UTD *Box* login information (i.e. netid and password)
 - Installation is successful if you see *Box* as an option in the side menu of your *File Explorer* desktop application
-3. Download the Project's .exe file, and save it in File Explorer. 
-- To start the application, navigate to the Project's main.py file and double-click it to start the application
+3. Download the Project's .exe file, and save it in File Explorer in the project enviroment, and ensure the images folder is copied to it. 
+- To start the application, navigate to the main file and double-click it to start the application
 
 ## Usage Instructions For Window Computers
 - Due to different PC monitor sizes, should you have trouble locating the page navigation buttons, try manually adjusting the size of the window, or clicking the "Expand Window" button located in the top right corner of the window
