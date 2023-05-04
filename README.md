@@ -18,16 +18,24 @@
 - Due to different PC monitor sizes, should you have trouble locating the page navigation buttons, try manually adjusting the size of the window, or clicking the "Expand Window" button located in the top right corner of the window
 ### Homepage Usage
 - Users can click the "Start" button on the application's homepage to direct them to the *Upload File* page 
+<img width="960" alt="image" src="https://user-images.githubusercontent.com/55895555/236084186-606c5f8e-ad89-497d-8858-923971bf7dd8.png">
+
 ### Upload File Page Usage
+<img width="960" alt="image" src="https://user-images.githubusercontent.com/55895555/236084226-c1b3f984-d125-4f8e-907e-754a8999b5d0.png">
 1. The *Upload File* page has a "Browse Files" button that the user will click to open Window's *File Explorer*
+
+<img width="564" alt="image" src="https://user-images.githubusercontent.com/55895555/236084387-eb5b2d12-0f7d-4fe2-b0ed-0d4f62d4e997.png">
 2. In Window's *File Explorer*, navigate to, and select the Transcript file of the student that your Degree Plan pdf will be about. 
 - When selecting a transcript file in Windows *File Explorer* , if you can't find the transcript file you need, try changing the File Type (located in the bottom right drop down menu of the *File Explorer* window) to the option *All Files* 
 3. After navigating to, and selecting your chosen Transcript file, click the Windows File Explorer "Open" button to open and upload the transcript file to the application
 - To change the transcript file you want to upload, simply re-click the "Browse Files" button to select the new transcript file you want to upload
+
+<img width="960" alt="image" src="https://user-images.githubusercontent.com/55895555/236084477-04b31182-1b49-4868-8501-d857fad95a26.png">
 4. Once the transcript file is selected, capturing the information on the transcript will begin, where at that point the name of your chosen file will be displayed on the screen
 - To go back to the previous page click the "<< previous" page button
 5. When you ready to continue to the "Degree Plan Editor" page, click the "Open Degree Plan Editor" button to continue
 ### Degree Plan Editor Page Usage
+<img width="960" alt="image" src="https://user-images.githubusercontent.com/55895555/236084551-f7609b5f-b8ea-49c7-88f3-e4510779e304.png">
 1. On the "Degree Plan Editor" page, you are required to select which Track the student is doing for their degree using the provided drop down button
 2. Fill out the information in the provided text fields
 3. When you are ready to launch the degree plan pdf, click the "Launch PDF Editor" to do so
