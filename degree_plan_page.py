@@ -197,7 +197,7 @@ class DegreePlanPage(ttk.Frame):
             fr_link.columnconfigure(c, weight=1)
         for r in range(r_link):
             fr_link.rowconfigure(r, weight=1)
-        fr_link.grid(column=0, row=3, sticky="nsew", pady=5)
+        fr_link.grid(column=0, row=4, sticky="nsew", pady=5)
 
         # Previous Page Button
         prev_btn = ttk.Button(

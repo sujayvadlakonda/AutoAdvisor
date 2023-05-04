@@ -12,7 +12,7 @@ class DegreeApp(tk.Tk):
         super().__init__(*args, **kwargs)
 
         window_name = "Degree Plan and Audit Tool"
-        window_size = "1050x650+100+0"
+        window_size = "1050x550+100+0"
         window_color = "white"
         self.frames = {}  # initializes application pages to dictionary
 
