@@ -66,4 +66,6 @@
 
 5. After saving the file, the application will begin generating the audit report and will notify the user when it is complete. 
 6. Please wait for confirmation pop-up window to show up, before closing the application, or moving to a different page
+<img width="292" alt="image" src="https://user-images.githubusercontent.com/55895555/236146825-08dc2e9f-0b92-4762-8928-a2c522702921.png">
+
 7. To print the audit report, simply open the audit report file in Microsoft Word, click the "file" tab located in the top left hand corner of Microsoft Word, click the "Print" tab in the side menu of Microsoft Word, and then press then print button. 
