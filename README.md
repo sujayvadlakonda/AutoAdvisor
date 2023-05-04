@@ -27,6 +27,7 @@
 <img width="564" alt="image" src="https://user-images.githubusercontent.com/55895555/236084387-eb5b2d12-0f7d-4fe2-b0ed-0d4f62d4e997.png">
 2. In Window's *File Explorer*, navigate to, and select the Transcript file of the student that your Degree Plan pdf will be about. 
 - When selecting a transcript file in Windows *File Explorer* , if you can't find the transcript file you need, try changing the File Type (located in the bottom right drop down menu of the *File Explorer* window) to the option *All Files* 
+
 3. After navigating to, and selecting your chosen Transcript file, click the Windows File Explorer "Open" button to open and upload the transcript file to the application
 - To change the transcript file you want to upload, simply re-click the "Browse Files" button to select the new transcript file you want to upload
 
