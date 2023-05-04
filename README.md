@@ -40,14 +40,12 @@
 ### Degree Plan Editor Page Usage
 <img width="960" alt="image" src="https://user-images.githubusercontent.com/55895555/236084551-f7609b5f-b8ea-49c7-88f3-e4510779e304.png">
 1. On the "Degree Plan Editor" page, you are required to select which Track the student is doing for their degree using the provided drop down button
-
 2. Fill out the information in the provided text fields
-
 3. When you are ready to launch the degree plan pdf, click the "Launch PDF Editor" to do so
   - This will open the Degree Plan pdf in the computer's default pdf program for viewing pdf files, most commonly the Google Chrome Browser
 
 4. To print the Degree Plan pdf, simply locate and click the print button located in the default application that your computer uses to open pdf files and adjust the print settings as needed
-
+ 
 5. If you do not wish to generate a audit report, simply click the "Go to Homepage" button to go back to the homepage
   - To go back to the previous page, click the "<< previous" button
 
