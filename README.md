@@ -14,7 +14,7 @@
 3. Download the Project's .exe file, and save it in File Explorer. 
 - To start the application, navigate to the Project's main.py file and double-click it to start the application
 
-### Usage Instructions For Window Computers
+# Usage Instructions For Window Computers
 - Due to different PC monitor sizes, should you have trouble locating the page navigation buttons, try manually adjusting the size of the window, or clicking the "Expand Window" button located in the top right corner of the window
 ## Homepage Usage
 - Users can click the "Start" button on the application's homepage to direct them to the *Upload File* page 
