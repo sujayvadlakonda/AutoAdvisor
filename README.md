@@ -23,13 +23,13 @@
 ### Upload File Page Usage
 <img width="960" alt="image" src="https://user-images.githubusercontent.com/55895555/236084226-c1b3f984-d125-4f8e-907e-754a8999b5d0.png">
 1. The *Upload File* page has a "Browse Files" button that the user will click to open Window's *File Explorer*
+<img width="677" alt="image" src="https://user-images.githubusercontent.com/55895555/236085081-b7c79075-c551-4424-96c1-01fa79cc161c.png">
 
-<img width="564" alt="image" src="https://user-images.githubusercontent.com/55895555/236084387-eb5b2d12-0f7d-4fe2-b0ed-0d4f62d4e997.png">
-2. In Window's *File Explorer*, navigate to, and select the Transcript file of the student that your Degree Plan pdf will be about. 
-- When selecting a transcript file in Windows *File Explorer* , if you can't find the transcript file you need, try changing the File Type (located in the bottom right drop down menu of the *File Explorer* window) to the option *All Files* 
+2. In Window's *File Explorer*, navigate to, and select the Transcript file of the student that your Degree Plan pdf will be about.
+  - When selecting a transcript file in Windows *File Explorer*, if you can't find the transcript file you need, try changing the File Type (located in the bottom right drop down menu of the *File Explorer* window) to the option *All Files* 
 
 3. After navigating to, and selecting your chosen Transcript file, click the Windows File Explorer "Open" button to open and upload the transcript file to the application
-- To change the transcript file you want to upload, simply re-click the "Browse Files" button to select the new transcript file you want to upload
+  - To change the transcript file you want to upload, simply re-click the "Browse Files" button to select the new transcript file you want to upload
 
 <img width="960" alt="image" src="https://user-images.githubusercontent.com/55895555/236084477-04b31182-1b49-4868-8501-d857fad95a26.png">
 4. Once the transcript file is selected, capturing the information on the transcript will begin, where at that point the name of your chosen file will be displayed on the screen
