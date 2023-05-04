@@ -1,5 +1,29 @@
 from course_finder import get_courses
 
+letter_grade_points = {
+                    "A ": 4.000,
+                    "A- ": 3.670,
+                    "B+ ": 3.330,
+                    "B ": 3.000,
+                    "B- ": 2.670,
+                    "C+ ": 2.330,
+                    "C ": 2.000,
+                    "F ": 0.000,
+                    "P ": 0.000,
+                    "W ": 0.000
+                }
+
+letter_grade_needed = {
+            4.000: "A",
+            3.670: "A-",
+            3.330: "B+",
+            3.000: "B",
+            2.670: "B-",
+            2.330: "C+",
+            2.000: "C",
+            0.000: "F"
+            }
+
 class AuditReport:
     def __init__(self, path_to_transcript, track):
         courses = get_courses(path_to_transcript)
@@ -15,19 +39,19 @@ class AuditReport:
     
     def get_core_gpa_section(self):
          core_gpa_section = "Core GPA: "
-         core_gpa = str(self.get_core_gpa(letter_grade_points))
+         core_gpa = str(self.get_core_gpa())
          core_gpa_section += core_gpa
          return core_gpa_section
     
     def get_elective_gpa_section(self):
         elec_gpa_section = "Elective GPA: "
-        elec_gpa = str(self.get_elec_gpa(letter_grade_points))
+        elec_gpa = str(self.get_elec_gpa())
         elec_gpa_section += elec_gpa
         return elec_gpa_section
     
     def get_combined_gpa_section(self):
         combined_gpa_section = "Combined GPA: "
-        combined_gpa = str(self.get_combined_gpa(letter_grade_points))
+        combined_gpa = str(self.get_combined_gpa())
         combined_gpa_section += combined_gpa
         return combined_gpa_section
     
@@ -62,15 +86,25 @@ class AuditReport:
 
         return leveling_section
 
+    def get_outstanding_requirements_section(self):
+        outstanding_requirements_section = (  "Outstanding Requirements:\n" )
+        outstanding_requirements_section += str(self.get_outstanding_core_gpa()) + "\n"
+        outstanding_requirements_section += str(self.get_outstanding_elec_gpa()) + "\n"
+        outstanding_requirements_section += str(self.get_outstanding_overall_gpa()) + "\n"
+        return outstanding_requirements_section
+    
     # Returns core courses on transcript regardless of completion status
     def _get_core_identifiers(self):
         core_courses = []
 
         for requirement in self.track.core_requirements:
-            course_dict = requirement.is_met(self.courses)
-            if course_dict:
-                identifier = course_dict["course_id"]
-                core_courses.append(identifier)
+            requirement_courses = requirement.is_met(self.courses)
+            if requirement_courses:
+                if not isinstance(requirement_courses, list):
+                    requirement_courses = [requirement_courses]
+                for requirement_course in requirement_courses:
+                    identifier = requirement_course["course_id"]
+                    core_courses.append(identifier)
 
         return core_courses
 
@@ -80,28 +114,99 @@ class AuditReport:
         ids = []
         for elective in electives:
             id = elective["course_id"]
-            ids.append(id)
+            grade = elective["grade"]
+
+            if grade == None:
+                grade = ""
+
+            grade = grade.strip()
+            if not grade == "F":
+                ids.append(id)
 
         ids.sort()
         return ids
     
+    # To get all remaining (uncompleted) core courses 
+    def get_remaining_core_courses(self):
+        remaining_core_courses = []
+
+        for requirement in self.track.core_requirements:
+            requirement_courses = requirement.is_met(self.courses)
+            if requirement_courses:
+                if not isinstance(requirement_courses, list):
+                    requirement_courses = [requirement_courses]
+                for requirement_course in requirement_courses:
+                    id = requirement_course["course_id"]
+                    letter_grade = requirement_course["grade"]
+                
+                if (letter_grade is None):
+                    remaining_core_courses.append(id)
+
+        print("Remaining Core Courses: ")
+        remaining = remaining_core_courses
+        remaining = ", ".join(remaining)
+        print(remaining)
+
+        return remaining_core_courses
+
+    # To get all remaining (uncompleted) elective courses 
+    def get_remaining_elec_courses(self):
+        remaining_elec_courses = []
+
+        electives = self.track.get_electives(self.courses)
+
+        for elective in electives:
+            id = elective["course_id"]
+            letter_grade = elective["grade"]
+            
+            if (letter_grade is None):
+                remaining_elec_courses.append(id)
+
+        print("Remaining Elective Courses: ")
+        remaining = remaining_elec_courses
+        remaining = ", ".join(remaining)
+        print(remaining)
+
+        return remaining_elec_courses
+
+    # To get all remaining overall courses regardless of core, elective, etc.
+    def get_remaining_overall_courses(self):
+        remaining_courses = []
+
+        for course in self.courses:
+            id = course["course_id"].strip()
+            letter_grade = course["grade"]
+
+            if (letter_grade is None):
+                remaining_courses.append(id)
+
+        print("Remaining Overall Courses: ")
+        remaining = remaining_courses
+        remaining = ", ".join(remaining)
+        print(remaining)
+
+        return remaining_courses
+
     # To calculate Core GPA
     def get_core_gpa(self):
         total_core_grade_points = 0 
         total_core_hours = 0 
 
-	# loop thru each core course and extract, the grade points and letter grade for each course
+		# loop thru each core course and extract, the grade points and letter grade for each course
         for requirement in self.track.core_requirements:
-            course_dict = requirement.is_met(self.courses)
-            if course_dict:
-                core_grade_points = float(course_dict["points"])
-                letter_grade = course_dict["grade"]
+            requirement_courses = requirement.is_met(self.courses)
+            if requirement_courses:
+                if not isinstance(requirement_courses, list):
+                    requirement_courses = [requirement_courses]
+                for requirement_course in requirement_courses:
+                    core_grade_points = float(requirement_course["points"])
+                    letter_grade = requirement_course["grade"]
                 
                 if ((letter_grade is None) or (letter_grade == 'I ') or letter_grade == 'P '):
                     core_hours = 0
                 else:
-                    core_hours = float(course_dict["earned"])
-            
+                    core_hours = float(requirement_course["earned"])
+                
                 total_core_grade_points += core_grade_points 
                 total_core_hours += core_hours 
 
@@ -146,7 +251,7 @@ class AuditReport:
                  overall_hours = 0
             else:
                 overall_hours = float(course["earned"])
-
+             
             total_grade_points += overall_grade_points 
             total_hours += overall_hours
                 
@@ -154,4 +259,311 @@ class AuditReport:
         combined_gpa = round((total_grade_points / total_hours),3)
 
         return combined_gpa
+    
+    # To check if an extra 6000+ level CS/SE course was completed
+    def get_if_extra_core_course(self):
+        num_of_core_courses = 0
+        consumed = self.track._get_core_consumed(self.courses) 
 
+        for requirement in self.track.core_requirements:
+            requirement_courses = requirement.is_met(self.courses)
+            if requirement_courses:
+                if not isinstance(requirement_courses, list):
+                    requirement_courses = [requirement_courses]
+                for requirement_course in requirement_courses:
+                    num_of_core_courses+=1
+                
+                    id = requirement_course["course_id"].strip()
+                    id_parts = id.split(" ")
+                    subject = id_parts[0]
+                    number = int(id_parts[1])
+
+                    if number >= 6000 and (subject == "CS" or subject == "SE"):
+                        id = subject + " " + str(number)
+                        if not id in consumed:
+                            extra_course = True
+                        else:
+                            extra_course = False
+                
+                    else:
+                        extra_course = False
+
+        return extra_course
+
+    # To calculate GPA needed in remaining courses to maintain core GPA
+    def get_needed_core_gpa(self):
+        
+        remaining_core_courses = self.get_remaining_core_courses()
+        num_of_core_courses = 0
+        num_of_core_p = 0
+        num_of_remaining = 0
+        total_gradepoints = 0
+        gradepoints = 0
+        
+        for course in remaining_core_courses:
+            num_of_remaining+=1
+        
+       # print("num of remaining core courses")
+        #print(num_of_remaining)
+
+        for requirement in self.track.core_requirements:
+            requirement_courses = requirement.is_met(self.courses)
+            if requirement_courses:
+                if not isinstance(requirement_courses, list):
+                    requirement_courses = [requirement_courses]
+                for requirement_course in requirement_courses:
+                    num_of_core_courses+=1
+                    letter_grade = requirement_course["grade"]
+                   # print("letter grade: ")
+                   # print(letter_grade)
+
+                if letter_grade is None:
+                    gradepoints = 0
+                else:
+                    gradepoints = letter_grade_points[letter_grade]
+                
+                total_gradepoints += gradepoints
+
+                if letter_grade == 'P ':
+                    num_of_core_p+=1
+
+        #print("Total num of core courses")
+        #print(num_of_core_courses)
+        
+        if num_of_remaining > 0:
+            extra_course = self.get_if_extra_core_course()
+                
+            if extra_course:
+                necessary_core_grade_points = (5 - num_of_core_p) * 3.00
+              #  print("necessary_core_grade_points: ")
+              #  print(necessary_core_grade_points)
+                core_gpa_needed = (necessary_core_grade_points - total_gradepoints) / num_of_remaining
+            else:
+                necessary_core_grade_points = (5 - num_of_core_p) * 3.19
+               # print("necessary_core_grade_points: ")
+               # print(necessary_core_grade_points)
+                core_gpa_needed = (necessary_core_grade_points - total_gradepoints) / num_of_remaining
+
+       # print("core_gpa_needed")   
+       # print(core_gpa_needed)
+        return core_gpa_needed
+            
+    # To get the outstanding GPA needed for the remaining core courses
+    def get_outstanding_core_gpa(self):
+        
+        remaining_core_courses = self.get_remaining_core_courses()
+        num_of_core_courses = 0
+        for course in remaining_core_courses:
+            num_of_core_courses+=1
+        
+        extra_course = self.get_if_extra_core_course()        
+        if extra_course:
+            comparison_gpa = "To maintain a 3.0 core GPA: " + "\n"
+        else:
+            comparison_gpa = "To maintain a 3.19 core GPA: " + "\n"
+
+        needed_core_gpa = self.get_needed_core_gpa()
+
+        #letter_grade = letter_grade_needed[needed_core_gpa]
+        
+        if needed_core_gpa >= 2.00:
+            if num_of_core_courses == 1:
+                outstanding_core_gpa = comparison_gpa
+                #outstanding_core_gpa += "\t" + "The student needs >= " + letter_grade + " in: "
+                outstanding_core_gpa += "\t" + "The student needs >= " + "letter_grade" + " in: "
+                remaining = remaining_core_courses
+                remaining = ", ".join(remaining)
+                outstanding_core_gpa += remaining
+                
+            elif num_of_core_courses > 1:
+                outstanding_core_gpa = comparison_gpa
+                outstanding_core_gpa += "\t" + "The student needs a GPA >= " + str(needed_core_gpa) + " in: "
+                remaining = remaining_core_courses
+                remaining = ", ".join(remaining)
+                outstanding_core_gpa += remaining
+
+            else:
+                outstanding_core_gpa = "Core Complete."
+                
+        elif needed_core_gpa < 2.00:
+            outstanding_core_gpa = comparison_gpa
+            outstanding_core_gpa += "\t" + "The student must pass: "
+            remaining = remaining_core_courses
+            remaining = ", ".join(remaining)
+            outstanding_core_gpa += remaining
+        
+        return outstanding_core_gpa
+
+    # To calculate GPA needed in remaining elective courses to maintain 3.0 GPA
+    def get_needed_elec_gpa(self):
+        
+        max_electives = 7
+        total_electives = max_electives - 1
+
+        electives = self.track.get_electives(self.courses)
+        
+        remaining_elec_courses = self.get_remaining_elec_courses()
+        num_of_elec_courses = 0
+        num_of_elec_p = 0
+        num_of_remaining = 0
+        total_gradepoints = 0
+        gradepoints = 0
+        
+        for course in remaining_elec_courses:
+            num_of_remaining+=1     
+        
+        for elective in electives:
+            num_of_elec_courses+=1
+            letter_grade = elective["grade"]
+            print("letter grade: ")
+            print(letter_grade)
+
+            if letter_grade is None:
+                gradepoints = 0
+            else:
+                gradepoints = letter_grade_points[letter_grade]
+                
+            total_gradepoints += gradepoints
+
+            if letter_grade == 'P ':
+                    num_of_elec_p+=1
+
+        non_p_elecs = num_of_elec_courses - num_of_elec_p
+
+        #if num_of_elec_courses < max_electives:
+            #if self.audit_report_page.select_elective.get() == "1":
+                #total_electives = max_electives
+            
+        if num_of_remaining > 0:
+            necessary_elec_grade_points = (num_of_remaining + non_p_elecs) * 3.00
+           # print("necessary_elec_grade_points: ")
+           # print(necessary_elec_grade_points)
+            elec_gpa_needed = (necessary_elec_grade_points - total_gradepoints) / num_of_remaining
+
+       # print("elec_gpa_needed")   
+       # print(elec_gpa_needed)
+        return elec_gpa_needed
+    
+    # To get the outstanding GPA needed for the remaining elective courses
+    def get_outstanding_elec_gpa(self):
+        remaining_elec_courses = self.get_remaining_elec_courses()
+        num_of_courses = 0
+        for course in remaining_elec_courses:
+            num_of_courses+=1
+
+        comparison_gpa = "To maintain a 3.0 elective GPA: " + "\n"
+        
+        needed_elec_gpa = self.get_needed_elec_gpa()
+
+        #letter_grade = letter_grade_needed[needed_elec_gpa]
+        
+        if needed_elec_gpa >= 2.00:
+            if num_of_courses == 1:
+                outstanding_elec_gpa = comparison_gpa
+                #outstanding_elec_gpa += "\t" + "The student needs >= " + letter_grade + " in: "
+                outstanding_elec_gpa += "\t" + "The student needs >= " + "letter_grade" + " in: "
+                remaining = remaining_elec_courses
+                remaining = ", ".join(remaining)
+                outstanding_elec_gpa += remaining
+                
+            elif num_of_courses > 1:
+                outstanding_elec_gpa = comparison_gpa
+                outstanding_elec_gpa += "\t" + "The student needs a GPA >= " + str(needed_elec_gpa) + " in: "
+                remaining = remaining_elec_courses
+                remaining = ", ".join(remaining)
+                outstanding_elec_gpa += remaining
+
+            else:
+                outstanding_elec_gpa = "Electives Complete."
+                
+        elif needed_elec_gpa < 2.00:
+            outstanding_elec_gpa = comparison_gpa
+            outstanding_elec_gpa += "\t" + "The student must pass: "
+            remaining = remaining_elec_courses
+            remaining = ", ".join(remaining)
+            outstanding_elec_gpa += remaining 
+        
+        return outstanding_elec_gpa
+
+    # To calculate GPA needed in remaining courses to maintain 3.0 GPA
+    def get_needed_overall_gpa(self):
+        remaining_overall_courses = self.get_remaining_overall_courses()
+        num_of_overall_courses = 0
+        num_of_all_p = 0
+        num_of_remaining = 0
+        total_gradepoints = 0
+        gradepoints = 0
+        
+        for course in remaining_overall_courses:
+            num_of_remaining+=1
+        
+       # print("Number of Total Remaining Courses: ")
+        #print(num_of_remaining)
+
+        for course in self.courses:
+                num_of_overall_courses+=1
+                letter_grade = course["grade"]
+
+                if letter_grade is None:
+                    gradepoints = 0
+                else:
+                    gradepoints = letter_grade_points[letter_grade]
+                
+                total_gradepoints += gradepoints
+
+                if letter_grade == 'P ':
+                    num_of_all_p+=1
+        
+        #print("Number of Total Courses: ")
+       # print(num_of_overall_courses)
+
+        if num_of_remaining > 0:
+                necessary_grade_points = (5 - num_of_all_p) * 3.00
+                print("necessary_grade_points: ")
+                print(necessary_grade_points)
+                overall_gpa_needed = (necessary_grade_points - total_gradepoints) / num_of_remaining
+
+       # print("overall_gpa_needed")   
+       # print(overall_gpa_needed)
+        return overall_gpa_needed
+    
+    # To get the outstanding GPA needed for the remaining courses
+    def get_outstanding_overall_gpa(self):
+        remaining_courses = self.get_remaining_overall_courses()
+        num_of_courses = 0
+        for course in remaining_courses:
+            num_of_courses+=1
+
+        comparison_gpa = "To maintain a 3.0 overall GPA: " + "\n"
+        
+        needed_overall_gpa = self.get_needed_overall_gpa()
+
+        #letter_grade = letter_grade_needed[needed_overall_gpa]
+        
+        if needed_overall_gpa >= 2.00:
+            if num_of_courses == 1:
+                outstanding_overall_gpa = comparison_gpa
+                #outstanding_overall_gpa += "\t" + "The student needs >= " + letter_grade + "in: "
+                outstanding_overall_gpa += "\t" + "The student needs >= " + "letter_grade" + " in: "
+                remaining = remaining_courses
+                remaining = ", ".join(remaining)
+                outstanding_overall_gpa += remaining 
+                
+            elif num_of_courses > 1:
+                outstanding_overall_gpa = comparison_gpa
+                outstanding_overall_gpa += "\t" + "The student needs a GPA >= " + str(needed_overall_gpa) + " in: "
+                remaining = remaining_courses
+                remaining = ", ".join(remaining)
+                outstanding_overall_gpa += remaining
+
+            else:
+                outstanding_overall_gpa = "All Classes Complete."
+                
+        elif needed_overall_gpa < 2.00:
+            outstanding_overall_gpa = comparison_gpa
+            outstanding_overall_gpa += "\t" + "The student must pass: "
+            remaining = remaining_courses
+            remaining = ", ".join(remaining)
+            outstanding_overall_gpa += remaining 
+        
+        return outstanding_overall_gpa
