@@ -55,9 +55,15 @@
 
 ### Audit Report Page Usage
 1. On the *Audit Report* page, press the "Start Audit" button to begin the audit report process
+<img width="66" alt="image" src="https://user-images.githubusercontent.com/55895555/236145897-9997a95d-f0f6-4a22-af2e-7488390159df.png">
+
 2. Please follow the instructions displayed on the screen after pressing the "Start Audit" button
 3. If you wish to add a comment or submit a change to an existing comment, to the dispostion of the course, then you are required to click the "submit" button, (located next to the commment text entry box) after entering your comment
-4. After following the instructions displayed on the screen, to generate a audit report, click the "Save Audit Report" button. This will open up Windows *File Explorer*. After navigating to where you want to save the Audit Report, press the "Save Audit Report" button to save the Audit Report. 
+<img width="180" alt="image" src="https://user-images.githubusercontent.com/55895555/236146048-5600fb1a-f3d4-421a-908b-fe71d44942c1.png">
+
+4. After following the instructions displayed on the screen, to generate a audit report, click the "Save Audit Report" button. This will open up Windows *File Explorer*. After navigating to where you want to save the Audit Report, press the "Save" button to save the Audit Report. 
+<img width="557" alt="image" src="https://user-images.githubusercontent.com/55895555/236146342-ee9ce874-1a7b-44af-9dc5-b9391ac20462.png">
+
 5. After saving the file, the application will begin generating the audit report and will notify the user when it is complete. 
-6. Please wait for confirmation pop-up window to show up, before closing the application, or going to the homepage. 
+6. Please wait for confirmation pop-up window to show up, before closing the application, or moving to a different page
 7. To print the audit report, simply open the audit report file in Microsoft Word, click the "file" tab located in the top left hand corner of Microsoft Word, click the "Print" tab in the side menu of Microsoft Word, and then press then print button. 
