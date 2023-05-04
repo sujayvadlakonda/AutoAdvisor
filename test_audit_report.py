@@ -1,5 +1,5 @@
 from audit_report import AuditReport
-from track import DataScience, IntelligentSystems, Systems, Traditional, InteractiveComputing
+from track import DataScience, IntelligentSystems, Systems, Traditional, InteractiveComputing, SoftwareEngineering
 
 
 def assertEqual(a, b):
@@ -66,6 +66,10 @@ jaime_tartt = AuditReport("transcripts/jaime-tartt.pdf", InteractiveComputing())
 jaime_tartt_core = ["CS 6326", "CS 6363", "CS 6323", "CS 6334", "CS 6366"]
 jaime_tartt_electives = ["CS 6301", "CS 6313", "CS 6319", "CS 6360", "CS 6375", "CS 6384"]
 
+rachel = AuditReport("transcripts/rachel-green.pdf", SoftwareEngineering())
+rachel_core = ["SE 6329", "CS 6361", "SE 6362", "SE 6367", "SE 6387"]
+rachel_elec = ["CS 6320", "CS 6324", "CS 6350", "CS 6360", "CS 6363", "CS 6375"]
+
 test_core(ted_lasso, ted_lasso_core)
 test_core(taylor_swift, taylor_swift_core)
 test_core(roy_kent, roy_kent_core)
@@ -78,7 +82,7 @@ test_core(chandler_bing, chandler_bing_core)
 test_core(harry_potter, harry_potter_core)
 test_core(ron_weasley, ron_weasley_core)
 test_core(jaime_tartt, jaime_tartt_core)
-
+test_core(rachel, rachel_core)
 
 test_electives(ted_lasso, ted_lasso_electives)
 test_electives(taylor_swift, taylor_swift_electives)
@@ -92,3 +96,4 @@ test_electives(chandler_bing, chandler_bing_electives)
 test_electives(harry_potter, harry_potter_electives)
 test_electives(ron_weasley, ron_weasley_electives)
 test_electives(jaime_tartt, jaime_tartt_electives)
+test_electives(rachel, rachel_elec)
