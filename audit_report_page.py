@@ -302,11 +302,11 @@ class AuditReportPage(ttk.Frame):
         # self.core_gpa_req = ""
         # self.elective_gpa_req = ""
         # self.overall_gpa_req = ""
-        self.out_req_sect = audit_report.get_outstanding_requirements_section()
+        # self.out_req_sect = audit_report.get_outstanding_requirements_section()
 
         # Displays outstanding core, elective, and overall gpa requirements information lines on screen
-        lbl_out_req_sect = ttk.Label(self.scrollable_frame, text=self.out_req_sect, style="Black_txt.TLabel")
-        lbl_out_req_sect.grid(column=0, row=16, columnspan=15, sticky="w", pad=(0, 20))
+        # lbl_out_req_sect = ttk.Label(self.scrollable_frame, text=self.out_req_sect, style="Black_txt.TLabel")
+        # lbl_out_req_sect.grid(column=0, row=16, columnspan=15, sticky="w", pad=(0, 20))
         # lbl_core_gpa_req = ttk.Label(self.scrollable_frame, text=self.maintain_core_gpa, style="Black_txt.TLabel")
         # lbl_core_gpa_req.grid(column=0, row=16, columnspan=2, sticky="w", pady=(0, 5))  # text positioning
         # lbl_core_gpa_pass = ttk.Label(self.scrollable_frame, text=self.core_gpa_req, style="Black_txt.TLabel")
@@ -569,10 +569,10 @@ class AuditReportPage(ttk.Frame):
         ar_out_req_title.paragraph_format.space_after = Pt(12)  # adds space after paragraph
 
         # Displays outstanding requirements for core gpa requirements in file
-        self.out_req_sect = audit_report.get_outstanding_requirements_section()
-        ar_out_req = self.document.add_paragraph()
-        format_ar_out_req_gpa = ar_out_req.add_run(self.out_req_sect)  # adds text
-        format_ar_out_req_gpa.font.size = Pt(12)  # sets font size
+        # self.out_req_sect = audit_report.get_outstanding_requirements_section()
+        # ar_out_req = self.document.add_paragraph()
+        #format_ar_out_req_gpa = ar_out_req.add_run(self.out_req_sect)  # adds text
+        #format_ar_out_req_gpa.font.size = Pt(12)  # sets font size
         # format_ar_out_req_core_gpa = ar_out_req.add_run(self.maintain_core_gpa)  # adds text
         # format_ar_out_req_core_gpa.font.size = Pt(12)  # sets font size
         # ar_out_req.paragraph_format.space_after = Pt(0)  # removes space after paragraph
