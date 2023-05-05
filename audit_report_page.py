@@ -47,12 +47,13 @@ class AuditReportPage(ttk.Frame):
         self.comment_tracker = []
 
         # Holds strings to be printed for the Outstanding Requirements section of the Word doc
-        self.maintain_core_gpa = "To maintain a example core GPA:"
-        self.maintain_elective_gpa = "To maintain a example elective GPA:"
-        self.maintain_overall_gpa = "To maintain a example overall GPA:"
-        self.core_gpa_req = "The student must pass: example class"
-        self.elective_gpa_req = "The student must pass: example class "
-        self.overall_gpa_req = "The student must pass: example class"
+        # self.maintain_core_gpa = ""
+        # self.maintain_elective_gpa = ""
+        # self.maintain_overall_gpa = ""
+        # self.core_gpa_req = ""
+        # self.elective_gpa_req = ""
+        # self.overall_gpa_req = ""
+        self.out_req_sect = ""
 
         self.select_elective = tk.IntVar()  # holds selection value to Student Taking Extra Elective question
         self.xtra_elective_result = ""  # saves selection value to Student Taking Extra Elective question
@@ -295,21 +296,31 @@ class AuditReportPage(ttk.Frame):
         lbl_gpa_req = ttk.Label(self.scrollable_frame, text="Outstanding Requirements:", style="BlackSmall.TLabel")
         lbl_gpa_req.grid(column=0, row=15, columnspan=2, sticky="w", pady=(30, 5))  # text positioning
 
+        # self.maintain_core_gpa = audit_report.get_outstanding_core_gpa()
+        # self.maintain_elective_gpa = audit_report.get_outstanding_elec_gpa()
+        # self.maintain_overall_gpa = audit_report.get_outstanding_overall_gpa()
+        # self.core_gpa_req = ""
+        # self.elective_gpa_req = ""
+        # self.overall_gpa_req = ""
+        # self.out_req_sect = audit_report.get_outstanding_requirements_section()
+
         # Displays outstanding core, elective, and overall gpa requirements information lines on screen
-        lbl_core_gpa_req = ttk.Label(self.scrollable_frame, text=self.maintain_core_gpa, style="Black_txt.TLabel")
-        lbl_core_gpa_req.grid(column=0, row=16, columnspan=2, sticky="w", pady=(0, 5))  # text positioning
-        lbl_core_gpa_pass = ttk.Label(self.scrollable_frame, text=self.core_gpa_req, style="Black_txt.TLabel")
-        lbl_core_gpa_pass.grid(column=0, row=17, columnspan=15, sticky="w", pady=(0, 20))  # text positioning
-        lbl_elective_gpa_req = ttk.Label(self.scrollable_frame,
-                                         text=self.maintain_elective_gpa,
-                                         style="Black_txt.TLabel")
-        lbl_elective_gpa_req.grid(column=0, row=18, columnspan=2, sticky="w", pady=(0, 5))  # text positioning
-        lbl_elective_gpa_pass = ttk.Label(self.scrollable_frame, text=self.elective_gpa_req, style="Black_txt.TLabel")
-        lbl_elective_gpa_pass.grid(column=0, row=19, columnspan=15, sticky="w", pady=(0, 20))  # text positioning
-        lbl_overall_gpa_req = ttk.Label(self.scrollable_frame, text=self.maintain_overall_gpa, style="Black_txt.TLabel")
-        lbl_overall_gpa_req.grid(column=0, row=20, columnspan=2, sticky="w", pady=(0, 5))  # text positioning
-        lbl_overall_gpa_pass = ttk.Label(self.scrollable_frame, text=self.overall_gpa_req, style="Black_txt.TLabel")
-        lbl_overall_gpa_pass.grid(column=0, row=21, columnspan=15, sticky="w", pady=(0, 20))  # text positioning
+        # lbl_out_req_sect = ttk.Label(self.scrollable_frame, text=self.out_req_sect, style="Black_txt.TLabel")
+        # lbl_out_req_sect.grid(column=0, row=16, columnspan=15, sticky="w", pad=(0, 20))
+        # lbl_core_gpa_req = ttk.Label(self.scrollable_frame, text=self.maintain_core_gpa, style="Black_txt.TLabel")
+        # lbl_core_gpa_req.grid(column=0, row=16, columnspan=2, sticky="w", pady=(0, 5))  # text positioning
+        # lbl_core_gpa_pass = ttk.Label(self.scrollable_frame, text=self.core_gpa_req, style="Black_txt.TLabel")
+        # lbl_core_gpa_pass.grid(column=0, row=17, columnspan=15, sticky="w", pady=(0, 20))  # text positioning
+        # lbl_elective_gpa_req = ttk.Label(self.scrollable_frame,
+        #                                 text=self.maintain_elective_gpa,
+        #                                 style="Black_txt.TLabel")
+        # lbl_elective_gpa_req.grid(column=0, row=18, columnspan=2, sticky="w", pady=(0, 5))  # text positioning
+        # lbl_elective_gpa_pass = ttk.Label(self.scrollable_frame, text=self.elective_gpa_req, style="Black_txt.TLabel")
+        # lbl_elective_gpa_pass.grid(column=0, row=19, columnspan=15, sticky="w", pady=(0, 20))  # text positioning
+        #lbl_overall_gpa_req = ttk.Label(self.scrollable_frame, text=self.maintain_overall_gpa, style="Black_txt.TLabel")
+        # lbl_overall_gpa_req.grid(column=0, row=20, columnspan=2, sticky="w", pady=(0, 5))  # text positioning
+        # lbl_overall_gpa_pass = ttk.Label(self.scrollable_frame, text=self.overall_gpa_req, style="Black_txt.TLabel")
+        # lbl_overall_gpa_pass.grid(column=0, row=21, columnspan=15, sticky="w", pady=(0, 20))  # text positioning
 
         # Displays instructions to select disposition of pre-reqs from degree plan
         pre_req_prompt = "Select Disposition for each Leveling Course(s) & Prerequisite(s):"
@@ -332,7 +343,6 @@ class AuditReportPage(ttk.Frame):
         row_count = 23  # holds row of menu & text
         for pre_req_class in self.disposition_dict["dp_pre_req_class"]:
             row_count += 1  # holds what row widget should be
-            # disp_choice = self.disp_select
             disp_select = tk.StringVar()  # holds user disposition selection
             disp_select.set(self.disposition_dict["disp_options"][0])  # sets default value of disposition
             disp_select.trace("w", self.disposition_update)  # updates saved disposition when user changes choice
@@ -515,7 +525,7 @@ class AuditReportPage(ttk.Frame):
         format_ar_overall_gpa_lbl = ar_overall_gpa.add_run("Combined GPA: ")  # adds text
         format_ar_overall_gpa_lbl.bold = True  # sets text to bold
         format_ar_overall_gpa_lbl.font.size = Pt(12)  # sets font size
-        format_ar_overall_gpa = ar_overall_gpa.add_run(self.elective_gpa)
+        format_ar_overall_gpa = ar_overall_gpa.add_run(self.overall_gpa)
         format_ar_overall_gpa.font.size = Pt(12)  # sets font size
         ar_overall_gpa.paragraph_format.space_after = Pt(12)  # adds space after paragraph
 
@@ -559,36 +569,39 @@ class AuditReportPage(ttk.Frame):
         ar_out_req_title.paragraph_format.space_after = Pt(12)  # adds space after paragraph
 
         # Displays outstanding requirements for core gpa requirements in file
-        ar_out_req = self.document.add_paragraph()
-        format_ar_out_req_core_gpa = ar_out_req.add_run(self.maintain_core_gpa)  # adds text
-        format_ar_out_req_core_gpa.font.size = Pt(12)  # sets font size
-        ar_out_req.paragraph_format.space_after = Pt(0)  # removes space after paragraph
-        ar_out_req_core_courses = self.document.add_paragraph()
-        format_ar_out_req_core_courses = ar_out_req_core_courses.add_run(self.core_gpa_req)  # adds text
-        format_ar_out_req_core_courses.font.size = Pt(12)  # sets font size
-        ar_out_req_core_courses.paragraph_format.space_after = Pt(0)  # removes space after paragraph
-        ar_out_req_core_courses.paragraph_format.left_indent = Inches(0.5)  # sets indentation
+        # self.out_req_sect = audit_report.get_outstanding_requirements_section()
+        # ar_out_req = self.document.add_paragraph()
+        #format_ar_out_req_gpa = ar_out_req.add_run(self.out_req_sect)  # adds text
+        #format_ar_out_req_gpa.font.size = Pt(12)  # sets font size
+        # format_ar_out_req_core_gpa = ar_out_req.add_run(self.maintain_core_gpa)  # adds text
+        # format_ar_out_req_core_gpa.font.size = Pt(12)  # sets font size
+        # ar_out_req.paragraph_format.space_after = Pt(0)  # removes space after paragraph
+        # ar_out_req_core_courses = self.document.add_paragraph()
+        # format_ar_out_req_core_courses = ar_out_req_core_courses.add_run(self.core_gpa_req)  # adds text
+        # format_ar_out_req_core_courses.font.size = Pt(12)  # sets font size
+        # ar_out_req_core_courses.paragraph_format.space_after = Pt(0)  # removes space after paragraph
+        # ar_out_req_core_courses.paragraph_format.left_indent = Inches(0.5)  # sets indentation
 
         # Displays outstanding requirements for elective gpa requirements in file
-        ar_out_req_elective_gpa = self.document.add_paragraph()
-        format_ar_out_req_elective_gpa = ar_out_req_elective_gpa.add_run(self.maintain_elective_gpa)  # adds text
-        format_ar_out_req_elective_gpa.font.size = Pt(12)  # sets font size
-        ar_out_req_elective_gpa.paragraph_format.space_after = Pt(0)  # removes space after paragraph
-        ar_out_req_elective_courses = self.document.add_paragraph()
-        format_ar_out_req_elective_courses = ar_out_req_elective_courses.add_run(self.elective_gpa_req)  # adds text
-        format_ar_out_req_elective_courses.font.size = Pt(12)  # sets font size
-        ar_out_req_elective_courses.paragraph_format.space_after = Pt(0)  # removes space after paragraph
-        ar_out_req_elective_courses.paragraph_format.left_indent = Inches(0.5)  # sets indentation
+        # far_out_req_elective_gpa = self.document.add_paragraph()
+        # format_ar_out_req_elective_gpa = ar_out_req_elective_gpa.add_run(self.maintain_elective_gpa)  # adds text
+        # format_ar_out_req_elective_gpa.font.size = Pt(12)  # sets font size
+        # ar_out_req_elective_gpa.paragraph_format.space_after = Pt(0)  # removes space after paragraph
+        # ar_out_req_elective_courses = self.document.add_paragraph()
+        # format_ar_out_req_elective_courses = ar_out_req_elective_courses.add_run(self.elective_gpa_req)  # adds text
+        # format_ar_out_req_elective_courses.font.size = Pt(12)  # sets font size
+        # ar_out_req_elective_courses.paragraph_format.space_after = Pt(0)  # removes space after paragraph
+        # ar_out_req_elective_courses.paragraph_format.left_indent = Inches(0.5)  # sets indentation
 
         # Displays outstanding requirements for overall gpa requirements in file
-        ar_out_req_overall_gpa = self.document.add_paragraph()
-        format_ar_out_req_overall_gpa = ar_out_req_overall_gpa.add_run(self.maintain_overall_gpa)  # adds text
-        format_ar_out_req_overall_gpa.font.size = Pt(12)  # sets font size
-        ar_out_req_overall_gpa.paragraph_format.space_after = Pt(0)  # removes space after paragraph
-        ar_out_req_overall_courses = self.document.add_paragraph()
-        format_ar_out_req_overall_courses = ar_out_req_overall_courses.add_run(self.overall_gpa_req)  # adds text
-        format_ar_out_req_overall_courses.font.size = Pt(12)  # sets font size
-        ar_out_req_overall_courses.paragraph_format.left_indent = Inches(0.5)  # sets indentation
+        # ar_out_req_overall_gpa = self.document.add_paragraph()
+        # format_ar_out_req_overall_gpa = ar_out_req_overall_gpa.add_run(self.maintain_overall_gpa)  # adds text
+        # format_ar_out_req_overall_gpa.font.size = Pt(12)  # sets font size
+        # ar_out_req_overall_gpa.paragraph_format.space_after = Pt(0)  # removes space after paragraph
+        # ar_out_req_overall_courses = self.document.add_paragraph()
+        # format_ar_out_req_overall_courses = ar_out_req_overall_courses.add_run(self.overall_gpa_req)  # adds text
+        # format_ar_out_req_overall_courses.font.size = Pt(12)  # sets font size
+        # ar_out_req_overall_courses.paragraph_format.left_indent = Inches(0.5)  # sets indentation
 
         # Prints out courses and disposition and checks if the disposition option is "None"
         check_none = self.disposition_dict["disp_selections"][0]
