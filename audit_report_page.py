@@ -19,7 +19,7 @@ class AuditReportPage(ttk.Frame):
         super().__init__(container)
         self.controller = controller
         self.transcript_path = tk.StringVar()  # holds path to transcript
-        self.document = docx.Document()  # sets up Word doc object to generate audit report
+        # self.document = docx.Document()  # sets up Word doc object to generate audit report
 
         self.student_name = ""
         self.student_id = ""
@@ -42,9 +42,6 @@ class AuditReportPage(ttk.Frame):
             "user_course_comment": [],  # Hold's user's entry in text entry box
             "entry_box": []  # holds entry text box widget
         }
-
-        self.disp_tracker = []
-        self.comment_tracker = []
 
         # Holds strings to be printed for the Outstanding Requirements section of the Word doc
         # self.maintain_core_gpa = ""
@@ -162,15 +159,17 @@ class AuditReportPage(ttk.Frame):
 
     # Ensures updated user selected disposition values are tracked upon selection in the GUI
     def disposition_update(self, *args):
+        disp_tracker = []
         for saved_disp in self.disposition_dict["disp_selections"]:
             disp_status_word = saved_disp.get()
-            self.disp_tracker.append(disp_status_word)
+            disp_tracker.append(disp_status_word)
 
     # Ensures text entry box values are tracked upon clicking the submit button
     def comment_tracker(self):
+        comment_tracker = []
         for entry in self.disposition_dict["user_course_comment"]:
             comment_word = entry.get()
-            self.comment_tracker.append(comment_word)
+            comment_tracker.append(comment_word)
 
     # Opens File Explorer to save file
     def save_file(self):
@@ -210,6 +209,20 @@ class AuditReportPage(ttk.Frame):
 
     # Displays Contents of Audit Report Page GUI
     def audit_report_gui(self):
+        transcript_filepath = self.transcript_path  # holds filepath of uploaded file
+        track_class = self.check_track()  # holds class for corresponding selected track
+        audit_report = AuditReport(transcript_filepath, track_class)  # used to call audit report related methods
+        self.core_gpa = audit_report.get_core_gpa_section()  # holds core gpa displayed in audit report
+        self.elective_gpa = audit_report.get_elective_gpa_section()  # holds elective gpa displayed in elective gpa
+        self.overall_gpa = audit_report.get_combined_gpa_section()  # holds overall gpa displayed in elective gpa
+        # self.maintain_core_gpa = audit_report.get_outstanding_core_gpa()
+        # self.maintain_elective_gpa = audit_report.get_outstanding_elec_gpa()
+        # self.maintain_overall_gpa = audit_report.get_outstanding_overall_gpa()
+        # self.core_gpa_req = ""
+        # self.elective_gpa_req = ""
+        # self.overall_gpa_req = ""
+        # self.out_req_sect = audit_report.get_outstanding_requirements_section()
+
         # Audit Report page title and design
         lbl_aud_report = ttk.Label(self.scrollable_frame, text="Audit Report", style="BlWht.TLabel")
         lbl_aud_report.grid(column=1, row=0, columnspan=2, sticky="nw", pady=(5, 0))  # text positioning
@@ -221,13 +234,6 @@ class AuditReportPage(ttk.Frame):
         lbl_elective_gpa.grid(column=0, row=7, columnspan=1, sticky="w")  # text positioning
         lbl_overall_gpa = ttk.Label(self.scrollable_frame, text="Overall GPA: ", style="BlackSmall.TLabel")
         lbl_overall_gpa.grid(column=0, row=8, columnspan=1, sticky="w", pady=(0, 20))  # text positioning
-
-        transcript_filepath = self.transcript_path  # holds filepath of uploaded file
-        track_class = self.check_track()  # holds class for corresponding selected track
-        audit_report = AuditReport(transcript_filepath, track_class)  # used to call audit report related methods
-        self.core_gpa = audit_report.get_core_gpa_section()  # holds core gpa displayed in audit report
-        self.elective_gpa = audit_report.get_elective_gpa_section()  # holds elective gpa displayed in elective gpa
-        self.overall_gpa = audit_report.get_combined_gpa_section()  # holds overall gpa displayed in elective gpa
 
         # Displays core, elective, and overall gpa on screen
         lbl_core_gpa_display = ttk.Label(self.scrollable_frame, text=self.core_gpa, style="Black_txt.TLabel")
@@ -294,15 +300,7 @@ class AuditReportPage(ttk.Frame):
 
         # Displays "Outstanding Requirements:" title to file and screen
         lbl_gpa_req = ttk.Label(self.scrollable_frame, text="Outstanding Requirements:", style="BlackSmall.TLabel")
-        lbl_gpa_req.grid(column=0, row=15, columnspan=2, sticky="w", pady=(30, 5))  # text positioning
-
-        # self.maintain_core_gpa = audit_report.get_outstanding_core_gpa()
-        # self.maintain_elective_gpa = audit_report.get_outstanding_elec_gpa()
-        # self.maintain_overall_gpa = audit_report.get_outstanding_overall_gpa()
-        # self.core_gpa_req = ""
-        # self.elective_gpa_req = ""
-        # self.overall_gpa_req = ""
-        # self.out_req_sect = audit_report.get_outstanding_requirements_section()
+        lbl_gpa_req.grid(column=0, row=15, columnspan=2, sticky="w", pady=(30, 5))  # text position
 
         # Displays outstanding core, elective, and overall gpa requirements information lines on screen
         # lbl_out_req_sect = ttk.Label(self.scrollable_frame, text=self.out_req_sect, style="Black_txt.TLabel")
@@ -420,6 +418,7 @@ class AuditReportPage(ttk.Frame):
 
     # Writes information to audit report file
     def generate_report_content(self, audit_report_filepath):
+        document = docx.Document()
         transcript_filepath = self.transcript_path  # holds filepath of uploaded file
         transcript = Transcript(transcript_filepath)  # used to get info from transcript
 
@@ -433,20 +432,20 @@ class AuditReportPage(ttk.Frame):
         track_class = self.check_track()  # holds class for corresponding selected track
         audit_report = AuditReport(transcript_filepath, track_class)  # used to call audit report related methods
 
-        self.core_gpa = audit_report.get_core_gpa_section()  # holds core gpa displayed in audit report
-        self.elective_gpa = audit_report.get_elective_gpa_section()  # holds elective gpa displayed in elective gpa
-        self.overall_gpa = audit_report.get_combined_gpa_section()  # holds overall gpa displayed in elective gpa
+        # self.core_gpa = audit_report.get_core_gpa_section()  # holds core gpa displayed in audit report
+        # self.elective_gpa = audit_report.get_elective_gpa_section()  # holds elective gpa displayed in elective gpa
+        # self.overall_gpa = audit_report.get_combined_gpa_section()  # holds overall gpa displayed in elective gpa
 
         self.core_courses = audit_report.get_core_section()  # Holds core courses displayed in audit report file
         self.elective_courses = audit_report.get_electives_section()  # Holds electives displayed in audit report file
 
         # sets default font
-        report_style = self.document.styles["Normal"]
+        report_style = document.styles["Normal"]
         fonts = report_style.font
         fonts.name = "Calibri"
 
         # Handles word doc margin
-        sections = self.document.sections
+        sections = document.sections
         for section in sections:
             section.top_margin = Inches(0.5)
             section.bottom_margin = Inches(0.5)
@@ -454,7 +453,7 @@ class AuditReportPage(ttk.Frame):
             section.right_margin = Inches(0.5)
 
         # Displays "Audit Report" title sent in file
-        ar_title = self.document.add_paragraph()
+        ar_title = document.add_paragraph()
         ar_title.paragraph_format.alignment = WD_PARAGRAPH_ALIGNMENT.CENTER  # centers text
         ar_title.paragraph_format.space_after = Pt(12)  # adds space after paragraph
         format_ar_title = ar_title.add_run("Audit Report")  # adds text
@@ -462,7 +461,7 @@ class AuditReportPage(ttk.Frame):
         format_ar_title.font.size = Pt(14)  # sets font size
 
         # Displays student name in audit report word doc
-        ar_student_name = self.document.add_paragraph()
+        ar_student_name = document.add_paragraph()
         format_ar_student_lbl = ar_student_name.add_run("Name: ")  # adds text
         format_ar_student_lbl.bold = True  # sets text to bold
         format_ar_student_lbl.font.size = Pt(12)  # sets font size
@@ -478,7 +477,7 @@ class AuditReportPage(ttk.Frame):
         ar_student_name.paragraph_format.space_after = Pt(0)  # removes space after paragraph
 
         # Displays Plan in audit report word doc
-        ar_student_plan = self.document.add_paragraph()
+        ar_student_plan = document.add_paragraph()
         format_ar_student_plan_lbl = ar_student_plan.add_run("Plan: ")  # adds text
         format_ar_student_plan_lbl.bold = True  # sets text to bold
         format_ar_student_plan_lbl.font.size = Pt(12)  # sets font size
@@ -494,7 +493,7 @@ class AuditReportPage(ttk.Frame):
         ar_student_plan.paragraph_format.space_after = Pt(0)  # removes space after paragraph
 
         # Displays student track in word doc
-        ar_student_track = self.document.add_paragraph()
+        ar_student_track = document.add_paragraph()
         format_ar_student_track_lbl = ar_student_track.add_run("Track: ")  # adds text
         format_ar_student_track_lbl.bold = True  # sets text to bold
         format_ar_student_track_lbl.font.size = Pt(12)  # sets font size
@@ -503,7 +502,7 @@ class AuditReportPage(ttk.Frame):
         ar_student_track.paragraph_format.space_after = Pt(12)  # adds space after paragraph
 
         # Displays "Core GPA" row in word doc
-        ar_core_gpa = self.document.add_paragraph()
+        ar_core_gpa = document.add_paragraph()
         format_ar_core_gpa_lbl = ar_core_gpa.add_run("Core GPA: ")  # adds text
         format_ar_core_gpa_lbl.bold = True  # sets text to bold
         format_ar_core_gpa_lbl.font.size = Pt(12)  # sets font size
@@ -512,7 +511,7 @@ class AuditReportPage(ttk.Frame):
         ar_core_gpa.paragraph_format.space_after = Pt(0)  # removes space after paragraph
 
         # Displays "Elective GPA" row in file
-        ar_elective_gpa = self.document.add_paragraph()
+        ar_elective_gpa = document.add_paragraph()
         format_ar_elective_gpa_lbl = ar_elective_gpa.add_run("Elective GPA: ")  # adds text
         format_ar_elective_gpa_lbl.bold = True  # sets text to bold
         format_ar_elective_gpa_lbl.font.size = Pt(12)  # sets font size
@@ -521,7 +520,7 @@ class AuditReportPage(ttk.Frame):
         ar_elective_gpa.paragraph_format.space_after = Pt(0)  # removes space after paragraph
 
         # Displays "Overall GPA" row in file
-        ar_overall_gpa = self.document.add_paragraph()
+        ar_overall_gpa = document.add_paragraph()
         format_ar_overall_gpa_lbl = ar_overall_gpa.add_run("Combined GPA: ")  # adds text
         format_ar_overall_gpa_lbl.bold = True  # sets text to bold
         format_ar_overall_gpa_lbl.font.size = Pt(12)  # sets font size
@@ -530,7 +529,7 @@ class AuditReportPage(ttk.Frame):
         ar_overall_gpa.paragraph_format.space_after = Pt(12)  # adds space after paragraph
 
         # Displays "Core Courses" row in file
-        ar_core_courses = self.document.add_paragraph()
+        ar_core_courses = document.add_paragraph()
         format_ar_core_courses_lbl = ar_core_courses.add_run("Core Courses: ")  # adds text
         format_ar_core_courses_lbl.bold = True  # sets text to bold
         format_ar_core_courses_lbl.font.size = Pt(12)  # sets font size
@@ -539,7 +538,7 @@ class AuditReportPage(ttk.Frame):
         ar_core_courses.paragraph_format.space_after = Pt(0)  # removes space after paragraph
 
         # Displays "Elective Courses" row in file
-        ar_elective_courses = self.document.add_paragraph()
+        ar_elective_courses = document.add_paragraph()
         format_ar_elective_courses_lbl = ar_elective_courses.add_run("Elective Courses: ")  # adds text
         format_ar_elective_courses_lbl.bold = True  # sets text to bold
         format_ar_elective_courses_lbl.font.size = Pt(12)  # sets font size
@@ -549,30 +548,32 @@ class AuditReportPage(ttk.Frame):
 
         # Displays "Leveling Courses and Pre-requisites from Admission Letter:" title in word doc
         pre_req_section_title = "Leveling Courses and Pre-requisites from Admission Letter:"
-        ar_pre_req_title = self.document.add_paragraph()
+        ar_pre_req_title = document.add_paragraph()
         format_ar_pre_req_title_lbl = ar_pre_req_title.add_run(pre_req_section_title)  # adds text
         format_ar_pre_req_title_lbl.bold = True  # sets text to bold
         format_ar_pre_req_title_lbl.font.size = Pt(12)  # sets font size
         ar_pre_req_title.paragraph_format.space_after = Pt(12)  # adds space after paragraph
 
         # Displays Course and disposition of pre-reqs in file
-        ar_pre_req_courses = self.document.add_paragraph()
+        ar_pre_req_courses = document.add_paragraph()
         ar_pre_req_courses.paragraph_format.space_after = Pt(0)  # removes space after paragraph
 
         # Displays "Outstanding Requirements:" title in file
         outstanding_req_title = "Outstanding Requirements:"
-        ar_out_req_title = self.document.add_paragraph()
+        ar_out_req_title = document.add_paragraph()
         format_ar_out_req_title_lbl = ar_out_req_title.add_run(outstanding_req_title)  # adds text
         format_ar_out_req_title_lbl.bold = True  # sets text to bold
         format_ar_out_req_title_lbl.font.size = Pt(12)  # sets font size
         ar_out_req_title.paragraph_format.space_before = Pt(12)  # adds space before paragraph
         ar_out_req_title.paragraph_format.space_after = Pt(12)  # adds space after paragraph
 
+        # Displays outstanding requirements section in file
+        #     self.out_req_sect = audit_report.get_outstanding_requirements_section() # optional?
+        #     ar_out_req = self.document.add_paragraph()
+        #     format_ar_out_req_gpa = ar_out_req.add_run(self.out_req_sect)  # adds text
+        #     format_ar_out_req_gpa.font.size = Pt(12)  # sets font size
+
         # Displays outstanding requirements for core gpa requirements in file
-        # self.out_req_sect = audit_report.get_outstanding_requirements_section()
-        # ar_out_req = self.document.add_paragraph()
-        #format_ar_out_req_gpa = ar_out_req.add_run(self.out_req_sect)  # adds text
-        #format_ar_out_req_gpa.font.size = Pt(12)  # sets font size
         # format_ar_out_req_core_gpa = ar_out_req.add_run(self.maintain_core_gpa)  # adds text
         # format_ar_out_req_core_gpa.font.size = Pt(12)  # sets font size
         # ar_out_req.paragraph_format.space_after = Pt(0)  # removes space after paragraph
@@ -644,4 +645,4 @@ class AuditReportPage(ttk.Frame):
             format_ar_pre_req_courses = ar_pre_req_courses.add_run(lvl_sect)  # adds text
             format_ar_pre_req_courses.font.size = Pt(12)  # sets font size
 
-        self.document.save(audit_report_filepath)  # saves the Word doc
+        document.save(audit_report_filepath)  # saves the Word doc
