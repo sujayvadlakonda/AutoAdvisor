@@ -293,7 +293,7 @@ class AuditReport:
         num_of_remaining = 0
         total_gradepoints = 0
         gradepoints = 0
-        core_gpa_needed = 0.00
+        core_gpa_needed = 0.000
 
         for course in remaining_core_courses:
             num_of_remaining += 1
@@ -385,6 +385,7 @@ class AuditReport:
         num_of_remaining = 0
         total_gradepoints = 0
         gradepoints = 0
+        elec_gpa_needed = 0.000
 
         for course in remaining_elec_courses:
             num_of_remaining += 1
@@ -454,6 +455,7 @@ class AuditReport:
         num_of_remaining = 0
         total_gradepoints = 0
         gradepoints = 0
+        overall_gpa_needed = 0.000
 
         for course in remaining_overall_courses:
             num_of_remaining += 1
