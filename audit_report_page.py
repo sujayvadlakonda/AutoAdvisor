@@ -19,7 +19,6 @@ class AuditReportPage(ttk.Frame):
         super().__init__(container)
         self.controller = controller
         self.transcript_path = tk.StringVar()  # holds path to transcript
-        # self.document = docx.Document()  # sets up Word doc object to generate audit report
 
         self.student_name = ""
         self.student_id = ""
@@ -209,6 +208,13 @@ class AuditReportPage(ttk.Frame):
 
     # Displays Contents of Audit Report Page GUI
     def audit_report_gui(self):
+        # resets values if already present
+        self.disposition_dict["dp_pre_req_class"].clear()
+        self.disposition_dict["disp_selections"].clear()
+        self.disposition_dict["opt_menu"].clear()
+        self.disposition_dict["user_course_comment"].clear()
+        self.disposition_dict["entry_box"].clear()
+
         transcript_filepath = self.transcript_path  # holds filepath of uploaded file
         track_class = self.check_track()  # holds class for corresponding selected track
         audit_report = AuditReport(transcript_filepath, track_class)  # used to call audit report related methods
@@ -431,10 +437,6 @@ class AuditReportPage(ttk.Frame):
 
         track_class = self.check_track()  # holds class for corresponding selected track
         audit_report = AuditReport(transcript_filepath, track_class)  # used to call audit report related methods
-
-        # self.core_gpa = audit_report.get_core_gpa_section()  # holds core gpa displayed in audit report
-        # self.elective_gpa = audit_report.get_elective_gpa_section()  # holds elective gpa displayed in elective gpa
-        # self.overall_gpa = audit_report.get_combined_gpa_section()  # holds overall gpa displayed in elective gpa
 
         self.core_courses = audit_report.get_core_section()  # Holds core courses displayed in audit report file
         self.elective_courses = audit_report.get_electives_section()  # Holds electives displayed in audit report file
