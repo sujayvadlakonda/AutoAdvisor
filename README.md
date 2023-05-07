@@ -53,7 +53,7 @@
 6. When you are ready to continue to the *Audit Report* page to start the process of generating a audit report, click the "next >>" button, located in the bottom right hand corner of the application
 
 ### Audit Report Page Usage
-1. On the *Audit Report* page, press the "Start Audit" button to begin the audit report process
+1. On the *Audit Report* page, press the "Start Audit" button (which also acts as a refresh button) to begin the audit report process
 <img width="66" alt="image" src="https://user-images.githubusercontent.com/55895555/236145897-9997a95d-f0f6-4a22-af2e-7488390159df.png">
 
 2. Please follow the instructions displayed on the screen after pressing the "Start Audit" button
