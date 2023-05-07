@@ -90,6 +90,7 @@ class AuditReport:
         outstanding_requirements_section += str(self.get_outstanding_core_gpa()) + "\n"
         outstanding_requirements_section += str(self.get_outstanding_elec_gpa()) + "\n"
         outstanding_requirements_section += str(self.get_outstanding_overall_gpa()) + "\n"
+        print(outstanding_requirements_section)
         return outstanding_requirements_section
 
     # Returns core courses on transcript regardless of completion status
@@ -292,6 +293,7 @@ class AuditReport:
         num_of_remaining = 0
         total_gradepoints = 0
         gradepoints = 0
+        core_gpa_needed = 0.000
 
         for course in remaining_core_courses:
             num_of_remaining += 1
@@ -383,6 +385,7 @@ class AuditReport:
         num_of_remaining = 0
         total_gradepoints = 0
         gradepoints = 0
+        elec_gpa_needed = 0.000
 
         for course in remaining_elec_courses:
             num_of_remaining += 1
@@ -452,6 +455,7 @@ class AuditReport:
         num_of_remaining = 0
         total_gradepoints = 0
         gradepoints = 0
+        overall_gpa_needed = 0.000
 
         for course in remaining_overall_courses:
             num_of_remaining += 1
