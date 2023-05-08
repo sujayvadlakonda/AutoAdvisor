@@ -455,7 +455,7 @@ class AuditReport:
         num_of_remaining = 0
         total_gradepoints = 0
         gradepoints = 0
-        overall_gpa_needed = 0.000
+        # overall_gpa_needed = 0.000
 
         for course in remaining_overall_courses:
             num_of_remaining += 1

@@ -39,7 +39,10 @@ class AuditReportPage(ttk.Frame):
             "disp_selections": [],  # holds user selected disposition choice
             "opt_menu": [],  # holds disposition menu widget
             "user_course_comment": [],  # Hold's user's entry in text entry box
-            "entry_box": []  # holds entry text box widget
+            "entry_box": [],  # holds entry text box widget
+            "lbl_course_widget": [],  # holds course name label widget
+            "lbl_comment_widget": [],  # holds comment label widget
+            "btn_submit": []  # holds submit button widget
         }
 
         # Holds strings to be printed for the Outstanding Requirements section of the Word doc
@@ -53,15 +56,22 @@ class AuditReportPage(ttk.Frame):
         self.class_quantity = tk.StringVar()  # Holds quantity value to Quantity of Additional Courses question
         self.class_quantity_output = ""  # Saves quality value ot Quantity of Additional Courses question
 
-        self.class_quantity_box = ttk.Entry()
+        # Creates Instances of gpa related gui widgets
         self.lbl_core_gpa_display = ttk.Label()
         self.lbl_elective_gpa_display = ttk.Label()
         self.lbl_overall_gpa_display = ttk.Label()
-        self.lbl_out_req_sect = ttk.Label()
+
+        # Instances attribute of Quantity Additional Courses entry related widget
+        self.lbl_quan_class = ttk.Label()
+        self.class_quantity_box = ttk.Entry()
+        self.lbl_enter = ttk.Label()
+
+        self.lbl_out_req_sect = ttk.Label()  # outstanding requirements widget instance attribute
+
+        # Instance attribute of GUI buttons
         self.previous_btn = ttk.Button()
         self.audit_report_btn = ttk.Button()
         self.homepage_btn = ttk.Button()
-        self.lbl_disp_class = ttk.Label()
 
         # Handles gui for audit report page
         self.style = ttk.Style(self)
@@ -146,14 +156,14 @@ class AuditReportPage(ttk.Frame):
 
         # Prompts user for additional course quantity
         if self.select_addi_class.get() == 1:
-            lbl_quan_class = ttk.Label(self.scrollable_frame, text=class_amount_question, style="Black_txt.TLabel")
-            lbl_quan_class.grid(column=0, row=14, columnspan=3, sticky="w", pady=(5, 10))  # text positioning
+            self.lbl_quan_class = ttk.Label(self.scrollable_frame, text=class_amount_question, style="Black_txt.TLabel")
+            self.lbl_quan_class.grid(column=0, row=14, columnspan=3, sticky="w", pady=(5, 10))  # text positioning
             # Entry text box for user to enter how many additional graduate courses the student is taking
             self.class_quantity_box.grid(column=3, row=14, columnspan=1, sticky="w", pady=(5, 10))  # positioning
             self.class_quantity_box.bind("<Return>", self.addi_course_entry)  # saves entry upon user press Enter
             # Displays instructions for user to press enter to save their entry
-            lbl_press_enter = ttk.Label(self.scrollable_frame, text=submit_quantity_entry, style="gray_subtext.TLabel")
-            lbl_press_enter.grid(column=4, row=14, columnspan=2, sticky="w", pady=(5, 10))  # positioning
+            self.lbl_enter = ttk.Label(self.scrollable_frame, text=submit_quantity_entry, style="gray_subtext.TLabel")
+            self.lbl_enter.grid(column=4, row=14, columnspan=2, sticky="w", pady=(5, 10))  # positioning
 
     # Saves value entered in Additional Graduate Course text entry box upon the Enter key being pressed
     def addi_course_entry(self, event):
@@ -217,13 +227,26 @@ class AuditReportPage(ttk.Frame):
             self.lbl_elective_gpa_display.grid_forget()
             self.lbl_overall_gpa_display.grid_forget()
             self.lbl_out_req_sect.grid_forget()
-            self.lbl_disp_class.grid_forget()
+            for widget in self.disposition_dict["lbl_course_widget"]:
+                widget.grid_forget()
+            for widget in self.disposition_dict["opt_menu"]:
+                widget.grid_forget()
+            for widget in self.disposition_dict["lbl_comment_widget"]:
+                widget.grid_forget()
+            for widget in self.disposition_dict["entry_box"]:
+                widget.grid_forget()
+            for widget in self.disposition_dict["btn_submit"]:
+                widget.grid_forget()
             self.previous_btn.grid_forget()
-            self.audit_report_btn = ttk.Button()
-            self.homepage_btn = ttk.Button()
+            self.audit_report_btn.grid_forget()
+            self.homepage_btn.grid_forget()
         if self.select_elective.get() == 1 or 2:
             self.select_elective.set(0)
         if self.select_addi_class.get() == 1 or 2:
+            if self.select_addi_class.get() == 1:
+                self.lbl_quan_class.grid_forget()
+                self.class_quantity_box.grid_forget()
+                self.lbl_enter.grid_forget()
             self.select_addi_class.set(0)
         if self.class_quantity.get():
             self.class_quantity_box.delete(0, "end")
@@ -232,6 +255,9 @@ class AuditReportPage(ttk.Frame):
         self.disposition_dict["opt_menu"].clear()
         self.disposition_dict["user_course_comment"].clear()
         self.disposition_dict["entry_box"].clear()
+        self.disposition_dict["lbl_course_widget"].clear()
+        self.disposition_dict["lbl_comment_widget"].clear()
+        self.disposition_dict["btn_submit"].clear()
 
         transcript_filepath = self.transcript_path  # holds filepath of uploaded file
         track_class = self.check_track()  # holds class for corresponding selected track
@@ -239,7 +265,7 @@ class AuditReportPage(ttk.Frame):
         self.core_gpa = audit_report.get_core_gpa_section()  # holds core gpa displayed in audit report
         self.elective_gpa = audit_report.get_elective_gpa_section()  # holds elective gpa displayed in elective gpa
         self.overall_gpa = audit_report.get_combined_gpa_section()  # holds overall gpa displayed in elective gpa
-        self.out_req_sect = audit_report.get_outstanding_requirements_section()
+        self.out_req_sect = audit_report.get_outstanding_requirements_section()  # holds outstanding requirements text
 
         # Audit Report page title and design
         lbl_aud_report = ttk.Label(self.scrollable_frame, text="Audit Report", style="BlWht.TLabel")
@@ -256,7 +282,7 @@ class AuditReportPage(ttk.Frame):
         # Displays core, elective, and overall gpa on screen
         self.lbl_core_gpa_display = ttk.Label(self.scrollable_frame, text=self.core_gpa, style="Black_txt.TLabel")
         self.lbl_elective_gpa_display = ttk.Label(self.scrollable_frame, text="", style="Black_txt.TLabel")
-        self.lbl_elective_gpa_display.configure(text=self.elective_gpa)
+        self.lbl_elective_gpa_display.configure(text=self.elective_gpa)  # sets text
         self.lbl_overall_gpa_display = ttk.Label(self.scrollable_frame, text=self.overall_gpa, style="Black_txt.TLabel")
         self.lbl_core_gpa_display.grid(column=1, row=6, columnspan=1, sticky="w", pady=(20, 0))  # text positioning
         self.lbl_elective_gpa_display.grid(column=1, row=7, columnspan=1, sticky="w")  # text positioning
@@ -326,7 +352,7 @@ class AuditReportPage(ttk.Frame):
 
         # Displays outstanding core, elective, and overall gpa requirements information lines on screen
         self.lbl_out_req_sect = ttk.Label(self.scrollable_frame, text=self.out_req_sect, style="Black_txt.TLabel")
-        self.lbl_out_req_sect.grid(column=0, row=16, columnspan=7, sticky="w", pady=(0, 20))
+        self.lbl_out_req_sect.grid(column=0, row=16, columnspan=7, sticky="w", pady=(0, 20))  # text positioning
 
         # Displays instructions to select disposition of pre-reqs from degree plan
         pre_req_prompt = "Select Disposition for each Leveling Course(s) & Prerequisite(s):"
@@ -355,8 +381,8 @@ class AuditReportPage(ttk.Frame):
             disp_comment = tk.StringVar()  # Holds user's text entry in text box
             disp_comment.set("")  # sets default value of text entry box
             # Displays classes on screen
-            self.lbl_disp_class = ttk.Label(self.scrollable_frame, text=pre_req_class, style="Black_txt.TLabel")
-            self.lbl_disp_class.grid(column=0, row=row_count, columnspan=1, sticky="w", pady=(10, 0))  # positioning
+            lbl_disp_class = ttk.Label(self.scrollable_frame, text=pre_req_class, style="Black_txt.TLabel")
+            lbl_disp_class.grid(column=0, row=row_count, columnspan=1, sticky="w", pady=(10, 0))  # positioning
             # Displays drop down menu's on screen
             option_menu = ttk.OptionMenu(
                 self.scrollable_frame,
@@ -377,6 +403,11 @@ class AuditReportPage(ttk.Frame):
             self.disposition_dict["opt_menu"].append(option_menu)  # Adds disposition menu with unique variable to list
             self.disposition_dict["user_course_comment"].append(disp_comment)  # adds entry StringVar() to list
             self.disposition_dict["entry_box"].append(text_entry_box)  # adds entry widget to list
+            self.disposition_dict["lbl_course_widget"].append(lbl_disp_class)  # appends course name label widget
+            self.disposition_dict["lbl_comment_widget"].append(lbl_disp_comment)  # appends comment label widget
+            self.disposition_dict["btn_submit"].append(submit_btn)  # appends submit button widget
+
+        final_row = row_count+1  # Holds last row value
 
         # Previous Page button and design
         self.previous_btn = ttk.Button(
@@ -384,7 +415,7 @@ class AuditReportPage(ttk.Frame):
             text="<< Previous",
             command=lambda: self.controller.show_frame("DegreePlanPage")
         )
-        self.previous_btn.grid(column=0, row=row_count + 1, columnspan=1, sticky="sw", padx=(5, 0), pady=(20, 20))
+        self.previous_btn.grid(column=0, row=final_row, columnspan=1, sticky="sw", padx=(5, 0), pady=(20, 20))
 
         # Saves printable audit report in File Explorer
         self.audit_report_btn = ttk.Button(
@@ -392,7 +423,7 @@ class AuditReportPage(ttk.Frame):
             text="Save Audit Report",
             command=lambda: self.save_file()
         )
-        self.audit_report_btn.grid(column=3, row=row_count + 1, columnspan=1, sticky="sw", padx=(0, 5), pady=20)
+        self.audit_report_btn.grid(column=3, row=final_row, columnspan=1, sticky="sw", padx=(0, 5), pady=20)
 
         # Go to homepage button and design
         self.homepage_btn = ttk.Button(
@@ -400,7 +431,7 @@ class AuditReportPage(ttk.Frame):
             text="Go to Homepage",
             command=lambda: self.controller.show_frame("HomepageStart")
         )
-        self.homepage_btn.grid(column=4, row=row_count + 1, columnspan=1, sticky="se", pady=(20, 20))  # positioning
+        self.homepage_btn.grid(column=4, row=final_row, columnspan=1, sticky="se", pady=(20, 20))  # positioning
 
     # Assigns track based on which track was selected
     def check_track(self):
@@ -426,7 +457,7 @@ class AuditReportPage(ttk.Frame):
 
     # Writes information to audit report file
     def generate_report_content(self, audit_report_filepath):
-        document = docx.Document()
+        document = docx.Document()  # Sets up word document
         transcript_filepath = self.transcript_path  # holds filepath of uploaded file
         transcript = Transcript(transcript_filepath)  # used to get info from transcript
 
@@ -568,7 +599,6 @@ class AuditReportPage(ttk.Frame):
         format_ar_out_req_title_lbl = ar_out_req_title.add_run(outstanding_req_title)  # adds text
         format_ar_out_req_title_lbl.bold = True  # sets text to bold
         format_ar_out_req_title_lbl.font.size = Pt(12)  # sets font size
-        ar_out_req_title.paragraph_format.space_before = Pt(12)  # adds space before paragraph
         ar_out_req_title.paragraph_format.space_after = Pt(12)  # adds space after paragraph
 
         # Displays outstanding requirements section in file
@@ -576,45 +606,40 @@ class AuditReportPage(ttk.Frame):
         format_ar_out_req_gpa = ar_out_req.add_run(self.out_req_sect)  # adds text
         format_ar_out_req_gpa.font.size = Pt(12)  # sets font size
 
-        # Prints out courses and disposition and checks if the disposition option is "None"
-        check_none = self.disposition_dict["disp_selections"][0]
-        if check_none.get() == "None":
-            format_ar_pre_req_courses = ar_pre_req_courses.add_run("None")  # adds text
-            format_ar_pre_req_courses.font.size = Pt(12)  # sets font size
-        else:
-            lvl_sect = ""  # Holds text to be printed in audit report
-            course_index = 0
-            # Displays contents to word doc based on disposition selection
-            for lvl_course in track_class.leveling_courses:
-                check_opt = self.disposition_dict["disp_selections"][course_index]
-                if check_opt.get() == "Completed":
-                    course_id = self.disposition_dict["dp_pre_req_class"][course_index]
-                    courses = get_courses(transcript_filepath)
-                    level_course = LevelingCourse(course_id, status=LevelingCourseStatus.COMPLETED)
-                    print_course = level_course.to_string(courses)
-                    get_comment = self.disposition_dict["user_course_comment"][course_index]
-                    lvl_sect += print_course + get_comment.get() + "\n"
-                elif check_opt.get() == "Waived":
-                    get_comment = self.disposition_dict["user_course_comment"][course_index]
-                    print_lvl = self.disposition_dict["dp_pre_req_class"][course_index] + " Waived " + get_comment.get()
-                    lvl_sect += print_lvl + "\n"
-                elif check_opt.get() == "Other":
-                    get_comment = self.disposition_dict["user_course_comment"][course_index]
-                    print_lvl = self.disposition_dict["dp_pre_req_class"][course_index] + " Other " + get_comment.get()
-                    lvl_sect += print_lvl + "\n"
-                elif check_opt.get() == "Not required by plan or elective":
-                    status = " Not required by plan or elective "
-                    get_comment = self.disposition_dict["user_course_comment"][course_index]
-                    print_lvl = self.disposition_dict["dp_pre_req_class"][course_index] + status + get_comment.get()
-                    lvl_sect += print_lvl + "\n"
-                else:
-                    status = " Leveling Course Marked as None "
-                    get_comment = self.disposition_dict["user_course_comment"][course_index]
-                    print_lvl = self.disposition_dict["dp_pre_req_class"][course_index] + status + get_comment.get()
-                    lvl_sect += print_lvl + "\n"
-                course_index += 1
+        # Displays courses and disposition and checks if the disposition option is "None"
+        lvl_sect = ""  # Holds text to be printed in audit report
+        course_index = 0
+        # Displays contents to word doc based on disposition selection
+        for lvl_course in track_class.leveling_courses:
+            check_opt = self.disposition_dict["disp_selections"][course_index]
+            if check_opt.get() == "Completed":
+                course_id = self.disposition_dict["dp_pre_req_class"][course_index]
+                courses = get_courses(transcript_filepath)
+                level_course = LevelingCourse(course_id, status=LevelingCourseStatus.COMPLETED)
+                print_course = level_course.to_string(courses)
+                get_comment = self.disposition_dict["user_course_comment"][course_index]
+                lvl_sect += print_course + " " + get_comment.get() + "\n"
+            elif check_opt.get() == "Waived":
+                get_comment = self.disposition_dict["user_course_comment"][course_index]
+                print_lvl = self.disposition_dict["dp_pre_req_class"][course_index] + " Waived " + get_comment.get()
+                lvl_sect += print_lvl + "\n"
+            elif check_opt.get() == "Other":
+                get_comment = self.disposition_dict["user_course_comment"][course_index]
+                print_lvl = self.disposition_dict["dp_pre_req_class"][course_index] + " Other " + get_comment.get()
+                lvl_sect += print_lvl + "\n"
+            elif check_opt.get() == "Not required by plan or elective":
+                status = " Not required by plan or elective "
+                get_comment = self.disposition_dict["user_course_comment"][course_index]
+                print_lvl = self.disposition_dict["dp_pre_req_class"][course_index] + status + get_comment.get()
+                lvl_sect += print_lvl + "\n"
+            else:
+                status = " Leveling Course Marked as None "
+                get_comment = self.disposition_dict["user_course_comment"][course_index]
+                print_lvl = self.disposition_dict["dp_pre_req_class"][course_index] + status + get_comment.get()
+                lvl_sect += print_lvl + "\n"
+            course_index += 1
 
-            format_ar_pre_req_courses = ar_pre_req_courses.add_run(lvl_sect)  # adds text
-            format_ar_pre_req_courses.font.size = Pt(12)  # sets font size
+        format_ar_pre_req_courses = ar_pre_req_courses.add_run(lvl_sect)  # adds text
+        format_ar_pre_req_courses.font.size = Pt(12)  # sets font size
 
         document.save(audit_report_filepath)  # saves the Word doc
