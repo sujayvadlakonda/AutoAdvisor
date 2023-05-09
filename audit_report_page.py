@@ -8,7 +8,7 @@ from docx.shared import Pt, Inches
 from docx.enum.text import WD_PARAGRAPH_ALIGNMENT
 from transcript import Transcript
 from audit_report import AuditReport
-from track import Track, DataScience, CyberSecurity, IntelligentSystems, InteractiveComputing, Network, Systems
+from track import DataScience, CyberSecurity, IntelligentSystems, InteractiveComputing, Network, Systems
 from track import Traditional, SoftwareEngineering
 from course import LevelingCourse, LevelingCourseStatus
 from course_finder import get_courses
