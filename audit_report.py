@@ -392,13 +392,10 @@ class AuditReport:
         remaining_elec_courses = self.get_remaining_elec_courses()
         num_of_elec_courses = 0
         num_of_elec_p = 0
-        num_of_remaining = 0
+        num_of_remaining = len(remaining_elec_courses)
         total_gradepoints = 0
         gradepoints = 0
         elec_gpa_needed = 0.000
-
-        for course in remaining_elec_courses:
-            num_of_remaining += 1
 
         for elective in electives:
             num_of_elec_courses += 1
