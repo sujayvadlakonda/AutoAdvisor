@@ -13,17 +13,6 @@ letter_grade_points = {
                     "W ": 0.000
                 }
 
-letter_grade_needed = {
-            4.000: "A",
-            3.670: "A-",
-            3.330: "B+",
-            3.000: "B",
-            2.670: "B-",
-            2.330: "C+",
-            2.000: "C",
-            0.000: "F"
-            }
-
 
 class AuditReport:
     def __init__(self, path_to_transcript, track):
@@ -122,6 +111,23 @@ class AuditReport:
 
         ids.sort()
         return ids
+    
+    def letter_grade_needed(self, needed_gpa):
+        
+        needed_grade = "C+"	
+        
+        if (needed_gpa > 3.670):
+            needed_grade = "A"
+        elif (needed_gpa > 3.330):
+            needed_grade = "A-"
+        elif (needed_gpa > 3.000):
+            needed_grade = "B+"
+        elif (needed_gpa > 2.670):
+            needed_grade = "B" 
+        elif (needed_gpa > 2.330):
+            needed_grade = "B-"
+        
+        return needed_grade
 
     # To get all remaining (uncompleted) core courses
     def get_remaining_core_courses(self):
@@ -153,8 +159,9 @@ class AuditReport:
         for elective in electives:
             id = elective["course_id"]
             letter_grade = elective["grade"]
+            credits_earned = elective["earned"]
 
-            if (letter_grade is None):
+            if (credits_earned == 0) or (letter_grade is None):
                 remaining_elec_courses.append(id)
 
         print("Remaining Elective Courses: ")
@@ -240,6 +247,8 @@ class AuditReport:
 
         for course in self.courses:
             overall_grade_points = float(course["points"])
+            print("Overall Grade Points")
+            print(overall_grade_points)
             letter_grade = course["grade"]
 
             if ((letter_grade is None) or (letter_grade == 'I ') or letter_grade == 'P '):
@@ -249,6 +258,8 @@ class AuditReport:
 
             total_grade_points += overall_grade_points
             total_hours += overall_hours
+            print("Total hours:")
+            print(total_hours)
 
         # calculate gpa by dividing elective total grade points by total number of elective credit hours
         combined_gpa = round((total_grade_points / total_hours), 3)
@@ -325,7 +336,7 @@ class AuditReport:
                 core_gpa_needed = (necessary_core_grade_points - total_gradepoints) / num_of_remaining
             else:
                 necessary_core_grade_points = (5 - num_of_core_p) * 3.19
-                core_gpa_needed = (necessary_core_grade_points - total_gradepoints) / num_of_remaining
+                core_gpa_needed = round(((necessary_core_grade_points - total_gradepoints) / num_of_remaining),3)
 
         return core_gpa_needed
 
@@ -343,31 +354,32 @@ class AuditReport:
             comparison_gpa = "To maintain a 3.19 core GPA: " + "\n"
 
         needed_core_gpa = self.get_needed_core_gpa()
+        letter_grade = self.letter_grade_needed(needed_core_gpa)
 
-        if needed_core_gpa >= 2.00:
-            if num_of_core_courses == 1:
+        if num_of_core_courses > 0:
+            if needed_core_gpa >= 2.00:
+                if num_of_core_courses == 1:
+                    outstanding_core_gpa = comparison_gpa
+                    outstanding_core_gpa += "\t" + "The student needs >= " + letter_grade + " in: "
+                    remaining = remaining_core_courses
+                    remaining = ", ".join(remaining)
+                    outstanding_core_gpa += remaining
+
+                elif num_of_core_courses > 1:
+                    outstanding_core_gpa = comparison_gpa
+                    outstanding_core_gpa += "\t" + "The student needs a GPA >= " + str(needed_core_gpa) + " in: "
+                    remaining = remaining_core_courses
+                    remaining = ", ".join(remaining)
+                    outstanding_core_gpa += remaining
+
+            elif needed_core_gpa < 2.00:
                 outstanding_core_gpa = comparison_gpa
-                outstanding_core_gpa += "\t" + "The student needs >= " + "letter_grade" + " in: "
+                outstanding_core_gpa += "\t" + "The student must pass: "
                 remaining = remaining_core_courses
                 remaining = ", ".join(remaining)
                 outstanding_core_gpa += remaining
-
-            elif num_of_core_courses > 1:
-                outstanding_core_gpa = comparison_gpa
-                outstanding_core_gpa += "\t" + "The student needs a GPA >= " + str(needed_core_gpa) + " in: "
-                remaining = remaining_core_courses
-                remaining = ", ".join(remaining)
-                outstanding_core_gpa += remaining
-
-            else:
+        else:
                 outstanding_core_gpa = "Core Complete."
-
-        elif needed_core_gpa < 2.00:
-            outstanding_core_gpa = comparison_gpa
-            outstanding_core_gpa += "\t" + "The student must pass: "
-            remaining = remaining_core_courses
-            remaining = ", ".join(remaining)
-            outstanding_core_gpa += remaining
 
         return outstanding_core_gpa
 
@@ -393,8 +405,9 @@ class AuditReport:
         for elective in electives:
             num_of_elec_courses += 1
             letter_grade = elective["grade"]
+            credits_earned = elective["earned"]
 
-            if letter_grade is None:
+            if credits_earned == 0 or letter_grade is None:
                 gradepoints = 0
             else:
                 gradepoints = letter_grade_points[letter_grade]
@@ -404,11 +417,14 @@ class AuditReport:
             if letter_grade == 'P ':
                 num_of_elec_p += 1
 
+            if letter_grade == 'W ':
+                    num_of_elec_courses -= 1
+
         non_p_elecs = num_of_elec_courses - num_of_elec_p
 
         if num_of_remaining > 0:
             necessary_elec_grade_points = (num_of_remaining + non_p_elecs) * 3.00
-            elec_gpa_needed = (necessary_elec_grade_points - total_gradepoints) / num_of_remaining
+            elec_gpa_needed = round(((necessary_elec_grade_points - total_gradepoints) / num_of_remaining),3)
 
         return elec_gpa_needed
 
@@ -422,28 +438,35 @@ class AuditReport:
         comparison_gpa = "To maintain a 3.0 elective GPA: " + "\n"
 
         needed_elec_gpa = self.get_needed_elec_gpa()
+        letter_grade = self.letter_grade_needed(needed_elec_gpa)
 
-        if needed_elec_gpa >= 2.00:
-            if num_of_courses == 1:
+        if num_of_courses > 0:
+            if needed_elec_gpa >= 2.00:
+                if num_of_courses == 1:
+                    outstanding_elec_gpa = comparison_gpa
+                    outstanding_elec_gpa += "\t" + "The student needs >= " + letter_grade + " in: "
+                    remaining = remaining_elec_courses
+                    remaining = ", ".join(remaining)
+                    outstanding_elec_gpa += remaining
+
+                elif num_of_courses > 1:
+                    outstanding_elec_gpa = comparison_gpa
+                    outstanding_elec_gpa += "\t" + "The student needs a GPA >= " + str(needed_elec_gpa) + " in: "
+
+                    remaining = remaining_elec_courses
+                    remaining = ", ".join(remaining)
+                    outstanding_elec_gpa += remaining
+                    
+            
+            elif needed_elec_gpa < 2.00:
                 outstanding_elec_gpa = comparison_gpa
-                outstanding_elec_gpa += "\t" + "The student needs >= " + "letter_grade" + " in: "
+                outstanding_elec_gpa += "\t" + "The student must pass: "
                 remaining = remaining_elec_courses
                 remaining = ", ".join(remaining)
                 outstanding_elec_gpa += remaining
-            elif num_of_courses > 1:
-                outstanding_elec_gpa = comparison_gpa
-                outstanding_elec_gpa += "\t" + "The student needs a GPA >= " + str(needed_elec_gpa) + " in: "
-                remaining = remaining_elec_courses
-                remaining = ", ".join(remaining)
-                outstanding_elec_gpa += remaining
-            else:
-                outstanding_elec_gpa = "Electives Complete."
-        elif needed_elec_gpa < 2.00:
-            outstanding_elec_gpa = comparison_gpa
-            outstanding_elec_gpa += "\t" + "The student must pass: "
-            remaining = remaining_elec_courses
-            remaining = ", ".join(remaining)
-            outstanding_elec_gpa += remaining
+        
+        else:
+            outstanding_elec_gpa = "Electives Complete."
 
         return outstanding_elec_gpa
 
@@ -463,8 +486,10 @@ class AuditReport:
         for course in self.courses:
             num_of_overall_courses += 1
             letter_grade = course["grade"]
+            credits_earned = course["earned"]
 
-            if letter_grade is None:
+
+            if credits_earned == 0 or letter_grade is None:
                 gradepoints = 0
             else:
                 gradepoints = letter_grade_points[letter_grade]
@@ -474,11 +499,16 @@ class AuditReport:
             if letter_grade == 'P ':
                 num_of_all_p += 1
 
+            if letter_grade == 'W ':
+                num_of_overall_courses -= 1
+
+        non_p_overall = num_of_overall_courses - num_of_all_p
+
         if num_of_remaining > 0:
-                necessary_grade_points = (5 - num_of_all_p) * 3.00
+                necessary_grade_points = (num_of_remaining + non_p_overall) * 3.00
                 print("necessary_grade_points: ")
                 print(necessary_grade_points)
-                overall_gpa_needed = (necessary_grade_points - total_gradepoints) / num_of_remaining
+                overall_gpa_needed = round(((necessary_grade_points - total_gradepoints) / num_of_remaining),3)
 
         return overall_gpa_needed
 
@@ -492,28 +522,33 @@ class AuditReport:
         comparison_gpa = "To maintain a 3.0 overall GPA: " + "\n"
 
         needed_overall_gpa = self.get_needed_overall_gpa()
+        letter_grade = self.letter_grade_needed(needed_overall_gpa)
+        
+        if num_of_courses > 0:
+            if needed_overall_gpa >= 2.00:
+                if num_of_courses == 1:
+                    outstanding_overall_gpa = comparison_gpa
+                    outstanding_overall_gpa += "\t" + "The student needs >= " + letter_grade + " in: "
+                    remaining = remaining_courses
+                    remaining = ", ".join(remaining)
+                    print ("Outstanding Overall Gpa")
+                    print(outstanding_overall_gpa) 
+                    outstanding_overall_gpa += remaining
+                elif num_of_courses > 1:
+                    outstanding_overall_gpa = comparison_gpa
+                    outstanding_overall_gpa += "\t" + "The student needs a GPA >= " + str(needed_overall_gpa) + " in: "
+                    remaining = remaining_courses
+                    remaining = ", ".join(remaining)
+                    outstanding_overall_gpa += remaining
 
-        if needed_overall_gpa >= 2.00:
-            if num_of_courses == 1:
+            elif needed_overall_gpa < 2.00:
                 outstanding_overall_gpa = comparison_gpa
-                outstanding_overall_gpa += "\t" + "The student needs >= " + "letter_grade" + " in: "
+                outstanding_overall_gpa += "\t" + "The student must pass: "
                 remaining = remaining_courses
                 remaining = ", ".join(remaining)
                 outstanding_overall_gpa += remaining
-            elif num_of_courses > 1:
-                outstanding_overall_gpa = comparison_gpa
-                outstanding_overall_gpa += "\t" + "The student needs a GPA >= " + str(needed_overall_gpa) + " in: "
-                remaining = remaining_courses
-                remaining = ", ".join(remaining)
-                outstanding_overall_gpa += remaining
-            else:
-                outstanding_overall_gpa = "All Classes Complete."
-
-        elif needed_overall_gpa < 2.00:
-            outstanding_overall_gpa = comparison_gpa
-            outstanding_overall_gpa += "\t" + "The student must pass: "
-            remaining = remaining_courses
-            remaining = ", ".join(remaining)
-            outstanding_overall_gpa += remaining
+        
+        else:
+            outstanding_overall_gpa = "All Classes Complete."
 
         return outstanding_overall_gpa
