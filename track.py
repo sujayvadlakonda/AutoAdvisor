@@ -210,6 +210,10 @@ class Traditional(ComputerScience):
 
 class SoftwareEngineering(ComputerScience):
     def __init__(self):
+        super().__init__()
+
+        self.name = "Software Engineering"
+
         self.core_requirements = [
             MultiRequirement(["SE 6329", "CS 6329"]),
             MultiRequirement(["SE 6361", "CS 6361"]),
