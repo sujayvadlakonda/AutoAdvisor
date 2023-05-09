@@ -403,15 +403,22 @@ class AuditReport:
 
     # To calculate GPA needed in remaining elective courses to maintain 3.0 GPA
     def get_needed_elec_gpa(self):
+        # All the electives a student has taken
+        electives = self.track.get_electives(self.courses)
+        # All the electives a student is taking right now
+        current_electives = self.get_remaining_elec_courses()
+
+        real_electives = filter(
+            lambda elective: not elective["grade"] == "P "
+            or not elective["grade"] == "W",
+            electives,
+        )
+
         max_electives = 7
         total_electives = max_electives - 1
 
-        electives = self.track.get_electives(self.courses)
-
-        remaining_elec_courses = self.get_remaining_elec_courses()
         num_of_elec_courses = 0
         num_of_elec_p = 0
-        num_of_remaining = len(remaining_elec_courses)
         total_gradepoints = 0
         gradepoints = 0
         elec_gpa_needed = 0.000
@@ -436,10 +443,13 @@ class AuditReport:
 
         non_p_elecs = num_of_elec_courses - num_of_elec_p
 
-        if num_of_remaining > 0:
-            necessary_elec_grade_points = (num_of_remaining + non_p_elecs) * 3.00
+        if len(current_electives) > 0:
+            necessary_elec_grade_points = (len(current_electives) + non_p_elecs) * 3.00
             elec_gpa_needed = round(
-                ((necessary_elec_grade_points - total_gradepoints) / num_of_remaining),
+                (
+                    (necessary_elec_grade_points - total_gradepoints)
+                    / len(current_electives)
+                ),
                 3,
             )
 

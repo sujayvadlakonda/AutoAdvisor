@@ -100,4 +100,4 @@ test_electives(rachel, rachel_elec)
 
 
 audit_report = AuditReport("transcripts/monica-geller.pdf", DataScience())
-print(audit_report.get_remaining_elec_courses())
+print(audit_report.get_needed_elec_gpa())
