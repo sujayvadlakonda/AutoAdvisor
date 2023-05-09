@@ -97,3 +97,7 @@ test_electives(harry_potter, harry_potter_electives)
 test_electives(ron_weasley, ron_weasley_electives)
 test_electives(jaime_tartt, jaime_tartt_electives)
 test_electives(rachel, rachel_elec)
+
+
+audit_report = AuditReport("transcripts/monica-geller.pdf", DataScience())
+print(audit_report.get_remaining_elec_courses())
