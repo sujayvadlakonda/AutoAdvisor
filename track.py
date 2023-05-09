@@ -6,70 +6,6 @@ from requirement import SimpleRequirement, MultiRequirement
 from course import LevelingCourse, courses_contains, _standardize_grade
 
 
-class Track:
-    def __init__(self):
-        self.core_requirements = []
-        self.leveling_courses = []
-        self.name = ""
-
-    def get_electives(self, courses):
-        electives = self._get_5xxx_electives(courses)
-        consumed = self._get_core_consumed(courses)
-
-        for course in courses:
-            id = course["course_id"].strip()
-            id_parts = id.split(" ")
-            subject = id_parts[0]
-            number = int(id_parts[1])
-            if number >= 6000 and (subject == "CS" or subject == "SE"):
-                id = subject + " " + str(number)
-                if not id in consumed:
-                    electives.append(course)
-
-        return electives
-
-    def _get_5xxx_electives(self, courses):
-        electives = []
-
-        cs5343 = courses_contains(courses, "CS 5343")
-        cs5348 = courses_contains(courses, "CS 5348")
-        cs5333 = courses_contains(courses, "CS 5333")
-
-        # Add grade comparison some day
-        if cs5343:
-            electives.append(cs5343)
-        if cs5348:
-            electives.append(cs5348)
-        if cs5333:
-            electives.append(cs5333)
-
-        electives.sort(key=lambda e: _standardize_grade(e["grade"]))
-
-        return electives[0:1]
-
-    def _get_core_consumed(self, courses):
-        """
-        Get the courses that are used to meet core requirements
-        """
-        consumed_courses = []
-
-        for core_requirement in self.core_requirements:
-            course = core_requirement.is_met(courses)
-            if course:
-                if isinstance(course, list):
-                    for c in course:
-                        consumed_courses.append(c)
-                else:
-                    consumed_courses.append(course)
-
-        ids = []
-        for course in consumed_courses:
-            id = course["course_id"].strip()
-            ids.append(id)
-
-        return ids
-
-
 class ComputerScience:
     def __init__(self):
         self.leveling_courses = [
@@ -272,7 +208,7 @@ class Traditional(ComputerScience):
         self.leveling_courses.append(LevelingCourse("CS 5390"))
 
 
-class SoftwareEngineering(Track):
+class SoftwareEngineering(ComputerScience):
     def __init__(self):
         self.core_requirements = [
             MultiRequirement(["SE 6329", "CS 6329"]),
@@ -281,7 +217,7 @@ class SoftwareEngineering(Track):
             MultiRequirement(["SE 6367", "CS 6367"]),
             MultiRequirement(["SE 6387", "CS 6387"]),
         ]
-        self.leveling_courses = [LevelingCourse("SE 5354")]
+        self.leveling_courses.append(LevelingCourse("SE 5354"))
 
 
 # Data Science: Ted Lasso, Taylor Swift, Roy Kent, Krusty Krab, Monica Geller
