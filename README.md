@@ -12,7 +12,7 @@
 2. Sign in to *Box Drive* with your UTD email (if *Box* asks for a email), then your UTD *Box* login information (i.e. netid and password)
 - Installation is successful if you see *Box* as an option in the side menu of your *File Explorer* desktop application
 3. Download the Project's Executable file (the folder labeled "Executable")
-4. Save the executable in File Explorer (in the project enviroment)
+4. Save the executable in File Explorer 
 5. To run the program, click on the "main" file located in the "Executable" Folder
 
 ## Usage Instructions For Window Computers
